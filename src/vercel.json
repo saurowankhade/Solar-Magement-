@@ -1,0 +1,21 @@
+{
+    "routes":[
+        {
+            "src":"/",
+            "dest":"/"
+        },{
+            "src":"/company-signup",
+            "dest":"/"
+        },{
+            "src":"/user-signup",
+            "dest":"/"
+        }
+        ,{
+            "src":"/user-signin",
+            "dest":"/"
+        },{
+            "src":"/company-signin",
+            "dest":"/"
+        }
+    ]
+}
