@@ -17,5 +17,19 @@
             "src":"/company-signin",
             "dest":"/"
         }
+        ,{
+            "src":"/dashboard",
+            "dest":"/"
+        },{
+            "src":"/add-track",
+            "dest":"/"
+        },{
+            "src":"/view-one",
+            "dest":"/"
+        }
+        ,{
+            "src":"/view-track",
+            "dest":"/"
+        }
     ]
 }

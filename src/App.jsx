@@ -13,14 +13,10 @@ import UserLogin from "./Components/Login/UserLogin/UserLogin";
 import Home from "./Components/Screens/Home";
 import TrackSolar from "./Components/TrackSolarUser/TrackSolar";
 import TrackSolarContextProvider from "./Context/TrackSolarContext/TrackSolarContextProvider";
-import { useContext, useEffect } from "react";
-import UserContext from "./Context/UserContext/UserContext";
-import firestore from "./Firebase/Firestore";
+
 import UserContextProvider from "./Context/UserContext/UserContextProvider";
 import ShowTrackSolar from "./Components/TrackSolarUser/Show/ShowTrackSolar";
 import ShowSpeficicData from "./Components/TrackSolarUser/Show/ShowSpeficicData";
-import ShowOneTrackData from "./Components/TrackSolarUser/Show/ShowOneTrackData";
-
 
 // import { setItem } from "./utils/LocalStorage/localAuth";
 
