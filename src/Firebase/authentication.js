@@ -30,7 +30,7 @@ class Authentication  {
                }).then(()=>{
                 toast.success("Register Success ",{position:'top-center'})
                 window.location.href = "/dashboard"
-                setItem(KEY_VAULE,{isLogin:true,userID:user.uid}); // atLocal Storage
+                setItem(KEY_VAULE,{isLogin:true,userID:user.uid,cmpID:companyID }); // atLocal Storage
                }).catch((error)=>{
                 console.log(error.message);
                });
@@ -91,6 +91,11 @@ class Authentication  {
   userID(){
     const userData = getItem(KEY_VAULE);
     return userData.userID;
+  }
+
+  isShowCmpID(){
+    const userData = getItem(KEY_VAULE);
+    return userData.showCmpID;
   }
 
 }

@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+import { getEnv } from "./getEnv";
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -11,13 +13,13 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD668NUZmEhARUuUKxShj85zfqJQ9O0nWQ",
-  authDomain: "solarmagement.firebaseapp.com",
-  projectId: "solarmagement",
-  storageBucket: "solarmagement.appspot.com",
-  messagingSenderId: "340267485924",
-  appId: "1:340267485924:web:1c7f1aea4dd837a28a7af1",
-  measurementId: "G-PLRY9WVXSH"
+  apiKey: getEnv.apiKey,
+  authDomain: getEnv.authDomain,
+  projectId: getEnv.projectId,
+  storageBucket: getEnv.storageBucket,
+  messagingSenderId: getEnv.messagingSenderId,
+  appId: getEnv.appId,
+  measurementId: getEnv.measurementId
 };
 
 // Initialize Firebase
