@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={authentication.isLogin() ? <Navigate to={"/dashboard"} /> : <Home/> }/>
         <Route path="/company-signup" element={<CmpRegister />} /> 
         <Route path="/user-signup" element={<UserRegister />} />
-        <Route path="/company-signin" element={<CmpLogin />} /> 
+        {/* <Route path="/company-signin" element={<CmpLogin />} />  */}
         <Route path="/user-signin" element={<UserLogin />} />
       
       <Route path="add-track" element={<TrackSolarContextProvider><TrackSolar /></TrackSolarContextProvider>}/>
