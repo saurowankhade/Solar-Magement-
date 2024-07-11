@@ -2,16 +2,20 @@ import { db } from "./firebase";
 import { collection, deleteDoc, doc,getDoc, getDocs ,setDoc, updateDoc } from "firebase/firestore";
 import authentication from "./authentication";
 import { toast } from "react-toastify";
+import { setItem } from "../utils/LocalStorage/localAuth";
+
 class Firestore {
 
   async addData(collection,data,documentID){
     
     try{
-      setDoc(doc(db,collection,documentID),{data}).then(()=>{
+      setDoc(doc(db,collection,documentID),{data})
+      .then(()=>{
         toast.success("Data Added!");
     });
     } catch(error){
       console.log("error",error);
+
       toast.error(error,{position:"bottom-center"});
     }
   }
@@ -23,7 +27,10 @@ class Firestore {
           const docSnap = await getDoc(docRef);
           return docSnap.exists() ? docSnap.data() : ""
         } catch (error) {
+          setItem("isLogin",{isLogin:false,userID:""})
           console.error("Error getting document: ", error);
+
+          
         }
       }
 

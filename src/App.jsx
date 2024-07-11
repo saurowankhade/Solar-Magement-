@@ -16,6 +16,7 @@ import TrackSolarContextProvider from "./Context/TrackSolarContext/TrackSolarCon
 import UserContextProvider from "./Context/UserContext/UserContextProvider";
 import ShowTrackSolar from "./Components/TrackSolarUser/Show/ShowTrackSolar";
 import ShowSpeficicData from "./Components/TrackSolarUser/Show/ShowSpeficicData";
+import RegisterUsers from "./Components/RegisterUserData/RegisterUsers";
 
 
 function App() {
@@ -25,10 +26,9 @@ function App() {
 <UserContextProvider>  
   <BrowserRouter>
       <Routes>
-        <Route path="/" element={authentication.isLogin() ? <Navigate to={"/dashboard"} /> : <Home/> }/>
+        <Route path="/" element={authentication.isLogin() ? <Navigate to={"/dashboard"} /> : <Home/> } />
         <Route path="/company-signup" element={<CmpRegister />} /> 
         <Route path="/user-signup" element={<UserRegister />} />
-        {/* <Route path="/company-signin" element={<CmpLogin />} />  */}
         <Route path="/user-signin" element={<UserLogin />} />
       
       <Route path="add-track" element={<TrackSolarContextProvider><TrackSolar /></TrackSolarContextProvider>}/>
@@ -37,9 +37,8 @@ function App() {
       </Route>
       <Route path="/view-one" element={<ShowSpeficicData/>} ></Route>
         <Route path="/dashboard" element={authentication.isLogin() ? <Dashboard /> : <Navigate to={"/user-signin"} />}>
-          <Route path="add-data" element={<Home/>}></ Route >
         </ Route >
-         
+          <Route path="regitser-users" element={<RegisterUsers/>}></ Route >
       </Routes>
     </BrowserRouter>
     </UserContextProvider>

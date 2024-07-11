@@ -49,7 +49,7 @@ class Authentication  {
         try{
              await signInWithEmailAndPassword(auth,email,password)
              .then((userCredential)=>{
-                const user = userCredential.user;
+                const user = userCredential?.user;
                 toast.success("Login Sccessfully!",{position:'top-center'});
                 window.location.href = '/dashboard';
                 setItem(KEY_VAULE,{isLogin:true,userID:user.uid}); // atLocal Storage
@@ -91,11 +91,6 @@ class Authentication  {
   userID(){
     const userData = getItem(KEY_VAULE);
     return userData.userID;
-  }
-
-  isShowCmpID(){
-    const userData = getItem(KEY_VAULE);
-    return userData.showCmpID;
   }
 
 }

@@ -15,17 +15,17 @@ const Dashboard =  ()=>{
     });
   }
   return(
-        <>
+        
         <div className="flex flex-col">
         <NavigationDashboard />
 
-        <div className="ml-[200px] border p-3 w-fit">
-          <p className="cursor-pointer" onClick={copyToClipboard}>Compay ID : <input className="outline-none cursor-pointer" type="text" readOnly ref={copyRef} value={user ? user?.companyID : "Loading..."} / ></p>
+        <div className="ml-[200px] border p-3 w-fit flex gap-2" onClick={copyToClipboard}>
+          <p  >Compay ID : </p>
+            <input className="outline-none cursor-pointer" type="text"
+             readOnly ref={copyRef} value={user ? user?.companyID : "Loading..."} / >
         </div>
 
         </div>
-       
-        </>
     )
 }
 
