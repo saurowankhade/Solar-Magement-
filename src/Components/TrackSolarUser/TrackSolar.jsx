@@ -21,12 +21,9 @@ import ReactLoading from 'react-loading';
 
     const submitData = ()=>{
         setIsAdded(true)
-        const companyID = user.companyID;
+        const companyID = user?.companyID;
         if(trackSolarData){
-            firestore.addData(companyID+"TrackSolarData",trackSolarData,trackSolarData?.Id)
-            .then(()=>{
-                toast.success("Data Added!");
-            }).catch((error)=>{
+            firestore.addData(companyID+"TrackSolarData",trackSolarData,trackSolarData?.Id).catch((error)=>{
                 toast.error(error.message)
                 setIsAdded(false)
             });

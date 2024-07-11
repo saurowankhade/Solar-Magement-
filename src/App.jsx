@@ -8,7 +8,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./Components/Dashboard/Dashboard";
 import authentication from "./Firebase/authentication";
-import CmpLogin from "./Components/Login/CmpLogin/CmpLogin";
 import UserLogin from "./Components/Login/UserLogin/UserLogin";
 import Home from "./Components/Screens/Home";
 import TrackSolar from "./Components/TrackSolarUser/TrackSolar";
@@ -18,12 +17,8 @@ import UserContextProvider from "./Context/UserContext/UserContextProvider";
 import ShowTrackSolar from "./Components/TrackSolarUser/Show/ShowTrackSolar";
 import ShowSpeficicData from "./Components/TrackSolarUser/Show/ShowSpeficicData";
 
-// import { setItem } from "./utils/LocalStorage/localAuth";
 
 function App() {
-  
-  
-
   return (
     <>
 

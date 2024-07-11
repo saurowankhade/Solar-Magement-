@@ -1,5 +1,5 @@
-import { useCallback, useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useCallback, useContext } from "react";
+import {  useNavigate } from "react-router-dom";
 import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext";
 import firestore from "../../../Firebase/Firestore";
 

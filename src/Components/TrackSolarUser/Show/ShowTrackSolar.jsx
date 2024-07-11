@@ -8,26 +8,46 @@ import { v4 } from "uuid";
 
 const ShowTrackSolar = ()=>{
     const [trackData,setTrackData] = useState([]);
+    const [trackDataDoublicate,setTrackDataDoublicate] = useState([]);
+
+    const [searchQuery,setSearchQuery] = useState("");
+
     const {user} = useContext(UserContext);
     useEffect(()=>{
         const companyID = user?.companyID;
         const collection = companyID+"TrackSolarData";
         const data = firestore.getAllDocuments(collection);
         data.then((sinData)=>{
-            
             setTrackData(sinData)
-        }).catch((error)=>{
+            setTrackDataDoublicate(sinData);
+       }).catch((error)=>{
             toast.error(error.message);
         })
     },[user])
+
+
+
+    useEffect(()=>{
+        setTrackDataDoublicate(
+            trackData.filter(item =>
+                item?.data?.ConsumerName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                item?.data?.ConsumerNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                item?.data?.ConsumerMobileNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                item?.data?.MNRERegistrationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                item?.data?.PVApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) 
+            )
+          );
+
+    },[searchQuery,setSearchQuery,trackData])
 
     return (
         
         <>
 
         {
-            trackData.length === 0 ? <>
-             <thead className="w-full text-base text-gray-700 uppercase bg-gray-50 border-b-2 sticky ">
+            trackData.length === 0 ? 
+            <>
+        <thead className="w-full text-base text-gray-700 uppercase bg-gray-50 border-b-2">
             <tr>
                 <th scope="col" className="py-3 px-3 text-center border ">
                     PV Application Number
@@ -57,12 +77,21 @@ const ShowTrackSolar = ()=>{
         <TableUi key={v4()} />
             
             </>
+
+
             :
             <>
 
-        {
-            console.log(trackData)
-        }
+            <div>
+            <input
+            className="border p-3 w-fit m-3"
+        type="text"
+        placeholder="Search..."
+        value={searchQuery}
+        onChange={(e)=>{setSearchQuery(e.target.value)}}
+      />
+            </div>
+
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 border">
         <thead className="w-full text-base text-gray-700 uppercase bg-gray-50 border-b-2 sticky ">
             <tr>
@@ -91,21 +120,30 @@ const ShowTrackSolar = ()=>{
         </thead>
 
         {
+            trackDataDoublicate.length > 0 ?
+            <>
+            {
             
-            trackData.map((map)=>(
+            trackDataDoublicate.map((map)=>(
                 <>
                 {/* console.log(map.data) */}
                 <ShowOneTrackData key={map?.id} getData={map?.data} collectionId={user?.companyID+"TrackSolarData"}/>
                 </>
             ))
        }
+            </> 
+            : 
+            <>Ooops!! Data not found Search other data...</>
+        }
 
 
       
 
     </table>
+
+    </>
         
-        </>
+        
         }
         
         

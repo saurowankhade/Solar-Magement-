@@ -1,7 +1,7 @@
 const TableUi = ()=>{
     return (
         
-<div role="status" className="w-full p-4 space-y-4 border  rounded shadow animate-pulse">
+<div className="w-full p-4 space-y-4 border  rounded shadow animate-pulse">
     <div className="flex items-center justify-between w-full">
         <div>
             <div className="h-full bg-gray-300 rounded-full  w-full mb-2.5"></div>
