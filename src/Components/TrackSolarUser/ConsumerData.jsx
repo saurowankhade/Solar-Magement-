@@ -27,16 +27,14 @@ const ConsumerData = ()=>{
     },[trackSolarData])
 
     const handleSubmit = ()=>{
-        if(consumerNameState === "" || consumerNumberState === "" || consumerMobileNumberState === "" || areaOfAddressState === "" || PVApplicationNumberState === "" || MNRERegistrationNumberState === ""){
-            toast.error("Fill Information")
-        }else if(consumerNumberState.length < 12) {
-            toast.error("Consumer number is wrong")
-        } 
-        else if(consumerMobileNumberState.length < 10) {
-            toast.error("Consumer Mobile number is wrong")
-        } else if(PVApplicationNumberState.length < 10) {
-            toast.error("PV Application Number is wrong")
-        } else{
+        // if(consumerNumberState.length < 12) {
+        //     toast.error("Consumer number is wrong")
+        // } 
+        // else if(consumerMobileNumberState.length < 10) {
+        //     toast.error("Consumer Mobile number is wrong")
+        // } else if(PVApplicationNumberState.length < 10) {
+        //     toast.error("PV Application Number is wrong")
+        // } else{
             setTrackSolarData((pre)=>({
                 ...pre,
                 Id:pre?.Id ? pre?.Id : docID(),
@@ -48,7 +46,7 @@ const ConsumerData = ()=>{
                 MNRERegistrationNumber:MNRERegistrationNumberState
             }))
             toast.success("Saved! Go Next ➡️ ")
-        }
+        // }
     }
     return (
         <div className="flex flex-col w-[700px] border ">
