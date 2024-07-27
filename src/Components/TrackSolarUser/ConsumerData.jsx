@@ -27,14 +27,7 @@ const ConsumerData = ()=>{
     },[trackSolarData])
 
     const handleSubmit = ()=>{
-        // if(consumerNumberState.length < 12) {
-        //     toast.error("Consumer number is wrong")
-        // } 
-        // else if(consumerMobileNumberState.length < 10) {
-        //     toast.error("Consumer Mobile number is wrong")
-        // } else if(PVApplicationNumberState.length < 10) {
-        //     toast.error("PV Application Number is wrong")
-        // } else{
+        
             setTrackSolarData((pre)=>({
                 ...pre,
                 Id:pre?.Id ? pre?.Id : docID(),

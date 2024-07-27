@@ -47,7 +47,7 @@ const ShowTrackSolar = ()=>{
         {
             trackData.length === 0 ? 
             <>
-        <thead className="w-full text-base text-gray-700 uppercase bg-gray-50 border-b-2">
+        {/* <thead className="w-full text-base text-gray-700 uppercase bg-gray-50 border-b-2">
             <tr>
                 <th scope="col" className="py-3 px-3 text-center border ">
                     PV Application Number
@@ -71,7 +71,7 @@ const ShowTrackSolar = ()=>{
                     Options
                 </th>
             </tr>
-        </thead>
+        </thead> */}
 
 
         <TableUi key={v4()} />
@@ -125,10 +125,7 @@ const ShowTrackSolar = ()=>{
             {
             
             trackDataDoublicate.map((map)=>(
-                <>
-                {/* console.log(map.data) */}
                 <ShowOneTrackData key={map?.id} getData={map?.data} collectionId={user?.companyID+"TrackSolarData"}/>
-                </>
             ))
        }
             </> 

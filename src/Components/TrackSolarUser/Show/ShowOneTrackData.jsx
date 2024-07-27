@@ -25,10 +25,9 @@ const ShowOneTrackData = ({getData,collectionId})=>{
        
 
     const goToSpeficData = ()=>{
-       navigate("/view-one",{state:getData})
+       navigate(`/view-one/${Id}`,{state:getData})
     }
-    return(       
-<>      
+    return(            
   <tbody className="w-full border-b">
             <tr onClick={goToSpeficData}  className="bg-gray-50 mt-2 cursor-pointer">
                 <th scope="row" className="px-6 py-4 border">
@@ -57,9 +56,8 @@ const ShowOneTrackData = ({getData,collectionId})=>{
                 </td>
                 
             </tr>  
-        </tbody>
+ </tbody>
 
-        </>
 
 
         
