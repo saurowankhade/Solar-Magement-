@@ -19,6 +19,7 @@ const ShowSpecific = () => {
   const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
   const [currentPage,setCurrentPage] = useState(0);
   const [showPage,setShowPage] = useState(0);
+  const [userDetails,setUserDetails] = useState([]);
   const processArray = ["Primary","Application","Site Work","Inspection","Meter Installtion","Net Metering","Subsidy"]
   
   useEffect(()=>{
@@ -36,6 +37,14 @@ const ShowSpecific = () => {
     })
 
   },[Id,user,setTrackSolarData])
+
+
+  useEffect(()=>{
+    firestore.getOneData("Users",trackSolarData?.UserDetails)
+    .then((repos)=>{
+      setUserDetails(repos);
+    })
+  },[trackSolarData])
 
 
   useEffect(()=>{
@@ -93,6 +102,13 @@ const ShowSpecific = () => {
         ))
       }
     </ol>
+
+
+        {
+          userDetails ? <div className="m-2 p-2 border">This data added by : {userDetails?.name}</div> : <>Loading...</>
+        }
+
+
 
 
     {
