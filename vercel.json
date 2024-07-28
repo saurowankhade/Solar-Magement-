@@ -1,36 +1,5 @@
 {
-    "routes":[
-        {
-            "src":"/",
-            "dest":"/"
-        },{
-            "src":"/company-signup",
-            "dest":"/"
-        },{
-            "src":"/user-signup",
-            "dest":"/"
-        }
-        ,{
-            "src":"/user-signin",
-            "dest":"/"
-        }
-        ,{
-            "src":"/dashboard",
-            "dest":"/"
-        },{
-            "src":"/new-acivity",
-            "dest":"/"
-        },{
-            "src":"/show-existing-acivity",
-            "dest":"/"
-        }
-        ,{
-            "src":"/show-existing-acivity/:Id",
-            "dest":"/"
-        }
-        ,{
-            "src":"/regitser-users",
-            "dest":"/"
-        }
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/" }
     ]
-}
+  }
