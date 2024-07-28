@@ -11,7 +11,7 @@ function RegisterUsers() {
     const {user} = useContext(UserContext);
 
     useEffect(()=>{
-        firestore.getAllDocuments("Users")
+        firestore.getAllUser()
         .then((users)=>{
             const filteredUsers = users.filter((userData) =>userData?.companyID === user?.companyID);
             setUserData(filteredUsers);

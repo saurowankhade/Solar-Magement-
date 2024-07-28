@@ -46,6 +46,28 @@ class Firestore {
         }
       }
 
+      async getAllUser(){
+        try {
+          // Reference to the collection
+          const collectionRef = collection(db, "Users");
+
+      // Get the documents based on the query
+          const snapshot = await getDocs(collectionRef);
+          
+          if (snapshot.empty) {
+            console.log('No matching documents.');
+            return [];
+          }
+      
+          // Map document data
+          const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          
+          return documents;
+        } catch (error) {
+          console.error('Error fetching documents:', error);
+          return [];
+        }
+      }
      
 
       async getAllDocuments(collectionName) {
