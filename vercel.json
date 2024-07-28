@@ -13,22 +13,23 @@
         ,{
             "src":"/user-signin",
             "dest":"/"
-        },{
-            "src":"/company-signin",
-            "dest":"/"
         }
         ,{
             "src":"/dashboard",
             "dest":"/"
         },{
-            "src":"/add-track",
+            "src":"/new-acivity",
             "dest":"/"
         },{
-            "src":"/view-one",
+            "src":"/show-existing-acivity",
             "dest":"/"
         }
         ,{
-            "src":"/view-track",
+            "src":"/show-existing-acivity/:Id",
+            "dest":"/"
+        }
+        ,{
+            "src":"/regitser-users",
             "dest":"/"
         }
     ]

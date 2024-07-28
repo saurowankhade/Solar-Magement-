@@ -31,13 +31,13 @@ function App() {
         <Route path="/user-signup" element={<UserRegister />} />
         <Route path="/user-signin" element={<UserLogin />} />
       
-      <Route path="new-acivity" element={<PrivateRoute><TrackSolarContextProvider><CreateNewAcivity/></TrackSolarContextProvider></PrivateRoute>}/>
+      <Route path="/new-acivity" element={<PrivateRoute><TrackSolarContextProvider><CreateNewAcivity/></TrackSolarContextProvider></PrivateRoute>}/>
      
       <Route path="/show-existing-acivity" element={<PrivateRoute><TrackSolarContextProvider><ShowAcivity/></TrackSolarContextProvider></PrivateRoute>} ></Route>
       <Route path="/show-existing-acivity/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
       
         <Route path="/dashboard" element={<PrivateRoute> <Dashboard /> </PrivateRoute>} />
-          <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
+          <Route path="/regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
       </Routes>
     </BrowserRouter>
     </UserContextProvider>
