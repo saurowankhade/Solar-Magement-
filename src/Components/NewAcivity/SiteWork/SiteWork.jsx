@@ -3,15 +3,18 @@ import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarCont
 import { toast } from "react-toastify";
 import UserContext from "../../../Context/UserContext/UserContext";
 import firestore from "../../../Firebase/Firestore";
+import Loading from "react-loading";
 
 
 const SiteWork = () => {
     const [isStructure,setIsStructure] = useState(false);
     const [isConcreteEarthing,setIsConcreteEarthing] = useState(false);
     const [isElectricFitting,setIsElectricFitting] = useState(false);
+    const [isPanelFitting,setIsPanelFitting] = useState(false);
     
   const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
   const {user} = useContext(UserContext);
+  const [isLoading,setIsLoading] = useState(false)
 
     
   useEffect(()=>{
@@ -19,6 +22,7 @@ const SiteWork = () => {
         setIsStructure(trackSolarData?.Structure || false);
         setIsConcreteEarthing(trackSolarData?.ConcreteEarthing || false);
         setIsElectricFitting(trackSolarData?.ElectricFitting || false);
+        setIsPanelFitting(trackSolarData?.PanelFitting || false);
     }
 },[trackSolarData]);
 
@@ -28,27 +32,30 @@ const handleSubmit = useCallback((e) => {
   e.preventDefault();
 
   const updatedTrackSolarData = {
-    ...trackSolarData,
-    Structure:isStructure,
+      ...trackSolarData,
+      Structure:isStructure,
       ConcreteEarthing:isConcreteEarthing,
       ElectricFitting:isElectricFitting,
-    SiteWorkInfromationDate: trackSolarData?.SiteWorkInfromationDate || new Date()
+      PanelFitting:isPanelFitting,
+      SiteWorkInfromationDate: trackSolarData?.SiteWorkInfromationDate || new Date()
   };
 
   // Update the context state
   setTrackSolarData(updatedTrackSolarData);
 
   const companyID = user?.companyID;
-  firestore.addData(companyID + "TrackSolarData", updatedTrackSolarData, trackSolarData?.Id)
-    .then((message) => {
-      toast.success(message);
-      toast.success("Saved! Submit the data");
-    })
-    .catch((error) => {
-      toast.error("Error saving data: " + error.message);
-    });
+        firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
+        .then((getStatus)=>{
+            if(getStatus.status === 200){
+                setIsLoading(false);
+                toast.success("Data saved!Go next",{position:'top-right'});
+            } else{
+                setIsLoading(false);
+                toast.error(getStatus?.message?.message || "Failed to add" ,{position:'top-right'})
+            }
+        });
 
-}, [trackSolarData, isStructure, isConcreteEarthing, isElectricFitting, setTrackSolarData, user?.companyID]);
+}, [trackSolarData, isStructure, isConcreteEarthing, isElectricFitting,isPanelFitting, setTrackSolarData, user?.companyID]);
 
 
 
@@ -72,14 +79,23 @@ const handleSubmit = useCallback((e) => {
                 </div> 
         </div>
         <div className="flex flex-row gap-2 w-full">
+        
+        <div className=" w-full p-2 border flex items-center hover:border hover:border-gray-500">
+                <input className="cursor-pointer h-4 w-4" type="checkbox" name="panelFitting" id="panelFitting" checked={isPanelFitting} onChange={(e)=>{setIsPanelFitting(e.target.checked)}}  />
+                <label className="p-2 text-base cursor-pointer text-black" htmlFor="panelFitting">Panel fitting</label>
+                </div> 
+
                <div className=" w-full p-2 border flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="electricFitting" id="electricFitting" checked={isElectricFitting} onChange={(e)=>{setIsElectricFitting(e.target.checked)}}  />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="electricFitting">Electric fitting</label>
                 </div> 
         </div>
-        <div className="m-2 flex justify-center">
-            <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2" onClick={handleSubmit}>Save</button>
-        </div>
+        <div className="flex w-full justify-center gap-3 mt-5">
+            {
+                isLoading ? <Loading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+            }
+
+            </div>
     </div>
    </div>
   )

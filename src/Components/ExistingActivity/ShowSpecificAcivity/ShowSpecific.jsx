@@ -20,7 +20,7 @@ const ShowSpecific = () => {
   const [currentPage,setCurrentPage] = useState(0);
   const [showPage,setShowPage] = useState(0);
   const [userDetails,setUserDetails] = useState([]);
-  const processArray = ["Primary","Application","Site Work","Inspection","Meter Installtion","Net Metering","Subsidy"]
+  const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Metering","Subsidy"]
   
   useEffect(()=>{
     const companyID = user?.companyID;
@@ -40,7 +40,7 @@ const ShowSpecific = () => {
 
 
   useEffect(()=>{
-    firestore.getOneData("Users",trackSolarData?.UserDetails)
+    firestore.getOneData("Users",trackSolarData?.PrimaryUserDetails)
     .then((repos)=>{
       setUserDetails(repos);
     })
@@ -77,7 +77,7 @@ const ShowSpecific = () => {
     {
       !trackSolarData?.PrimaryInfromationDate ? <TableUi /> :
       <>
-      <ol className="flex  items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
+      <ol className="flex  items-center justify-center w-fit p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
       {
         processArray.map((element,index)=>(
          

@@ -6,20 +6,14 @@ import { setItem } from "../utils/LocalStorage/localAuth";
 
 class Firestore {
 
-  async addData(collection,data,documentID){
-    
-    try{
-      setDoc(doc(db,collection,documentID),{data})
-      .then(()=>{
-        toast.success("Data Added!");
-    });
-    } catch(error){
-      console.log("error",error);
-
-      toast.error(error,{position:"bottom-center"});
+  async addData(collection, data, documentID) {
+    try {
+      await setDoc(doc(db, collection, documentID), data);
+      return { status: 200, message: 'Data saved!' };
+    } catch (error) {
+      return { status: 500, message: error,Id:documentID };
     }
   }
-
 
       async getUserData ()  {
         try {
@@ -29,8 +23,6 @@ class Firestore {
         } catch (error) {
           setItem("isLogin",{isLogin:false,userID:""})
           console.error("Error getting document: ", error);
-
-          
         }
       }
 

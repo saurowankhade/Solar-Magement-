@@ -3,6 +3,7 @@ import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarCont
 import { toast } from "react-toastify";
 import firestore from "../../../Firebase/Firestore";
 import UserContext from "../../../Context/UserContext/UserContext";
+import Loading from "react-loading";
 
 
 
@@ -12,7 +13,7 @@ const NetMetering = () => {
     const [netMeterNSCApproved,setNetMeterNSCApproved] = useState(false);
     const [netMeterFileSubmitted,setNetMeterFileSubmitted] = useState(false);
 
-
+    const [isLoading,setIsLoading] = useState(false)
     const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext);
 
@@ -46,14 +47,16 @@ const handleSubmit = useCallback((e) => {
   setTrackSolarData(updatedTrackSolarData);
 
   const companyID = user?.companyID;
-  firestore.addData(companyID + "TrackSolarData", updatedTrackSolarData, trackSolarData?.Id)
-    .then((message) => {
-      toast.success(message);
-      toast.success("Saved! Submit the data");
-    })
-    .catch((error) => {
-      toast.error("Error saving data: " + error.message);
-    });
+  firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
+  .then((getStatus)=>{
+      if(getStatus.status === 200){
+          setIsLoading(false);
+          toast.success("Data saved!Go next",{position:'top-right'});
+      } else{
+          setIsLoading(false);
+          toast.error(getStatus?.message?.message || "Failed to add" ,{position:'top-right'})
+      }
+  });
 
 }, [trackSolarData, netMeterSignByDYEE, netMeterSendDCEngineer, netMeterNSCApproved, netMeterFileSubmitted, setTrackSolarData, user?.companyID]);
 
@@ -89,9 +92,12 @@ const handleSubmit = useCallback((e) => {
 
 
         </div>
-        <div className="m-2 flex justify-center">
-            <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2" onClick={handleSubmit}>Save</button>
-        </div>
+        <div className="flex w-full justify-center gap-3 mt-5">
+            {
+                isLoading ? <Loading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+            }
+
+            </div>
     </div>
    </div>
   )

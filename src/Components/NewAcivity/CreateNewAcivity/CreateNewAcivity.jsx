@@ -13,7 +13,7 @@ const CreateNewAcivity = () => {
   const [currentPage,setCurrentPage] = useState(0);
   const {trackSolarData} = useContext(TrackSolarContext);
   const [showPage,setShowPage] = useState(0);
-  const processArray = ["Primary","Application","Site Work","Inspection","Meter Installtion","Net Metering","Subsidy"]
+  const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Metering","Subsidy"]
   useEffect(()=>{
     if(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan === false) {
       setCurrentPage(1)
@@ -44,9 +44,11 @@ const CreateNewAcivity = () => {
   },[currentPage])
 
   return (
-    <div>
+    
+    <div className="w-fit flex justify-center">
+    <div className="w-fit">
       
-<ol className="flex  items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
+<ol className="flex items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
       {
         processArray.map((element,index)=>(
         
@@ -56,13 +58,8 @@ const CreateNewAcivity = () => {
             } else{
               toast.error("This process is in pending...")
             }
-            console.log("Index @ : ",index);
+            
            }}  key={element} className={`flex items-center cursor-pointer ${currentPage > index ?  "text-green-500" : "text-gray-500"} ${currentPage===7 && index===6 ? "text-green-500" : ""}`}>
-     {
-      console.log("Current page : ",currentPage," Index : ",index," showpage : ",showPage)
-     }
-   
-   
     <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border  rounded-full shrink-0 ">
             {index+1}
         </span>
@@ -84,6 +81,8 @@ const CreateNewAcivity = () => {
         showPage === 5 ? <NetMetering /> :
         showPage === 6 ? <Subsidy /> : <></>
       }
+
+    </div>
 
     </div>
   )

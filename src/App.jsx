@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import CmpRegister from "./Components/Register/CmpRegister/CmpRegister"
 import UserRegister from "./Components/Register/UserRegister/UserRegister"
 
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./Components/Dashboard/Dashboard";
 import authentication from "./Firebase/authentication";
@@ -44,8 +44,12 @@ function App() {
 
     
     
-    <ToastContainer />
-    
+    <ToastContainer 
+    position="top-left"
+    autoClose={3000}
+    limit={5}
+    newestOnTop
+    />
     </>
   )
 }

@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from "react"
 import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext";
 import { toast } from "react-toastify";
+import firestore from "../../../Firebase/Firestore";
+import UserContext from "../../../Context/UserContext/UserContext";
+import ReactLoading from "react-loading";
 
 const IsLoadChangeInformation = ()=>{
     const documentsArray = ["Non","Electricity Bill"];
@@ -10,8 +13,10 @@ const IsLoadChangeInformation = ()=>{
     const [isPaymentRecipt , setIsPaymentRecipt] = useState(false);
     const [isApproved , setIsApproved] = useState(false);
     const [documents , setDocuments] = useState("Non");
-
+    const [isLoading,setIsLoading] = useState(false);
     const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
+
+    const {user} = useContext(UserContext);
 
     useEffect(()=>{
         if(!isLoadChange) {
@@ -39,44 +44,57 @@ const IsLoadChangeInformation = ()=>{
 
 
     const handleSubmit = ()=>{
-       
-        setTrackSolarData((prevObject) => ({
-            ...prevObject,
-            LoadChange: isLoadChange,
-            LoadChangeAppliactionStatus: isAppliactionStatusDone,
-            LoadChangePaymentRecipt: isPaymentRecipt,
-            LoadChangeApproved: isApproved,
-            LoadChangeDocuments: documents
-        }));
-
-        toast.success("Saved! Go Next ➡️ ")
-
-
+        toast.dismiss()
+        if(!(trackSolarData?.ConsumerName )){
+            toast.error("Fill all the information",{position:"top-center"});
+            return;
+        }
+        setIsLoading(true);
+       const updatedTrackSolarData = {
+        ...trackSolarData,
+        LoadChange: isLoadChange,
+        LoadChangeAppliactionStatus: isAppliactionStatusDone,
+        LoadChangePaymentRecipt: isPaymentRecipt,
+        LoadChangeApproved: isApproved,
+        LoadChangeDocuments: documents
+       }
+        setTrackSolarData(updatedTrackSolarData);
+        const companyID = user?.companyID;
+        firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
+        .then((getStatus)=>{
+            if(getStatus.status === 200){
+                setIsLoading(false);
+                toast.success("Data saved!Go next",{position:'top-right'});
+            } else{
+                setIsLoading(false);
+                toast.error(getStatus?.message?.message || "Failed to add" ,{position:'top-right'})
+            }
+        });
     }
     return (
-        <div className="flex justify-center items-center">
-          <div className="flex flex-col w-[600px] justify-center ">
-            <h3 className="text-xl underline ">Load Change Information : </h3>
-            <div className=" ml-2 p-2 flex flex-row items-center">
-                <span className="ml-2 p-2 text-lg">Load Change : </span>
+        <div className="w-full  flex justify-center ">
+          <div className=" w-[600px] ">
+           
+           <div className=" flex  border gap-2 m-2 p-2">
+                <span className="ml-2 p-2 text-xl">Load Change : </span>
                 <input className="cursor-pointer" type="radio" name="loadChange" id="loadChangeYes" checked={isLoadChange} onChange={()=>{setIsLoadChange(true)}} />
-                <label className="p-2 text-lg cursor-pointer" htmlFor="loadChangeYes">Yes</label>
+                <label className="p-2 text-xl cursor-pointer" htmlFor="loadChangeYes">Yes</label>
                 <input className="cursor-pointer" type="radio" name="loadChange" id="loadChangeNo" checked={!isLoadChange} onChange={()=>{setIsLoadChange(false)}} />
                 <label className="p-2 text-xl cursor-pointer" htmlFor="loadChangeNo">No</label>
             </div>
-            {console.log("Is loading : "+isLoadChange)}
+
             {
                 isLoadChange ? 
-                <div>
+                <div className="w-full">
                     
-                    <div className=" ml-2 p-2 flex flex-row items-center">
-                    <label className="ml-2 p-2 text-xl" htmlFor="documents">Documents : </label>
-                    <select className="ml-2 p-2 text-xl border cursor-pointer" name="loadDocuments" id="loadDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}}>
+                    <div className=" p-2 flex flex-row items-center  border gap-2 m-2 ">
+                    <label className="p-2 text-xl" htmlFor="documents">Documents : </label>
+                    <select className="p-2 text-xl border cursor-pointer" name="loadDocuments" id="loadDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}}>
                         
                     {
                             
                             !documentsArray.includes(documents) && (
-                                <option className="cursor-pointer" key={documents} value={documents}>
+                                <option className="cursor-pointer outline-none" key={documents} value={documents}>
                                     {documents}
                                 </option>
                             )
@@ -85,7 +103,7 @@ const IsLoadChangeInformation = ()=>{
                         
                         {
                             documentsArray.map((document,index)=>(
-                                <option className="cursor-pointer" key={document+index+2} value={document}>
+                                <option className="cursor-pointer outline-none" key={document+index+2} value={document}>
                                     {document}
                                 </option>
                             ))
@@ -94,8 +112,8 @@ const IsLoadChangeInformation = ()=>{
                     </div>
 
                    <div>
-                   <div className=" ml-2 p-2 flex flex-row items-center">
-                <span className="ml-2 p-2 text-xl">Application Status : </span>
+                   <div className="  p-2 flex flex-row items-center   border m-2 ">
+                <span className=" p-2 text-xl">Application Status : </span>
                 <input className="cursor-pointer" type="radio" name="applicationStatus" id="applicationStatusDone" checked={isAppliactionStatusDone}  onChange={()=>{setIsAppliactionStatusDone(true)}} />
                 <label className="p-2 text-xl cursor-pointer" htmlFor="applicationStatusDone">Done</label>
                 <input className="cursor-pointer" type="radio" name="applicationStatus" id="applicationStatusPending" checked={!isAppliactionStatusDone} onChange={()=>{setIsAppliactionStatusDone(false)}} />
@@ -104,8 +122,8 @@ const IsLoadChangeInformation = ()=>{
             {
                 isAppliactionStatusDone ? 
                 <div>
-                    <div className=" ml-2 p-2 flex flex-row items-center">
-                <span className="ml-2 p-2 text-xl">Payment Recipt : </span>
+                    <div className="  p-2 flex flex-row items-center  border gap-2 m-2">
+                <span className=" p-2 text-xl">Payment Recipt : </span>
                 <input className="cursor-pointer"  type="radio" checked={isPaymentRecipt} name="paymentReciptLoadChange" id="paymentReciptYes" onChange={()=>{setIsPaymentRecipt(true)}} />
                 <label className="p-2 text-xl cursor-pointer" htmlFor="paymentReciptLoadChangeYes">Yes</label>
                 <input className="cursor-pointer" type="radio" checked={!isPaymentRecipt} name="paymentReciptLoadChange" id="paymentReciptNo" onChange={()=>{setIsPaymentRecipt(false)}}  />
@@ -113,8 +131,8 @@ const IsLoadChangeInformation = ()=>{
             </div>
 
             
-            <div className=" ml-2 p-2 flex flex-row items-center">
-                <span className="ml-2 p-2 text-xl">Approved (Send to bill ) : </span>
+            <div className="  p-2 flex flex-row items-center  border gap-1 m-2 ">
+                <span className=" p-2 text-xl">Approved (Send to bill ) : </span>
                 <input className="cursor-pointer"  type="radio" name="approved" id="approvedYes" checked={isApproved} onChange={()=>{setIsApproved(true)}}  />
                 <label className="p-2 text-xl cursor-pointer" htmlFor="approvedYes">Yes</label>
                 <input className="cursor-pointer" type="radio" name="approved" id="approvedNo" checked={!isApproved} onChange={()=>{setIsApproved(false)}} />
@@ -133,9 +151,12 @@ const IsLoadChangeInformation = ()=>{
                 
                 : <></>
             }
-            <div className="w-full flex justify-end p-3 mr-3">
-            <button className="bg-blue-500 text-white rounded-lg pl-3 pr-3 pt-2 pb-2 w-fit hover:bg-blue-600 hover:shadow-lg" onClick={handleSubmit}>Save</button>
-           </div>
+            <div className="flex w-full justify-center gap-3 mt-5">
+            {
+                isLoading ? <ReactLoading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+            }
+
+            </div>
         </div>     
         </div>                                                           
     )
