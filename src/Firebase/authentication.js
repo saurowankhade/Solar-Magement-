@@ -1,19 +1,16 @@
-import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { auth ,db } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword ,signOut,sendPasswordResetEmail,sendEmailVerification} from "firebase/auth"; 
 import { setDoc,doc } from "firebase/firestore";
 
-import { setItem,getItem } from "../utils/LocalStorage/localAuth";
+import { getItem } from "../utils/LocalStorage/localAuth";
 
 const KEY_VAULE = "isLogin";
 class Authentication  {
 
-    async RegisterEmailAndPassword(email,password,name,mobileNo,jobProfile,verified,companyID,isCmp){
-        toast.success("Register Success ",{position:'top-center'})
+    async RegisterEmailAndPassword(email,password,name,mobileNo,jobProfile,verified,companyID,isCmp){ 
       try{
-        await createUserWithEmailAndPassword(auth,email,password)
-        .then((userCredential)=>{
+        const userCredential = await createUserWithEmailAndPassword(auth,email,password);
             const user = userCredential.user;
             if(user){
                setDoc(doc(db,"Users",user.uid),{
@@ -27,59 +24,45 @@ class Authentication  {
                 userImg:"",
                 mobileNoVerify:false,
                 isCmp:isCmp
-               }).then(()=>{
-                toast.success("Register Success ",{position:'top-center'})
-                window.location.href = "/dashboard"
-                setItem(KEY_VAULE,{isLogin:true,userID:user.uid,cmpID:companyID }); // atLocal Storage
-               }).catch((error)=>{
-                console.log(error.message);
                });
+
+               return {status:200,message:"Done",userId:user?.uid};
+
             }
-         }).catch((error)=>{
-            console.log("Register failed : ",error.message);
-            
-        toast.error(error.message,{position:'bottom-center'})
-         });
       } catch(error){
-        toast.error(error.message,{position:'bottom-center'})
+        return {status:500,message:error};
       }
     }
 
     async LoginEmailAndPassword(email,password){
         try{
-             await signInWithEmailAndPassword(auth,email,password)
-             .then((userCredential)=>{
-                const user = userCredential?.user;
-                toast.success("Login Sccessfully!",{position:'top-center'});
-                window.location.href = '/dashboard';
-                setItem(KEY_VAULE,{isLogin:true,userID:user.uid}); // atLocal Storage
-            }).catch((error)=>{
-                toast.error(`Login Failed ${error.message}`,{position:'bottom-center'})
-            });
+              const data = await signInWithEmailAndPassword(auth,email,password)
+              return {status:200,message:"Done",userId:data?.user?.uid};
         } catch(error){
-            toast(`Failed : ${error.message}`,{position:'bottom-center'})
+            return {status:500,message:error};
         }
     }
 
 
   // Sign Out
   async signout() {
-      await signOut(auth).then(()=>{
-        toast.success("Sign Out",{position:'top-center'});
-        window.location.href = '/';
-        setItem(KEY_VAULE,{isLogin:false,userID:""})
-      }).catch((error)=>{
-        toast.error(error.message,{position:'bottom-center'})
-      });
+    try {
+        await signOut(auth)
+        return {status:200,message:"Done"};
+    } 
+    catch(error){
+        return {status:500,message:error};
+      }
   }
 
   // Password Reset
   async resetPassword(email) {
-      await sendPasswordResetEmail(auth, email).then(()=>{
-        toast.success("Email send check your email please !",{position:'top-right'})
-      }).catch((error)=>{
-        toast.error(error.message,{position:'bottom-center'})
-      })
+    try {
+      await sendPasswordResetEmail(auth, email)
+      return {status:200,message:"Done"};
+    }catch(error){
+      return {status:500,message:error};
+    }
   }
 
 

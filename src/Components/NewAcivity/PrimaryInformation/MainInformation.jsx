@@ -14,7 +14,7 @@ const MainInformation = () => {
     const [visitState,setVisitState] = useState("Non");
     const visitArray = ["Physical","Mobile Communication"]
 
-    const [isSave,setIsSave] = useState(false);
+   
     const [isLoading,setIsLoading] = useState(false);
         
 
@@ -28,7 +28,6 @@ const MainInformation = () => {
             setConsumerMobileNumberState(trackSolarData?.ConsumerMobileNumber || "");
             setRequiredSystemKWState(trackSolarData?.RequiredSystemKW || "")
             setVisitState(trackSolarData?.Visit || "")
-            if(trackSolarData?.Visit){setIsSave(true)}
         }
 
     },[trackSolarData])
@@ -52,8 +51,11 @@ const MainInformation = () => {
                 ConsumerMobileNumber:consumerMobileNumberState,
                 RequiredSystemKW:requiredSystemKWState,
                 Visit:visitState,
-                PrimaryUserDetails: user?.userID,
-                PrimaryInfromationDate: trackSolarData?.PrimaryInfromationDate || new Date()
+                CreatedAt:trackSolarData?.CreatedAt || new Date(),
+                PrimaryInfromation : {
+                    createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
+                    createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date()
+                }
             }
             setTrackSolarData(updatedTrackSolarData)
 
@@ -75,18 +77,18 @@ const MainInformation = () => {
     <div className="primaryInformation w-full  flex justify-center ">
         <div id="mainInformation" className="">
             <div className=" w-full  flex flex-col ">
-                <input className="p-4 m-2 border outline-none w-[600px]  text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}} readOnly={isSave} />
+                <input className="p-4 m-2 border outline-none w-[600px]  text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}}  />
 
-                <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={10}  placeholder="Consumer mobile no" type="text" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}} readOnly={isSave} />
+                <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={10}  placeholder="Consumer mobile no" type="text" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
 
             </div>
 
             <div className="w-full justify-center">
-                <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={2} placeholder="Required System in KW" type="text" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}} readOnly={isSave} />
+                <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={2} placeholder="Required System in KW" type="text" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}}  />
 
                 <div className="w-[600px] m-2 border flex items-center p-4 justify-between  ">
                 <span className="text-lg">visit :</span> 
-                    <select className="outline-none cursor-pointer text-lg" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}} readOnly={isSave} >
+                    <select className="outline-none cursor-pointer text-lg" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
                         {
                             
                                 !visitArray.includes(visitState) && (

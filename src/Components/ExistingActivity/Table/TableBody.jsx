@@ -6,7 +6,7 @@ import { Timestamp } from "firebase/firestore";
 import Dialog from "../../DialogBox/Dialog";
 
 const TableBody = ({getData,collectionId}) => {
-    const {Id,ConsumerName,ConsumerNumber,ConsumerMobileNumber,PrimaryInfromationDate,MNREApplicationNumber , PVApplicationNumber} = getData || {};
+    const {Id,ConsumerName,ConsumerNumber,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
 
     const {setTrackSolarData} = useContext(TrackSolarContext);
 
@@ -37,13 +37,12 @@ const TableBody = ({getData,collectionId}) => {
         }
         return ''; // Return empty string if not a valid timestamp
       }
-
   return (
     <tbody className="w-full border-b">
       
     <tr onClick={goToSpeficData} className="bg-gray-50 mt-2 cursor-pointer">
       <td className="px-6 py-4 border">
-        {formatTimestamp(PrimaryInfromationDate)}
+        {formatTimestamp(CreatedAt)  }
       </td>
       <td className="px-6 py-4 border">
         {ConsumerName}
@@ -52,7 +51,7 @@ const TableBody = ({getData,collectionId}) => {
         {ConsumerMobileNumber}
       </td>
       <td className="px-6 py-4 border">
-        {ConsumerNumber}
+        {Id}
       </td>
       <td className="px-6 py-4 border">
         {PVApplicationNumber}

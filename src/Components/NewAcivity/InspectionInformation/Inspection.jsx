@@ -35,11 +35,14 @@ const handleSubmit = useCallback((e) => {
 
   const updatedTrackSolarData = {
     ...trackSolarData,
-    InspectionByAEQCOnSite:inspectionByAEQCOnSite,
+        InspectionByAEQCOnSite:inspectionByAEQCOnSite,
         InspectionFileSign:inspectionFileSign,
         InspectionReportSendAEQC:inspectionReportSendAEQC,
         MNREInspectionApproved:MNREInspectionApproved,
-    InspectionInfromationDate: trackSolarData?.InspectionInfromationDate || new Date()
+        InspectionInfromation : {
+          createdBy:trackSolarData?.InspectionInfromation?.createdBy || user,
+          createdAt:trackSolarData?.InspectionInfromation?.createdAt || new Date()
+      }
   };
 
   // Update the context state

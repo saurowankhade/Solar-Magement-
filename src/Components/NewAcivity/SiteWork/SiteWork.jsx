@@ -37,7 +37,10 @@ const handleSubmit = useCallback((e) => {
       ConcreteEarthing:isConcreteEarthing,
       ElectricFitting:isElectricFitting,
       PanelFitting:isPanelFitting,
-      SiteWorkInfromationDate: trackSolarData?.SiteWorkInfromationDate || new Date()
+      SiteWorkInfromation : {
+        createdBy:trackSolarData?.SiteWorkInfromation?.createdBy || user,
+        createdAt:trackSolarData?.SiteWorkInfromation?.createdAt || new Date()
+    }
   };
 
   // Update the context state

@@ -5,6 +5,7 @@ import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarCont
 import firestore from "../../../Firebase/Firestore";
 import UserContext from "../../../Context/UserContext/UserContext";
 import Loading from "react-loading";
+import PrimaryInformation from "./PrimaryInformation";
 
 const IsBankLoanInformation = () => {
   
@@ -41,8 +42,7 @@ setIsLoading(true);
     ...trackSolarData,
     BankLoan: isBankLoan,
     BankLoanDocuments: bankLoanDocuments,
-    PrimaryUserDetails: trackSolarData?.PrimaryUserDetails || user?.userID,
-    PrimaryInfromationDate: trackSolarData?.PrimaryInfromationDate || new Date()
+    BankLoanPendingDocuments: documentArray.filter( docs => !docs.includes(bankLoanDocuments)) 
   };
 
   // Update the context state

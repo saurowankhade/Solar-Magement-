@@ -35,12 +35,15 @@ const handleSubmit = useCallback((e) => {
   e.preventDefault();
 
   const updatedTrackSolarData = {
-    ...trackSolarData,
-    NetMeterSignByDYEE:netMeterSignByDYEE,
+        ...trackSolarData,
+        NetMeterSignByDYEE:netMeterSignByDYEE,
         NetMeterSendDCEngineer:netMeterSendDCEngineer,
         NetMeterNSCApproved:netMeterNSCApproved,
         NetMeterFileSubmitted:netMeterFileSubmitted,
-    NetMeteringInfromationDate: trackSolarData?.NetMeteringInfromationDate || new Date()
+        NetMeteringInfromation : {
+          createdBy:trackSolarData?.NetMeteringInfromation?.createdBy || user,
+          createdAt:trackSolarData?.NetMeteringInfromation?.createdAt || new Date()
+      }
   };
 
   // Update the context state

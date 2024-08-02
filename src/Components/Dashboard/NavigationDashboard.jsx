@@ -11,8 +11,8 @@ const NavigationDashboard = ()=>{
 <></>
 
 <div className="">
-<aside className=" w-fit fixed h-screen pt-10 bg-gray-900 " >
-   <div className="h-full overflow-y-auto  ">
+<aside className=" w-fit fixed h-full pt-10 bg-gray-900 " >
+   <div className="h-full  overflow-y-auto  ">
       <ul className="space-y-2 font-medium">
 
          <li>

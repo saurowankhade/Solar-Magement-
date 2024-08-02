@@ -3,6 +3,9 @@ import { useRef, useState } from 'react';
 import authentication from '../../Firebase/authentication';
 
 import ReactLoading from 'react-loading';
+import { toast } from 'react-toastify';
+import { setItem } from '../../utils/LocalStorage/localAuth';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/display-name
 const SignUpForm =(props)=>{
@@ -10,7 +13,7 @@ const SignUpForm =(props)=>{
   const {isCmpReg} = props;
 
   const [error,setError] = useState("");
-  const [btnText,setBtnText] = useState("Create an account");
+  const [isLoading,setIsLoading] = useState(false);
   // 
 
   const nameRef = useRef(null);
@@ -21,10 +24,12 @@ const SignUpForm =(props)=>{
   const companyIDRef = useRef(null);
   const jobProfileRef = useRef(null);
 
+  const navigateToDashboard = useNavigate();
+
 
   const handleButtonClick = (event)=>{
     event.preventDefault();
-    const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
     let ranStr = "";
     for(let i=0;i<=4;i++){
       ranStr+=str.charAt(Math.floor(Math.random()*str.length + 1));
@@ -41,8 +46,18 @@ const SignUpForm =(props)=>{
     if(password.length <=7) setError("Password must be greater than 7!")
     else if(password !== rePassword) setError("Password not match!") 
     else {
-    setBtnText("Loading...")
-    authentication.RegisterEmailAndPassword(email,password,name,mobileNo,jobProfile,verified,companyID,isCmpReg);
+    setIsLoading(true)
+    authentication.RegisterEmailAndPassword(email,password,name,mobileNo,jobProfile,verified,companyID,isCmpReg)
+    .then((check)=>{
+      setIsLoading(false);
+      if(check?.status === 200 || check?.message === "Done"){
+        toast.success("Registration Successfully !",{position:'top-center'});
+        setItem("isLogin",{isLogin:true,userID:check?.userId})
+        navigateToDashboard('/dashboard');
+      } else{
+        toast.error(`Registration  Failed ${check?.message}`,{position:'bottom-center'})
+      }
+    });
   }    
     
   }
@@ -101,7 +116,8 @@ const SignUpForm =(props)=>{
                       
                     
                     {
-                      btnText === "Loading..." ? <ReactLoading type='spinningBubbles' color='black' height={'10%'} width={'10%'} /> : <button className='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 hover:cursor-pointe' type="submit">{btnText}</button>
+                      isLoading  ? <ReactLoading type='spinningBubbles' color='black' height={'10%'} width={'10%'} /> : 
+                      <button className='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 hover:cursor-pointe' type="submit">Create an account</button>
                     }
 
                     </div>

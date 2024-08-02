@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify";
 import UserContext from "../../../Context/UserContext/UserContext";
 import firestore from "../../../Firebase/Firestore";
@@ -13,25 +13,40 @@ const ShowAcivity = () => {
 
     const [searchQuery,setSearchQuery] = useState("");
 
+    const featchedLastData = useRef([]);
+    const [isLoading,setIsLoading] = useState(true);
     const {user} = useContext(UserContext);
+
     useEffect(()=>{
+        if(user?.companyID){
         const companyID = user?.companyID;
         const collection = companyID+"TrackSolarData";
+        console.log(collection);
         const data = firestore.getAllDocuments(collection);
         data.then((sinData)=>{
             setTrackData(sinData)
             setTrackDataDoublicate(sinData);
-       }).catch((error)=>{
+            setIsLoading(false);
+            })
+        .catch((error)=>{
             toast.error(error.message);
         })
+        }
     },[user])
 
-    function formatTimestamp(timestamp) {
-        if (timestamp instanceof Timestamp) {
-          return timestamp.toDate().toLocaleDateString(); // Or any other format you prefer
-        }
-        return ''; // Return empty string if not a valid timestamp
-      }
+    // const handleFetchMoreData = useCallback(async ()=>{
+    //     const companyID = user?.companyID;
+    //     const collection = companyID+"TrackSolarData";
+    //     const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,featchedLastData.current);
+    //     featchedLastData.current = newLastVisible
+    //     setTrackData(prevItems => [...prevItems, ...data])
+    //     setTrackDataDoublicate(prevItems => [...prevItems, ...data])
+    //     setIsLoading(false)
+    // },[ user?.companyID])
+
+    // useEffect(()=>{
+    //     handleFetchMoreData()
+    // },[handleFetchMoreData, user])
 
     useEffect(()=>{
         setTrackDataDoublicate(
@@ -41,11 +56,26 @@ const ShowAcivity = () => {
                 item?.data?.ConsumerMobileNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 item?.data?.MNREApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) || 
                 item?.data?.PVApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                formatTimestamp(item?.data?.PrimaryInfromationDate).toLowerCase().includes(searchQuery.toLowerCase())
+                firestore.formatTimestamp(item?.data?.PrimaryInfromationDate).toLowerCase().includes(searchQuery.toLowerCase())
             )
           );
 
     },[searchQuery,setSearchQuery,trackData])
+
+    
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
+    //       handleFetchMoreData();
+    //     // if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 60 && isLoading) {
+    //     //     handleFetchMoreData();
+    //     //   }
+    //     };
+    
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    //   }, [handleFetchMoreData, isLoading]);
+
 
   return (
     <div>
@@ -59,7 +89,7 @@ const ShowAcivity = () => {
             </div>
 
             {
-                trackData.length === 0 ?
+                isLoading ?
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 border">
                 <TableHeader />
                <TableBodyShimmerUI />

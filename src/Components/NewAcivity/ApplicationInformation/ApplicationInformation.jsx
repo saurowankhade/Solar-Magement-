@@ -39,7 +39,10 @@ const handleSubmit = useCallback((e) => {
       PVApplicationNumber:PVAppliactionNumber,
       PVTechnicalFeasibility:PVTechnicalFeasibility,
       MNRETechnicalFeasibility:MNRETechnicalFeasibility,
-      AppliactionInfromationDate: trackSolarData?.ApplicationInfromationDate || new Date()
+      ApplicationInfromation : {
+        createdBy:trackSolarData?.ApplicationInfromation?.createdBy || user,
+        createdAt:trackSolarData?.ApplicationInfromation?.createdAt || new Date()
+    }
   };
 
   // Update the context state

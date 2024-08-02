@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,orderBy,query,setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,orderBy,query,setDoc, startAfter, startAt, Timestamp, updateDoc } from "firebase/firestore";
 import authentication from "./authentication";
 import { toast } from "react-toastify";
 import { setItem } from "../utils/LocalStorage/localAuth";
@@ -68,7 +68,7 @@ class Firestore {
           const collectionRef = collection(db, collectionName);
       
           // Create a query with orderBy for sorting by date
-          const q = query(collectionRef, orderBy(new FieldPath('data', 'PrimaryInfromationDate'), 'desc')); // Use FieldPath for nested fields
+          const q = query(collectionRef); // Use FieldPath for nested fields
       
           // Get the documents based on the query
           const snapshot = await getDocs(q);
@@ -87,6 +87,49 @@ class Firestore {
           return [];
         }
       }
+
+
+    async getAllData(collectionName,lastDoc){
+      const collectionRef = collection(db, collectionName);
+  
+      let q;
+      if (lastDoc) {
+        q = query(
+          collectionRef,
+          orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
+          startAfter(lastDoc),
+          limit(10)
+        );
+      } else {
+        q = query(
+          collectionRef,
+          orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
+          limit(10)
+        );
+      }
+    
+      const snapshot = await getDocs(q);
+      const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    
+      return { data:documents, lastDocs: snapshot.docs[snapshot.docs.length - 1] };
+    }
+
+     getAllSearch = async (collectionName,conditions) => {
+      try{
+        let query = db.collection(collectionName);
+      conditions.forEach(condition => {
+        query = query.where(condition?.field, condition?.operator, condition?.value);
+      });
+      const snapshot = await query.get();
+      const results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      console.log(results);
+      return results;
+      } catch(error){
+        console.log(error);
+        return {status:500,message:error}
+      }
+    }
+
 
 
        // Delete a document by ID

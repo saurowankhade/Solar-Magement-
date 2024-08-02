@@ -38,15 +38,6 @@ const ShowSpecific = () => {
 
   },[Id,user,setTrackSolarData])
 
-
-  useEffect(()=>{
-    firestore.getOneData("Users",trackSolarData?.PrimaryUserDetails)
-    .then((repos)=>{
-      setUserDetails(repos);
-    })
-  },[trackSolarData])
-
-
   useEffect(()=>{
     if(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan === false) {
       setCurrentPage(1)
@@ -67,11 +58,10 @@ const ShowSpecific = () => {
       setCurrentPage(7)
     }
 
-
+    setUserDetails(trackSolarData?.PrimaryUserDetails)
+    
   },[trackSolarData])
 
-
-  // if(!trackSolarData?.Consumer) return (<>Loading....</>)
   return (
     <div>
     {

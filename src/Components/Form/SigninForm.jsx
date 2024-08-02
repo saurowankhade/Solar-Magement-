@@ -3,27 +3,43 @@ import { useRef, useState } from 'react';
 import authentication from '../../Firebase/authentication';
 
 import ReactLoading from 'react-loading';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { setItem } from '../../utils/LocalStorage/localAuth';
 
 // eslint-disable-next-line react/display-name, react/prop-types
 const SigninForm =({isCmpLogin})=>{
 
   const [error,setError] = useState("");
-  const [btnText,setBtnText] = useState("Login");
+  const [isLoading,setIsLoading] = useState(false);
   
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const navigateToDashboard = useNavigate();
+
 
   const handleButtonClick = (event)=>{
     event.preventDefault();
+    toast.dismiss()
     
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
     if(password.length <=7) setError("Password must be greater than 7!")
     else {
-    setBtnText("Loading...")
-    authentication.LoginEmailAndPassword(email,password);
+    setIsLoading(true)
+    authentication.LoginEmailAndPassword(email,password)
+    .then((check)=>{
+      setIsLoading(false);
+      if(check?.status === 200 || check?.message === "Done"){
+        toast.success("Login Successfully!",{position:'top-center'});
+        setItem("isLogin",{isLogin:true,userID:check?.userId})
+        navigateToDashboard('/dashboard');
+      } else{
+        toast.error(`Login Failed ${check?.message}`,{position:'bottom-center'})
+      }
+    });
   }    
     
   }
@@ -52,7 +68,10 @@ const SigninForm =({isCmpLogin})=>{
                     <div type='submit' className='flex items-center justify-center '>
                          
                     {
-                      btnText === "Loading..." ? <ReactLoading type='spinningBubbles' color='black' height={'10%'} width={'10%'} /> : <button className='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 hover:cursor-pointer' type="submit">{btnText}</button>
+                      isLoading ? 
+                      <ReactLoading type='spinningBubbles' color='black' height={'10%'} width={'10%'} /> 
+                      : 
+                      <button className='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 hover:cursor-pointer' type="submit">Login</button>
                     }
 
                     </div>

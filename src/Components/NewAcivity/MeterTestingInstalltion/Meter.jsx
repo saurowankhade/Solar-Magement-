@@ -36,11 +36,14 @@ const handleSubmit = useCallback((e) => {
 
   const updatedTrackSolarData = {
     ...trackSolarData,
-    MeterTestingCall:meterTestingCall,
+        MeterTestingCall:meterTestingCall,
         SubmitMeter:submitMeter,
         MeterTestReport:meterTestReport,
         ReleaseLetterMeterInstall:releaseLetterMeterInstall,
-    MeterInfromationDate: trackSolarData?.MeterInfromationDate || new Date()
+        MeterInfromation : {
+          createdBy:trackSolarData?.MeterInfromation?.createdBy || user,
+          createdAt:trackSolarData?.MeterInfromation?.createdAt || new Date()
+      }
   };
 
   // Update the context state

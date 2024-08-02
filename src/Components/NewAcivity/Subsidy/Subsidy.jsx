@@ -15,7 +15,6 @@ const Subsidy = () => {
     const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext);
 
-    
     useEffect(()=>{
       if(trackSolarData){
         setMNRESubsidyRequest(trackSolarData?.MNRESubsidyRequest || false);
@@ -23,17 +22,18 @@ const Subsidy = () => {
       }
   },[trackSolarData]);
   
-
-
   // Adjusted handleSubmit function
 const handleSubmit = useCallback((e) => {
   e.preventDefault();
 
   const updatedTrackSolarData = {
-    ...trackSolarData,
+        ...trackSolarData,
         MNRESubsidyRequest:MNRESubsidyRequest,
         SubsidyRedeem:subsidyRedeem,
-    SubsidyInfromationDate: trackSolarData?.SubsidyInfromationDate || new Date()
+        SubsidyInfromation : {
+          createdBy:trackSolarData?.SubsidyInfromation?.createdBy || user,
+          createdAt:trackSolarData?.SubsidyInfromation?.createdAt || new Date()
+      }
   };
 
   // Update the context state
@@ -44,22 +44,19 @@ const handleSubmit = useCallback((e) => {
         .then((getStatus)=>{
             if(getStatus.status === 200){
                 setIsLoading(false);
-                toast.success("Data saved!Go next",{position:'top-right'});
+                toast.success("Data saved!",{position:'top-right'});
             } else{
                 setIsLoading(false);
                 toast.error(getStatus?.message?.message || "Failed to add" ,{position:'top-right'})
             }
         });
 
-}, [trackSolarData, MNRESubsidyRequest, subsidyRedeem, setTrackSolarData, user?.companyID]);
-
-
-
+}, [trackSolarData, MNRESubsidyRequest,user, subsidyRedeem, setTrackSolarData]);
 
 
   return (
     <div className="flex justify-center">
-     <div className="w-[600px]">
+    <div className="w-[600px]">
     <h4 className="m-2">Subsidy Information : </h4>
         <div className="flex flex-row gap-2 w-full">
                <div className=" w-full p-2 border flex items-center hover:border hover:border-gray-500">
