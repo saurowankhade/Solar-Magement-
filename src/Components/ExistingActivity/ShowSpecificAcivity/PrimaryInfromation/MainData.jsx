@@ -3,14 +3,15 @@ import TrackSolarContext from "../../../../Context/TrackSolarContext/TrackSolarC
 
 const MainData = () => {
     const {trackSolarData} = useContext(TrackSolarContext);
+    const {ConsumerName,ConsumerMobileNumber,RequiredSystemKW,Visit} = trackSolarData;
   return (
     <div>
       <div className="">
-             Consumer Name : {trackSolarData?.ConsumerName} <br />
-             Consumer Mobile No : {trackSolarData?.ConsumerMobileNumber} <br />
-             Required System inn KW : {trackSolarData?.RequiredSystemKW}
+             Consumer Name : {ConsumerName} <br />
+             Consumer Mobile No : {ConsumerMobileNumber} <br />
+             Required System in KW : {RequiredSystemKW}
              <br />
-             Visit : {trackSolarData?.Visit}
+             Visit : {Visit}
       </div>
     </div>
   )

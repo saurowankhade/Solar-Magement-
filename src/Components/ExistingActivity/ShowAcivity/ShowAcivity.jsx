@@ -17,36 +17,40 @@ const ShowAcivity = () => {
     const [isLoading,setIsLoading] = useState(true);
     const {user} = useContext(UserContext);
 
-    useEffect(()=>{
-        if(user?.companyID){
-        const companyID = user?.companyID;
-        const collection = companyID+"TrackSolarData";
-        console.log(collection);
-        const data = firestore.getAllDocuments(collection);
-        data.then((sinData)=>{
-            setTrackData(sinData)
-            setTrackDataDoublicate(sinData);
-            setIsLoading(false);
-            })
-        .catch((error)=>{
-            toast.error(error.message);
-        })
-        }
-    },[user])
-
-    // const handleFetchMoreData = useCallback(async ()=>{
+    // useEffect(()=>{
+    //     if(user?.companyID){
     //     const companyID = user?.companyID;
     //     const collection = companyID+"TrackSolarData";
-    //     const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,featchedLastData.current);
-    //     featchedLastData.current = newLastVisible
-    //     setTrackData(prevItems => [...prevItems, ...data])
-    //     setTrackDataDoublicate(prevItems => [...prevItems, ...data])
-    //     setIsLoading(false)
-    // },[ user?.companyID])
+    //     console.log(collection);
+    //     const data = firestore.getAllDocuments(collection);
+    //     data.then((sinData)=>{
+    //         setTrackData(sinData)
+    //         setTrackDataDoublicate(sinData);
+    //         setIsLoading(false);
+    //         })
+    //     .catch((error)=>{
+    //         toast.error(error.message);
+    //     })
+    //     }
+    // },[user])
 
-    // useEffect(()=>{
-    //     handleFetchMoreData()
-    // },[handleFetchMoreData, user])
+    const handleFetchMoreData = useCallback(async ()=>{
+        if(user?.companyID ){
+        // setIsLoading(true)
+        const companyID = user?.companyID;
+        const collection = companyID+"TrackSolarData";
+        const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,featchedLastData.current,trackData);
+        featchedLastData.current = newLastVisible
+        console.log("New data : ",data);
+        setTrackData(data)
+        setTrackDataDoublicate(data)
+        setIsLoading(false)
+        }
+    },[ trackData,user?.companyID])
+
+    useEffect(()=>{
+        handleFetchMoreData()
+    },[handleFetchMoreData])
 
     useEffect(()=>{
         setTrackDataDoublicate(
@@ -62,24 +66,22 @@ const ShowAcivity = () => {
 
     },[searchQuery,setSearchQuery,trackData])
 
-    
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
-    //       handleFetchMoreData();
-    //     // if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 60 && isLoading) {
-    //     //     handleFetchMoreData();
-    //     //   }
-    //     };
-    
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => window.removeEventListener('scroll', handleScroll);
-    //   }, [handleFetchMoreData, isLoading]);
+    useEffect(() => {
+       const event =  window.addEventListener('scroll', ()=>{
+            if ((window.innerHeight + window.scrollY)>= document.body.scrollHeight-5 && !isLoading ){
+                handleFetchMoreData();
+            }
+        });
+        return () => window.removeEventListener('scroll', event);
+      }, [isLoading,handleFetchMoreData]);
 
 
   return (
     <div>
         <div>
+            {
+                console.log("Last docs in show : ",featchedLastData.current)
+            }
             <input
         className="border p-3 w-fit m-3"
         type="text"
@@ -87,6 +89,9 @@ const ShowAcivity = () => {
         value={searchQuery}
         onChange={(e)=>{setSearchQuery(e.target.value)}} />
             </div>
+            {
+                console.log("data : ",trackData)
+            }
 
             {
                 isLoading ?

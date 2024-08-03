@@ -89,29 +89,21 @@ class Firestore {
       }
 
 
-    async getAllData(collectionName,lastDoc){
+    async getAllData(collectionName,lastDoc,preData){
       const collectionRef = collection(db, collectionName);
   
-      let q;
-      if (lastDoc) {
-        q = query(
-          collectionRef,
-          orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
-          startAfter(lastDoc),
-          limit(10)
-        );
-      } else {
-        q = query(
-          collectionRef,
-          orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
-          limit(10)
-        );
-      }
+      let q = query(
+        collectionRef,
+        orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
+        startAfter(lastDoc || 0),
+        limit(10)
+      );
+      
     
       const snapshot = await getDocs(q);
       const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    
-      return { data:documents, lastDocs: snapshot.docs[snapshot.docs.length - 1] };
+      console.log("Pre data : ",preData);
+      return { data:[...preData || [],...documents], lastDocs: snapshot.docs[snapshot.docs.length - 1] };
     }
 
      getAllSearch = async (collectionName,conditions) => {

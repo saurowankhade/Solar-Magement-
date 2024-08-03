@@ -19,19 +19,18 @@ const ShowSpecific = () => {
   const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
   const [currentPage,setCurrentPage] = useState(0);
   const [showPage,setShowPage] = useState(0);
-  const [userDetails,setUserDetails] = useState([]);
   const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Metering","Subsidy"]
   
   useEffect(()=>{
+    if(user?.companyID){
     const companyID = user?.companyID;
     firestore.getOneData(companyID + "TrackSolarData",Id)
-    .then((data)=>{
-      setTrackSolarData(data?.data);
-    }).catch((error)=>{
-      toast.error(error);
-    })
-
-
+      .then((data)=>{
+          setTrackSolarData(data?.data);
+      }).catch((error)=>{
+          toast.error(error);
+      })
+    }
     return (()=>{
       setTrackSolarData({});
     })
@@ -57,15 +56,13 @@ const ShowSpecific = () => {
     if(trackSolarData?.SubsidyRedeem){
       setCurrentPage(7)
     }
-
-    setUserDetails(trackSolarData?.PrimaryUserDetails)
-    
+    return (()=>{setCurrentPage(0)})    
   },[trackSolarData])
 
   return (
     <div>
     {
-      !trackSolarData?.PrimaryInfromationDate ? <TableUi /> :
+      !trackSolarData?.CreatedAt ? <TableUi /> :
       <>
       <ol className="flex  items-center justify-center w-fit p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
       {
@@ -92,14 +89,6 @@ const ShowSpecific = () => {
         ))
       }
     </ol>
-
-
-        {
-          userDetails ? <div className="m-2 p-2 border">This data added by : {userDetails?.name}</div> : <>Loading...</>
-        }
-
-
-
 
     {
       showPage === 0 ? <PrimaryInformation/> :
