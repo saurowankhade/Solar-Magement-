@@ -56,7 +56,15 @@ const IsLoadChangeInformation = ()=>{
         LoadChangeAppliactionStatus: isAppliactionStatusDone,
         LoadChangePaymentRecipt: isPaymentRecipt,
         LoadChangeApproved: isApproved,
-        LoadChangeDocuments: documents
+        LoadChangeDocuments: documents,
+        PrimaryInfromation : {
+            createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
+            createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
+            isDone:(isLoadChange ? 
+                ( (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents) ? true: false)
+            :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)
+        )
+        }
        }
         setTrackSolarData(updatedTrackSolarData);
         const companyID = user?.companyID;

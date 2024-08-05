@@ -34,14 +34,15 @@ const handleSubmit = useCallback((e) => {
 
   const updatedTrackSolarData = {
     ...trackSolarData,
-    ConsumerNumber:consumerNo,
+      ConsumerNumber:consumerNo,
       MNREApplicationNumber:MNREAppliactionNumber ,
       PVApplicationNumber:PVAppliactionNumber,
       PVTechnicalFeasibility:PVTechnicalFeasibility,
       MNRETechnicalFeasibility:MNRETechnicalFeasibility,
       ApplicationInfromation : {
         createdBy:trackSolarData?.ApplicationInfromation?.createdBy || user,
-        createdAt:trackSolarData?.ApplicationInfromation?.createdAt || new Date()
+        createdAt:trackSolarData?.ApplicationInfromation?.createdAt || new Date(),
+        isDone:((consumerNo && MNREAppliactionNumber && PVAppliactionNumber)&&(PVTechnicalFeasibility|| MNRETechnicalFeasibility) ? true : false)
     }
   };
 

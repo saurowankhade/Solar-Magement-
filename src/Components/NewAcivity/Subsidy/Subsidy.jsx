@@ -32,8 +32,9 @@ const handleSubmit = useCallback((e) => {
         SubsidyRedeem:subsidyRedeem,
         SubsidyInfromation : {
           createdBy:trackSolarData?.SubsidyInfromation?.createdBy || user,
-          createdAt:trackSolarData?.SubsidyInfromation?.createdAt || new Date()
-      }
+          createdAt:trackSolarData?.SubsidyInfromation?.createdAt || new Date(),
+          isDone:(MNRESubsidyRequest && subsidyRedeem ? true : false)
+        }
   };
 
   // Update the context state

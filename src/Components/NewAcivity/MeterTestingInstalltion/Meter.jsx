@@ -42,7 +42,8 @@ const handleSubmit = useCallback((e) => {
         ReleaseLetterMeterInstall:releaseLetterMeterInstall,
         MeterInfromation : {
           createdBy:trackSolarData?.MeterInfromation?.createdBy || user,
-          createdAt:trackSolarData?.MeterInfromation?.createdAt || new Date()
+          createdAt:trackSolarData?.MeterInfromation?.createdAt || new Date(),
+          isDone:(meterTestingCall && submitMeter && releaseLetterMeterInstall ? true : false)
       }
   };
 

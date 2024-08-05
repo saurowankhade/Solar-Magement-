@@ -35,11 +35,12 @@ const handleSubmit = useCallback((e) => {
       ...trackSolarData,
       Structure:isStructure,
       ConcreteEarthing:isConcreteEarthing,
-      ElectricFitting:isElectricFitting,
       PanelFitting:isPanelFitting,
+      ElectricFitting:isElectricFitting,
       SiteWorkInfromation : {
         createdBy:trackSolarData?.SiteWorkInfromation?.createdBy || user,
-        createdAt:trackSolarData?.SiteWorkInfromation?.createdAt || new Date()
+        createdAt:trackSolarData?.SiteWorkInfromation?.createdAt || new Date(),
+        isDone:(isStructure&&isConcreteEarthing&&isPanelFitting&&isElectricFitting ? true : false)
     }
   };
 

@@ -37,12 +37,17 @@ const handleSubmit = useCallback((e) => {
    if(!(trackSolarData?.ConsumerName && ( trackSolarData?.LoadChange===true || trackSolarData?.LoadChange === false) && (trackSolarData?.NameChange === true || trackSolarData?.NameChange === false))){
     toast.error("Fill all the information",{position:"top-center"});
    } else{
-setIsLoading(true);
+  setIsLoading(true);
   const updatedTrackSolarData = {
     ...trackSolarData,
     BankLoan: isBankLoan,
     BankLoanDocuments: bankLoanDocuments,
-    BankLoanPendingDocuments: documentArray.filter( docs => !docs.includes(bankLoanDocuments)) 
+    BankLoanPendingDocuments: documentArray.filter( docs => !docs.includes(bankLoanDocuments)),
+    PrimaryInfromation : {
+      createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
+      createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
+      isDone: trackSolarData?.LoadChange ? trackSolarData?.LoadChangeApproved ? true : false : true
+  }
   };
 
   // Update the context state

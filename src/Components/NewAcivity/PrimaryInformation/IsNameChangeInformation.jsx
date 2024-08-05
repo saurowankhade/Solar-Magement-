@@ -70,8 +70,7 @@ const IsNameChangeInformation = ()=>{
             NameChangePassPhoto:isPassPhoto,
             NameChangeDeathCertificate:isDeathCertificate,
             Note:shortNote === undefined ? "" : shortNote,
-            NameChangeDocuments:documents
-
+            NameChangeDocuments:documents,
         }
         setTrackSolarData(updatedTrackSolarData)
 

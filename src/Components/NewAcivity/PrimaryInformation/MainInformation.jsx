@@ -54,7 +54,8 @@ const MainInformation = () => {
                 CreatedAt:trackSolarData?.CreatedAt || new Date(),
                 PrimaryInfromation : {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
-                    createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date()
+                    createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
+                    isDone:(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false ? true : false) 
                 }
             }
             setTrackSolarData(updatedTrackSolarData)

@@ -42,7 +42,8 @@ const handleSubmit = useCallback((e) => {
         NetMeterFileSubmitted:netMeterFileSubmitted,
         NetMeteringInfromation : {
           createdBy:trackSolarData?.NetMeteringInfromation?.createdBy || user,
-          createdAt:trackSolarData?.NetMeteringInfromation?.createdAt || new Date()
+          createdAt:trackSolarData?.NetMeteringInfromation?.createdAt || new Date(),
+          isDone:(netMeterSignByDYEE && netMeterSendDCEngineer && netMeterNSCApproved && netMeterFileSubmitted ? true : false )
       }
   };
 

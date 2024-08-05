@@ -41,7 +41,8 @@ const handleSubmit = useCallback((e) => {
         MNREInspectionApproved:MNREInspectionApproved,
         InspectionInfromation : {
           createdBy:trackSolarData?.InspectionInfromation?.createdBy || user,
-          createdAt:trackSolarData?.InspectionInfromation?.createdAt || new Date()
+          createdAt:trackSolarData?.InspectionInfromation?.createdAt || new Date(),
+          isDone:(inspectionByAEQCOnSite && inspectionFileSign && inspectionReportSendAEQC && MNREInspectionApproved ? true : false)
       }
   };
 
