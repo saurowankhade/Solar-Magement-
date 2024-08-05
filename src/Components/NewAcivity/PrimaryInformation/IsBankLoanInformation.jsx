@@ -36,7 +36,11 @@ const handleSubmit = useCallback((e) => {
   toast.dismiss()
    if(!(trackSolarData?.ConsumerName && ( trackSolarData?.LoadChange===true || trackSolarData?.LoadChange === false) && (trackSolarData?.NameChange === true || trackSolarData?.NameChange === false))){
     toast.error("Fill all the information",{position:"top-center"});
-   } else{
+   } else if(isBankLoan && bankLoanDocuments.length===0){
+    toast.error("Select Documents!",{position:'top-right'});
+   }
+   else {
+
   setIsLoading(true);
   const updatedTrackSolarData = {
     ...trackSolarData,

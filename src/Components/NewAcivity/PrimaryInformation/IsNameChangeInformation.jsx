@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Loading from "react-loading";
 import firestore from "../../../Firebase/Firestore";
 import UserContext from "../../../Context/UserContext/UserContext";
+import NameChange from "../../ExistingActivity/ShowSpecificAcivity/PrimaryInfromation/NameChange";
 
 const IsNameChangeInformation = ()=>{
     
@@ -71,6 +72,14 @@ const IsNameChangeInformation = ()=>{
             NameChangeDeathCertificate:isDeathCertificate,
             Note:shortNote === undefined ? "" : shortNote,
             NameChangeDocuments:documents,
+            PrimaryInfromation : {
+                createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
+                createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
+                isDone:(isNameChange ? 
+                    ( (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents) ? true: false)
+                :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)
+            )
+            }
         }
         setTrackSolarData(updatedTrackSolarData)
 

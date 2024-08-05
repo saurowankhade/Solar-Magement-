@@ -4,20 +4,39 @@ import TrackSolarContext from "../../../../Context/TrackSolarContext/TrackSolarC
 
 const BankLoan = () => {
     const {trackSolarData} = useContext(TrackSolarContext);
+    const {BankLoan,BankLoanDocuments,BankLoanPendingDocuments} = trackSolarData;
   return (
-    <div>
-        <h3 className="m-2">Bank Loan </h3>
-      <div>
-            Bank Loan : {trackSolarData?.BankLoan ? "Yes" : "No"} <br />
-           Documents :  {
-                trackSolarData?.BankLoan ? 
-                trackSolarData?.BankLoanDocuments.map((ele,index)=>(
-                    <li className="ml-2" key={ele+index}>{ele}</li>
-                ))                
-                :<></>
-            }
-      </div>
+    <div className="flex justify-center">
+    <div className="p-2  shadow-md border  w-[700px]  ">
+    <h3 className="text-center text-xl underline">Bank Loan Data</h3>
+        <div className="mt-2">
+          <span className="text-base font-bold">Bank Loan : </span>
+          <span className="text-blue-800">{BankLoan ? "Yes" : "No"}</span>
+        </div>
+        {
+          BankLoan ? 
+          <div className="flex justify-between">
+         <div className="mt-2">
+          <span className="text-base font-bold text-center">Documents : </span> 
+          {
+            BankLoanDocuments.map((element,index)=>(
+              <li key={`${element+index}`} className="text-blue-800 list-decimal">{element}</li>
+            ))
+          }
+         </div>
+         <div className="mt-2">
+          <span className="text-base font-bold text-center">Pending Documents : </span> 
+          {
+            BankLoanPendingDocuments.map((element,index)=>(
+              <li key={`${element+index}`} className="text-red-800 list-decimal">{element}</li>
+            ))
+          }
+         </div>
+         
+        </div> : <></>
+        }
     </div>
+  </div>
   )
 }
 
