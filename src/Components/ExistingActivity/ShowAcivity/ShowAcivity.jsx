@@ -13,58 +13,59 @@ const ShowAcivity = () => {
 
     const [searchQuery,setSearchQuery] = useState("");
 
-    const featchedLastData = useRef([]);
+    // const featchedLastData = useRef([]);
     const [isLoading,setIsLoading] = useState(true);
     const {user} = useContext(UserContext);
 
-    // useEffect(()=>{
-    //     if(user?.companyID){
-    //     const companyID = user?.companyID;
-    //     const collection = companyID+"TrackSolarData";
-    //     console.log(collection);
-    //     const data = firestore.getAllDocuments(collection);
-    //     data.then((sinData)=>{
-    //         setTrackData(sinData)
-    //         setTrackDataDoublicate(sinData);
-    //         setIsLoading(false);
-    //         })
-    //     .catch((error)=>{
-    //         toast.error(error.message);
-    //     })
-    //     }
-    // },[user])
-
-    // data featch on scroll
-    const handleFetchMoreData = useCallback(async ()=>{
-        if(user?.companyID && featchedLastData.current){
+    useEffect(()=>{
+        if(user?.companyID){
+            setIsLoading(true)
         const companyID = user?.companyID;
         const collection = companyID+"TrackSolarData";
-        const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,
-            featchedLastData.current,trackData);
-        featchedLastData.current = newLastVisible
-        setTrackData(data)
-        setTrackDataDoublicate(data)
-        setIsLoading(false)
-        }
-        return (()=>{
-            setTrackData([])
-            setTrackDataDoublicate([])
-            setIsLoading(true)
+        // console.log(collection);
+        const data = firestore.getAllDocuments(collection);
+        data.then((sinData)=>{
+            setTrackData(sinData)
+            setTrackDataDoublicate(sinData);
+            setIsLoading(false);
+            })
+        .catch((error)=>{
+            toast.error(error.message);
         })
-    },[ user?.companyID,trackData])
+        }
+    },[user])
 
-    useEffect(()=>{ 
-        handleFetchMoreData()
-    },[handleFetchMoreData])
+    // data featch on scroll
+    // const handleFetchMoreData = useCallback(async ()=>{
+    //     if(user?.companyID && featchedLastData.current){
+    //     const companyID = user?.companyID;
+    //     const collection = companyID+"TrackSolarData";
+    //     const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,
+    //         featchedLastData.current,trackData);
+    //     featchedLastData.current = newLastVisible
+    //     setTrackData(data)
+    //     setTrackDataDoublicate(data)
+    //     setIsLoading(false)
+    //     }
+    //     return (()=>{
+    //         setTrackData([])
+    //         setTrackDataDoublicate([])
+    //         setIsLoading(true)
+    //     })
+    // },[ user?.companyID,trackData])
 
-    useEffect(() => {
-        const event =  window.addEventListener('scroll', ()=>{
-            if ((window.innerHeight + window.scrollY)>= document.body.scrollHeight-10 ){
-                handleFetchMoreData();
-            }
-        });
-        return () => window.removeEventListener('scroll', event);
-    }, [isLoading,handleFetchMoreData]);
+    // useEffect(()=>{ 
+    //     handleFetchMoreData()
+    // },[handleFetchMoreData])
+
+    // useEffect(() => {
+    //     const event =  window.addEventListener('scroll', ()=>{
+    //         if ((window.innerHeight + window.scrollY)>= document.body.scrollHeight-10 ){
+    //             handleFetchMoreData();
+    //         }
+    //     });
+    //     return () => window.removeEventListener('scroll', event);
+    // }, [isLoading,handleFetchMoreData]);
     
     // for search
     useEffect(()=>{

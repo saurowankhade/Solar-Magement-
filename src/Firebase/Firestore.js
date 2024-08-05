@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,orderBy,query,setDoc, startAfter, Timestamp, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,orderBy,query,setDoc, startAfter, startAt, Timestamp, updateDoc, where } from "firebase/firestore";
 import authentication from "./authentication";
 import { toast } from "react-toastify";
 import { setItem } from "../utils/LocalStorage/localAuth";
@@ -68,7 +68,9 @@ class Firestore {
           const collectionRef = collection(db, collectionName);
       
           // Create a query with orderBy for sorting by date
-          const q = query(collectionRef); // Use FieldPath for nested fields
+          const q = query(collectionRef,
+            orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
+          ); // Use FieldPath for nested fields
       
           // Get the documents based on the query
           const snapshot = await getDocs(q);
@@ -91,6 +93,8 @@ class Firestore {
 
     async getAllData(collectionName,lastDoc,preData){
       const collectionRef = collection(db, collectionName);
+
+      console.log(collectionRef);
   
       let q = query(
         collectionRef,
@@ -151,7 +155,7 @@ class Firestore {
 
    formatTimestamp(timestamp) {
     if (timestamp instanceof Timestamp) {
-      return timestamp.toDate().toLocaleDateString(); // Or any other format you prefer
+      return timestamp.toDate().toUTCString(); // Or any other format you prefer
     }
     return ''; // Return empty string if not a valid timestamp
   }

@@ -31,18 +31,12 @@ const TableBody = ({getData,collectionId}) => {
        navigate(`/show-existing-acivity/${Id}`)
     }
 
-    function formatTimestamp(timestamp) {
-        if (timestamp instanceof Timestamp) {
-          return timestamp.toDate().toLocaleDateString(); // Or any other format you prefer
-        }
-        return ''; // Return empty string if not a valid timestamp
-      }
   return (
     <tbody className="w-full border-b">
       
     <tr onClick={goToSpeficData} className="bg-gray-50 mt-2 cursor-pointer">
       <td className="px-6 py-4 border">
-        {formatTimestamp(CreatedAt)  }
+        {firestore.formatTimestamp(CreatedAt)  }
       </td>
       <td className="px-6 py-4 border">
         {ConsumerName}
