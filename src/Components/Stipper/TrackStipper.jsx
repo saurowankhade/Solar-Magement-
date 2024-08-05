@@ -8,7 +8,8 @@ const TrackStipper = ({setShowPage}) => {
     const {trackSolarData} = useContext(TrackSolarContext);
 
   return (
-    <ol className="flex items-center justify-center w-fit p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
+    <div className="w-fit">
+      <ol className="flex items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
       {
        
         processArray.map((element,index)=>(
@@ -27,6 +28,15 @@ const TrackStipper = ({setShowPage}) => {
         ))
       }
 </ol>
+
+       <div className=" hidden sm:flex sm:gap-2 sm:border p-2 w-fit">
+        <p className="text-gray-500 font-bold">Status : </p>
+       <p className="text-green-500">Done</p>
+        <p className="text-blue-500">Pending</p>
+        <p className="text-red-500">Not Creted Yet</p>
+       </div>
+
+    </div>
   )
 }
 
