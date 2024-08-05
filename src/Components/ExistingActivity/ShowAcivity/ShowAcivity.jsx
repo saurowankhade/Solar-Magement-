@@ -34,24 +34,39 @@ const ShowAcivity = () => {
     //     }
     // },[user])
 
+    // data featch on scroll
     const handleFetchMoreData = useCallback(async ()=>{
-        if(user?.companyID ){
-        // setIsLoading(true)
+        if(user?.companyID && featchedLastData.current){
         const companyID = user?.companyID;
         const collection = companyID+"TrackSolarData";
-        const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,featchedLastData.current,trackData);
+        const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,
+            featchedLastData.current,trackData);
         featchedLastData.current = newLastVisible
-        console.log("New data : ",data);
         setTrackData(data)
         setTrackDataDoublicate(data)
         setIsLoading(false)
         }
-    },[ trackData,user?.companyID])
+        return (()=>{
+            setTrackData([])
+            setTrackDataDoublicate([])
+            setIsLoading(true)
+        })
+    },[ user?.companyID,trackData])
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         handleFetchMoreData()
     },[handleFetchMoreData])
 
+    useEffect(() => {
+        const event =  window.addEventListener('scroll', ()=>{
+            if ((window.innerHeight + window.scrollY)>= document.body.scrollHeight-10 ){
+                handleFetchMoreData();
+            }
+        });
+        return () => window.removeEventListener('scroll', event);
+    }, [isLoading,handleFetchMoreData]);
+    
+    // for search
     useEffect(()=>{
         setTrackDataDoublicate(
             trackData.filter(item =>
@@ -60,28 +75,17 @@ const ShowAcivity = () => {
                 item?.data?.ConsumerMobileNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 item?.data?.MNREApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) || 
                 item?.data?.PVApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                firestore.formatTimestamp(item?.data?.PrimaryInfromationDate).toLowerCase().includes(searchQuery.toLowerCase())
-            )
-          );
+                firestore.formatTimestamp(item?.data?.CreatedAt).toLowerCase().includes(searchQuery.toLowerCase())
+            )    
+          );  
 
-    },[searchQuery,setSearchQuery,trackData])
-
-    useEffect(() => {
-       const event =  window.addEventListener('scroll', ()=>{
-            if ((window.innerHeight + window.scrollY)>= document.body.scrollHeight-5 && !isLoading ){
-                handleFetchMoreData();
-            }
-        });
-        return () => window.removeEventListener('scroll', event);
-      }, [isLoading,handleFetchMoreData]);
+    },[searchQuery,setSearchQuery,trackData])      
 
 
   return (
-    <div>
-        <div>
-            {
-                console.log("Last docs in show : ",featchedLastData.current)
-            }
+    <div className="fixed w-full">
+        <div className="">
+            
             <input
         className="border p-3 w-fit m-3"
         type="text"
@@ -89,19 +93,18 @@ const ShowAcivity = () => {
         value={searchQuery}
         onChange={(e)=>{setSearchQuery(e.target.value)}} />
             </div>
-            {
-                console.log("data : ",trackData)
-            }
+            
+            <div className=" max-h-screen overflow-y-auto ">
 
             {
                 isLoading ?
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 border">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 border ">
                 <TableHeader />
                <TableBodyShimmerUI />
                </table>
                :
 
-               <table className="w-full text-sm text-left rtl:text-right text-gray-500 border">
+               <table className="w-full text-sm text-left rtl:text-right text-gray-500 border h-[100px]  overflow-y-scroll ">
                <TableHeader />
                {
            trackDataDoublicate.length > 0 ?
@@ -119,9 +122,10 @@ const ShowAcivity = () => {
        </tbody>
        
        }
-      </table>
+                 </table>
        
             }
+            </div>
             
       
        

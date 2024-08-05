@@ -51,7 +51,7 @@ const TableBody = ({getData,collectionId}) => {
         {ConsumerMobileNumber}
       </td>
       <td className="px-6 py-4 border">
-        {Id}
+        {ConsumerNumber}
       </td>
       <td className="px-6 py-4 border">
         {PVApplicationNumber}

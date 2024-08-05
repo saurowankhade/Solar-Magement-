@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,orderBy,query,setDoc, startAfter, startAt, Timestamp, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,orderBy,query,setDoc, startAfter, Timestamp, updateDoc } from "firebase/firestore";
 import authentication from "./authentication";
 import { toast } from "react-toastify";
 import { setItem } from "../utils/LocalStorage/localAuth";
@@ -96,22 +96,20 @@ class Firestore {
         collectionRef,
         orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
         startAfter(lastDoc || 0),
-        limit(10)
+        limit(25)
       );
-      
-    
       const snapshot = await getDocs(q);
       const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      console.log("Pre data : ",preData);
+      // console.log("Last DOcs : ",lastDoc);
       return { data:[...preData || [],...documents], lastDocs: snapshot.docs[snapshot.docs.length - 1] };
     }
 
      getAllSearch = async (collectionName,conditions) => {
       try{
         let query = db.collection(collectionName);
-      conditions.forEach(condition => {
-        query = query.where(condition?.field, condition?.operator, condition?.value);
-      });
+        conditions.forEach(condition => {
+          query = query.where(condition?.field, condition?.operator, condition?.value);
+        });
       const snapshot = await query.get();
       const results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       console.log(results);
