@@ -55,7 +55,8 @@ const MainInformation = () => {
                 PrimaryInfromation : {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-                    isDone:(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false ? true : false) 
+                    isDone:(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false ? true : false),
+                    isMainDone:(consumerNameState && visitState && consumerMobileNumberState && requiredSystemKWState ? true : false)
                 }
             }
             setTrackSolarData(updatedTrackSolarData)

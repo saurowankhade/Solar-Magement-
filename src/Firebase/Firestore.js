@@ -82,6 +82,7 @@ class Firestore {
       
           // Map document data
           const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          console.log(documents);
           
           return documents;
         } catch (error) {

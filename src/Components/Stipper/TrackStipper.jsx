@@ -2,7 +2,7 @@ import { useContext } from "react";
 import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext";
 
 const TrackStipper = ({setShowPage}) => {
-    const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Meter Aggrement","Subsidy"]
+    const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Meter ","Subsidy"]
     const keyArray = ["PrimaryInfromation","ApplicationInfromation","SiteWorkInfromation","InspectionInfromation","MeterInfromation","NetMeteringInfromation","SubsidyInfromation"]
 
     const {trackSolarData} = useContext(TrackSolarContext);
@@ -13,7 +13,7 @@ const TrackStipper = ({setShowPage}) => {
       {
        
         processArray.map((element,index)=>(
-          <li onClick={()=>{setShowPage(index)}} key={element} className={`flex items-center cursor-pointer ${trackSolarData?.[keyArray[index]]?.isDone ? " text-green-500" : trackSolarData?.[keyArray[index]]?.isDone === false ? "text-blue-500" : " text-red-500"}`}>
+          <li key={element} onClick={()=>{setShowPage(index)}} className={`flex items-center cursor-pointer ${trackSolarData?.[keyArray[index]]?.isDone ? " text-green-500" : trackSolarData?.[keyArray[index]]?.isDone === false ? "text-blue-500" : " text-red-500"}`}>
     <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border  rounded-full shrink-0 ">
             {index+1}
         </span>
@@ -33,7 +33,7 @@ const TrackStipper = ({setShowPage}) => {
         <p className="text-gray-500 font-bold">Status : </p>
        <p className="text-green-500">Done</p>
         <p className="text-blue-500">Pending</p>
-        <p className="text-red-500">Not Creted Yet</p>
+        <p className="text-red-500">Not fill Yet</p>
        </div>
 
     </div>

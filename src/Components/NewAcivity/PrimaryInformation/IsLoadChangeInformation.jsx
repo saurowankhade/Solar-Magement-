@@ -63,7 +63,8 @@ const IsLoadChangeInformation = ()=>{
             isDone:(isLoadChange ? 
                 ( (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents) ? true: false)
             :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)
-        )
+        ),
+        isMainDone:(trackSolarData?.Visit ? true : false)
         }
        }
         setTrackSolarData(updatedTrackSolarData);

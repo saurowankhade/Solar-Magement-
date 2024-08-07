@@ -37,6 +37,8 @@ class Authentication  {
     async LoginEmailAndPassword(email,password){
         try{
               const data = await signInWithEmailAndPassword(auth,email,password)
+              // console.log(data);
+              
               return {status:200,message:"Done",userId:data?.user?.uid};
         } catch(error){
             return {status:500,message:error};

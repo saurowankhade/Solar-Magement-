@@ -44,8 +44,8 @@ const IsNameChangeInformation = ()=>{
             setIsStampPaper(trackSolarData?.NameChangeStampPaper || false);
             setIsUForm(trackSolarData?.NameChangeUForm || false);
             setIsPaymentRecipt(trackSolarData?.NameChangePaymentRecipt || false);
-            setIsPassPhoto(trackSolarData?.NameChagePassPhoto || false);
-            setIsDeathCertificate(trackSolarData?.NameChageDeathCertificate || false);
+            setIsPassPhoto(trackSolarData?.NameChangePassPhoto || false);
+            setIsDeathCertificate(trackSolarData?.NameChangeDeathCertificate || false);
             setDocuments(trackSolarData?.NameChangeDocuments || "");
             setShortNote(trackSolarData?.Note || "");
         }
@@ -77,8 +77,8 @@ const IsNameChangeInformation = ()=>{
                 createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
                 isDone:(isNameChange ? 
                     ( (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents) ? true: false)
-                :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)
-            )
+                :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)),
+                isMainDone:(trackSolarData?.Visit ? true : false)
             }
         }
         setTrackSolarData(updatedTrackSolarData)

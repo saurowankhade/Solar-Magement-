@@ -50,7 +50,8 @@ const handleSubmit = useCallback((e) => {
     PrimaryInfromation : {
       createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
       createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-      isDone: trackSolarData?.LoadChange ? trackSolarData?.LoadChangeApproved ? true : false : true
+      isDone: trackSolarData?.LoadChange ? trackSolarData?.LoadChangeApproved ? true : false : true,
+      isMainDone:(trackSolarData?.Visit ? true : false)
   }
   };
 
