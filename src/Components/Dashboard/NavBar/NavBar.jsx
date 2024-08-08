@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import urjaSolarLogo from '../../../../urja-solar.png'
 import allUserIcon from '../../../assets/all-user.png'
+import userIcon from '../../../assets/user-profile.png'
 
 const NavBar = () => {
     const [show,setShow] = useState(false);
@@ -53,7 +54,7 @@ const NavBar = () => {
             </div>
           <img
             className="w-6 h-6 sm:w-8 sm:h-8 rounded-full"
-            src="src/assets/user-profile.png"
+            src={userIcon}
             alt="user photo"
           />
         </button>
