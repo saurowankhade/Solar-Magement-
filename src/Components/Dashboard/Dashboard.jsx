@@ -27,6 +27,7 @@ const Dashboard =  ()=>{
   return(
         
         <div onClick={()=>{
+          toast.dismiss()
           if(!user?.name){
             toast.info("Loading data please wait...",{position:'top-center'})
           }
