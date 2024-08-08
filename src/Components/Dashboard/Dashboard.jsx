@@ -39,10 +39,12 @@ const Dashboard =  ()=>{
               
           <TrackAnalytics />
           </div>
-          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
-            
+          {
+            user?.jobProfile === "Admin" ? 
+            <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
           <Users />
-          </div>
+          </div> : <></>
+          }
         </div>
     )
 }

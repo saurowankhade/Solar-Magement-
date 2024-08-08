@@ -1,14 +1,14 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import {  useNavigate } from "react-router-dom";
 import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext";
 import firestore from "../../../Firebase/Firestore";
-import { Timestamp } from "firebase/firestore";
-import Dialog from "../../DialogBox/Dialog";
+import UserContext from "../../../Context/UserContext/UserContext";
 
 const TableBody = ({getData,collectionId}) => {
     const {Id,ConsumerName,ConsumerNumber,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
 
     const {setTrackSolarData} = useContext(TrackSolarContext);
+    const {user} = useContext(UserContext)
 
     const navigate = useNavigate();
     const navigateToAddTrack = useNavigate();
@@ -57,9 +57,11 @@ const TableBody = ({getData,collectionId}) => {
         <button onClick={handleLink} className="border bg-blue-300 text-white p-2 rounded-lg">
           Update
         </button>
-        <button onClick={deleteHandle} className="border bg-blue-300 text-white p-2 rounded-lg">
-          Delete
-        </button>
+       {
+        user?.jobProfile === "Admin" ?  <button onClick={deleteHandle} className="border bg-blue-300 text-white p-2 rounded-lg">
+        Delete
+      </button> : <></>
+       }
       </td>
     </tr>
    
