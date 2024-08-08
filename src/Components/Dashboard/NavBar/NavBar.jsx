@@ -2,6 +2,9 @@ import { useContext, useState } from "react"
 import UserContext from "../../../Context/UserContext/UserContext";
 import { useNavigate } from "react-router-dom";
 
+import urjaSolarLogo from '../../../../urja-solar.png'
+import allUserIcon from '../../../assets/all-user.png'
+
 const NavBar = () => {
     const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
@@ -10,7 +13,7 @@ const NavBar = () => {
 <nav className="bg-white border-gray-200 border shadow-xl">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a  className="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="/urja-solar.png" className="h-8" alt="Flowbite Logo" />
+      <img src={urjaSolarLogo} className="h-8" alt="Flowbite Logo" />
       <span className="self-center text-2xl font-semibold whitespace-nowrap sm:block hidden">UrjaSolar</span>
   </a>
   <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -27,7 +30,7 @@ const NavBar = () => {
         >
           <img
             className="w-6 h-6 sm:w-8 sm:h-8 rounded-full"
-            src="src/assets/all-user.png"
+            src={allUserIcon}
             alt="user profiles"
           />
         </button>
