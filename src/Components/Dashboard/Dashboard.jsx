@@ -1,12 +1,15 @@
 
 import { useContext, useRef } from "react";
-import NavigationDashboard from "./NavigationDashboard";
 import UserContext from "../../Context/UserContext/UserContext";
 import { toast } from "react-toastify";
+import NavBar from "./NavBar/NavBar";
+import AcivityButton from "./AcivityButtons/AcivityButton";
+import BoxAnalytics from "./Analytics/ByTrackData/BoxAnalytics";
+import TrackAnalytics from "./Analytics/ByTrackData/TrackAnalytics";
+import Users from "./Users/Users";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
   const copyRef = useRef();
-
 
   const copyToClipboard = ()=>{
     const copyText = copyRef.current.value;
@@ -16,15 +19,19 @@ const Dashboard =  ()=>{
   }
   return(
         
-        <div className="flex flex-col">
-        <NavigationDashboard />
-
-        <div className="ml-[200px] border p-3 w-fit flex gap-2" onClick={copyToClipboard}>
-          <p  >Compay ID : </p>
-            <input className="outline-none cursor-pointer" type="text"
-             readOnly ref={copyRef} value={user ? user?.companyID : "Loading..."} / >
-        </div>
-
+        <div className=" w-full h-full">
+          <NavBar />
+          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
+              <AcivityButton />
+          </div>
+          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
+              
+          <TrackAnalytics />
+          </div>
+          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
+            
+          <Users />
+          </div>
         </div>
     )
 }
