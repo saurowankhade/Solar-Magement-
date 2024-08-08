@@ -1,8 +1,11 @@
 import { useContext } from "react"
 import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUserContext"
+import { useNavigate } from "react-router-dom";
+import TableBodyShimmerUI from "../../ExistingActivity/Table/TableBodyShimmerUI";
 
 const Users = () => {
     const {allUser} = useContext(ShowAllUserContext);
+    const navigate = useNavigate();
   return (
 <div className="relative overflow-x-auto shadow-lg border">
 <h1 className="font-bold font-sans px-4 py-4 my-2 text-base sm:text-lg">Users</h1>
@@ -27,19 +30,21 @@ const Users = () => {
             </tr>
         </thead>
         {
-            allUser.map((user,index)=>(
-                <tbody key={user?.userID}>
-            <tr className="bg-white border-b ">
-            <td className="px-6 py-4">
+            allUser.map((user)=>(
+                <tbody onClick={()=>{
+                    navigate("/regitser-users");
+                }} key={user?.userID} className="cursor-pointer">
+            <tr className={`bg-white border-b `}>
+            <td className={`px-6 py-4 ${user?.verified ? "" : " text-red-900"}`}>
                     {user?.name}
                 </td>
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${user?.verified ? "" : " text-red-900"}`}>
                     {user?.mobileNo}
                 </td>
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${user?.verified ? "" : " text-red-900"}`}>
                     {user?.email}
                 </td>
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${user?.verified ? "" : " text-red-900"}`}>
                     {user?.jobProfile}
                 </td>
                 <td className={`px-6 py-4 ${user?.verified ? "" : " text-red-900"}`}>
