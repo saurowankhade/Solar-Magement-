@@ -6,6 +6,7 @@ import TableHeader from "../Table/TableHeader";
 import TableBody from "../Table/TableBody";
 import { Timestamp } from "firebase/firestore";
 import TableBodyShimmerUI from "../Table/TableBodyShimmerUI";
+import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
 
 const ShowAcivity = () => {
     const [trackData,setTrackData] = useState([]);
@@ -17,23 +18,16 @@ const ShowAcivity = () => {
     const [isLoading,setIsLoading] = useState(true);
     const {user} = useContext(UserContext);
 
+    const {allTrack} = useContext(AllTrackContext);
+
     useEffect(()=>{
         if(user?.companyID){
             setIsLoading(true)
-        const companyID = user?.companyID;
-        const collection = companyID+"TrackSolarData";
-        // console.log(collection);
-        const data = firestore.getAllDocuments(collection);
-        data.then((sinData)=>{
-            setTrackData(sinData)
-            setTrackDataDoublicate(sinData);
-            setIsLoading(false);
-            })
-        .catch((error)=>{
-            toast.error(error.message);
-        })
+            setTrackData(allTrack)
+            setTrackDataDoublicate(allTrack)
+            setIsLoading(false)
         }
-    },[user])
+    },[user,allTrack])
 
     // data featch on scroll
     // const handleFetchMoreData = useCallback(async ()=>{

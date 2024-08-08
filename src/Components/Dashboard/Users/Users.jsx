@@ -1,4 +1,8 @@
+import { useContext } from "react"
+import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUserContext"
+
 const Users = () => {
+    const {allUser} = useContext(ShowAllUserContext);
   return (
 <div className="relative overflow-x-auto shadow-lg border">
 <h1 className="font-bold font-sans px-4 py-4 my-2 text-base sm:text-lg">Users</h1>
@@ -22,25 +26,29 @@ const Users = () => {
                 </th>
             </tr>
         </thead>
-        <tbody>
+        {
+            allUser.map((user,index)=>(
+                <tbody key={user?.userID}>
             <tr className="bg-white border-b ">
             <td className="px-6 py-4">
-                    Name
+                    {user?.name}
                 </td>
                 <td className="px-6 py-4">
-                    Silver
+                    {user?.mobileNo}
                 </td>
                 <td className="px-6 py-4">
-                    Laptop
+                    {user?.email}
                 </td>
                 <td className="px-6 py-4">
-                    $2999
+                    {user?.jobProfile}
                 </td>
-                <td className="px-6 py-4">
-                    $2999
+                <td className={`px-6 py-4 ${user?.verified ? "" : " text-red-900"}`}>
+                    {user?.verified ? "Yes" : "No"}
                 </td>
             </tr> 
         </tbody>
+            ))
+        }
     </table>
 </div>
 

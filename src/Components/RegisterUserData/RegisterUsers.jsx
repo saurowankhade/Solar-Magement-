@@ -1,22 +1,20 @@
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../../Context/UserContext/UserContext";
-import firestore from "../../Firebase/Firestore";
 import RegisterUserShow from "./RegisterUserShow";
 import TableUi from "../ShimmerUI/TableUi";
+import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
 
 
 function RegisterUsers() {
 
     const [usersData,setUserData] = useState([]);
     const {user} = useContext(UserContext);
-
+    const {allUser} = useContext(ShowAllUserContext);
     useEffect(()=>{
-        firestore.getAllUser()
-        .then((users)=>{
-            const filteredUsers = users.filter((userData) =>userData?.companyID === user?.companyID);
-            setUserData(filteredUsers);
-        })
-    },[user,setUserData]);
+          if(user?.name){
+            setUserData(allUser);
+          }
+    },[allUser,user]);
 
   return (
     <div className="">

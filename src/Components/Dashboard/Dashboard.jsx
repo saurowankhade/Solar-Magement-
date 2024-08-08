@@ -1,22 +1,28 @@
 
-import { useContext, useRef } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../../Context/UserContext/UserContext";
-import { toast } from "react-toastify";
 import NavBar from "./NavBar/NavBar";
 import AcivityButton from "./AcivityButtons/AcivityButton";
-import BoxAnalytics from "./Analytics/ByTrackData/BoxAnalytics";
 import TrackAnalytics from "./Analytics/ByTrackData/TrackAnalytics";
 import Users from "./Users/Users";
+import firestore from "../../Firebase/Firestore";
+import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
+import AllTrackContext from "../../Context/AllTrackData/AllTrackContext";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
-  const copyRef = useRef();
-
-  const copyToClipboard = ()=>{
-    const copyText = copyRef.current.value;
-    navigator.clipboard.writeText(copyText).then(()=>{
-      toast.success("Copied to Clipboard");
-    });
-  }
+  // const {setShowAllUser} = useContext(ShowAllUserContext);
+  const {setAllUser} = useContext(ShowAllUserContext);
+  const {setAllTrack} = useContext(AllTrackContext)
+    useEffect(()=>{
+      firestore.getAllUser().then((data)=>{
+        const filterData = data.filter((da) => da?.companyID === user?.companyID);
+        setAllUser(filterData)       
+      });
+      firestore.getAllDocuments(user?.companyID+"TrackSolarData")
+      .then((data)=>{
+        setAllTrack(data)        
+      })
+    },[setAllUser, user?.companyID,setAllTrack])
   return(
         
         <div className=" w-full h-full">
