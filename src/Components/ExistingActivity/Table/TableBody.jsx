@@ -53,12 +53,12 @@ const TableBody = ({getData,collectionId}) => {
       <td className="px-6 py-4 border">
         {MNREApplicationNumber}
       </td>
-      <td className="px-6 py-4 border flex gap-3">
-        <button onClick={handleLink} className="border bg-blue-300 text-white p-2 rounded-lg">
+      <td className="px-6 py-4 h-fit flex items-center justify-center gap-3">
+        <button onClick={handleLink} className={`border bg-blue-300  p-2 rounded-lg ${user?.verified ? "bg-blue-300 text-white" : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
           Update
         </button>
        {
-        user?.jobProfile === "Admin" ?  <button onClick={deleteHandle} className="border bg-blue-300 text-white p-2 rounded-lg">
+        user?.jobProfile === "Admin" && user?.verified ?  <button onClick={deleteHandle} className="border bg-blue-300 text-white p-2 rounded-lg">
         Delete
       </button> : <></>
        }

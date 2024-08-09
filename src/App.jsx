@@ -45,10 +45,9 @@ function App() {
     
     
     <ToastContainer 
-    position="top-left"
+    position="top-right"
     autoClose={3000}
-    limit={5}
-    newestOnTop
+    limit={1}
     />
     </>
   )

@@ -21,6 +21,8 @@ const ShowAcivity = () => {
     const {allTrack} = useContext(AllTrackContext);
 
     useEffect(()=>{
+        console.log("User data",user);
+        
         if(user?.companyID){
             setIsLoading(true)
             setTrackData(allTrack)

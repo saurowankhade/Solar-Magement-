@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import urjaSolarLogo from '../../../../urja-solar.png'
 import allUserIcon from '../../../assets/all-user.png'
 import userIcon from '../../../assets/user-profile.png'
+import { toast } from "react-toastify";
 
 const NavBar = () => {
     const [show,setShow] = useState(false);
@@ -18,9 +19,13 @@ const NavBar = () => {
       <span className="self-center text-2xl font-semibold whitespace-nowrap sm:block hidden">UrjaSolar</span>
   </a>
   <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      
+      <button onClick={()=>{
+        navigator.clipboard.writeText(user?.companyID).then(()=>{
+          toast.success("Copy to clipboard",{position:'bottom-center'})
+        })
+      }} className="flex text-sm md:me-0 items-center gap-3  border p-2 rounded-full bg-blue-400 text-white">{user?.companyID}</button>
       {
-         user?.jobProfile === "Admin" ? 
+         user?.jobProfile === "Admin" && user?.verified ? 
          <div className="mr-4 sm:mr-10 ">
       <button
           onClick={()=>{
