@@ -8,6 +8,13 @@ import { Timestamp } from "firebase/firestore";
 import TableBodyShimmerUI from "../Table/TableBodyShimmerUI";
 import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
 
+import { DownloadTableExcel } from 'react-export-table-to-excel';
+
+
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx'; // Import xlsx
+
+
 const ShowAcivity = () => {
     const [trackData,setTrackData] = useState([]);
     const [trackDataDoublicate,setTrackDataDoublicate] = useState([]);
@@ -19,6 +26,10 @@ const ShowAcivity = () => {
     const {user} = useContext(UserContext);
 
     const {allTrack} = useContext(AllTrackContext);
+    
+    const tableRef = useRef(null);
+
+    const [enable,setEnable] = useState(false);
 
     useEffect(()=>{        
         if(user?.companyID && allTrack){
@@ -30,38 +41,6 @@ const ShowAcivity = () => {
     useEffect(()=>{
         trackData[0]?.data && setIsLoading(false) ;
     },[trackData])
-
-    // data featch on scroll
-    // const handleFetchMoreData = useCallback(async ()=>{
-    //     if(user?.companyID && featchedLastData.current){
-    //     const companyID = user?.companyID;
-    //     const collection = companyID+"TrackSolarData";
-    //     const { data, lastDocs: newLastVisible } = await firestore.getAllData(collection,
-    //         featchedLastData.current,trackData);
-    //     featchedLastData.current = newLastVisible
-    //     setTrackData(data)
-    //     setTrackDataDoublicate(data)
-    //     setIsLoading(false)
-    //     }
-    //     return (()=>{
-    //         setTrackData([])
-    //         setTrackDataDoublicate([])
-    //         setIsLoading(true)
-    //     })
-    // },[ user?.companyID,trackData])
-
-    // useEffect(()=>{ 
-    //     handleFetchMoreData()
-    // },[handleFetchMoreData])
-
-    // useEffect(() => {
-    //     const event =  window.addEventListener('scroll', ()=>{
-    //         if ((window.innerHeight + window.scrollY)>= document.body.scrollHeight-10 ){
-    //             handleFetchMoreData();
-    //         }
-    //     });
-    //     return () => window.removeEventListener('scroll', event);
-    // }, [isLoading,handleFetchMoreData]);
     
     // for search
     useEffect(()=>{
@@ -78,18 +57,68 @@ const ShowAcivity = () => {
 
     },[searchQuery,setSearchQuery,trackData])      
 
+    const exportToExcel = () => {
+           if(trackDataDoublicate){
+            setEnable(true)
+            setTimeout(()=>{
+                setEnable(false)
+            },2000)
+            const fields = ["CreatedAt", "ConsumerName", "ConsumerMobileNumber","RequiredSystemKW", "ConsumerNumber","MNREApplicationNumber", "PVApplicationNumber", "LoadChange", "NameChange", "BankLoan"];
+
+            // Convert data to 2D array with only specified fields
+            const headers = fields;
+            const formatBoolean = (value) => {
+                return value ? "Yes" : "No";
+              };
+          
+              // Convert data to 2D array with only specified fields and format data
+              const rows = trackDataDoublicate.map(item => 
+                fields.map(field => {
+                  const value = item?.data?.[field];
+                  if (field === "CreatedAt") {
+                    return firestore.formatTimestamp(value); // Format timestamp
+                  } else if (["LoadChange", "NameChange", "BankLoan"].includes(field)) {
+                    return formatBoolean(value); // Format boolean
+                  } else {
+                    return value; // Convert other values to string
+                  }
+                })
+              );
+          
+            // Add headers as the first row
+            const dataArray = [headers, ...rows];
+        
+            // Convert array to worksheet
+            const ws = XLSX.utils.aoa_to_sheet(dataArray);
+          const wb = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Consumer Data');
+    
+          // Create a binary Excel file and trigger download
+          const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+          const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, `Solar Consumer List ${new Date().toISOString()}.xlsx`); // Use .xlsx extension for Excel files
+        
+        }
+      };
 
   return (
     <div className="fixed w-full">
-        <div className="">
+        <div className=" flex flex-wrap justify-between m-3">
             
             <input
-        className="border p-3 w-fit m-3"
+        className="border p-3 w-fit"
         type="text"
         placeholder="Search..."
         value={searchQuery}
         onChange={(e)=>{setSearchQuery(e.target.value)}} />
+
+                <button className="border rounded-full bg-green-800 px-5 text-white" disabled={enable} onClick={exportToExcel}> Export excel </button>
+            
             </div>
+
+           
+                  
+
             
             <div className=" max-h-screen overflow-y-auto ">
 
@@ -101,7 +130,7 @@ const ShowAcivity = () => {
                </table>
                :
 
-               <table className="w-full text-sm text-left rtl:text-right text-gray-500 border h-[100px]  overflow-y-scroll ">
+               <table ref={tableRef} className="w-full text-sm text-left rtl:text-right text-gray-500 border h-[100px]  overflow-y-scroll ">
                <TableHeader />
                {
            trackDataDoublicate.length > 0 ?

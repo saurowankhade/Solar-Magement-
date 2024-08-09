@@ -11,16 +11,19 @@
   },
   "dependencies": {
     "chart.js": "^4.4.3",
+    "file-saver": "^2.0.5",
     "firebase": "^10.12.2",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-countup": "^6.5.3",
     "react-dom": "^18.3.1",
+    "react-export-table-to-excel": "^1.0.6",
     "react-hook-form": "^7.52.0",
     "react-loading": "^2.0.3",
     "react-router-dom": "^6.24.0",
     "react-toastify": "^10.0.5",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
