@@ -13,9 +13,9 @@ import { setItem } from "../../../utils/LocalStorage/localAuth";
 const NavBar = () => {
     const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
-    const navigator = useNavigate();
+    const navigateTo = useNavigate();
   return (
-<nav className="bg-white border-gray-200 border shadow-xl">
+<nav className={` border-gray-200 border shadow-xl ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a  className="flex items-center space-x-3 rtl:space-x-reverse">
       <img src={urjaSolarLogo} className="h-8" alt="Flowbite Logo" />
@@ -23,7 +23,8 @@ const NavBar = () => {
   </a>
   <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button onClick={()=>{
-        navigator.clipboard.writeText(user?.companyID).then(()=>{
+        toast.dismiss()
+          navigator.clipboard.writeText(user?.companyID).then(()=>{
           toast.success("Copy to clipboard",{position:'bottom-center'})
         })
       }} className="flex text-sm md:me-0 items-center gap-3  border p-2 rounded-full bg-blue-400 text-white">{user?.companyID}</button>
@@ -32,7 +33,7 @@ const NavBar = () => {
          <div className="mr-4 sm:mr-10 ">
       <button
           onClick={()=>{
-            navigator('/regitser-users')
+            navigateTo('/regitser-users')
           }}
           type="button"
           className="flex text-sm md:me-0 items-center gap-3  "
@@ -93,7 +94,7 @@ const NavBar = () => {
                   if(status.status === 200){
                     setItem("isLogin",{isLogin:false,userID:""})
                     toast.success("Sign out",{position:'top-center'})
-                    navigator("/user-signin")
+                    navigateTo("/user-signin")
                   }
                 })
               }}  className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

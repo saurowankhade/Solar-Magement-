@@ -15,10 +15,10 @@ class Firestore {
     }
   }
 
-      async getUserData ()  {
+      async getUserData (userID)  {
         try {
-          const docRef = doc(db, "Users", authentication.userID());
-          const docSnap = await getDoc(docRef);
+          const docRef = doc(db, "Users",userID);
+          const docSnap = await getDoc(docRef); 
           return docSnap.exists() ? docSnap.data() : ""
         } catch (error) {
           setItem("isLogin",{isLogin:false,userID:""})

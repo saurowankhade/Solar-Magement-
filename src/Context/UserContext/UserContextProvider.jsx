@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import UserContext from "./UserContext";
 import firestore from "../../Firebase/Firestore";
+import authentication from "../../Firebase/authentication";
 
 const UserContextProvider = ({children})=>{
     const [user,setUser] = useState();
 
     useEffect(()=>{
-        const userData = firestore.getUserData();
+      const userId = authentication.userID();      
+        const userData = firestore.getUserData(userId);
         userData.then((userCri)=>{
           setUser(userCri)
         })

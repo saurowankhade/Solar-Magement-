@@ -122,12 +122,12 @@ const SignUpForm =(props)=>{
 
                     </div>
 
-                    
-
-
+                  {
+                    isCmpReg ? <></> : 
                     <p className="text-sm font-light text-gray-500 ">
-                        Already have an account? <a href={isCmpReg ? "/company-signin" : "/user-signin"} className="font-medium text-primary-600 hover:underline ">Login here</a>
+                        Already have an account? <a href={"/user-signin"} className="font-medium text-primary-600 hover:underline ">Login here</a>
                     </p>
+                  }
                 </form>
             </div>
         </div>
