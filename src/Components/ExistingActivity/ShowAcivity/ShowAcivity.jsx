@@ -96,7 +96,18 @@ const ShowAcivity = () => {
           // Create a binary Excel file and trigger download
           const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
           const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          saveAs(blob, `Solar Consumer List ${new Date().toISOString()}.xlsx`); // Use .xlsx extension for Excel files
+          const reader = new FileReader();
+        reader.onloadend = function () {
+            const base64data = reader.result.split(',')[1]; // Get only the base64 data
+            const fileName = `Solar_Consumer_List_${new Date().toISOString()}.xlsx`;
+            if (window.AndroidDownloader) {
+                window.AndroidDownloader.downloadFile(base64data, fileName);
+            } else{
+                saveAs(blob,fileName)
+            }
+        };
+        reader.readAsDataURL(blob);
+        //   saveAs(blob, `Solar Consumer List ${new Date().toISOString()}.xlsx`); // Use .xlsx extension for Excel files
         
         }
       };
