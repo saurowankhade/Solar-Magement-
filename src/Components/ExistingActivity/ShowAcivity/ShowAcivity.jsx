@@ -20,16 +20,16 @@ const ShowAcivity = () => {
 
     const {allTrack} = useContext(AllTrackContext);
 
-    useEffect(()=>{
-        console.log("User data",user);
-        
-        if(user?.companyID){
-            setIsLoading(true)
+    useEffect(()=>{        
+        if(user?.companyID && allTrack){
             setTrackData(allTrack)
             setTrackDataDoublicate(allTrack)
-            setIsLoading(false)
         }
     },[user,allTrack])
+
+    useEffect(()=>{
+        trackData[0]?.data && setIsLoading(false) ;
+    },[trackData])
 
     // data featch on scroll
     // const handleFetchMoreData = useCallback(async ()=>{

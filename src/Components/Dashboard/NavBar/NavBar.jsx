@@ -6,11 +6,14 @@ import urjaSolarLogo from '../../../../urja-solar.png'
 import allUserIcon from '../../../assets/all-user.png'
 import userIcon from '../../../assets/user-profile.png'
 import { toast } from "react-toastify";
+import authentication from "../../../Firebase/authentication";
+import firestore from "../../../Firebase/Firestore";
+import { setItem } from "../../../utils/LocalStorage/localAuth";
 
 const NavBar = () => {
     const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
-    const viwAllUser = useNavigate();
+    const navigator = useNavigate();
   return (
 <nav className="bg-white border-gray-200 border shadow-xl">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -29,7 +32,7 @@ const NavBar = () => {
          <div className="mr-4 sm:mr-10 ">
       <button
           onClick={()=>{
-            viwAllUser('/regitser-users')
+            navigator('/regitser-users')
           }}
           type="button"
           className="flex text-sm md:me-0 items-center gap-3  "
@@ -85,7 +88,15 @@ const NavBar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <a onClick={()=>{
+                authentication.signout().then((status)=>{
+                  if(status.status === 200){
+                    setItem("isLogin",{isLogin:false,userID:""})
+                    toast.success("Sign out",{position:'top-center'})
+                    navigator("/user-signin")
+                  }
+                })
+              }}  className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Sign out
               </a>
             </li>

@@ -10,20 +10,19 @@ import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserCon
 import { toast } from "react-toastify";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
-  // const {setShowAllUser} = useContext(ShowAllUserContext);
   const {setAllUser} = useContext(ShowAllUserContext);
     useEffect(()=>{
-      firestore.getAllUser().then((data)=>{
+      firestore.getAllUser()
+      .then((data)=>{
         const filterData = data.filter((da) => da?.companyID === user?.companyID);
         setAllUser(filterData)       
       });
-    },[setAllUser, user?.companyID])
+    },[setAllUser, user])
   return(
         
-        <div onClick={(e)=>{
-          e.stopPropagation()
-          toast.dismiss()
+        <div onClick={()=>{
           if(!user?.name){
+            toast.dismiss()
             toast.info("Loading data please wait...",{position:'top-center'})
           }
         }} className=" w-full h-full ">

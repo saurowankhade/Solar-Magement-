@@ -21,11 +21,11 @@ const AcivityButton = () => {
         } else{
           toast.info("You are not verified",{position:'top-center'})
         }
-      }} className={`p-2 text-base w-full border sm:p-3 sm:text-lg rounded-full ${user?.verified ? "bg-green-900" : "bg-gray-400"} text-white shadow-md `}>New Acivity</button>
+      }} className={`p-2 text-base  w-full border sm:p-3 sm:text-lg rounded-full ${user?.verified ? "bg-green-900 text-white" : "bg-gray-400 animate-pulse text-gray-800"}  shadow-md `}>New Acivity</button>
       <button onClick={(e)=>{
         e.stopPropagation()
         handleButton("/show-existing-acivity")
-      }} className="p-2 text-base w-full border sm:p-3 sm:text-lg rounded-full bg-yellow-900 text-white shadow-md ">Existing Acivity</button>
+      }} className="p-2 text-base  w-full border sm:p-3 sm:text-lg rounded-full bg-yellow-900 text-white shadow-md ">Existing Acivity</button>
     </div>
   )
 }
