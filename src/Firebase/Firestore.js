@@ -154,7 +154,7 @@ class Firestore {
   }
 
 
-   formatTimestamp(timestamp) {
+  formatTimestamp(timestamp) {
     if (timestamp instanceof Timestamp) {
       return timestamp.toDate().toUTCString(); // Or any other format you prefer
     }

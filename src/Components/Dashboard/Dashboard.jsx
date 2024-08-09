@@ -8,6 +8,7 @@ import Users from "./Users/Users";
 import firestore from "../../Firebase/Firestore";
 import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
 import { toast } from "react-toastify";
+import ChartsBar from "./Analytics/BarCharts/ChartsBar";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
   const {setAllUser} = useContext(ShowAllUserContext);
@@ -29,6 +30,9 @@ const Dashboard =  ()=>{
           <NavBar />
           <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
               <AcivityButton />
+          </div>
+          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
+          <ChartsBar />
           </div>
           <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
               
