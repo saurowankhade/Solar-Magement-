@@ -3,7 +3,7 @@ import TrackSolarContext from "../../../../Context/TrackSolarContext/TrackSolarC
 
 const MainData = () => {
     const {trackSolarData} = useContext(TrackSolarContext);
-    const {ConsumerName,ConsumerMobileNumber,RequiredSystemKW,Visit} = trackSolarData;
+    const {ConsumerName,ConsumerMobileNumber,RequiredSystemKW,Visit,ConsumerAddress} = trackSolarData;
   return (
     <div className="flex justify-center">
       <div className="p-2  shadow-md border  w-[700px] ">
@@ -16,6 +16,10 @@ const MainData = () => {
            <div className="mt-2">
               <span className="text-base font-bold">Consumer Mobile Number : </span>
              <span className="text-blue-800">{ConsumerMobileNumber}</span>
+           </div>
+           <div className="mt-2">
+              <span className="text-base font-bold">Consumer Address : </span>
+             <span className="text-blue-800">{ConsumerAddress}</span>
            </div>
            <div className="mt-2">
              <span className="text-base font-bold">Consumer Required System in KW : </span>

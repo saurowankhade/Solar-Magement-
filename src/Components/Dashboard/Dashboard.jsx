@@ -9,9 +9,18 @@ import firestore from "../../Firebase/Firestore";
 import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
 import { toast } from "react-toastify";
 import ChartsBar from "./Analytics/BarCharts/ChartsBar";
+import AllTrackContext from "../../Context/AllTrackData/AllTrackContext";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
   const {setAllUser} = useContext(ShowAllUserContext);
+  const {setAllTrack} = useContext(AllTrackContext);
+  useEffect(()=>{
+    if(user?.companyID){
+      firestore.getAllDocuments(user?.companyID+"TrackSolarData").then((data)=>{
+        setAllTrack(data)
+      })
+    }
+  },[user,setAllTrack])
     useEffect(()=>{
       firestore.getAllUser()
       .then((data)=>{
@@ -32,11 +41,10 @@ const Dashboard =  ()=>{
               <AcivityButton />
           </div>
           <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
-          <ChartsBar />
-          </div>
-          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
-              
           <TrackAnalytics />
+          </div>
+          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">   
+          <ChartsBar />
           </div>
           {
             user?.jobProfile === "Admin" && user?.verified ? 

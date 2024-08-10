@@ -8,11 +8,11 @@ import Loading from "react-loading";
 
 const ApplicationInformation = () => {
   const [consumerNo,setConsumerNo] = useState("");
+  const [billUnit,setBillUnit] = useState("");
   const [MNREAppliactionNumber,setMNREApplicationNumber] = useState("");
   const [PVAppliactionNumber,setPVApplicationNumber] = useState("");
   const [PVTechnicalFeasibility,setPVTechnicalFeasibility] = useState(false);
   const [MNRETechnicalFeasibility,setMNRETechnicalFeasibility] = useState(false);
-  const [isSave,setIsSave] = useState(false);
   const {user} = useContext(UserContext);
   const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
   const [isLoading,setIsLoading] = useState(false)
@@ -21,6 +21,7 @@ const ApplicationInformation = () => {
   useEffect(()=>{
     if(trackSolarData){
         setConsumerNo(trackSolarData?.ConsumerNumber || "");
+        setBillUnit(trackSolarData?.BillUnit || "");
         setMNREApplicationNumber(trackSolarData?.MNREApplicationNumber || "");
         setPVApplicationNumber(trackSolarData?.PVApplicationNumber || "");
         setPVTechnicalFeasibility(trackSolarData?.PVTechnicalFeasibility || false);
@@ -35,6 +36,7 @@ const handleSubmit = useCallback((e) => {
   const updatedTrackSolarData = {
     ...trackSolarData,
       ConsumerNumber:consumerNo,
+      BillUnit:billUnit,
       MNREApplicationNumber:MNREAppliactionNumber ,
       PVApplicationNumber:PVAppliactionNumber,
       PVTechnicalFeasibility:PVTechnicalFeasibility,
@@ -42,7 +44,7 @@ const handleSubmit = useCallback((e) => {
       ApplicationInfromation : {
         createdBy:trackSolarData?.ApplicationInfromation?.createdBy || user,
         createdAt:trackSolarData?.ApplicationInfromation?.createdAt || new Date(),
-        isDone:((consumerNo && MNREAppliactionNumber && PVAppliactionNumber)&&(PVTechnicalFeasibility|| MNRETechnicalFeasibility) ? true : false)
+        isDone:((consumerNo && billUnit && MNREAppliactionNumber && PVAppliactionNumber)&&(PVTechnicalFeasibility|| MNRETechnicalFeasibility) ? true : false)
     }
   };
 
@@ -61,7 +63,7 @@ const handleSubmit = useCallback((e) => {
       }
   });
 
-}, [trackSolarData, consumerNo, MNREAppliactionNumber, PVAppliactionNumber, PVTechnicalFeasibility, MNRETechnicalFeasibility, setTrackSolarData, user?.companyID]);
+}, [trackSolarData,billUnit, user,consumerNo, MNREAppliactionNumber, PVAppliactionNumber, PVTechnicalFeasibility, MNRETechnicalFeasibility, setTrackSolarData]);
 
 
   
@@ -70,12 +72,13 @@ const handleSubmit = useCallback((e) => {
     <div id="mainInformation" className="w-[600px]">
       <h3>Application Information : </h3>
         <div className="flex w-full justify-center">
-            <input className="p-2 m-2 border outline-none w-[300px] " placeholder="Consumer Number " type="text" value={consumerNo} onChange={(e)=>{setConsumerNo(e.target.value)}} readOnly={isSave} />
-            <input className="p-2 m-2 border outline-none w-[300px] "  placeholder="MNRE Application Number" type="text" value={MNREAppliactionNumber} onChange={(e)=>{setMNREApplicationNumber(e.target.value)}} readOnly={isSave} />
+            <input className="p-2 m-2 border outline-none w-[300px] " placeholder="Consumer Number " type="text" value={consumerNo} onChange={(e)=>{setConsumerNo(e.target.value)}}  />
+            <input className="p-2 m-2 border outline-none w-[300px] "  placeholder="Bill Unit" type="text" value={billUnit} onChange={(e)=>{setBillUnit(e.target.value)}}  />
         </div>
 
         <div className="flex w-full justify-center">
-            <input className="p-2 m-2 border outline-none w-[600px] " placeholder="PV Application Number" type="text" value={PVAppliactionNumber} onChange={(e)=>{setPVApplicationNumber(e.target.value)}} readOnly={isSave} />
+        <input className="p-2 m-2 border outline-none w-[300px] "  placeholder="MNRE Application Number" type="text" value={MNREAppliactionNumber} onChange={(e)=>{setMNREApplicationNumber(e.target.value)}}  />
+            <input className="p-2 m-2 border outline-none w-[300px] " placeholder="PV Application Number" type="text" value={PVAppliactionNumber} onChange={(e)=>{setPVApplicationNumber(e.target.value)}}  />
         </div>
 
 

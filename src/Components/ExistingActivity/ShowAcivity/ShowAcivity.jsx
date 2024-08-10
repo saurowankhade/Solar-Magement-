@@ -33,6 +33,7 @@ const ShowAcivity = () => {
 
     useEffect(()=>{        
         if(user?.companyID && allTrack){
+          
             setTrackData(allTrack)
             setTrackDataDoublicate(allTrack)
         }

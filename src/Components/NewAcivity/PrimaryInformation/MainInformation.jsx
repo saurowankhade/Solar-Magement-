@@ -11,6 +11,7 @@ const MainInformation = () => {
     const [consumerNameState,setConsumerNameState] = useState("");
     const [consumerMobileNumberState,setConsumerMobileNumberState] = useState("");
     const [requiredSystemKWState,setRequiredSystemKWState] = useState("");
+    const [consumerAddress,setconsumerAddress] = useState("");
     const [visitState,setVisitState] = useState("Non");
     const visitArray = ["Physical","Mobile Communication"]
 
@@ -27,6 +28,7 @@ const MainInformation = () => {
             setConsumerNameState(trackSolarData?.ConsumerName || "");
             setConsumerMobileNumberState(trackSolarData?.ConsumerMobileNumber || "");
             setRequiredSystemKWState(trackSolarData?.RequiredSystemKW || "")
+            setconsumerAddress(trackSolarData?.ConsumerAddress || "")
             setVisitState(trackSolarData?.Visit || "")
         }
 
@@ -40,7 +42,10 @@ const MainInformation = () => {
             toast.error("Enter Consumer Mobile no")
            } else if(requiredSystemKWState.length <=0){
             toast.error("Enter Required System In KW")
-           } else if(visitState === "Non"){
+           } else if(consumerAddress.length <=0){
+            toast.error("Enter Consumer address")
+           }
+           else if(visitState === "Non"){
             toast.error("Enter Visit")
            } else{
             setIsLoading(true);
@@ -49,6 +54,7 @@ const MainInformation = () => {
                 Id:trackSolarData?.Id || docID(),
                 ConsumerName:consumerNameState,
                 ConsumerMobileNumber:consumerMobileNumberState,
+                ConsumerAddress:consumerAddress,
                 RequiredSystemKW:requiredSystemKWState,
                 Visit:visitState,
                 CreatedAt:trackSolarData?.CreatedAt || new Date(),
@@ -56,7 +62,7 @@ const MainInformation = () => {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
                     isDone:(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false ? true : false),
-                    isMainDone:(consumerNameState && visitState && consumerMobileNumberState && requiredSystemKWState ? true : false)
+                    isMainDone:(consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState ? true : false)
                 }
             }
             setTrackSolarData(updatedTrackSolarData)
@@ -84,10 +90,16 @@ const MainInformation = () => {
                 <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={10}  placeholder="Consumer mobile no" type="text" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
 
             </div>
+            
+            <div className="w-full justify-center">
 
+            <input className="p-4 m-2 border outline-none w-[600px] text-lg"  placeholder="Consumer Address" type="text" value={consumerAddress} onChange={(e)=>{setconsumerAddress(e.target.value)}}  />
+
+
+            </div>
             <div className="w-full justify-center">
                 <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={2} placeholder="Required System in KW" type="text" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}}  />
-
+                
                 <div className="w-[600px] m-2 border flex items-center p-4 justify-between  ">
                 <span className="text-lg">visit :</span> 
                     <select className="outline-none cursor-pointer text-lg" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
