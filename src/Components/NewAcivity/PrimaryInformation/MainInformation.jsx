@@ -82,27 +82,23 @@ const MainInformation = () => {
            }
     }
   return (
-    <div className="primaryInformation w-full  flex justify-center ">
-        <div id="mainInformation" className="">
-            <div className=" w-full  flex flex-col ">
-                <input className="p-4 m-2 border outline-none w-[600px]  text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}}  />
+    <div className="primaryInformation  container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+        <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
+            <h2 className="text-center font-bold">Main Information</h2>
+            <div className=" flex flex-col ">
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}}  />
 
-                <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={10}  placeholder="Consumer mobile no" type="text" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
-
-            </div>
-            
-            <div className="w-full justify-center">
-
-            <input className="p-4 m-2 border outline-none w-[600px] text-lg"  placeholder="Consumer Address" type="text" value={consumerAddress} onChange={(e)=>{setconsumerAddress(e.target.value)}}  />
-
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={10}  placeholder="Consumer mobile no" type="text" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
+            <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="Consumer Address" type="text" value={consumerAddress} onChange={(e)=>{setconsumerAddress(e.target.value)}}  />
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={2} placeholder="Required System in KW" type="text" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}}  />
 
             </div>
+
             <div className="w-full justify-center">
-                <input className="p-4 m-2 border outline-none w-[600px] text-lg" maxLength={2} placeholder="Required System in KW" type="text" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}}  />
                 
-                <div className="w-[600px] m-2 border flex items-center p-4 justify-between  ">
-                <span className="text-lg">visit :</span> 
-                    <select className="outline-none cursor-pointer text-lg" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
+                <div className="my-2 border rounded-full flex items-center py-2 px-3 justify-between  ">
+                <span className="text-base">visit :</span> 
+                    <select className="outline-none cursor-pointer text-base" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
                         {
                             
                                 !visitArray.includes(visitState) && (
@@ -123,11 +119,14 @@ const MainInformation = () => {
                 </div>
             </div>
 
-            <div className="flex w-full justify-center gap-3 mt-5">
+            <div className="flex w-full justify-center mt-8">
             {
-                isLoading ? <ReactLoading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+                isLoading ? <ReactLoading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+                <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
+                onClick={handleSubmit}>Save</button>
             }
 
+                {/* <ReactLoading type='spinningBubbles' color='#3b82f6' height={'8%'} width={'8%'} /> */}
             </div>
 
         </div>

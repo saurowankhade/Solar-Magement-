@@ -13,8 +13,8 @@ const CreateNewAcivity = () => {
 
   return (
     
-    <div className="w-fit lg:w-full flex justify-center">
-    <div className="w-fit">
+    <div className="w-full md:w-full flex justify-center items-center">
+    <div className="w-full">
 
     <TrackStipper setShowPage={setShowPage} />
 

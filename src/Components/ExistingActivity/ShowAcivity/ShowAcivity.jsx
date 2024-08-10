@@ -128,10 +128,6 @@ const ShowAcivity = () => {
             
             </div>
 
-           
-                  
-
-            
             <div className=" max-h-screen overflow-y-auto ">
 
             {

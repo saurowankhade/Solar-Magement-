@@ -41,7 +41,7 @@ useEffect(()=>{
     const createdAt = createdAtStr.toDate();    
     
     const month = createdAt.toLocaleString('default', { month: 'short' }); // e.g., 'Jan', 'Feb'
-    console.log("Month: ", month);
+    // console.log("Month: ", month);
     
     // Increment the count for the respective month
     acc[month] = (acc[month] || 0) + 1;

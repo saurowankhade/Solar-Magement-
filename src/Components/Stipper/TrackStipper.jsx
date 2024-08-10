@@ -8,8 +8,8 @@ const TrackStipper = ({setShowPage}) => {
     const {trackSolarData} = useContext(TrackSolarContext);
 
   return (
-    <div className="w-fit">
-      <ol className="flex items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
+    <div className="sticky top-0  w-full overflow-x-scroll xl:overflow-x-hidden scrollbar-hide">
+      <ol className="py-4 px-2 flex items-center justify-center w-fit xl:w-full  space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200  shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
       {
        
         processArray.map((element,index)=>(
