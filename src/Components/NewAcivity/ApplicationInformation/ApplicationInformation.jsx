@@ -33,6 +33,7 @@ const ApplicationInformation = () => {
 const handleSubmit = useCallback((e) => {
   e.preventDefault();
 
+  setIsLoading(true)
   const updatedTrackSolarData = {
     ...trackSolarData,
       ConsumerNumber:consumerNo,
@@ -68,37 +69,39 @@ const handleSubmit = useCallback((e) => {
 
   
   return (
-    <div className="primaryInformation flex justify-center pb-3">
-    <div id="mainInformation" className="w-[600px]">
-      <h3>Application Information : </h3>
-        <div className="flex w-full justify-center">
-            <input className="p-2 m-2 border outline-none w-[300px] " placeholder="Consumer Number " type="text" value={consumerNo} onChange={(e)=>{setConsumerNo(e.target.value)}}  />
-            <input className="p-2 m-2 border outline-none w-[300px] "  placeholder="Bill Unit" type="text" value={billUnit} onChange={(e)=>{setBillUnit(e.target.value)}}  />
+    <div className="primaryInformation container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+    <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
+    <h2 className="text-center font-bold">Application Information</h2>
+        <div className="flex flex-col w-full justify-center">
+            <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  " placeholder="Consumer Number " type="text" value={consumerNo} onChange={(e)=>{setConsumerNo(e.target.value)}}  />
+            <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  "  placeholder="Bill Unit" type="text" value={billUnit} onChange={(e)=>{setBillUnit(e.target.value)}}  />
         </div>
 
-        <div className="flex w-full justify-center">
-        <input className="p-2 m-2 border outline-none w-[300px] "  placeholder="MNRE Application Number" type="text" value={MNREAppliactionNumber} onChange={(e)=>{setMNREApplicationNumber(e.target.value)}}  />
-            <input className="p-2 m-2 border outline-none w-[300px] " placeholder="PV Application Number" type="text" value={PVAppliactionNumber} onChange={(e)=>{setPVApplicationNumber(e.target.value)}}  />
+        <div className="flex flex-col w-full justify-center">
+        <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  "  placeholder="MNRE Application Number" type="text" value={MNREAppliactionNumber} onChange={(e)=>{setMNREApplicationNumber(e.target.value)}}  />
+            <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  " placeholder="PV Application Number" type="text" value={PVAppliactionNumber} onChange={(e)=>{setPVApplicationNumber(e.target.value)}}  />
         </div>
 
 
-        <div className="flex flex-row gap-2">
-               <div className=" w-full p-2 border flex items-center hover:border hover:border-gray-500">
-                <input className="cursor-pointer h-4 w-4" type="checkbox" name="PVTechnicalFeasibility" id="PVTechnicalFeasibility" checked={PVTechnicalFeasibility} onChange={(e)=>{setPVTechnicalFeasibility(e.target.checked)}}  />
-                <label className="p-2 text-base cursor-pointer text-black" htmlFor="PVTechnicalFeasibility">PV Technical Feasibility</label>
+        <div className="flex flex-wrap gap-2 my-2">
+               <div className=" w-full p-2 rounded-full border flex items-center hover:border hover:border-gray-500">
+                <input className="cursor-pointer" type="checkbox" name="PVTechnicalFeasibility" id="PVTechnicalFeasibility" checked={PVTechnicalFeasibility} onChange={(e)=>{setPVTechnicalFeasibility(e.target.checked)}}  />
+                <label className=" px-2 py01 text-base cursor-pointer text-black" htmlFor="PVTechnicalFeasibility">PV Technical Feasibility</label>
                 </div> 
 
-                <div className=" w-full p-2 border  flex flex-row items-center hover:border hover:border-gray-500">
-                <input className="cursor-pointer h-4 w-4 " type="checkbox" name="MNRETechnicalFeasibility" id="MNRETechnicalFeasibility"  checked={MNRETechnicalFeasibility} onChange={(e)=>{setMNRETechnicalFeasibility(e.target.checked)}}   />
-                <label className="p-2 text-base cursor-pointer text-black" htmlFor="MNRETechnicalFeasibility">MNRE Technical Feasibility</label>
+                <div className=" w-full p-2 my-2 rounded-full border  flex flex-row items-center hover:border hover:border-gray-500">
+                <input className="cursor-pointer " type="checkbox" name="MNRETechnicalFeasibility" id="MNRETechnicalFeasibility"  checked={MNRETechnicalFeasibility} onChange={(e)=>{setMNRETechnicalFeasibility(e.target.checked)}}   />
+                <label className=" px-2 py01 text-base cursor-pointer text-black" htmlFor="MNRETechnicalFeasibility">MNRE Technical Feasibility</label>
                 </div> 
                </div>
 
 
 
                <div className="flex w-full justify-center gap-3 mt-5">
-            {
-                isLoading ? <Loading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+               {
+                isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+                <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
+                onClick={handleSubmit}>Save</button>
             }
 
             </div>

@@ -21,7 +21,7 @@ const TableHeader = () => {
                     Consumer Number
                 </th>
                 <th scope="col" className="py-3  text-center border sticky top-0 z-10 shadow-md bg-blue-300 text-gray-100">
-                    PV Application Number
+                    PV Number
                 </th>
                 <th scope="col" className="py-3 text-center w-fit border sticky top-0 z-10 shadow-md bg-blue-300 text-gray-100">
                     MNRE Number
