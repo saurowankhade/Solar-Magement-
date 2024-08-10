@@ -104,51 +104,53 @@ const IsNameChangeInformation = ()=>{
     }
    
     return (
-       <div className=" flex justify-center items-center">
-         <div className="flex flex-col w-[600px] ">
+       <div className=" container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+         <div className="shadow-md p-2 border rounded-lg ">
+            
+          <h2 className="text-center font-bold">Name Change Information</h2>
             <div className="w-full  p-3 flex flex-col ">
 
-            <div className=" p-2 flex flex-row border m-2">
-                <span className=" p-2 text-xl">Name Change : </span>
+            <div className=" rounded-full flex flex-row border gap-3 my-2 py-2 px-3">
+                <span className=" p-1 text-base">Name Change : </span>
                 <input className="cursor-pointer" type="radio" name="nameChange" id="nameChangeYes" checked={isNameChange} onChange={(e)=>{setIsNameChange(e.target.checked)}} />
-                <label className="p-2 text-xl cursor-pointer" htmlFor="nameChangeYes">Yes</label>
+                <label className="p-1 text-base cursor-pointer" htmlFor="nameChangeYes">Yes</label>
                 <input className="cursor-pointer" type="radio" name="nameChange" id="nameChangeNo" checked={!isNameChange} onChange={(e)=>{setIsNameChange(!e.target.checked)}} />
-                <label className="p-2 text-xl cursor-pointer" htmlFor="nameChangeNo">No</label>
+                <label className="p-1 text-base cursor-pointer" htmlFor="nameChangeNo">No</label>
             </div>
 
             {
                 isNameChange ? <>
                 
                 <div className="flex flex-row gap-1 w-full m-2">
-               <div className=" w-full p-2 border flex items-center hover:border hover:border-gray-500">
+               <div className=" w-full px-2 border rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="eBill" id="eBill" checked={isEBill} onChange={(e)=>{setIsEBill(e.target.checked)}}  />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="eBill">Electricity Bill</label>
                 </div> 
 
-                <div className=" w-full p-2 border  flex flex-row items-center hover:border hover:border-gray-500">
+                <div className=" w-full px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="stampPaper" id="stampPaper"  checked={isStampPaper} onChange={(e)=>{setIsStampPaper(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="stampPaper">Stamp Paper</label>
                 </div> 
                </div>
 
                <div className="flex flex-row gap-1 w-full m-2">
-               <div className=" w-full p-2 border flex items-center hover:border hover:border-gray-500">
+               <div className=" w-full px-2 border rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="uForm" id="uForm"  checked={isUForm} onChange={(e)=>{setIsUForm(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="uForm">U Form</label>
                 </div> 
 
-                <div className=" w-full p-2 border  flex flex-row items-center hover:border hover:border-gray-500">
+                <div className=" w-full px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="paymentRecipt" id="paymentRecipt"  checked={isPaymentRecipt} onChange={(e)=>{setIsPaymentRecipt(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="paymentRecipt">Payment Recipt</label>
                 </div> 
                </div>
                <div className="flex flex-row gap-1 w-full m-2">
-               <div className=" w-full p-2 border  flex flex-row items-center hover:border hover:border-gray-500">
+               <div className=" w-full px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="passPhoto" id="passPhoto"  checked={isPassPhoto} onChange={(e)=>{setIsPassPhoto(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="passPhoto">Pass Photo 2 of Consumer</label>
                 </div> 
 
-                <div className=" w-full p-2 border  flex flex-row items-center hover:border hover:border-gray-500">
+                <div className=" w-full px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="deathCertificate" id="deathCertificate"  checked={isDeathCertificate} onChange={(e)=>{setIsDeathCertificate(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="deathCertificate">Death Certificate</label>
                 </div> 
@@ -156,9 +158,9 @@ const IsNameChangeInformation = ()=>{
                 </div>
 
                <div className="flex flex-row gap-1 w-full m-2">
-               <div className=" w-full p-2 border  flex flex-row items-center">
+               <div className=" w-full px-2 border rounded-full  flex flex-row items-center">
                 <label className="w-full p-2 text-base" htmlFor="documents">Documents : </label>
-                    <select className="p-2 w-full text-base border cursor-pointer" name="nameChangeDocuments" id="nameChangeDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}} >
+                    <select className="p-2 w-full text-base  cursor-pointer" name="nameChangeDocuments" id="nameChangeDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}} >
                         {
                             
                                 !documentsArray.includes(documents) && (
@@ -187,13 +189,15 @@ const IsNameChangeInformation = ()=>{
             }
 
             <div className="mt-2 flex flex-row items-center">
-                <textarea className="border-2 rounded-2xl outline-none w-full p-3  border-gray-300" name="note" id="note" rows="4" placeholder="Note" value={shortNote} onChange={(e)=>{setShortNote(e.target.value)}}/>
+                <textarea className="border-2 rounded-lg outline-none w-full p-3  border-gray-300" name="note" id="note" rows="4" placeholder="Note" value={shortNote} onChange={(e)=>{setShortNote(e.target.value)}}/>
             </div>
 
            </div>     
             <div className="flex w-full justify-center gap-3 mt-5">
             {
-                isLoading ? <Loading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+                isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+                <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
+                onClick={handleSubmit}>Save</button>
             }
 
             </div>

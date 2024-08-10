@@ -72,31 +72,33 @@ const handleSubmit = useCallback((e) => {
 
   }
 
-}, [trackSolarData, isBankLoan, bankLoanDocuments, user, setTrackSolarData]);
+}, [trackSolarData, isBankLoan, bankLoanDocuments,documentArray, user, setTrackSolarData]);
 
 
 
 
 
   return (
-    <div className=" flex justify-center items-center">
-    <div className="flex flex-col w-[600px] ">
+    <div className=" container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+         <div className="shadow-md p-2 border rounded-lg ">
+            
+          <h2 className="text-center font-bold">Bank Loan Information</h2>
        <div className="w-full  p-3 flex flex-col ">
 
-       <div className=" border  p-2 flex flex-row items-center">
-           <span className=" p-2 text-lg">Bank Loan : </span>
+       <div className=" border rounded-full my-2 gap-3 py-2 px-3 flex flex-row items-center">
+           <span className="  text-base">Bank Loan : </span>
            <input className="cursor-pointer" type="radio" name="bankLoan" id="bankLoanYes" checked={isBankLoan} onChange={(e)=>{setIsBankLoan(e.target.checked)}} />
-           <label className="p-2 text-lg cursor-pointer" htmlFor="bankLoanYes">Yes</label>
+           <label className=" text-base cursor-pointer" htmlFor="bankLoanYes">Yes</label>
            <input className="cursor-pointer" type="radio" name="bankLoan" id="bankLoanNo" checked={!isBankLoan} onChange={(e)=>{setIsBankLoan(!e.target.checked)}} />
-           <label className="p-2 text-xl cursor-pointer" htmlFor="bankLoanNo">No</label>
+           <label className=" text-base cursor-pointer" htmlFor="bankLoanNo">No</label>
        </div>
 
        {
         isBankLoan ? 
         <>
-          <div className="mt-2 border flex items-center p-4 justify-between  ">
-                Select Documents : 
-                    <select className="outline-none cursor-pointer" name="bankDocuments" id="bankDocuments"
+          <div className="mt-2 border rounded-full w-full flex gap-1 my-2 py-2 px-2 justify-between  ">
+                Documents : 
+                    <select className="outline-none flex justify-center cursor-pointer w-[100px] sm:w-fit" name="bankDocuments" id="bankDocuments"
                     onChange={(e) => {
                       const selectedDoc = e.target.value;
                       setBankLoanDocuments((prev) => {
@@ -120,8 +122,9 @@ const handleSubmit = useCallback((e) => {
                     
                 </div>
 
-           { bankLoanDocuments.length !=0 &&   <div className="border mt-2 p-3">
-           
+           { bankLoanDocuments.length !=0 &&   
+           <div className="border rounded-md mt-2 p-3">
+
          
           <span className="underline ">Documents List : </span>
          
@@ -129,7 +132,7 @@ const handleSubmit = useCallback((e) => {
        {
         bankLoanDocuments ? <>
           {bankLoanDocuments.map((document,index)=>(
-          <div className="flex justify-between m-2 w-[300px]  "  key={`${document}+${index*2}`}>
+          <div className="flex justify-between mx-2 my-3 w-full border-b-2 "  key={`${document}+${index*2}`}>
           <li className="list-none" key={document} value={document}>
               {index+1}.{document}
           </li>
@@ -157,10 +160,11 @@ const handleSubmit = useCallback((e) => {
       </div>    
 
       <div className="flex w-full justify-center gap-3 mt-5">
-            {
-                isLoading ? <Loading type='spinningBubbles' color='blue' height={'15%'} width={'15%'} /> :  <button className="bg-blue-700 text-white rounded-lg hover:bg-blue-600 cursor-pointer p-2 m-2 w-[200px] text-xl" onClick={handleSubmit}>Save</button>
+      {
+                isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+                <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
+                onClick={handleSubmit}>Save</button>
             }
-
             </div>
 
    </div>  
