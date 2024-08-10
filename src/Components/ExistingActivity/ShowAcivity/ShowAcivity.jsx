@@ -116,16 +116,20 @@ const ShowAcivity = () => {
 
   return (
     <div className="fixed w-full">
-        <div className=" flex flex-wrap justify-between m-3">
+        <div className=" flex justify-between m-3">
             
-            <input
+           <div>
+           <input
         className="border p-3 w-fit"
         type="text"
         placeholder="Search..."
         value={searchQuery}
         onChange={(e)=>{setSearchQuery(e.target.value)}} />
+           </div>
 
-                <button className="border rounded-full bg-green-800 px-5 text-white" disabled={enable} onClick={exportToExcel}> Export excel </button>
+          <div className="flex items-center">
+          <button className="rounded-full bg-green-800 px-3 py-2 text-white text-base" disabled={enable} onClick={exportToExcel}>Excel</button>
+          </div>
             
             </div>
 
