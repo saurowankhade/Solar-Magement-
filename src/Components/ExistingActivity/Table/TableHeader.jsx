@@ -15,6 +15,9 @@ const TableHeader = () => {
                     Consumer Mobile No
                 </th>
                 <th scope="col" className="py-3 text-center w-fit border sticky top-0 z-10 shadow-md bg-blue-300 text-gray-100">
+                    Bill Unit
+                </th>
+                <th scope="col" className="py-3 text-center w-fit border sticky top-0 z-10 shadow-md bg-blue-300 text-gray-100">
                     Consumer Number
                 </th>
                 <th scope="col" className="py-3  text-center border sticky top-0 z-10 shadow-md bg-blue-300 text-gray-100">

@@ -132,7 +132,7 @@ const handleSubmit = useCallback((e) => {
        {
         bankLoanDocuments ? <>
           {bankLoanDocuments.map((document,index)=>(
-          <div className="flex justify-between mx-2 my-3 w-full border-b-2 "  key={`${document}+${index*2}`}>
+          <div className="flex justify-between mx-2 my-3 w-full border-b-2"  key={`${document}+${index*2}`}>
           <li className="list-none" key={document} value={document}>
               {index+1}.{document}
           </li>

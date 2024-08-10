@@ -64,7 +64,7 @@ const ShowAcivity = () => {
             setTimeout(()=>{
                 setEnable(false)
             },2000)
-            const fields = ["CreatedAt", "ConsumerName", "ConsumerMobileNumber","RequiredSystemKW", "ConsumerNumber","MNREApplicationNumber", "PVApplicationNumber", "LoadChange", "NameChange", "BankLoan"];
+            const fields = ["CreatedAt", "ConsumerName", "ConsumerMobileNumber","RequiredSystemKW","ConsumerAddress","BillUnit", "ConsumerNumber","MNREApplicationNumber", "PVApplicationNumber", "LoadChange", "NameChange", "BankLoan"];
 
             // Convert data to 2D array with only specified fields
             const headers = fields;

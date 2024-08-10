@@ -5,7 +5,7 @@ import firestore from "../../../Firebase/Firestore";
 import UserContext from "../../../Context/UserContext/UserContext";
 
 const TableBody = ({getData,collectionId}) => {
-    const {Id,ConsumerName,ConsumerNumber,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
+    const {Id,ConsumerName,ConsumerNumber,BillUnit,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
 
     const {setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext)
@@ -43,6 +43,9 @@ const TableBody = ({getData,collectionId}) => {
       </td>
       <td className="px-6 py-4 border">
         {ConsumerMobileNumber}
+      </td>
+      <td className="px-6 py-4 border">
+        {BillUnit}
       </td>
       <td className="px-6 py-4 border">
         {ConsumerNumber}
