@@ -111,11 +111,11 @@ const IsNameChangeInformation = ()=>{
             <div className="w-full  p-3 flex flex-col ">
 
             <div className=" rounded-full flex flex-row border gap-3 my-2 py-2 px-3">
-                <span className=" p-1 text-base">Name Change : </span>
+                <span className="  text-base">Name Change : </span>
                 <input className="cursor-pointer" type="radio" name="nameChange" id="nameChangeYes" checked={isNameChange} onChange={(e)=>{setIsNameChange(e.target.checked)}} />
-                <label className="p-1 text-base cursor-pointer" htmlFor="nameChangeYes">Yes</label>
+                <label className=" text-base cursor-pointer" htmlFor="nameChangeYes">Yes</label>
                 <input className="cursor-pointer" type="radio" name="nameChange" id="nameChangeNo" checked={!isNameChange} onChange={(e)=>{setIsNameChange(!e.target.checked)}} />
-                <label className="p-1 text-base cursor-pointer" htmlFor="nameChangeNo">No</label>
+                <label className=" text-base cursor-pointer" htmlFor="nameChangeNo">No</label>
             </div>
 
             {

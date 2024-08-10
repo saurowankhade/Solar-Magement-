@@ -67,7 +67,8 @@ const ShowAcivity = () => {
             const fields = ["CreatedAt", "ConsumerName", "ConsumerMobileNumber","RequiredSystemKW","ConsumerAddress","BillUnit", "ConsumerNumber","MNREApplicationNumber", "PVApplicationNumber", "LoadChange", "NameChange", "BankLoan"];
 
             // Convert data to 2D array with only specified fields
-            const headers = fields;
+            const headers = ["Created At", "Consumer Name", "Consumer Mobile Number","Required System in KW","Consumer Address","Bill Unit", "Consumer Number","MNRE  Number", "PV Number", "Is Load Change", "Is Name Change", "Is Bank Loan"];
+
             const formatBoolean = (value) => {
                 return value ? "Yes" : "No";
               };

@@ -96,9 +96,9 @@ const MainInformation = () => {
 
             <div className="w-full justify-center">
                 
-                <div className="my-2 border rounded-full flex items-center py-2 px-3 justify-between  ">
-                <span className="text-base">visit :</span> 
-                    <select className="outline-none cursor-pointer text-base" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
+                <div className="my-2 border rounded-full flex items-center py-2 gap-1 px-2 justify-between  ">
+                <div className="text-base px-1">visit :</div> 
+                    <select className="outline-none cursor-pointer text-base w-[100px] sm:w-fit" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
                         {
                             
                                 !visitArray.includes(visitState) && (

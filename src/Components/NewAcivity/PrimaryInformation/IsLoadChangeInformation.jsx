@@ -98,7 +98,7 @@ const IsLoadChangeInformation = ()=>{
                     
                     <div className=" p-2 flex flex-row items-center rounded-full border gap-2 my-2 py-1 px-3 ">
                     <label className="p-2 text-base" htmlFor="documents">Documents : </label>
-                    <select className="p-2 text-base border cursor-pointer" name="loadDocuments" id="loadDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}}>
+                    <select className="p-2 text-base border cursor-pointer w-[100px] sm:w-fit" name="loadDocuments" id="loadDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}}>
                         
                     {
                             
