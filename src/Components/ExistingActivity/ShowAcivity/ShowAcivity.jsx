@@ -52,6 +52,7 @@ const ShowAcivity = () => {
                 item?.data?.ConsumerMobileNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 item?.data?.MNREApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) || 
                 item?.data?.PVApplicationNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                item?.data?.BillUnit?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 firestore.formatTimestamp(item?.data?.CreatedAt).toLowerCase().includes(searchQuery.toLowerCase())
             )    
           );  
