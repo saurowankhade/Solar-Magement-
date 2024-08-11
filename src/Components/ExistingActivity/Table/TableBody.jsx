@@ -35,28 +35,28 @@ const TableBody = ({getData,collectionId}) => {
     <tbody className="w-full border-b">
       
     <tr onClick={goToSpeficData} className="bg-gray-50 mt-2 cursor-pointer">
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {firestore.formatTimestamp(CreatedAt)  }
       </td>
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {ConsumerName}
       </td>
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {ConsumerMobileNumber}
       </td>
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {BillUnit}
       </td>
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {ConsumerNumber}
       </td>
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {PVApplicationNumber}
       </td>
-      <td className="px-6 py-4 border">
+      <td className="p-2 sm:px-6 sm:py-4 border">
         {MNREApplicationNumber}
       </td>
-      <td className="px-6 py-4 h-full flex items-center justify-center gap-3">
+      <td className="p-2 sm:px-6 sm:py-4 h-full flex items-center justify-center gap-3">
         <button onClick={handleLink} className={`border bg-blue-300  p-2 rounded-lg ${user?.verified ? "bg-blue-900 text-white" : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
           Update
         </button>
@@ -64,7 +64,7 @@ const TableBody = ({getData,collectionId}) => {
         user?.jobProfile === "Admin" && user?.verified ?  
         <button onClick={deleteHandle} className="border bg-blue-900 text-white p-2 rounded-lg">
         Delete
-      </button> : <></>
+        </button> : <></>
        }
       </td>
     </tr>
