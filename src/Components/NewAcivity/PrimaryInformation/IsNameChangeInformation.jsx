@@ -46,7 +46,7 @@ const IsNameChangeInformation = ()=>{
             setIsPaymentRecipt(trackSolarData?.NameChangePaymentRecipt || false);
             setIsPassPhoto(trackSolarData?.NameChangePassPhoto || false);
             setIsDeathCertificate(trackSolarData?.NameChangeDeathCertificate || false);
-            setDocuments(trackSolarData?.NameChangeDocuments || "");
+            setDocuments(trackSolarData?.NameChangeDocuments || "Non");
             setShortNote(trackSolarData?.Note || "");
         }
     },[trackSolarData])
@@ -75,16 +75,18 @@ const IsNameChangeInformation = ()=>{
             PrimaryInfromation : {
                 createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                 createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-                isDone:(isNameChange ? 
-                    ( (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents) ? true: false)
-                :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)),
+              
                 isMainDone:(trackSolarData?.Visit ? true : false),
                 
-                isLoadChangeDone:trackSolarData?.isLoadChangeDone || false,
+                isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
                 isNameChangeDone:isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
                 :   true,
-                isBankDetailsDone:trackSolarData?.isBankDetailsDone || false,
-                isBankLoanDone:trackSolarData?.isBankLoanDone || false
+                isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
+                isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
+                isDone: trackSolarData?.PrimaryInfromation?.isMainDone && trackSolarData?.PrimaryInfromation?.isLoadChangeDone && 
+                isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
+                :   true
+                 && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false
             }
         }
        

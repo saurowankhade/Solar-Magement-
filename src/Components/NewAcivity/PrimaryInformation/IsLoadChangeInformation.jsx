@@ -60,15 +60,14 @@ const IsLoadChangeInformation = ()=>{
         PrimaryInfromation : {
             createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
             createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-            isDone:(isLoadChange ? 
-                ( (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents) ? true: false)
-            :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)
-        ),
-        isMainDone:(trackSolarData?.Visit ? true : false), 
-        isLoadChangeDone:isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents? true: false) : true,
-        isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
-        isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
-        isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false
+            isMainDone:(trackSolarData?.Visit ? true : false), 
+            isLoadChangeDone:isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents? true: false) : true,
+            isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
+            isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
+            isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
+            isDone: trackSolarData?.PrimaryInfromation?.isMainDone && 
+            isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents? true: false) : true 
+            && trackSolarData?.PrimaryInfromation?.isNameChangeDone && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false,
         }
        }
         const companyID = user?.companyID;
@@ -77,7 +76,7 @@ const IsLoadChangeInformation = ()=>{
             if(getStatus.status === 200){
                 setIsLoading(false);
                   // Update the context state
-  setTrackSolarData(updatedTrackSolarData);
+                setTrackSolarData(updatedTrackSolarData);
                 toast.success("Data saved!Go next",{position:'top-right'});
             } else{
                 setIsLoading(false);

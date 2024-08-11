@@ -50,13 +50,13 @@ const handleSubmit = useCallback((e) => {
     PrimaryInfromation : {
       createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
       createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-      isDone: trackSolarData?.LoadChange ? trackSolarData?.LoadChangeApproved ? true : false : true,
       isMainDone:(trackSolarData?.Visit ? true : false),
       
       isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
       isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
       isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
-      isBankLoanDone:true
+      isBankLoanDone:true,
+      isDone: trackSolarData?.PrimaryInfromation?.isMainDone && trackSolarData?.PrimaryInfromation?.isLoadChangeDone && trackSolarData?.PrimaryInfromation?.isNameChangeDone && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false
   }
   };
 

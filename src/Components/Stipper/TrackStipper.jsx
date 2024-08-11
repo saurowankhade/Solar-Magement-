@@ -29,12 +29,12 @@ const TrackStipper = ({setShowPage}) => {
       }
 </ol>
 
-       <div className=" hidden sm:flex sm:gap-2 sm:border p-2 w-fit">
+       {/* <div className=" hidden sm:flex sm:gap-2 sm:border p-2 w-fit">
         <p className="text-gray-500 font-bold">Status : </p>
        <p className="text-green-500">Done</p>
         <p className="text-blue-500">Pending</p>
         <p className="text-red-500">Not fill Yet</p>
-       </div>
+       </div> */}
 
     </div>
   )

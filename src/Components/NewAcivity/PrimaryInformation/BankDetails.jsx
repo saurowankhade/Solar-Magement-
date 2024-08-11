@@ -51,12 +51,12 @@ const BankDetails = () => {
                 PrimaryInfromation : {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-                    isDone:(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false ? true : false),
                     isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone || false,
                     isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
                     isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
                     isBankDetailsDone:(bankName && consumerAccountNumber && IFSCCode && checkORPassbookPhoto ? true : false),
-                    isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false
+                    isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
+                    isDone: trackSolarData?.PrimaryInfromation?.isMainDone && trackSolarData?.PrimaryInfromation?.isLoadChangeDone && trackSolarData?.PrimaryInfromation?.isNameChangeDone && (bankName && consumerAccountNumber && IFSCCode && checkORPassbookPhoto ? true : false) ? true : false
                 }
             }
             
@@ -88,7 +88,7 @@ const BankDetails = () => {
 
             </div>
 
-            <div className="w-full justify-center">
+            <div className="w-full justify-center my-2">
             <div className=" w-full px-2 border rounded-md sm:rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="checkORPassbookPhoto" id="checkORPassbookPhoto" checked={checkORPassbookPhoto} onChange={(e)=>{setCheckORPassbookPhoto(e.target.checked)}}  />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="checkORPassbookPhoto">Check / Passbook Photo</label>
