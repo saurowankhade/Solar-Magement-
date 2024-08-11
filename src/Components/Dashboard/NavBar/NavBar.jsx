@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import UserContext from "../../../Context/UserContext/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -14,8 +14,25 @@ const NavBar = () => {
     const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
     const navigateTo = useNavigate();
+    const [hasShadow, setHasShadow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setHasShadow(true);
+      } else {
+        setHasShadow(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-<nav className={` border-gray-200 border shadow-xl ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
+<nav className={` sticky top-0 left-0  transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a  className="flex items-center space-x-3 rtl:space-x-reverse">
       <img src={urjaSolarLogo} className="h-8" alt="Flowbite Logo" />
