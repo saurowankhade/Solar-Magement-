@@ -116,8 +116,8 @@ const ShowAcivity = () => {
       };
 
   return (
-    <div className="fixed w-full">
-        <div className=" flex justify-between m-3">
+    <div className="w-full">
+        <div className=" bg-white flex justify-between m-3">
             
            <div>
            <input
@@ -134,7 +134,7 @@ const ShowAcivity = () => {
             
             </div>
 
-            <div className=" max-h-screen overflow-y-auto ">
+            <div className=" max-h-screen h-screen overflow-y-auto ">
 
             {
                 isLoading ?
