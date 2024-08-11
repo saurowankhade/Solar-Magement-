@@ -60,14 +60,15 @@ const IsLoadChangeInformation = ()=>{
         PrimaryInfromation : {
             createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
             createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-            isMainDone:(trackSolarData?.Visit ? true : false), 
+            isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone, 
             isLoadChangeDone:isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents? true: false) : true,
             isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
             isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
             isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
-            isDone: trackSolarData?.PrimaryInfromation?.isMainDone && 
-            isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents? true: false) : true 
-            && trackSolarData?.PrimaryInfromation?.isNameChangeDone && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false,
+            isDone: (trackSolarData?.PrimaryInfromation?.isMainDone) && 
+           ( isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents ? true: false) : true )&&
+            trackSolarData?.PrimaryInfromation?.isNameChangeDone && 
+            trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false,
         }
        }
         const companyID = user?.companyID;
@@ -77,6 +78,8 @@ const IsLoadChangeInformation = ()=>{
                 setIsLoading(false);
                   // Update the context state
                 setTrackSolarData(updatedTrackSolarData);
+              
+                
                 toast.success("Data saved!Go next",{position:'top-right'});
             } else{
                 setIsLoading(false);
@@ -86,6 +89,7 @@ const IsLoadChangeInformation = ()=>{
     }
     return (
         <div className="container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+            
           <div className="shadow-md p-2 border rounded-lg">
           <h2 className="text-center font-bold">Load Change Information</h2>
            <div className=" flex  border rounded-full gap-2 my-2 py-1">

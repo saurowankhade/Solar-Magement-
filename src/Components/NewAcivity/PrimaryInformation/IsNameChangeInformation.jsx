@@ -76,16 +76,16 @@ const IsNameChangeInformation = ()=>{
                 createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                 createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
               
-                isMainDone:(trackSolarData?.Visit ? true : false),
+                isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone,
                 
                 isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
                 isNameChangeDone:isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
                 :   true,
                 isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
                 isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
-                isDone: trackSolarData?.PrimaryInfromation?.isMainDone && trackSolarData?.PrimaryInfromation?.isLoadChangeDone && 
+                isDone: (trackSolarData?.PrimaryInfromation?.isMainDone) && (trackSolarData?.PrimaryInfromation?.isLoadChangeDone && 
                 isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
-                :   true
+                :   true)
                  && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false
             }
         }
