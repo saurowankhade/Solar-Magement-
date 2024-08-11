@@ -27,7 +27,7 @@ const NavBar = () => {
           navigator.clipboard.writeText(user?.companyID).then(()=>{
           toast.success("Copy to clipboard",{position:'bottom-center'})
         })
-      }} className="flex text-sm md:me-0 items-center gap-3  border p-2 rounded-full bg-blue-400 text-white">{user?.companyID}</button>
+      }} className="flex text-sm md:me-0 items-center gap-3  border p-2 rounded-full bg-blue-900 text-white">{user?.companyID}</button>
       {
          user?.jobProfile === "Admin" && user?.verified ? 
          <div className="mr-4 sm:mr-10 ">
