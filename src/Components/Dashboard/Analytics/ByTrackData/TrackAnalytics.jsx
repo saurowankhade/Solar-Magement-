@@ -13,7 +13,7 @@ const TrackAnalytics = () => {
 
   useEffect(()=>{
     setEnquiryData( allTrack.filter((data)=>
-      data?.data?.PrimaryInfromation?.isMainDone === true     
+      data?.data?.ConsumerName     
     ))
     setSiteWorkData( allTrack.filter((data)=>
       data?.data?.SiteWorkInfromation?.isDone === true     

@@ -30,7 +30,7 @@ const ChartsBar = ()=>{
 
 useEffect(() => {
   if (allTrack) {
-    const filteredData = allTrack.filter((preData)=> preData?.data?.PrimaryInfromation?.isMainDone === true && (preData?.data?.CreatedAt).toDate().getFullYear() === 2024 )
+    const filteredData = allTrack.filter((preData)=> preData?.data?.ConsumerName && (preData?.data?.CreatedAt).toDate().getFullYear() === 2024 )
     setFilterData(filteredData) 
   }
 }, [allTrack]);
