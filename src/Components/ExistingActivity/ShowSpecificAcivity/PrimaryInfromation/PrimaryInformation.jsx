@@ -7,6 +7,7 @@ import { useContext } from "react";
 import TrackSolarContext from "../../../../Context/TrackSolarContext/TrackSolarContext";
 import firestore from "../../../../Firebase/Firestore";
 import WhoAddData from "../WhoAddData/WhoAddData";
+import BankDetails from "./BankDetails";
 
 const PrimaryInformation = () => {
   
@@ -31,6 +32,7 @@ const PrimaryInformation = () => {
       <MainData />
       <LoadChange />
       <NameChange />
+      <BankDetails />
       <BankLoan />
     </div>
   )
