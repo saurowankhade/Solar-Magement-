@@ -14,7 +14,7 @@ const PrimaryInformation = () => {
   const {trackSolarData} = useContext(TrackSolarContext);
   const {PrimaryInfromation} = trackSolarData
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       {/* <div className="flex justify-center">
       <div className="p-2  shadow-md border  w-[700px]  ">
       <h3 className="text-center text-xl underline">Who added this</h3>

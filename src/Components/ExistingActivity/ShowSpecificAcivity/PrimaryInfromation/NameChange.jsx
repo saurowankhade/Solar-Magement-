@@ -6,7 +6,8 @@ const NameChange = () => {
     const {NameChange,NameChangeEBill,NameChangeStampPaper,NameChangeDeathCertificate,NameChangePassPhoto,NameChangeUForm,NameChangeDocuments,NameChangePaymentRecipt} = trackSolarData;
   return (
     <div className="flex justify-center">
-      <div className="p-2  shadow-md border  w-[700px]  ">
+      <div className={`p-2  shadow-md border  w-[700px] ${trackSolarData?.PrimaryInfromation?.isNameChangeDone ? " bg-white" : " bg-red-100"} `}>
+
       <h3 className="text-center text-xl underline">Name Change Data</h3>
           <div className="mt-2">
             <span className="text-base font-bold">Name Change : </span>

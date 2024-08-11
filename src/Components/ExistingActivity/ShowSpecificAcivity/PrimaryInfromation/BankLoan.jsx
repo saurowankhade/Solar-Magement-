@@ -7,7 +7,7 @@ const BankLoan = () => {
     const {BankLoan,BankLoanDocuments,BankLoanPendingDocuments} = trackSolarData;
   return (
     <div className="flex justify-center">
-    <div className="p-2  shadow-md border  w-[700px]  ">
+    <div className={`p-2  shadow-md border  w-[700px] ${trackSolarData?.PrimaryInfromation?.isBankLoanDone ? " bg-white" : " bg-red-100"} `}>
     <h3 className="text-center text-xl underline">Bank Loan Data</h3>
         <div className="mt-2">
           <span className="text-base font-bold">Bank Loan : </span>

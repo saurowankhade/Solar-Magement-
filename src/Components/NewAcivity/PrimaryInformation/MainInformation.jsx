@@ -12,6 +12,7 @@ const MainInformation = () => {
     const [consumerMobileNumberState,setConsumerMobileNumberState] = useState("");
     const [requiredSystemKWState,setRequiredSystemKWState] = useState("");
     const [consumerAddress,setconsumerAddress] = useState("");
+    const [stampPaper,setStampPaper] = useState(false);
     const [visitState,setVisitState] = useState("Non");
     const visitArray = ["Physical","Mobile Communication"]
 
@@ -30,6 +31,7 @@ const MainInformation = () => {
             setRequiredSystemKWState(trackSolarData?.RequiredSystemKW || "")
             setconsumerAddress(trackSolarData?.ConsumerAddress || "")
             setVisitState(trackSolarData?.Visit || "")
+            setStampPaper(trackSolarData?.StampPaper || false)
         }
 
     },[trackSolarData])
@@ -57,11 +59,12 @@ const MainInformation = () => {
                 ConsumerAddress:consumerAddress,
                 RequiredSystemKW:requiredSystemKWState,
                 Visit:visitState,
+                StampPaper:stampPaper,
                 CreatedAt:trackSolarData?.CreatedAt || new Date(),
                 PrimaryInfromation : {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
-                    isMainDone:(consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState ? true : false),
+                    isMainDone:(consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState && stampPaper ? true : false),
                     isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
                     isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
                     isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
@@ -100,9 +103,15 @@ const MainInformation = () => {
 
             </div>
 
-            <div className="w-full justify-center">
-                
-                <div className="my-2 border rounded-full flex items-center py-2 gap-1 px-2 justify-between  ">
+            <div className="w-full justify-center my-2">
+            <div className=" w-full px-2 border rounded-md sm:rounded-full flex items-center hover:border hover:border-gray-500">
+                <input className="cursor-pointer h-4 w-4" type="checkbox" name="consumerStampPaper" id="consumerStampPaper" checked={stampPaper} onChange={(e)=>{setStampPaper(e.target.checked)}}  />
+                <label className="p-2 text-base cursor-pointer text-black" htmlFor="consumerStampPaper">2 Stamp Paper</label>
+                </div> 
+            </div>
+
+            <div className="w-full justify-center my-2">    
+                <div className=" border rounded-full flex items-center py-2 gap-1 px-2 justify-between  ">
                 <div className="text-base px-1">visit :</div> 
                     <select className="outline-none cursor-pointer text-base w-[100px] sm:w-fit" name="documents" id="documents" value={visitState} onChange={(e)=>{setVisitState(e.target.value)}}  >
                         {
