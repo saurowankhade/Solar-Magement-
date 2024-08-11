@@ -78,10 +78,16 @@ const IsNameChangeInformation = ()=>{
                 isDone:(isNameChange ? 
                     ( (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents) ? true: false)
                 :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)),
-                isMainDone:(trackSolarData?.Visit ? true : false)
+                isMainDone:(trackSolarData?.Visit ? true : false),
+                
+                isLoadChangeDone:trackSolarData?.isLoadChangeDone || false,
+                isNameChangeDone:isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
+                :   true,
+                isBankDetailsDone:trackSolarData?.isBankDetailsDone || false,
+                isBankLoanDone:trackSolarData?.isBankLoanDone || false
             }
         }
-        setTrackSolarData(updatedTrackSolarData)
+       
 
 
         
@@ -90,6 +96,8 @@ const IsNameChangeInformation = ()=>{
         .then((getStatus)=>{
             if(getStatus.status === 200){
                 setIsLoading(false);
+                  // Update the context state
+                setTrackSolarData(updatedTrackSolarData);
                 toast.success("Data saved!Go next",{position:'top-right'});
             } else{
                 setIsLoading(false);

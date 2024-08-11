@@ -64,15 +64,20 @@ const IsLoadChangeInformation = ()=>{
                 ( (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents) ? true: false)
             :   ( (trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false) ? true : false)
         ),
-        isMainDone:(trackSolarData?.Visit ? true : false)
+        isMainDone:(trackSolarData?.Visit ? true : false), 
+        isLoadChangeDone:isLoadChange ? (isAppliactionStatusDone && isPaymentRecipt && isApproved && documents? true: false) : true,
+        isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
+        isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
+        isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false
         }
        }
-        setTrackSolarData(updatedTrackSolarData);
         const companyID = user?.companyID;
         firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
         .then((getStatus)=>{
             if(getStatus.status === 200){
                 setIsLoading(false);
+                  // Update the context state
+  setTrackSolarData(updatedTrackSolarData);
                 toast.success("Data saved!Go next",{position:'top-right'});
             } else{
                 setIsLoading(false);

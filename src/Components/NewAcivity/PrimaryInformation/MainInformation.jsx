@@ -62,16 +62,21 @@ const MainInformation = () => {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
                     isDone:(trackSolarData?.BankLoan === true || trackSolarData?.BankLoan===false ? true : false),
-                    isMainDone:(consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState ? true : false)
+                    isMainDone:(consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState ? true : false),
+                    isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
+                    isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
+                    isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
+                    isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false
                 }
             }
-            setTrackSolarData(updatedTrackSolarData)
+            
 
             const companyID = user?.companyID;
             firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, updatedTrackSolarData?.Id)
             .then((getStatus)=>{
                 if(getStatus.status === 200){
                     setIsLoading(false);
+                    setTrackSolarData(updatedTrackSolarData)
                     toast.success("Data saved!Go next",{position:'top-right'});
                 } else{
                     setIsLoading(false);
@@ -88,9 +93,9 @@ const MainInformation = () => {
             <div className=" flex flex-col ">
                 <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}}  />
 
-                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={10}  placeholder="Consumer mobile no" type="text" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={10}  placeholder="Consumer mobile no" type="number" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
             <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="Consumer Address" type="text" value={consumerAddress} onChange={(e)=>{setconsumerAddress(e.target.value)}}  />
-                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={2} placeholder="Required System in KW" type="text" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}}  />
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="Required System in KW" type="number" value={requiredSystemKWState} onChange={(e)=>{setRequiredSystemKWState(e.target.value)}}  />
 
             </div>
 
@@ -125,8 +130,6 @@ const MainInformation = () => {
                 <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
                 onClick={handleSubmit}>Save</button>
             }
-
-                {/* <ReactLoading type='spinningBubbles' color='#3b82f6' height={'8%'} width={'8%'} /> */}
             </div>
 
         </div>

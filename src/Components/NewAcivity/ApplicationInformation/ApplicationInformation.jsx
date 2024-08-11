@@ -49,13 +49,12 @@ const handleSubmit = useCallback((e) => {
     }
   };
 
-  // Update the context state
-  setTrackSolarData(updatedTrackSolarData);
-
   const companyID = user?.companyID;
   firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
   .then((getStatus)=>{
       if(getStatus.status === 200){
+          // Update the context state
+          setTrackSolarData(updatedTrackSolarData);
           setIsLoading(false);
           toast.success("Data saved!Go next",{position:'top-right'});
       } else{

@@ -51,18 +51,24 @@ const handleSubmit = useCallback((e) => {
       createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
       createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
       isDone: trackSolarData?.LoadChange ? trackSolarData?.LoadChangeApproved ? true : false : true,
-      isMainDone:(trackSolarData?.Visit ? true : false)
+      isMainDone:(trackSolarData?.Visit ? true : false),
+      
+      isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
+      isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
+      isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
+      isBankLoanDone:true
   }
   };
 
-  // Update the context state
-  setTrackSolarData(updatedTrackSolarData);
+
 
   const companyID = user?.companyID;
   firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
   .then((getStatus)=>{
       if(getStatus.status === 200){
           setIsLoading(false);
+            // Update the context state
+      setTrackSolarData(updatedTrackSolarData);
           toast.success("Data saved!Go next",{position:'top-right'});
       } else{
           setIsLoading(false);
