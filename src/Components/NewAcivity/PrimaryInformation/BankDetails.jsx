@@ -89,9 +89,9 @@ const BankDetails = () => {
             </div>
 
             <div className="w-full justify-center my-2">
-            <div className=" w-full px-2 border rounded-md sm:rounded-full flex items-center hover:border hover:border-gray-500">
+            <div className=" w-full px-2 border rounded-full sm:rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="checkORPassbookPhoto" id="checkORPassbookPhoto" checked={checkORPassbookPhoto} onChange={(e)=>{setCheckORPassbookPhoto(e.target.checked)}}  />
-                <label className="p-2 text-base cursor-pointer text-black" htmlFor="checkORPassbookPhoto">Check / Passbook Photo</label>
+                <label className="p-2 text-base cursor-pointer text-black" htmlFor="checkORPassbookPhoto">Cheque / Passbook Photo</label>
                 </div> 
             </div>
 

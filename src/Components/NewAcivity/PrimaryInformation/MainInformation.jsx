@@ -102,13 +102,13 @@ const MainInformation = () => {
             <div className=" flex flex-col ">
                 <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}}  />
 
-                <input onWheel={disableScroll} onKeyDown={(e)=>{
+                <input  onKeyDown={(e)=>{
                      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
             e.preventDefault();
         }
                 }} className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={10}  placeholder="Consumer mobile no" type="number" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
             <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="Consumer Address" type="text" value={consumerAddress} onChange={(e)=>{setconsumerAddress(e.target.value)}}  />
-                <input onWheel={(e)=>{ e.preventDefault();}} onKeyDown={(e)=>{
+                <input onWheel={(e) => e.target.blur()}  onKeyDown={(e)=>{
                      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
             e.preventDefault();
         }
@@ -117,7 +117,7 @@ const MainInformation = () => {
             </div>
 
             <div className="w-full justify-center my-2">
-            <div className=" w-full px-2 border rounded-md sm:rounded-full flex items-center hover:border hover:border-gray-500">
+            <div className=" w-full px-2 border rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="consumerStampPaper" id="consumerStampPaper" checked={stampPaper} onChange={(e)=>{setStampPaper(e.target.checked)}}  />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="consumerStampPaper">2 Stamp Paper</label>
                 </div> 

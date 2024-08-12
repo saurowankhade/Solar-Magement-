@@ -131,44 +131,44 @@ const IsNameChangeInformation = ()=>{
             {
                 isNameChange ? <>
                 
-                <div className="flex  justify-between gap-1 w-full m-2">
-               <div className=" w-full px-2 border rounded-md sm:rounded-full flex items-center hover:border hover:border-gray-500">
+                <div className="flex flex-col md:flex-row justify-between gap-2 w-full my-2">
+               <div className=" w-full px-2 border rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="eBill" id="eBill" checked={isEBill} onChange={(e)=>{setIsEBill(e.target.checked)}}  />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="eBill">Electricity Bill</label>
                 </div> 
 
-                <div className=" w-full px-2 border rounded-md sm:rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
+                <div className=" w-full mt-2 px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="stampPaper" id="stampPaper"  checked={isStampPaper} onChange={(e)=>{setIsStampPaper(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="stampPaper">Stamp Paper</label>
                 </div> 
                </div>
 
-               <div className="flex justify-between gap-1 w-full m-2">
-               <div className=" w-full px-2 border rounded-md sm:rounded-full flex items-center hover:border hover:border-gray-500">
+               <div className="flex  flex-col md:flex-row  justify-between gap-2 w-full my-2">
+               <div className=" w-full px-2 border rounded-full flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4" type="checkbox" name="uForm" id="uForm"  checked={isUForm} onChange={(e)=>{setIsUForm(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="uForm">U Form</label>
                 </div> 
 
-                <div className=" w-full px-2 border rounded-md sm:rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
+                <div className=" w-full mt-2 px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="paymentRecipt" id="paymentRecipt"  checked={isPaymentRecipt} onChange={(e)=>{setIsPaymentRecipt(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="paymentRecipt">Payment Recipt</label>
                 </div> 
                </div>
-               <div className="flex justify-between gap-1 w-full m-2">
-               <div className=" w-full px-2 border rounded-md sm:rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
+               <div className="flex flex-col md:flex-row justify-between gap-2 w-full my-2">
+               <div className=" w-full px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="passPhoto" id="passPhoto"  checked={isPassPhoto} onChange={(e)=>{setIsPassPhoto(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="passPhoto">Pass Photo 2 of Consumer</label>
                 </div> 
 
-                <div className=" w-full px-2 border rounded-md sm:rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
+                <div className=" w-full mt-2 px-2 border rounded-full  flex flex-row items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer h-4 w-4 " type="checkbox" name="deathCertificate" id="deathCertificate"  checked={isDeathCertificate} onChange={(e)=>{setIsDeathCertificate(e.target.checked)}}   />
                 <label className="p-2 text-base cursor-pointer text-black" htmlFor="deathCertificate">Death Certificate</label>
                 </div> 
 
                 </div>
 
-               <div className="flex justify-between gap-1 w-full m-2">
-               <div className=" w-full px-2 border rounded-md sm:rounded-full  flex flex-row items-center">
+               <div className="flex justify-between gap-2 w-full my-2">
+               <div className=" w-full px-2 border rounded-full  flex flex-row items-center">
                 <label className="w-full p-2 text-base" htmlFor="documents">Documents : </label>
                     <select className="p-2 w-full text-base  cursor-pointer" name="nameChangeDocuments" id="nameChangeDocuments" value={documents} onChange={(e)=>{setDocuments(e.target.value)}} >
                         {

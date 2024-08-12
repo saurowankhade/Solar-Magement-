@@ -92,12 +92,12 @@ const IsLoadChangeInformation = ()=>{
             
           <div className="shadow-md p-2 border rounded-lg">
           <h2 className="text-center font-bold">Load Change Information</h2>
-           <div className=" flex  border rounded-full gap-2 my-2 py-1">
-                <span className="ml-2 p-2 text-base ">Load Change : </span>
+           <div className=" flex  border rounded-full gap-2 my-2 py-2 px-2">
+                <span className="text-base ">Load Change : </span>
                 <input className="cursor-pointer" type="radio" name="loadChange" id="loadChangeYes" checked={isLoadChange} onChange={()=>{setIsLoadChange(true)}} />
-                <label className="p-2 text-base  cursor-pointer" htmlFor="loadChangeYes">Yes</label>
+                <label className=" text-base  cursor-pointer" htmlFor="loadChangeYes">Yes</label>
                 <input className="cursor-pointer" type="radio" name="loadChange" id="loadChangeNo" checked={!isLoadChange} onChange={()=>{setIsLoadChange(false)}} />
-                <label className="p-2 text-base  cursor-pointer" htmlFor="loadChangeNo">No</label>
+                <label className=" text-base  cursor-pointer" htmlFor="loadChangeNo">No</label>
             </div>
 
             {
