@@ -68,62 +68,28 @@ class Firestore {
           const collectionRef = collection(db, collectionName);
       
           // Create a query with orderBy for sorting by date
-          const q = query(collectionRef,
+                   
+          const q = collectionName === "Users" ? collectionRef :  query(collectionRef,
             orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
-          ); // Use FieldPath for nested fields
+          );
+           // Use FieldPath for nested fields
       
           // Get the documents based on the query
           const snapshot = await getDocs(q);
           
           if (snapshot.empty) {
-            console.log('No matching documents.');
-            return [];
+            return {status:500,message:"No data",data:[]};
           }
       
           // Map document data
           const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          // console.log(documents);
-          
-          return documents;
+                    
+          return {status:200,message:"Data",data:documents};
         } catch (error) {
           console.error('Error fetching documents:', error);
-          return [];
+          return {status:500,message:error,data:[]};
         }
       }
-
-
-    async getAllData(collectionName,lastDoc,preData){
-      const collectionRef = collection(db, collectionName);
-
-      console.log(collectionRef);
-  
-      let q = query(
-        collectionRef,
-        orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
-        startAfter(lastDoc || 0),
-        limit(25)
-      );
-      const snapshot = await getDocs(q);
-      const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      // console.log("Last DOcs : ",lastDoc);
-      return { data:[...preData || [],...documents], lastDocs: snapshot.docs[snapshot.docs.length - 1] };
-    }
-
-     getAllSearch = async (collectionName,conditions) => {
-      try{
-        let query = db.collection(collectionName);
-        conditions.forEach(condition => {
-          query = query.where(condition?.field, condition?.operator, condition?.value);
-        });
-      const snapshot = await query.get();
-      const results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      console.log(results);
-      return results;
-      } catch(error){
-        console.log(error);
-        return {status:500,message:error}
-      }
-    }
 
 
 
@@ -131,7 +97,8 @@ class Firestore {
   async deleteDocument(collectionName, documentId) {
     try {
       const documentRef = doc(db, collectionName, documentId);
-      await deleteDoc(documentRef).then(()=>{
+      await deleteDoc(documentRef)
+      .then(()=>{
         toast.success("Deleted !!")
       }).catch((error)=>{
         toast.error(error.message)
@@ -142,21 +109,10 @@ class Firestore {
     }
   }
 
-   // Update a document by ID
-   async updateDocument(collectionName, documentId, updatedData) {
-    try {
-      const documentRef = doc(db, collectionName, documentId);
-      await updateDoc(documentRef, updatedData);
-      return true;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }
-
-
   formatTimestamp(timestamp) {
     if (timestamp instanceof Timestamp) {
-      return timestamp.toDate().toUTCString(); // Or any other format you prefer
+      return timestamp.toDate().toString().replace("(India Standard Time)","(IST)"); // Or any other format you prefer
+    
     }
     return ''; // Return empty string if not a valid timestamp
   }

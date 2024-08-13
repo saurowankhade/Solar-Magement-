@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUserContext"
 import { useNavigate } from "react-router-dom";
-import TableBodyShimmerUI from "../../ExistingActivity/Table/TableBodyShimmerUI";
 
 const Users = () => {
     const {allUser} = useContext(ShowAllUserContext);

@@ -17,16 +17,22 @@ const Dashboard =  ()=>{
   const {setAllTrack} = useContext(AllTrackContext);
   useEffect(()=>{
     if(user?.companyID){
-      firestore.getAllDocuments(user?.companyID+"TrackSolarData").then((data)=>{
-        setAllTrack(data)
+      firestore.getAllDocuments(user?.companyID+"TrackSolarData")
+      .then((status)=>{
+        console.log(status?.data)
+        if(status?.status === 200 ){
+          setAllTrack(status?.data)
+        }
       })
     }
   },[user,setAllTrack])
     useEffect(()=>{
-      firestore.getAllUser()
-      .then((data)=>{
-        const filterData = data.filter((da) => da?.companyID === user?.companyID);
-        setAllUser(filterData)       
+      firestore.getAllDocuments("Users")
+      .then((status)=>{        
+       if(status?.status === 200){
+        const filterData = (status.data).filter((userData) => userData?.companyID === user?.companyID);
+        setAllUser(filterData)      
+       } 
       });
     },[setAllUser, user])
   return(

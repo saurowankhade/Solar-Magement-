@@ -7,13 +7,16 @@ const AllTrackContextProvider = ({children}) => {
     const [allTrack,setAllTrack] = useState([]);
     const {user} = useContext(UserContext);
     useEffect(()=>{
-      if(user?.name){
+      if(user?.name ){
         firestore.getAllDocuments(user?.companyID+"TrackSolarData")
-        .then((data)=>{
-          setAllTrack(data)
+        .then((status)=>{
+          // setAllTrack(data)
+          if(status?.status === 200){
+            setAllTrack(status?.data)
+          }
         })
       }
-    },[user])
+    },[user,allTrack])
   return (
     <AllTrackContext.Provider value={{allTrack,setAllTrack}} >
         {children}
