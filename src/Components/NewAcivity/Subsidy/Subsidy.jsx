@@ -25,11 +25,13 @@ const Subsidy = () => {
   // Adjusted handleSubmit function
 const handleSubmit = useCallback((e) => {
   e.preventDefault();
+  setIsLoading(true)
 
   const updatedTrackSolarData = {
         ...trackSolarData,
         MNRESubsidyRequest:MNRESubsidyRequest,
         SubsidyRedeem:subsidyRedeem,
+        SubsidyRedeemDate:subsidyRedeem ? new Date() : "",
         SubsidyInfromation : {
           createdBy:trackSolarData?.SubsidyInfromation?.createdBy || user,
           createdAt:trackSolarData?.SubsidyInfromation?.createdAt || new Date(),
@@ -37,13 +39,13 @@ const handleSubmit = useCallback((e) => {
         }
   };
 
-  // Update the context state
-  setTrackSolarData(updatedTrackSolarData);
-
+  
   const companyID = user?.companyID;
-        firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
-        .then((getStatus)=>{
-            if(getStatus.status === 200){
+  firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
+  .then((getStatus)=>{
+    if(getStatus.status === 200){
+              // Update the context state
+              setTrackSolarData(updatedTrackSolarData);
                 setIsLoading(false);
                 toast.success("Data saved!",{position:'top-right'});
             } else{

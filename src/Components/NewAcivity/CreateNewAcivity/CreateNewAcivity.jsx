@@ -7,6 +7,7 @@ import SiteWork from "../SiteWork/SiteWork"
 import Subsidy from "../Subsidy/Subsidy"
 import ApplicationInformation from "../ApplicationInformation/ApplicationInformation"
 import TrackStipper from "../../Stipper/TrackStipper"
+import Payment from "../Payment/Payment"
 
 const CreateNewAcivity = () => {
   const [showPage,setShowPage] = useState(0);
@@ -25,7 +26,8 @@ const CreateNewAcivity = () => {
         showPage === 3 ? <Inspection /> :
         showPage === 4 ? <Meter /> :
         showPage === 5 ? <NetMetering /> :
-        showPage === 6 ? <Subsidy /> : <></>
+        showPage === 6 ? <Subsidy /> : 
+        showPage === 7 ? <Payment /> : <></>
       }
 
     </div>

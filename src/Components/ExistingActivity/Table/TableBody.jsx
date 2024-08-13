@@ -17,7 +17,7 @@ const TableBody = ({getData,collectionId}) => {
     const handleLink = useCallback((event)=>{
         event.stopPropagation();
         setTrackSolarData(getData);
-        navigateToAddTrack("/new-acivity");
+        navigateToAddTrack("/dashboard/new-acivity");
     },[getData,setTrackSolarData,navigateToAddTrack])
 
     const deleteHandle = (event)=>{

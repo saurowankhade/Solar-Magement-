@@ -91,10 +91,6 @@ const MainInformation = () => {
            }
     }
 
-    const disableScroll = (e) => {
-        e.preventDefault();
-    };
-
   return (
     <div className="primaryInformation  container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
         <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
