@@ -25,7 +25,7 @@ export const data = (data)=>{
       },
       title: {
         display: true,
-        text: 'Yearly enquiries for the year 2024',
+        text: 'Monthly Enquiries for the year 2024',
         font: {
           size: 14, // Font size in pixels
           weight: 'bold', // Font weight (e.g., 'normal', 'bold', 'bolder', or numeric values)

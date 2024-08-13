@@ -1,17 +1,21 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext";
 import firestore from "../../../Firebase/Firestore";
 import UserContext from "../../../Context/UserContext/UserContext";
+import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
+import Loading from "react-loading";
 
 const TableBody = ({getData,collectionId}) => {
     const {Id,ConsumerName,ConsumerNumber,BillUnit,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
 
     const {setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext)
-
+    const {setAllTrack} = useContext(AllTrackContext);
     const navigate = useNavigate();
     const navigateToAddTrack = useNavigate();
+
+    const [isLoading,setIsLoading] = useState(false);
 
 
     const handleLink = useCallback((event)=>{
@@ -22,8 +26,15 @@ const TableBody = ({getData,collectionId}) => {
 
     const deleteHandle = (event)=>{
         event.stopPropagation();
-        firestore.deleteDocument(collectionId,Id);
-       
+        setIsLoading(true)
+        firestore.deleteDocument(collectionId,Id).then(()=>{
+          firestore.getAllDocuments(user?.companyID+"TrackSolarData")
+          .then((data)=>{
+            setAllTrack(data)
+            setIsLoading(false)
+          })
+        })
+
     }
        
 
@@ -57,6 +68,8 @@ const TableBody = ({getData,collectionId}) => {
         {MNREApplicationNumber}
       </td>
       <td className="p-2 sm:px-6 sm:py-4 h-full flex items-center justify-center gap-3">
+      {
+        isLoading ? <Loading type='spinningBubbles' color='#1e3a8a' height={'90%'} width={'90%'} /> :   <div className="flex gap-2">
         <button onClick={handleLink} className={`border bg-blue-300  p-2 rounded-lg ${user?.verified ? "bg-blue-900 text-white" : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
           Update
         </button>
@@ -66,6 +79,8 @@ const TableBody = ({getData,collectionId}) => {
         Delete
         </button> : <></>
        }
+        </div>
+      }
       </td>
     </tr>
    

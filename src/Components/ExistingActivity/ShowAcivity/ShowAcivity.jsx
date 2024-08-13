@@ -31,9 +31,17 @@ const ShowAcivity = () => {
 
     const [enable,setEnable] = useState(false);
 
+    useEffect(()=>{
+      if(user?.companyID){
+        firestore.getAllDocuments(user?.companyID+"TrackSolarData")
+        .then((data)=>{
+          setTrackData(data)
+          setTrackDataDoublicate(data)
+        })
+      }
+    },[user])
     useEffect(()=>{        
         if(user?.companyID && allTrack){
-          
             setTrackData(allTrack)
             setTrackDataDoublicate(allTrack)
         }
