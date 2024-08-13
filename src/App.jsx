@@ -17,6 +17,7 @@ import CreateNewAcivity from "./Components/NewAcivity/CreateNewAcivity/CreateNew
 import ShowAcivity from "./Components/ExistingActivity/ShowAcivity/ShowAcivity";
 import ShowSpecific from "./Components/ExistingActivity/ShowSpecificAcivity/ShowSpecific";
 import PrivateRoute from "./Routing/PrivateRoute";
+import HomeDashboard from "./Components/Dashboard/Home";
 
 function App() {
   return (
@@ -28,14 +29,14 @@ function App() {
            <Route path="/company-signup" element={<CmpRegister />} /> 
            <Route path="/user-signup" element={<UserRegister />} />
            <Route path="/user-signin" element={<UserLogin />} />
-         
-         <Route path="/new-acivity" element={<PrivateRoute><TrackSolarContextProvider><CreateNewAcivity/></TrackSolarContextProvider></PrivateRoute>}/>
-        
-         <Route path="/show-existing-acivity" element={<PrivateRoute><TrackSolarContextProvider><ShowAcivity/></TrackSolarContextProvider></PrivateRoute>} ></Route>
-         <Route path="/show-existing-acivity/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
-         
-           <Route path="/dashboard" element={<PrivateRoute> <Dashboard /> </PrivateRoute>} />
-             <Route path="/regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
+                
+           <Route path="/dashboard" element={<PrivateRoute><Dashboard /> </PrivateRoute>} >
+                <Route index element={<HomeDashboard/>}></Route>
+                <Route path="new-acivity" element={<PrivateRoute><TrackSolarContextProvider><CreateNewAcivity/></TrackSolarContextProvider></PrivateRoute>}/>
+                <Route path="show-existing-acivity" element={<PrivateRoute><TrackSolarContextProvider><ShowAcivity/></TrackSolarContextProvider></PrivateRoute>} ></Route>
+                <Route path="show-existing-acivity/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
+              <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
+           </Route> 
          </Routes>
        </BrowserRouter>
        <div>

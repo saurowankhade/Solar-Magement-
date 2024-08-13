@@ -32,7 +32,7 @@ const NavBar = () => {
     };
   }, []);
   return (
-<nav className={` sticky top-0 left-0  transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
+<nav className={`transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a  className="flex items-center space-x-3 rtl:space-x-reverse">
       <img src={urjaSolarLogo} className="h-8" alt="Flowbite Logo" />
@@ -64,7 +64,7 @@ const NavBar = () => {
       </div> : <></>
       }
       
-      <div>
+      <div className="relative z-100">
         <button
           onClick={() => setShow(!show)}
           type="button"
@@ -87,7 +87,7 @@ const NavBar = () => {
 
         {/* Dropdown menu */}
         <div
-          className={`absolute right-3 my-6  z-100 ${show ? " block " : "hidden"}  text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow  sm:right-4 md:right-14 `}
+          className={`absolute right-3 my-6  z-50 ${show ? " block " : "hidden"}  text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow  sm:right-4 md:right-14 `}
           id="user-dropdown"
         >
           <div className="px-4 py-3">

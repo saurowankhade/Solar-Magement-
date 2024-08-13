@@ -10,6 +10,7 @@ import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserCon
 import { toast } from "react-toastify";
 import ChartsBar from "./Analytics/BarCharts/ChartsBar";
 import AllTrackContext from "../../Context/AllTrackData/AllTrackContext";
+import { Outlet } from "react-router-dom";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
   const {setAllUser} = useContext(ShowAllUserContext);
@@ -37,7 +38,8 @@ const Dashboard =  ()=>{
           }
         }} className=" w-full h-full ">
           <NavBar />
-          <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
+          
+          {/* <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
               <AcivityButton />
           </div>
           <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
@@ -51,7 +53,8 @@ const Dashboard =  ()=>{
             <div className="mx-2 my-10 md:my-20 md:mx-20 xl:mx-28 2xl:mx-30">
           <Users />
           </div> : <></>
-          }
+          } */}
+          <Outlet />
         </div>
     )
 }

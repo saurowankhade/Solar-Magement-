@@ -28,7 +28,7 @@ const TableBody = ({getData,collectionId}) => {
        
 
     const goToSpeficData = ()=>{
-       navigate(`/show-existing-acivity/${Id}`)
+       navigate(`/dashboard/show-existing-acivity/${Id}`)
     }
 
   return (
