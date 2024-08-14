@@ -142,13 +142,13 @@ const ShowAcivity = () => {
     
         const allWs = XLSX.utils.aoa_to_sheet(allDataArray);
         let paymentWs = ''
-        if(user?.jobProfile === "Admin"){
+        if(user?.jobProfile === "Admin" && user?.verified){
           paymentWs = XLSX.utils.aoa_to_sheet(paymentDataArray);
         }
     
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, allWs, 'All Information');
-        if(user?.jobProfile === "Admin"){
+        if(user?.jobProfile === "Admin" && user?.verified){
           XLSX.utils.book_append_sheet(wb, paymentWs, 'Payment Information');
         }
     
