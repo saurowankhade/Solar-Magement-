@@ -12,7 +12,7 @@ const TrackStipper = ({setShowPage}) => {
     const {user} = useContext(UserContext);
 
     useEffect(()=>{
-      if(user?.jobProfile === "Amdin" && user?.verified){
+      if(user?.jobProfile === "Admin" && user?.verified){
         processArray.push("Payment")
         keyArray.push("PaymentInfromation")
       }
