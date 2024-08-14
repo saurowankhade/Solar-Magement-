@@ -39,3 +39,54 @@ input[type="number"] {
   -ms-user-select: none;
   user-select: none;
 }
+
+/* Date time picker  */
+.custom-picker .react-datetime-picker__wrapper {
+  @apply flex items-center border-0  p-2;
+}
+
+.custom-picker .react-datetime-picker__inputGroup {
+  @apply text-blue-950;
+}
+
+.custom-picker .react-datetime-picker__calendar-button, /* Hide the calendar icon */
+.custom-picker .react-datetime-picker__clock-button {   /* Hide the clock icon */
+  @apply hidden;
+}
+
+.custom-picker .react-datetime-picker__clock-button {
+  @apply hidden; /* Hide clock button */
+}
+
+
+.custom-picker .react-datetime-picker__calendar-button, /* Hide calendar icon */
+.custom-picker .react-datetime-picker__clock-button, /* Hide clock icon */
+.custom-picker .react-datetime-picker__inputGroup__leadingZero, /* Hide leading zero for time */
+.custom-picker .react-datetime-picker__inputGroup__hour, /* Hide hour text */
+.custom-picker .react-datetime-picker__inputGroup__minute, /* Hide minute text */
+.custom-picker .react-datetime-picker__inputGroup__second, /* Hide second text */
+.custom-picker .react-datetime-picker__inputGroup__ampm, /* Hide AM/PM selector */
+.custom-picker .react-datetime-picker__inputGroup__timeContainer { /* Hide entire time container */
+  @apply hidden;
+}
+.custom-picker .react-datetime-picker__inputGroup__timeContainer {
+  @apply hidden !important; /* Hide the entire time container */
+}
+
+/* Hide time-related elements in the DateTimePicker with !important */
+.custom-picker .react-datetime-picker__clock-button {
+  @apply hidden !important; /* Hide clock icon */
+}
+
+.custom-picker .react-datetime-picker__inputGroup__leadingZero,
+.custom-picker .react-datetime-picker__inputGroup__hour,
+.custom-picker .react-datetime-picker__inputGroup__minute,
+.custom-picker .react-datetime-picker__inputGroup__second,
+.custom-picker .react-datetime-picker__inputGroup__ampm,
+.custom-picker .react-datetime-picker__inputGroup__timeContainer {
+  @apply hidden !important; /* Hide time-related text */
+}
+
+.custom-picker .react-datetime-picker__inputGroup__timeContainer {
+  display: none !important;
+}

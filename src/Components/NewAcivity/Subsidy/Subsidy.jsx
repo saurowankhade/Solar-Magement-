@@ -36,7 +36,22 @@ const handleSubmit = useCallback((e) => {
           createdBy:trackSolarData?.SubsidyInfromation?.createdBy || user,
           createdAt:trackSolarData?.SubsidyInfromation?.createdAt || new Date(),
           isDone:(MNRESubsidyRequest && subsidyRedeem ? true : false)
-        }
+        },
+        ...(subsidyRedeem && {
+          PaymentInfromation: {
+            createdBy: trackSolarData?.PaymentInfromation?.createdBy || "",
+            createdAt: trackSolarData?.PaymentInfromation?.createdAt || "",
+            isDone:
+              trackSolarData?.totalAmount &&
+              trackSolarData?.balance === 0 &&
+              trackSolarData?.installamentData.length > 0
+                ? trackSolarData?.isSubsidyCheque
+                  ? subsidyRedeem
+                  : true
+                : false
+          }})
+          
+        
   };
 
   

@@ -3,7 +3,7 @@ import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext
 
 const TrackStipper = ({setShowPage}) => {
     const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Meter ","Subsidy","Payment"]
-    const keyArray = ["PrimaryInfromation","ApplicationInfromation","SiteWorkInfromation","InspectionInfromation","MeterInfromation","NetMeteringInfromation","SubsidyInfromation"]
+    const keyArray = ["PrimaryInfromation","ApplicationInfromation","SiteWorkInfromation","InspectionInfromation","MeterInfromation","NetMeteringInfromation","SubsidyInfromation","PaymentInfromation"]
 
     const {trackSolarData} = useContext(TrackSolarContext);
 

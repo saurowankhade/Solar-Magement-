@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.23",
     "chart.js": "^4.4.3",
     "file-saver": "^2.0.5",
     "firebase": "^10.12.2",

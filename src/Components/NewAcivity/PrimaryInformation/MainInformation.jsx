@@ -98,10 +98,9 @@ const MainInformation = () => {
             <div className=" flex flex-col ">
                 <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Consumer name " type="text" value={consumerNameState} onChange={(e)=>{setConsumerNameState(e.target.value)}}  />
 
-                <input  onKeyDown={(e)=>{
+                <input onWheel={(e) => e.target.blur()}  onKeyDown={(e)=>{
                      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-            e.preventDefault();
-        }
+            e.preventDefault(); }
                 }} className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={10}  placeholder="Consumer mobile no" type="number" value={consumerMobileNumberState} onChange={(e)=>{setConsumerMobileNumberState(e.target.value)}}  />
             <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="Consumer Address" type="text" value={consumerAddress} onChange={(e)=>{setconsumerAddress(e.target.value)}}  />
                 <input onWheel={(e) => e.target.blur()}  onKeyDown={(e)=>{

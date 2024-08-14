@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,orderBy,query,setDoc, startAfter, startAt, Timestamp, updateDoc, where } from "firebase/firestore";
+import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,onSnapshot,orderBy,query,setDoc, startAfter, startAt, Timestamp, updateDoc, where } from "firebase/firestore";
 import authentication from "./authentication";
 import { toast } from "react-toastify";
 import { setItem } from "../utils/LocalStorage/localAuth";
@@ -78,7 +78,7 @@ class Firestore {
           const snapshot = await getDocs(q);
           
           if (snapshot.empty) {
-            return {status:500,message:"No data",data:[]};
+            return {status:204,message:"No data",data:[]};
           }
       
           // Map document data
@@ -91,6 +91,39 @@ class Firestore {
         }
       }
 
+      async fetchDocuments(collectionName) {
+        const collectionRef = collection(db, collectionName);
+    
+        let q;
+        if (collectionName === "Users") {
+            q = collectionRef;
+        } else {
+            q = query(
+                collectionRef,
+                orderBy(new FieldPath('data', 'CreatedAt'), 'desc')
+            );
+        }
+    
+        console.log("Collection name:", collectionName);
+    
+        return new Promise((resolve, reject) => {
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                if (snapshot.empty) {
+                    reject('No data available');
+                } else {
+                    const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    console.log("Documents:", documents);
+                    resolve(documents);
+                }
+            }, (error) => {
+                console.error("Snapshot error:", error);
+                reject(error);
+            });
+    
+            // Optionally, return the unsubscribe function if needed
+            return unsubscribe;
+        });
+    }
 
 
        // Delete a document by ID
@@ -110,11 +143,13 @@ class Firestore {
   }
 
   formatTimestamp(timestamp) {
+    // console.log(timestamp);
+    
     if (timestamp instanceof Timestamp) {
       return timestamp.toDate().toString().replace("(India Standard Time)","(IST)"); // Or any other format you prefer
     
     }
-    return ''; // Return empty string if not a valid timestamp
+    return 'no date'; // Return empty string if not a valid timestamp
   }
       
 }
