@@ -34,13 +34,19 @@ const Payment = () => {
     
                <div className="mt-2">
                 <span className="text-base font-bold">Balance Amount : </span> 
-                <span className={`${BalanceAmount === 0 ? "text-green-800" : "text-red-800"}`}>{BalanceAmount && "Not yet"}</span>
+                <span className={`${BalanceAmount === 0 ? "text-green-800" : "text-red-800"}`}>{TotalAmount ? BalanceAmount :  "Not yet"}</span>
                </div>
     
-               <div className="mt-2">
+               {
+                Installament  ? <div className="mt-2">
                 <h2 className="text-center p-2">Installament Details  : </h2>
-                <TableHeader installamentData={Installament} isShow={true} />
-               </div>
+                <TableHeader installamentData={Installament || []} isShow={true} />
+               </div> : 
+               <div className="mt-2">
+               <h2 className="text-center p-2">No Installament Details yet : </h2>
+              </div>
+
+               }
     
                
           </div>
