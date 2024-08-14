@@ -1,11 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext";
+import UserContext from "../../Context/UserContext/UserContext";
 
 const TrackStipper = ({setShowPage}) => {
-    const processArray = ["Primary","Application","Site Work","Inspection","Meter Installation","Net Meter ","Subsidy","Payment"]
-    const keyArray = ["PrimaryInfromation","ApplicationInfromation","SiteWorkInfromation","InspectionInfromation","MeterInfromation","NetMeteringInfromation","SubsidyInfromation","PaymentInfromation"]
+    const processArray = useMemo(()=>["Primary","Application","Site Work","Inspection","Meter Installation","Net Meter ","Subsidy"],[])
+
+
+    const keyArray = useMemo(()=>["PrimaryInfromation","ApplicationInfromation","SiteWorkInfromation","InspectionInfromation","MeterInfromation","NetMeteringInfromation","SubsidyInfromation"],[])
 
     const {trackSolarData} = useContext(TrackSolarContext);
+    const {user} = useContext(UserContext);
+
+    useEffect(()=>{
+      if(user?.jobProfile === "Amdin" && user?.verified){
+        processArray.push("Payment")
+        keyArray.push("PaymentInfromation")
+      }
+    },[user,keyArray,processArray])
 
   return (
     <div className="sticky z-0  inset-0  top-0  w-full overflow-x-scroll xl:overflow-x-hidden scrollbar-hide">
@@ -13,7 +24,7 @@ const TrackStipper = ({setShowPage}) => {
       {
        
         processArray.map((element,index)=>(
-          <li key={element} onClick={()=>{setShowPage(index)}} className={`flex items-center cursor-pointer ${trackSolarData?.[keyArray[index]]?.isDone ? " text-green-500"  : trackSolarData?.[keyArray[index]]?.isDone === false ? "text-blue-500" : " text-red-500"}`}>
+          <li key={element} onClick={()=>{setShowPage(index)}} className={`flex items-center cursor-pointer hover:cursor-pointer ${trackSolarData?.[keyArray[index]]?.isDone ? " text-green-500"  : trackSolarData?.[keyArray[index]]?.isDone === false ? "text-blue-500" : " text-red-500"}`}>
     <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border  rounded-full shrink-0 ">
             {index+1}
         </span>

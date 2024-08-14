@@ -13,6 +13,7 @@ import NetMettering from "./NetMetering/NetMettering";
 import Subsidy from "./Subsidy/Subsidy";
 import TableUi from "../../ShimmerUI/TableUi";
 import TrackStipper from "../../Stipper/TrackStipper";
+import Payment from "./Payment/Payment";
 
 const ShowSpecific = () => {
   const {Id} = useParams();
@@ -55,7 +56,8 @@ const ShowSpecific = () => {
       showPage === 3 ? <Inspection/> :
       showPage === 4 ? <Meter/> :
       showPage === 5 ? <NetMettering/> :
-      showPage === 6 ? <Subsidy/> : <></>
+      showPage === 6 ? <Subsidy/> : 
+      showPage === 7 ? <Payment/> : <></>
     }
     </>
       }

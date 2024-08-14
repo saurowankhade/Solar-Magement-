@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import firestore from '../../../Firebase/Firestore';
 
-const TableHeader = ({installamentData,setInstallamentData}) => {
+const TableHeader = ({installamentData,setInstallamentData , isShow}) => {
 
 // Function to handle removal
 const handleRemoveInstallment = (index) => {
@@ -26,7 +26,7 @@ const handleRemoveInstallment = (index) => {
                 <th scope="col" className="px-6 py-3 font-bold">
                     Medium
                 </th>
-                <th scope="col" className="px-6 py-3 font-bold">
+                <th scope="col" className={`px-6 py-3 font-bold ${isShow === true ? "hidden" : ''} `}>
                     Option
                 </th>
             </tr>
@@ -47,9 +47,9 @@ const handleRemoveInstallment = (index) => {
                 <td className={`px-6 py-4`}>
                     {installament?.PaymentMedium}
                 </td>
-                <td onClick={()=>{
+                <td  onClick={()=>{
                     handleRemoveInstallment(index)
-                }} className={`px-6 py-4 cursor-pointer`}>
+                }} className={`px-6 py-4 cursor-pointer ${isShow === true ? "hidden" : ''}`}>
                     ❌
                 </td>
             </tr> 
