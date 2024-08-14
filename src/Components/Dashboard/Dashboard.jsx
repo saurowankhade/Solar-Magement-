@@ -30,14 +30,8 @@ const Dashboard =  ()=>{
 
   const { data, error } = useFirestoreDocuments("SolarData");
   useEffect(()=>{
-    console.log("Data is ",data);
     setAllTrack(data ?? [])
   },[data,setAllTrack])
-
-  useEffect(()=>{
-    console.log("In dashbord : ",allTrack);
-  })
-
   
   useEffect(()=>{
     firestore.getAllDocuments("Users")

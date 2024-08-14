@@ -1,10 +1,7 @@
 import { useEffect } from 'react'
+import firestore from '../../../Firebase/Firestore';
 
 const TableHeader = ({installamentData,setInstallamentData}) => {
-    useEffect(()=>{
-        console.log("Inst : ",installamentData);
-        
-    },[installamentData])
 
 // Function to handle removal
 const handleRemoveInstallment = (index) => {
@@ -39,7 +36,7 @@ const handleRemoveInstallment = (index) => {
                 <tbody key={(installament?.Date).toString()+installament?.Amount+installament?.InstallmentNumber} className="">
             <tr className={`bg-white border-b `}>
             <td className={`px-6 py-4`}>
-                    {(installament?.Date).toString().replace("India Standard Time","IST")}
+                    {firestore.formatTimestamp((installament?.Date)).toString().replace("India Standard Time","IST")}
                 </td>
                 <td className={`px-6 py-4`}>
                     {installament?.InstallmentNumber + " Installament"}

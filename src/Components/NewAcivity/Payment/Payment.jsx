@@ -51,7 +51,7 @@ const Payment = () => {
             setTotalAmount(trackSolarData?.TotalAmount || "");
             setIsSubsidyCheque(trackSolarData?.SubsidyCheque || false)
             setSubsidyChequeAmount(trackSolarData?.SubsidyChequeAmount || "")
-            setBalance(trackSolarData?.Balance || 0)
+            setBalance(trackSolarData?.BalanceAmount || 0)
             setInstallamentData(trackSolarData?.Installament || [])
         }
 
@@ -156,7 +156,7 @@ const Payment = () => {
             <h2 className="text-center font-bold">Payment Information</h2>
             <div className=" flex  flex-col my-2 ">
               
-                <input onWheel={(e) => e.target.blur()}  onKeyDown={(e)=>{
+              <input onWheel={(e) => e.target.blur()}  onKeyDown={(e)=>{
                      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                                 e.preventDefault();
                     }

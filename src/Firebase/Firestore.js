@@ -104,7 +104,7 @@ class Firestore {
             );
         }
     
-        console.log("Collection name:", collectionName);
+        // console.log("Collection name:", collectionName);
     
         return new Promise((resolve, reject) => {
             const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -112,11 +112,11 @@ class Firestore {
                     reject('No data available');
                 } else {
                     const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    console.log("Documents:", documents);
+                    // console.log("Documents:", documents);
                     resolve(documents);
                 }
             }, (error) => {
-                console.error("Snapshot error:", error);
+                // console.error("Snapshot error:", error);
                 reject(error);
             });
     
@@ -149,7 +149,7 @@ class Firestore {
       return timestamp.toDate().toString().replace("(India Standard Time)","(IST)"); // Or any other format you prefer
     
     }
-    return 'no date'; // Return empty string if not a valid timestamp
+    return timestamp.toString(); // Return empty string if not a valid timestamp
   }
       
 }
