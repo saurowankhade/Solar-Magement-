@@ -42,10 +42,10 @@ const handleSubmit = useCallback((e) => {
             createdBy: trackSolarData?.PaymentInfromation?.createdBy || "",
             createdAt: trackSolarData?.PaymentInfromation?.createdAt || "",
             isDone:
-              trackSolarData?.totalAmount &&
-              trackSolarData?.balance === 0 &&
-              trackSolarData?.installamentData.length > 0
-                ? trackSolarData?.isSubsidyCheque
+              trackSolarData?.TotalAmount &&
+              trackSolarData?.BalanceAmount === 0 &&
+              trackSolarData?.Installament.length > 0
+                ? trackSolarData?.SubsidyCheque
                   ? subsidyRedeem
                   : true
                 : false

@@ -83,7 +83,7 @@ const BankDetails = () => {
             <div className=" flex flex-col ">
                 <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Bank Name" type="text" value={bankName} onChange={(e)=>{setBankName(e.target.value)}}  />
 
-                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base" maxLength={10}  placeholder="Consumer Account no" type="text" value={consumerAccountNumber} onChange={(e)=>{setConsumerAccountNumber(e.target.value)}}  />
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"   placeholder="Consumer Account no" type="text" value={consumerAccountNumber} onChange={(e)=>{setConsumerAccountNumber(e.target.value)}}  />
             <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="IFSC Code" type="text" value={IFSCCode} onChange={(e)=>{setIFSCCode(e.target.value)}}  />
 
             </div>

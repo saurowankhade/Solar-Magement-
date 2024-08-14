@@ -51,14 +51,23 @@ const Payment = () => {
             setTotalAmount(trackSolarData?.TotalAmount || "");
             setIsSubsidyCheque(trackSolarData?.SubsidyCheque || false)
             setSubsidyChequeAmount(trackSolarData?.SubsidyChequeAmount || "")
-            setBalance(trackSolarData?.Balance || "")
+            setBalance(trackSolarData?.Balance || 0)
             setInstallamentData(trackSolarData?.Installament || [])
         }
 
     },[trackSolarData])
 
     const handleSubmit = ()=>{
-        toast.dismiss();       
+        toast.dismiss();  
+        // console.log(totalAmount.length);
+          
+        if(totalAmount.length < 0 || installamentData.length < 0 ){
+            toast.error('Fill all information')
+           
+        } else if(balance < 0){
+            toast.error('Check amount')
+        }  
+        else{ 
        
             setIsLoading(true);
             const updatedTrackSolarData = {
@@ -71,7 +80,7 @@ const Payment = () => {
                 PaymentInfromation : {
                     createdBy:trackSolarData?.PaymentInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PaymentInfromation?.createdAt || new Date(),
-                    isDone : (totalAmount.length >0 && balance === 0 && installamentData.length > 0 ) ? 
+                    isDone : (totalAmount.length > 0 && balance === 0 && installamentData.length > 0 ) ? 
                     (isSubsidyCheque ? trackSolarData?.SubsidyInfromation?.isDone === true : true ) : false
                    
                 }
@@ -90,6 +99,8 @@ const Payment = () => {
                     toast.error(getStatus?.message?.message || "Failed to add" ,{position:'top-right'})
                 }
             });
+
+        }
 
     }
 
@@ -133,8 +144,9 @@ const Payment = () => {
         })
         if(balanceAmount < 0){
             toast.error("Check your amount")
+        } else{
+            setBalance(balanceAmount)
         }
-        setBalance(balanceAmount)
     },[isSubsidyCheque,totalAmount,subsidyChequeAmount,installamentData])
 
 
