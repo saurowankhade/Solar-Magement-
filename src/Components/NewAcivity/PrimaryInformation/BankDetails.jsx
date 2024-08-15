@@ -7,6 +7,8 @@ import UserContext from "../../../Context/UserContext/UserContext";
 import firestore from "../../../Firebase/Firestore";
 
 const BankDetails = () => {
+
+    const [suggestBankName,setSuggestBankName] = useState([]);
     
     const [bankName,setBankName] = useState("");
     const [consumerAccountNumber,setConsumerAccountNumber] = useState("");
@@ -15,10 +17,11 @@ const BankDetails = () => {
    
     const [isLoading,setIsLoading] = useState(false);
         
-
     //Context 
     const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext);
+
+
 
     useEffect(()=>{
         if(trackSolarData){
@@ -27,6 +30,11 @@ const BankDetails = () => {
             setIFSCCode(trackSolarData?.IFSCCode || "")
             setCheckORPassbookPhoto(trackSolarData?.CheckORPassbookPhoto || false)
         }
+        firestore.getOneData("AppData","library")
+        .then((respo)=>{
+            const nameOfBanks = respo?.BankName
+            setSuggestBankName(nameOfBanks)
+        })
 
     },[trackSolarData])
 
@@ -81,10 +89,18 @@ const BankDetails = () => {
         <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
             <h2 className="text-center font-bold">Bank Details</h2>
             <div className=" flex flex-col ">
-                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Bank Name" type="text" value={bankName} onChange={(e)=>{setBankName(e.target.value)}}  />
-
+               <div className="relative ">
+               <input className=" w-full my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base  " placeholder="Bank Name" list="bankNames"  type="text" value={bankName} onChange={(e)=>{setBankName(e.target.value)}}  />
+                <datalist className="bg-white text-black hidden" id="bankNames">
+                    {
+                        suggestBankName.map((bankName,index)=>(
+                            <option className="cursor-pointer" key={`${bankName+index}`} value={bankName}>{bankName}</option>
+                        ))
+                    }
+                </datalist>
+               </div>
                 <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"   placeholder="Consumer Account no" type="text" value={consumerAccountNumber} onChange={(e)=>{setConsumerAccountNumber(e.target.value)}}  />
-            <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="IFSC Code" type="text" value={IFSCCode} onChange={(e)=>{setIFSCCode(e.target.value)}}  />
+                <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base"  placeholder="IFSC Code" type="text" value={IFSCCode} onChange={(e)=>{setIFSCCode(e.target.value)}}  />
 
             </div>
 

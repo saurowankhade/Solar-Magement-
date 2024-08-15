@@ -16,8 +16,8 @@ const NavBar = () => {
     const navigateTo = useNavigate();
     const [hasShadow, setHasShadow] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
+    useEffect(() => {
+      const handleScroll = () => {
       if (window.scrollY > 0) {
         setHasShadow(true);
       } else {
@@ -30,11 +30,13 @@ const NavBar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+   }, []);
+
+
   return (
 <nav className={`transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  <a  className="flex items-center space-x-3 rtl:space-x-reverse">
+  <a className="flex items-center space-x-3 rtl:space-x-reverse">
       <img src={urjaSolarLogo} className="h-8" alt="Flowbite Logo" />
       <span className="self-center text-2xl font-semibold whitespace-nowrap sm:block hidden">UrjaSolar</span>
   </a>
