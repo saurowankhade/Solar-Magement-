@@ -11,7 +11,7 @@ const handleRemoveInstallment = (index) => {
   };
   return (
     <div className="relative overflow-x-auto shadow-sm border">
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 border">
+    <table className="w-full overflow-x-auto text-sm text-left rtl:text-right text-gray-500 border">
         <thead className="text-xs text-gray-700 uppercase  border ">
             <tr>
                 <th scope="col" className="px-6 py-3 font-bold">
