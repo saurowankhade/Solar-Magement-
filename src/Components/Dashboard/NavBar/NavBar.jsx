@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../../../Context/UserContext/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import urjaSolarLogo from '../../../../urja-solar.png'
 import allUserIcon from '../../../assets/all-user.png'
@@ -15,6 +15,7 @@ const NavBar = () => {
     const {user} = useContext(UserContext);
     const navigateTo = useNavigate();
     const [hasShadow, setHasShadow] = useState(false);
+    const location = useLocation()
 
     useEffect(() => {
       const handleScroll = () => {
@@ -32,14 +33,31 @@ const NavBar = () => {
     };
    }, []);
 
+   const navigate = useNavigate();
+   const goBack = () => {
+    navigate(-1); // Navigate to the previous route
+  };
+
+
 
   return (
 <nav className={`transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  <a className="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src={urjaSolarLogo} className="h-8" alt="Flowbite Logo" />
-      <span className="self-center text-2xl font-semibold whitespace-nowrap sm:block hidden">UrjaSolar</span>
+ {
+  location.pathname === '/dashboard' ?  <a className="flex items-center space-x-3 rtl:space-x-reverse">
+  <img src={urjaSolarLogo} className="h-8" alt="UrjaSolar Icon" />
+  <span className="self-center text-2xl font-semibold whitespace-nowrap sm:block hidden">UrjaSolar</span>
+</a> :  <a onClick={goBack} className="cursor-pointer">
+  <svg
+      viewBox="0 0 24 24"
+      fill="#000"
+      height="1.5em"
+      width="1.5em"
+    >
+      <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z" />
+    </svg>
   </a>
+ }
   <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button onClick={()=>{
         toast.dismiss()
