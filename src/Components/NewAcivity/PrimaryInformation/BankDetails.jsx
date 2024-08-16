@@ -10,6 +10,7 @@ const BankDetails = () => {
 
     const [suggestBankName,setSuggestBankName] = useState([]);
     
+    const [bankHolderName,setBankHolderName] = useState("");
     const [bankName,setBankName] = useState("");
     const [consumerAccountNumber,setConsumerAccountNumber] = useState("");
     const [IFSCCode,setIFSCCode] = useState("");
@@ -29,6 +30,7 @@ const BankDetails = () => {
             setConsumerAccountNumber(trackSolarData?.ConsumerAccountNumber || "");
             setIFSCCode(trackSolarData?.IFSCCode || "")
             setCheckORPassbookPhoto(trackSolarData?.CheckORPassbookPhoto || false)
+            setBankHolderName(trackSolarData?.BankHolderName || "")
         }
         firestore.getOneData("AppData","library")
         .then((respo)=>{
@@ -40,7 +42,9 @@ const BankDetails = () => {
 
     const handleSubmit = ()=>{
         toast.dismiss();
-           if(bankName.length <=0){
+          if(bankHolderName.length <=0){
+            toast.error("Enter Bank holder name")
+           } else if(bankName.length <=0){
             toast.error("Enter Bank name")
            } else if(consumerAccountNumber.length <=0){
             toast.error("Enter Consumer account no")
@@ -55,6 +59,7 @@ const BankDetails = () => {
                 ConsumerAccountNumber:consumerAccountNumber,
                 IFSCCode:IFSCCode,
                 CheckORPassbookPhoto:checkORPassbookPhoto,
+                BankHolderName:bankHolderName,
                 CreatedAt:trackSolarData?.CreatedAt || new Date(),
                 PrimaryInfromation : {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
@@ -62,12 +67,11 @@ const BankDetails = () => {
                     isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone || false,
                     isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
                     isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
-                    isBankDetailsDone:(bankName && consumerAccountNumber && IFSCCode && checkORPassbookPhoto ? true : false),
+                    isBankDetailsDone:(bankName && bankHolderName && consumerAccountNumber && IFSCCode && checkORPassbookPhoto ? true : false),
                     isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
                     isDone: trackSolarData?.PrimaryInfromation?.isMainDone && trackSolarData?.PrimaryInfromation?.isLoadChangeDone && trackSolarData?.PrimaryInfromation?.isNameChangeDone && (bankName && consumerAccountNumber && IFSCCode && checkORPassbookPhoto ? true : false) ? true : false
                 }
             }
-            
 
             const companyID = user?.companyID;
             firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, updatedTrackSolarData?.Id)
@@ -90,8 +94,11 @@ const BankDetails = () => {
             <h2 className="text-center font-bold">Bank Details</h2>
             <div className=" flex flex-col ">
                <div className="relative ">
+               
+               <input className=" w-full my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base  " placeholder="Account holder name"  type="text" value={bankHolderName} onChange={(e)=>{setBankHolderName(e.target.value)}}  />
+
                <input className=" w-full my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none  text-base  " placeholder="Bank Name" list="bankNames"  type="text" value={bankName} onChange={(e)=>{setBankName(e.target.value)}}  />
-                <datalist className="bg-white text-black hidden" id="bankNames">
+                <datalist className=" hidden" id="bankNames">
                     {
                         suggestBankName.map((bankName,index)=>(
                             <option className="cursor-pointer" key={`${bankName+index}`} value={bankName}>{bankName}</option>
