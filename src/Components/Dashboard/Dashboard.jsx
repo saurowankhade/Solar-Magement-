@@ -2,7 +2,6 @@
 import { useContext, useEffect } from "react";
 import UserContext from "../../Context/UserContext/UserContext";
 import NavBar from "./NavBar/NavBar";
-import BackButton from "./NavBar/BackButton";
 import firestore from "../../Firebase/Firestore";
 import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
 import { toast } from "react-toastify";
@@ -14,7 +13,6 @@ const Dashboard =  ()=>{
   const {setAllUser} = useContext(ShowAllUserContext);
   const {setAllTrack} = useContext(AllTrackContext);
 
-  const location = useLocation()
 
   const { data, error } = useFirestoreDocuments("SolarData");
   useEffect(()=>{

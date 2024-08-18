@@ -81,6 +81,7 @@ const ShowAcivity = () => {
         }, 2000);
     
         const allFields = ["CreatedAt", "ConsumerName", "ConsumerMobileNumber", "RequiredSystemKW", "ConsumerAddress", "BillUnit", "ConsumerNumber", "MNREApplicationNumber", "PVApplicationNumber", "BankName", "ConsumerAccountNumber", "IFSCCode", "LoadChange", "NameChange", "BankLoan"];
+        
         // const paymentFields = ["ConsumerName", "BankName", "ConsumerAccountNumber", "IFSCCode", "SubsidyCheque", "SubsidyChequeAmount", "Installament"];
     
         const allHeaders = ["Created At", "Consumer Name", "Consumer Mobile Number", "Required System in KW", "Consumer Address", "Bill Unit", "Consumer Number", "MNRE Number", "PV Number", "Bank Name", "Bank Account Number", "ISFC Code", "Is Load Change", "Is Name Change", "Is Bank Loan"];
@@ -89,7 +90,7 @@ const ShowAcivity = () => {
         const maxInstallments = Math.max(...trackDataDoublicate.map(item => item?.data?.Installament?.length || 0));
     
         // Generate headers for installments dynamically
-        let paymentHeaders = ["Consumer Name", "Bank Name", "Bank Account Number", "IFSC Code","Total Amount", "Is Subsidy Cheque", "Subsidy Cheque Amount"];
+        let paymentHeaders = ["Consumer Name","Bank Holder Name", "Bank Name", "Bank Account Number", "IFSC Code","Total Amount", "Is Subsidy Cheque", "Subsidy Cheque Amount"];
         for (let i = 1; i <= maxInstallments; i++) {
           paymentHeaders.push(`Installment ${i} Date`, `Installment ${i} Amount`, `Installment ${i} Medium`);
         }
@@ -116,6 +117,7 @@ const ShowAcivity = () => {
         const paymentRows = trackDataDoublicate.map(item => {
           const row = [
             item?.data?.ConsumerName,
+            item?.data?.BankHolderName,
             item?.data?.BankName,
             item?.data?.ConsumerAccountNumber,
             item?.data?.IFSCCode,

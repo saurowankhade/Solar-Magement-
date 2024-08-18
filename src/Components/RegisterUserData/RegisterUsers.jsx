@@ -11,6 +11,7 @@ function RegisterUsers() {
     const {user} = useContext(UserContext);
     const {allUser} = useContext(ShowAllUserContext);
     useEffect(()=>{
+      console.log(allUser);
           if(user?.name){
             setUserData(allUser);
           }

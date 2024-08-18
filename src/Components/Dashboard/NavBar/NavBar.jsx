@@ -70,7 +70,7 @@ const NavBar = () => {
          <div className="mr-4 sm:mr-10 ">
       <button
           onClick={()=>{
-            navigateTo('/regitser-users')
+            navigateTo('/dashboard/regitser-users')
           }}
           type="button"
           className="flex text-sm md:me-0 items-center gap-3  "
