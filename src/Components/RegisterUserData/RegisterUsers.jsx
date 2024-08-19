@@ -4,7 +4,6 @@ import RegisterUserShow from "./RegisterUserShow";
 import TableUi from "../ShimmerUI/TableUi";
 import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
 
-
 function RegisterUsers() {
 
     const [usersData,setUserData] = useState([]);
@@ -23,8 +22,7 @@ function RegisterUsers() {
       {
             usersData.length === 0 ? <TableUi/> : 
       
-            <>
-      
+      <> 
       {
        usersData.map((user)=>(
         <RegisterUserShow key={user?.userID} getData={user} />

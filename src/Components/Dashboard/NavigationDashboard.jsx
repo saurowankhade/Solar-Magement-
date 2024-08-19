@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link } from "react-router-dom"
 import authentication from "../../Firebase/authentication"
 import { useContext, useState } from "react"
 import UserContext from "../../Context/UserContext/UserContext";
