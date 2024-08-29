@@ -6,7 +6,7 @@ import firestore from "../../Firebase/Firestore";
 import ShowAllUserContext from "../../Context/ShowAllUsersContext/ShowAllUserContext";
 import { toast } from "react-toastify";
 import AllTrackContext from "../../Context/AllTrackData/AllTrackContext";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useFirestoreDocuments } from "../../useFirestoreDocuments/useFirestoreDocuments";
 const Dashboard =  ()=>{ 
   const {user} = useContext(UserContext);
@@ -46,7 +46,6 @@ const Dashboard =  ()=>{
           }
         }} className=" w-full h-full ">
           <NavBar /> 
-        
           <Outlet />
         </div>
     )

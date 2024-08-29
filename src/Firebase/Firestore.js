@@ -1,6 +1,5 @@
 import { db } from "./firebase";
-import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,limit,onSnapshot,orderBy,query,setDoc, startAfter, startAt, Timestamp, updateDoc, where } from "firebase/firestore";
-import authentication from "./authentication";
+import { collection, deleteDoc, doc,FieldPath,getDoc, getDocs ,onSnapshot,orderBy,query,setDoc, Timestamp, updateDoc, where } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { setItem } from "../utils/LocalStorage/localAuth";
 
@@ -12,6 +11,19 @@ class Firestore {
       return { status: 200, message: 'Data saved!' };
     } catch (error) {
       return { status: 500, message: error,Id:documentID };
+    }
+  }
+  async updateData(collection, data, documentID) {
+    try {
+      // Reference to the specific document in the collection
+      const docRef = doc(db, collection, documentID);
+      
+      // Update the document with the new data fields
+      await updateDoc(docRef, data);
+      
+      return { status: 200, message: 'Data updated successfully!' };
+    } catch (error) {
+      return { status: 500, message: error.message, Id: documentID };
     }
   }
 
@@ -33,6 +45,7 @@ class Firestore {
           const docRef = doc(db, collectionName, docsId);
           const docSnap = await getDoc(docRef);
           return docSnap.exists() ? docSnap.data() : ""
+          
         } catch (error) {
           console.error("Error getting document: ", error);
         }
@@ -83,12 +96,38 @@ class Firestore {
       
           // Map document data
           const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                 console.log(documents);
+                
                     
           return {status:200,message:"Data",data:documents};
         } catch (error) {
           console.error('Error fetching documents:', error);
           return {status:500,message:error,data:[]};
+        }
+      }
+
+      async  getSelectedDocuments(collectionName) {
+        try {
+          const collectionRef = collection(db, collectionName);
+      
+          // Use the spread syntax to pass the list of fields to select()
+          const q = query(collectionRef);
+      
+          const snapshot = await getDocs(q);
+      
+          if (snapshot.empty) {
+            return { status: 204, message: "No data", data: [] };
+          }
+      
+          // Map document data
+          const documents = snapshot.docs.map(doc => ({ id: doc.id, 
+            ConsumerName:doc.data().data.ConsumerName
+           }));
+          console.log(documents);
+      
+          return { status: 200, message: "Data", data: documents };
+        } catch (error) {
+          console.error('Error fetching documents:', error);
+          return { status: 500, message: error.message, data: [] };
         }
       }
 

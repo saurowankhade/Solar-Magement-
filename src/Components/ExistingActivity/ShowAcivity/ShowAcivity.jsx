@@ -71,8 +71,8 @@ const ShowAcivity = () => {
             )    
           );  
 
-    },[searchQuery,setSearchQuery,trackData])      
-
+    },[searchQuery,setSearchQuery,trackData])  
+    
     const exportToExcel = () => {
       if (trackDataDoublicate) {
         setEnable(true);
