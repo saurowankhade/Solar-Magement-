@@ -19,6 +19,9 @@ import ShowSpecific from "./Components/ExistingActivity/ShowSpecificAcivity/Show
 import PrivateRoute from "./Routing/PrivateRoute";
 import HomeDashboard from "./Components/Dashboard/Home";
 import Library from "./Components/Library/Library";
+import PrimaryInfo from "./Components/MaterialComponent/PrimaryInfo/PrimaryInfo";
+import MaterialDetails from "./Components/MaterialComponent/CreateMaterial/MaterialDetails";
+import ShowMaterial from "./Components/ShowMaterialDetails/ShowMaterial/ShowMaterial";
 
 function App() {
   return (
@@ -39,8 +42,8 @@ function App() {
                 
                 <Route path="library" element={<PrivateRoute><TrackSolarContextProvider><Library/></TrackSolarContextProvider></PrivateRoute>}/>
               
-                <Route path="material-entry" element={<PrivateRoute><TrackSolarContextProvider><CreateNewAcivity/></TrackSolarContextProvider></PrivateRoute>}/>
-                <Route path="material-overview" element={<PrivateRoute><TrackSolarContextProvider><ShowAcivity/></TrackSolarContextProvider></PrivateRoute>} ></Route>
+                <Route path="material-entry" element={<PrivateRoute><TrackSolarContextProvider><MaterialDetails/></TrackSolarContextProvider></PrivateRoute>}/>
+                <Route path="material-overview" element={<PrivateRoute><TrackSolarContextProvider><ShowMaterial/></TrackSolarContextProvider></PrivateRoute>} ></Route>
                 <Route path="material-overview/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
 
               <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>

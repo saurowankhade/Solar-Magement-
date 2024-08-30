@@ -29,7 +29,7 @@ const AcivityButton = () => {
       }} className={`py-2 px-3 text-sm  w-full border sm:p-3 sm:text-base rounded-full ${user?.name ? " bg-yellow-900 text-white" : " bg-gray-400 text-gray-900"} shadow-md `}>Project Overview</button>
     </div>
 
-    {/* <div className="flex justify-evenly mt-10 gap-3">
+    <div className="flex justify-evenly mt-10 gap-3">
       <button onClick={(e)=>{
         e.stopPropagation()
         toast.dismiss()
@@ -43,7 +43,7 @@ const AcivityButton = () => {
         e.stopPropagation()
         handleButton("/dashboard/material-overview")
       }} className={`py-2 px-3 text-sm  w-full border sm:p-3 sm:text-base rounded-full ${user?.name ? " bg-yellow-900 text-white" : " bg-gray-400 text-gray-900"} shadow-md `}>Material Overview</button>
-    </div> */}
+    </div>
 
     <div className="flex justify-evenly mt-10 gap-3">
       <button onClick={(e)=>{

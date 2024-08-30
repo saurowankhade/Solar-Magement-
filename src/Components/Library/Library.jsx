@@ -38,7 +38,7 @@ const Library = () => {
         setIsLoading(true)
         if(action.toString() === actionArray[0] && (inputText.current.value).length >=0){
 
-            firestore.updateData("Library",{[selectInput]:[...alreadyData,inputText.current.value]},user?.companyID)
+            firestore.updateData("Library",{[selectInput]:[...alreadyData || [],inputText.current.value]},user?.companyID)
             .then((cre)=>{
                 if(cre.status === 200){
                     setIsLoading(false)

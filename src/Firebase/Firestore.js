@@ -105,7 +105,7 @@ class Firestore {
         }
       }
 
-      async  getSelectedDocuments(collectionName) {
+      async  getConsumerDetails(collectionName) {
         try {
           const collectionRef = collection(db, collectionName);
       
@@ -119,8 +119,10 @@ class Firestore {
           }
       
           // Map document data
-          const documents = snapshot.docs.map(doc => ({ id: doc.id, 
-            ConsumerName:doc.data().data.ConsumerName
+          const documents = snapshot.docs.map(doc => ({ 
+            id: doc.id, 
+            ConsumerName:doc.data().data.ConsumerName,
+            ConsumerAddress:doc.data().data.ConsumerAddress
            }));
           console.log(documents);
       
@@ -130,6 +132,39 @@ class Firestore {
           return { status: 500, message: error.message, data: [] };
         }
       }
+
+      async  getMaterialListForTable(collectionName) {
+        try {
+          const collectionRef = collection(db, collectionName);
+      
+          // Use the spread syntax to pass the list of fields to select()
+          const q = query(collectionRef);
+      
+          const snapshot = await getDocs(q);
+      
+          if (snapshot.empty) {
+            return { status: 204, message: "No data", data: [] };
+          }
+      
+          // Map document data
+          const documents = snapshot.docs.map(doc => ({ 
+            id: doc.id, 
+            CreatedAt : doc.data().CreatedAt,
+            ConsumerName:doc.data().ConsumerName,
+            ConsumerAddress:doc.data().ConsumerAddress,
+            TeamName : doc.data().TeamName,
+            Verify : doc.data().Verify
+           }));
+          console.log(documents);
+      
+          return { status: 200, message: "Data", data: documents };
+        } catch (error) {
+          console.error('Error fetching documents:', error);
+          return { status: 500, message: error.message, data: [] };
+        }
+      }
+
+
 
       async fetchDocuments(collectionName) {
         const collectionRef = collection(db, collectionName);
