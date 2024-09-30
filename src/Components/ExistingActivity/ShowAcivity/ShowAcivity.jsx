@@ -1,14 +1,11 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react"
-import { toast } from "react-toastify";
+import { useContext, useEffect, useRef, useState } from "react"
 import UserContext from "../../../Context/UserContext/UserContext";
 import firestore from "../../../Firebase/Firestore";
 import TableHeader from "../Table/TableHeader";
 import TableBody from "../Table/TableBody";
-import { Timestamp } from "firebase/firestore";
 import TableBodyShimmerUI from "../Table/TableBodyShimmerUI";
 import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
 
-import { DownloadTableExcel } from 'react-export-table-to-excel';
 
 
 import { saveAs } from 'file-saver';
@@ -204,8 +201,8 @@ const ShowAcivity = () => {
                {
            trackDataDoublicate.length > 0 ?
          
-           trackDataDoublicate.map((map)=>(
-               <TableBody key={map?.id} getData={map?.data} collectionId={user?.companyID+"TrackSolarData"}/>
+           trackDataDoublicate.map((map,index)=>(
+               <TableBody key={map?.id} getData={map?.data} index={index+1}  collectionId={user?.companyID+"TrackSolarData"}/>
            ))
            : 
            <tbody className="w-full border-b">

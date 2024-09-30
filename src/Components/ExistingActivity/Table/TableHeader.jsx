@@ -4,6 +4,10 @@ const TableHeader = () => {
   return (
     <thead className="w-full text-base  text-gray-50 uppercase bg-blue-900 border-b-2 sticky shadow-md  ">
             <tr className="">
+            <th scope="col" className=" p-2 text-sm sm:text-base sm:py-3 sm:px-3 text-center border sticky top-0 z-10 shadow-md bg-blue-900 text-gray-100">
+                    Sr.No.
+                </th>
+
                 <th scope="col" className=" p-2 text-sm sm:text-base sm:py-3 sm:px-3 text-center border sticky top-0 z-10 shadow-md bg-blue-900 text-gray-100">
                     Date
                 </th>

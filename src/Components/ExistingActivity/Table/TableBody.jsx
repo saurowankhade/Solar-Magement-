@@ -6,7 +6,7 @@ import UserContext from "../../../Context/UserContext/UserContext";
 import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
 import Loading from "react-loading";
 
-const TableBody = ({getData,collectionId}) => {
+const TableBody = ({getData,collectionId,index}) => {
     const {Id,ConsumerName,ConsumerNumber,BillUnit,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
 
     const {setTrackSolarData} = useContext(TrackSolarContext);
@@ -46,6 +46,9 @@ const TableBody = ({getData,collectionId}) => {
     <tbody className="w-full border-b">
       
     <tr onClick={goToSpeficData} className="bg-gray-50 mt-2 cursor-pointer">
+    <td className="p-2 sm:px-6 sm:py-4 border">
+        {index}
+      </td>
       <td className="p-2 sm:px-6 sm:py-4 border">
         {firestore.formatTimestamp(CreatedAt)  }
       </td>
