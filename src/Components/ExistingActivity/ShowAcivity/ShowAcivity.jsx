@@ -6,11 +6,12 @@ import TableBody from "../Table/TableBody";
 import TableBodyShimmerUI from "../Table/TableBodyShimmerUI";
 import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
 
-
-
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx'; // Import xlsx
 import { useFirestoreDocuments } from "../../../useFirestoreDocuments/useFirestoreDocuments";
+import { useLocation } from "react-router-dom";
+
+import exportExcel from '../../../assets/export-excel.svg'
 
 
 const ShowAcivity = () => {
@@ -29,6 +30,10 @@ const ShowAcivity = () => {
 
     const [enable,setEnable] = useState(false);
 
+
+    const navigateFilter = useLocation();
+    const {name,index} = navigateFilter.state || {}
+
     // useEffect(()=>{
     //   if(user?.companyID){
     //     firestore.getAllDocuments(user?.companyID+"TrackSolarData")
@@ -43,7 +48,6 @@ const ShowAcivity = () => {
     // },[user])
     const { data } = useFirestoreDocuments("SolarData");
     useEffect(()=>{       
-       
         if(user?.companyID && data){
             setTrackData(data)
             setTrackDataDoublicate(data)
@@ -167,13 +171,58 @@ const ShowAcivity = () => {
       }
     };
 
+    useEffect(()=>{     
+      if(name === "Enquiry No" && index === 0){
+        setTrackDataDoublicate(
+          trackData.filter(item => 
+            item?.data?.ConsumerName
+          )
+        )
+      }
+      if(name === "Site Work Done" && index === 1){
+        setTrackDataDoublicate(
+          trackData.filter(item => 
+            item?.data?.SiteWorkInfromation?.isDone === true
+          )
+        )
+      } 
+      if(name === "Inspection No" && index === 2){
+        setTrackDataDoublicate(
+          trackData.filter(item => 
+            item?.data?.InspectionInfromation?.isDone === true
+          )
+        )
+      } 
+      if(name === "Meter Installation" && index === 3){
+        setTrackDataDoublicate(
+          trackData.filter(item => 
+            item?.data?.MeterInfromation?.isDone === true
+          )
+        )
+      } 
+      if(name === "NSC Approved" && index === 4){
+        setTrackDataDoublicate(
+          trackData.filter(item => 
+            item?.data?.NetMeteringInfromation?.isDone === true
+          )
+        )
+      } 
+      if(name === "Subsidy" && index === 5){
+        setTrackDataDoublicate(
+          trackData.filter(item => 
+            item?.data?.SubsidyInfromation?.isDone === true
+          )
+        )
+      } 
+    },[name,index,trackData])
+
   return (
     <div className="w-full">
         <div className=" bg-white flex justify-between m-3">
             
            <div>
            <input
-        className="border p-3 w-fit"
+        className="border p-8 "
         type="text"
         placeholder="Search..."
         value={searchQuery}
@@ -181,7 +230,9 @@ const ShowAcivity = () => {
            </div>
 
           <div className="flex items-center">
-          <button className="rounded-full bg-green-800 px-3 py-2 text-white text-base" disabled={enable} onClick={exportToExcel}>Excel</button>
+          <button className="rounded-full bg-green-800 px-3 py-2 text-white text-base" disabled={enable} onClick={exportToExcel}>
+            Export to excel
+          </button>
           </div>
             
             </div>
@@ -196,8 +247,14 @@ const ShowAcivity = () => {
                </table>
                :
 
+               
                <table ref={tableRef} className="w-full text-sm text-left rtl:text-right text-gray-500 border h-[100px]  overflow-y-scroll ">
+               
                <TableHeader />
+               {
+                console.log("Data : ",trackDataDoublicate )
+                
+               }
                {
            trackDataDoublicate.length > 0 ?
          
