@@ -8,6 +8,8 @@ export const data = (data)=>{
           data: data,
           fill: true,
           backgroundColor : '#60a5fa',
+          // backgroundColor: 'yellow',
+         
         },
       ],
       borderWidth: 1
@@ -25,7 +27,7 @@ export const data = (data)=>{
       },
       title: {
         display: true,
-        text: 'Monthly Enquiries for the year 2024',
+        text: `Monthly Enquiries for the year ${new Date().getFullYear()}`,
         font: {
           size: 14, // Font size in pixels
           weight: 'bold', // Font weight (e.g., 'normal', 'bold', 'bolder', or numeric values)
@@ -38,14 +40,28 @@ export const data = (data)=>{
       },
     },
     scales: {
-      x: {
-        beginAtZero: true,
+    x: {
+      beginAtZero: true,
+      grid: {
+        color: 'gray', // Grid line color
+        lineWidth: 1,   // Make the grid lines bold
       },
-      y: {
-        beginAtZero: true,
-        suggestedMax: 10,
+      ticks: {
+        color: 'black', // X-axis label color
       },
     },
+    y: {
+      beginAtZero: true,
+      suggestedMax: 10, // Suggested max value for y-axis
+      grid: {
+        color: 'gray', // Grid line color
+        lineWidth: 1,   // Make the grid lines bold
+      },
+      ticks: {
+        color: 'black', // Y-axis label color
+      },
+    },
+  },
   };
   
   

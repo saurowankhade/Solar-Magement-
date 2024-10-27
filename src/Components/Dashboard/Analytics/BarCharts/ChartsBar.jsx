@@ -5,7 +5,7 @@ import {Chart as ChartJS,
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,Filler
 } from 'chart.js'
 import { data, options } from './BarData';
 import { useContext, useEffect, useState } from 'react';
@@ -27,10 +27,10 @@ const ChartsBar = ()=>{
   const { allTrack } = useContext(AllTrackContext);
 
   const [filterData,setFilterData] = useState([]);
-
+  ChartJS.register(Filler);
 useEffect(() => {
   if (allTrack) {
-    const filteredData = allTrack.filter((preData)=> preData?.data?.ConsumerName && (preData?.data?.CreatedAt).toDate().getFullYear() === 2024 )
+    const filteredData = allTrack.filter((preData)=> preData?.data?.ConsumerName && (preData?.data?.CreatedAt).toDate().getFullYear() === new Date().getFullYear() )
     setFilterData(filteredData) 
   }
 }, [allTrack]);
@@ -69,7 +69,7 @@ useEffect(()=>{
 
   return (
     <>
-        <div className=' h-[400px] border shadow-sm rounded-sm p-2'>
+        <div className=' h-[400px] border shadow-sm rounded-sm p-2 '>
             <Bar options={options} data={da} />
         </div>
   </>

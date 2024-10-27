@@ -12,24 +12,26 @@ const TrackAnalytics = () => {
   const [subsidyData,setSubsidyData] = useState([]);
 
   useEffect(()=>{
-    setEnquiryData( allTrack.filter((data)=>
-      data?.data?.ConsumerName     
-    ))
-    setSiteWorkData( allTrack.filter((data)=>
-      data?.data?.SiteWorkInfromation?.isDone === true     
-    ))
-    setInspectionData( allTrack.filter((data)=>
-      data?.data?.InspectionInfromation?.isDone === true     
-    ))
-    setMeterInstallationData( allTrack.filter((data)=>
-      data?.data?.MeterInfromation?.isDone === true     
-    ))
-    setNSCApprovedData( allTrack.filter((data)=>
-      data?.data?.NetMeteringInfromation?.isDone === true     
-    ))
-    setSubsidyData( allTrack.filter((data)=>
-      data?.data?.SubsidyInfromation?.isDone === true     
-    ))
+    if(allTrack.length > 0){
+      setEnquiryData(allTrack.filter((data)=>
+        data?.data?.ConsumerName     
+      ))
+      setSiteWorkData( allTrack.filter((data)=>
+        data?.data?.SiteWorkInfromation?.isDone === true     
+      ))
+      setInspectionData( allTrack.filter((data)=>
+        data?.data?.InspectionInfromation?.isDone === true     
+      ))
+      setMeterInstallationData( allTrack.filter((data)=>
+        data?.data?.MeterInfromation?.isDone === true     
+      ))
+      setNSCApprovedData( allTrack.filter((data)=>
+        data?.data?.NetMeteringInfromation?.isDone === true     
+      ))
+      setSubsidyData( allTrack.filter((data)=>
+        data?.data?.SubsidyInfromation?.isDone === true     
+      ))
+    }
   },[allTrack])
   return (
     <div>

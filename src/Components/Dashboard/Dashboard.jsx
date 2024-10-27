@@ -30,9 +30,9 @@ const Dashboard =  ()=>{
   },[setAllUser, user])
 
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
   
 
 
