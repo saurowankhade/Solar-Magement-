@@ -3,11 +3,9 @@ import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUser
 import { useNavigate } from "react-router-dom";
 
 const Users = () => {
-    const {allUser,setAllUser} = useContext(ShowAllUserContext);
+    const {allUser} = useContext(ShowAllUserContext);
     const navigate = useNavigate();
-    useEffect(()=>{
-        setAllUser(allUser)
-    })
+   
   return (
 <div className="relative overflow-x-auto shadow-lg border">
 <h1 className="font-bold font-sans px-4 py-4 my-2 text-base sm:text-lg">Users</h1>
