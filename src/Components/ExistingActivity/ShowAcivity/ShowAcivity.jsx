@@ -230,7 +230,7 @@ const ShowAcivity = () => {
            </div>
 
           <div className="flex justify-end w-full">
-          <button className="rounded-lg bg-green-800 px-4 text-white text-base" disabled={enable} onClick={exportToExcel}>
+          <button className="rounded-lg bg-green-800 px-2 text-white text-base" disabled={enable} onClick={exportToExcel}>
             Excel 
           </button>
           </div>

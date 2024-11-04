@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics"; // Corrected import
 
 import { getEnv } from "./getEnv";
 
@@ -17,7 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-export const auth = getAuth();
+export const auth = getAuth(app); // Pass the app instance
 export const db = getFirestore(app);
+export const analytics = getAnalytics(app); // Initialize Analytics
 export default app;

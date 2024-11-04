@@ -10,9 +10,9 @@ import { useState } from 'react'
 const PrimaryInformation = () => {
   const [showPage,setShowPage] = useState(0);
   return (
-    <div className=''>
+    <div className='w-full '>
+      <div className=' flex flex-col justify-center items-center'>
       <PrimaryStipper setShowPage={setShowPage} />
-      <div className=''>
       {
         showPage===0 ? <MainInformation /> : 
         showPage===1 ?<IsLoadChangeInformation /> :

@@ -8,16 +8,17 @@ import Subsidy from "../Subsidy/Subsidy"
 import ApplicationInformation from "../ApplicationInformation/ApplicationInformation"
 import TrackStipper from "../../Stipper/TrackStipper"
 import Payment from "../Payment/Payment"
+import StatusStipper from "../../Stipper/StatusStipper"
 
 const CreateNewAcivity = () => {
   const [showPage,setShowPage] = useState(0);
 
   return (
     
-    <div className="w-full md:w-full flex justify-center items-center">
-    <div className="w-full">
+    <div className="w-full h-fit md:w-full flex justify-center items-center">
+    <div className="w-full md:flex">
 
-    <TrackStipper setShowPage={setShowPage} />
+    <StatusStipper showPage={showPage} setShowPage={setShowPage} />
 
       {
         showPage === 0 ? <PrimaryInformation /> :

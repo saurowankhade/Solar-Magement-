@@ -14,6 +14,7 @@ import Subsidy from "./Subsidy/Subsidy";
 import TableUi from "../../ShimmerUI/TableUi";
 import TrackStipper from "../../Stipper/TrackStipper";
 import Payment from "./Payment/Payment";
+import StatusStipper from "../../Stipper/StatusStipper";
 
 const ShowSpecific = () => {
   const {Id} = useParams();
@@ -40,15 +41,16 @@ const ShowSpecific = () => {
 
 
   return (
-    <div>
+    <div className="w-full md:flex ">
     {
       !trackSolarData?.CreatedAt ? <TableUi /> :
       <>
 
       <>
-      <TrackStipper setShowPage={setShowPage} />
+      <StatusStipper showPage={showPage} setShowPage={setShowPage} />
       </>
 
+<div className=" w-full flex flex-col items-center mt-4">
     {
       showPage === 0 ? <PrimaryInformation/> :
       showPage === 1 ? <ApplicationInformation/> :
@@ -59,6 +61,7 @@ const ShowSpecific = () => {
       showPage === 6 ? <Subsidy/> : 
       showPage === 7 ? <Payment/> : <></>
     }
+    </div>
     </>
       }
     </div>

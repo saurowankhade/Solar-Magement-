@@ -22,6 +22,7 @@ import Library from "./Components/Library/Library";
 import PrimaryInfo from "./Components/MaterialComponent/PrimaryInfo/PrimaryInfo";
 import MaterialDetails from "./Components/MaterialComponent/CreateMaterial/MaterialDetails";
 import ShowMaterial from "./Components/ShowMaterialDetails/ShowMaterial/ShowMaterial";
+import StatusStipper from "./Components/Stipper/StatusStipper";
 
 function App() {
   return (
@@ -47,7 +48,9 @@ function App() {
                 <Route path="material-overview/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
 
               <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
+
            </Route> 
+           <Route path="/demo" element={<StatusStipper />} />
          </Routes>
        </BrowserRouter>
        <div>
