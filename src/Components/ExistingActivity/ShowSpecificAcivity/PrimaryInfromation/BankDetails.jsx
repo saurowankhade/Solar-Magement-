@@ -6,7 +6,7 @@ const BankDetails = () => {
     const {BankHolderName,BankName,ConsumerAccountNumber,IFSCCode,CheckORPassbookPhoto} = trackSolarData;
   return (
     <div className="flex justify-center">
-     <div className={`p-2  shadow-md border  w-[700px] ${trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? " bg-white" : " bg-red-100"} `}>
+     <div className={`p-2  shadow-md border  w-full ${trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? " bg-white" : " bg-red-100"} `}>
       <h3 className="text-center text-xl underline">Bank Details</h3>
            <div className="mt-2">
             <span className="text-base font-bold">Bank Holder Name : </span> 

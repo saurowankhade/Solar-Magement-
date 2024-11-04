@@ -6,7 +6,7 @@ const MainData = () => {
     const {ConsumerName,ConsumerMobileNumber,StampPaper,RequiredSystemKW,Visit,ConsumerAddress} = trackSolarData;
   return (
     <div className="flex justify-center">
-      <div className={`p-2  shadow-md border  w-[700px] ${trackSolarData?.PrimaryInfromation?.isMainDone ? " bg-white" : " bg-red-100"} `}>
+      <div className={`p-2  shadow-md border  w-full ${trackSolarData?.PrimaryInfromation?.isMainDone ? " bg-white" : " bg-red-100"} `}>
       <h3 className="text-center text-xl underline">Main Data</h3>
           
            <div className="mt-2">
