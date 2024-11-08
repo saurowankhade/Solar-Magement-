@@ -20,7 +20,7 @@ const TrackStipper = ({setShowPage}) => {
 
   return (
     <div className="sticky z-0  inset-0  top-0  w-full overflow-x-scroll xl:overflow-x-hidden scrollbar-hide">
-      <ol className="py-4 px-2 flex items-center justify-center w-fit xl:w-full  space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200  shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
+      <ol className="py-4 px-2 flex items-center justify-center w-fit xl:w-full  space-x-2 text-sm font-medium text-center text-gray-500 bg-white  shadow-sm  sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse ">
       {
        
         processArray.map((element,index)=>(

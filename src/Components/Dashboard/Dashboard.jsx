@@ -29,18 +29,12 @@ const Dashboard =  ()=>{
     });
   },[setAllUser, user])
 
-
-  // if (error) {
-  //   return <div>Error: {error.message}</div>;
-  // }
-  
-
-
-
   return(
         
-        <div onClick={()=>{
+        <div onClick={(e)=>{
           if(!user?.name){
+            e.preventDefault();
+            e.stopPropagation();
             toast.dismiss()
             toast.info("Loading data please wait...",{position:'top-center'})
           }

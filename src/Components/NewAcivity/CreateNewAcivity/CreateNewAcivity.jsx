@@ -16,7 +16,7 @@ const CreateNewAcivity = () => {
   return (
     
     <div className="w-full h-fit md:w-full flex justify-center items-center">
-    <div className="w-full md:flex">
+    <div className="w-full mt-20 md:flex">
 
     <StatusStipper showPage={showPage} setShowPage={setShowPage} />
 

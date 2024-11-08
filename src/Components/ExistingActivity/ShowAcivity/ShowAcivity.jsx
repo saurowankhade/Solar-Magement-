@@ -217,7 +217,7 @@ const ShowAcivity = () => {
     },[name,index,trackData])
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-20">
         <div className=" bg-white flex m-3 ">
             
            <div className="w-full">

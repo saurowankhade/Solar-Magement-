@@ -41,7 +41,7 @@ const NavBar = () => {
 
 
   return (
-<nav className={`transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
+<nav className={`fixed w-full top-0 transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
  {
   location.pathname === '/dashboard' ?  <a className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -64,22 +64,20 @@ const NavBar = () => {
           navigator.clipboard.writeText(user?.companyID).then(()=>{
           toast.success("Copy to clipboard",{position:'bottom-center'})
         })
-      }} className="flex text-sm md:me-0 items-center gap-3  border p-2 rounded-full bg-blue-900 text-white">{user?.companyID}</button>
+      }} className="flex text-sm md:me-0 items-center gap-3 text-center  font-bold border p-2 rounded-full bg-gradient-to-r from-[#F7AB0D] to-[#F0D807] text-white">{user?.companyID}</button>
       {
          user?.jobProfile === "Admin" && user?.verified ? 
          <div className="mr-4 sm:mr-10 ">
       <button
           onClick={()=>{
-            navigateTo('/dashboard/regitser-users')
+            // navigateTo('/dashboard/notification')
           }}
           type="button"
-          className="flex text-sm md:me-0 items-center gap-3  "
+          className="flex"
         >
-          <img
-            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full"
-            src={allUserIcon}
-            alt="user profiles"
-          />
+          <svg width="30" height="30" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.33334 39.5834V35.4167H12.5V20.8334C12.5 17.9514 13.3681 15.3993 15.1042 13.1771C16.8403 10.9202 19.0972 9.44446 21.875 8.75002V7.29169C21.875 6.42363 22.1702 5.69446 22.7604 5.10418C23.3854 4.47919 24.132 4.16669 25 4.16669C25.8681 4.16669 26.5972 4.47919 27.1875 5.10418C27.8125 5.69446 28.125 6.42363 28.125 7.29169V8.75002C30.9028 9.44446 33.1597 10.9202 34.8958 13.1771C36.632 15.3993 37.5 17.9514 37.5 20.8334V35.4167H41.6667V39.5834H8.33334ZM25 45.8334C23.8542 45.8334 22.8646 45.434 22.0313 44.6354C21.2327 43.8021 20.8333 42.8125 20.8333 41.6667H29.1667C29.1667 42.8125 28.75 43.8021 27.9167 44.6354C27.1181 45.434 26.1458 45.8334 25 45.8334ZM16.6667 35.4167H33.3333V20.8334C33.3333 18.5417 32.5174 16.5799 30.8854 14.9479C29.2535 13.316 27.2917 12.5 25 12.5C22.7083 12.5 20.7465 13.316 19.1146 14.9479C17.4827 16.5799 16.6667 18.5417 16.6667 20.8334V35.4167Z" fill="#1D1B20"/>
+</svg>
         </button>
       </div> : <></>
       }
@@ -98,11 +96,17 @@ const NavBar = () => {
 
                 <p className={`text-gray-500 text-[12px]${user?.jobProfile ? " " : " w-[50px] bg-gray-500 animate-pulse  rounded-md  text-white "}`}>{user?.jobProfile || "   "}</p>
             </div>
-          <img
-            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full"
-            src={userIcon}
-            alt="user photo"
-          />
+            <svg width="35" height="35" viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="40" height="36" rx="18" fill="url(#paint0_linear_421_90)"/>
+<path d="M20 18C18.1667 18 16.5972 17.4125 15.2917 16.2375C13.9861 15.0625 13.3334 13.65 13.3334 12C13.3334 10.35 13.9861 8.9375 15.2917 7.7625C16.5972 6.5875 18.1667 6 20 6C21.8334 6 23.4028 6.5875 24.7084 7.7625C26.0139 8.9375 26.6667 10.35 26.6667 12C26.6667 13.65 26.0139 15.0625 24.7084 16.2375C23.4028 17.4125 21.8334 18 20 18ZM6.66669 30V25.8C6.66669 24.95 6.90974 24.1687 7.39585 23.4562C7.88196 22.7437 8.5278 22.2 9.33335 21.825C11.0556 21.05 12.8056 20.4687 14.5834 20.0812C16.3611 19.6937 18.1667 19.5 20 19.5C21.8334 19.5 23.6389 19.6937 25.4167 20.0812C27.1945 20.4687 28.9445 21.05 30.6667 21.825C31.4722 22.2 32.1181 22.7437 32.6042 23.4562C33.0903 24.1687 33.3334 24.95 33.3334 25.8V30H6.66669ZM10 27H30V25.8C30 25.525 29.9236 25.275 29.7709 25.05C29.6181 24.825 29.4167 24.65 29.1667 24.525C27.6667 23.85 26.1528 23.3438 24.625 23.0063C23.0972 22.6688 21.5556 22.5 20 22.5C18.4445 22.5 16.9028 22.6688 15.375 23.0063C13.8472 23.3438 12.3334 23.85 10.8334 24.525C10.5834 24.65 10.382 24.825 10.2292 25.05C10.0764 25.275 10 25.525 10 25.8V27ZM20 15C20.9167 15 21.7014 14.7062 22.3542 14.1187C23.007 13.5312 23.3334 12.825 23.3334 12C23.3334 11.175 23.007 10.4688 22.3542 9.88125C21.7014 9.29375 20.9167 9 20 9C19.0834 9 18.2986 9.29375 17.6459 9.88125C16.9931 10.4688 16.6667 11.175 16.6667 12C16.6667 12.825 16.9931 13.5312 17.6459 14.1187C18.2986 14.7062 19.0834 15 20 15Z" fill="#FDF7FF"/>
+<defs>
+<linearGradient id="paint0_linear_421_90" x1="0" y1="18" x2="40" y2="18" gradientUnits="userSpaceOnUse">
+<stop stopColor="#F6AE0C"/>
+<stop offset="1" stopColor="#F0D707"/>
+</linearGradient>
+</defs>
+</svg>
+
         </button>
 
         {/* Dropdown menu */}

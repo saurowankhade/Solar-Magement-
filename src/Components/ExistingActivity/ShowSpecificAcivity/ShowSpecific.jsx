@@ -41,16 +41,16 @@ const ShowSpecific = () => {
 
 
   return (
-    <div className="md:flex ">
+    <div className="md:flex mt-20 ">
     {
       !trackSolarData?.CreatedAt ? <TableUi /> :
       <>
 
-      <>
+      <div className="sticky md:top-20 bottom-0 top-16">
       <StatusStipper showPage={showPage} setShowPage={setShowPage} />
-      </>
+      </div>
 
-<div className=" md:w-full md:flex md:flex-col md:items-center mt-4">
+<div className=" md:w-full md:flex md:flex-col md:items-center md:mt-2">
     {
       showPage === 0 ? <PrimaryInformation/> :
       showPage === 1 ? <ApplicationInformation/> :

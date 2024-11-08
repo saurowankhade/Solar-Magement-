@@ -27,7 +27,7 @@ const Library = () => {
             firestore.getOneData("Library",user?.companyID)
             .then((cre)=>{
                 const inputData = cre?.[selectInput]
-                setAlreadyData(inputData); 
+                setAlreadyData(inputData || []); 
             })
         }
 

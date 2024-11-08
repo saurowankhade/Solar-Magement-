@@ -11,7 +11,6 @@ import { data, options } from './BarData';
 import { useContext, useEffect, useState } from 'react';
 import ShowAllUserContext from '../../../../Context/ShowAllUsersContext/ShowAllUserContext';
 import AllTrackContext from '../../../../Context/AllTrackData/AllTrackContext';
-import firestore from '../../../../Firebase/Firestore';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -69,7 +68,8 @@ useEffect(()=>{
 
   return (
     <>
-        <div className=' h-[400px] border shadow-sm rounded-sm p-2 '>
+        <div className='md:h-[300px] w-full h-[200px] bg-white 
+         md:w-[700px] md:mt-14 md:ml-[350px] border shadow-md rounded-md p-2 mt-8 '>
             <Bar options={options} data={da} />
         </div>
   </>

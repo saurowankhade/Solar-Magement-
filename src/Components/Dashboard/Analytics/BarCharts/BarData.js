@@ -1,18 +1,22 @@
+import { color } from "chart.js/helpers";
 
 export const data = (data)=>{
+  
     return {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       datasets: [
         {
           label: '',
           data: data,
-          fill: true,
-          backgroundColor : '#60a5fa',
+          fill: false,
+          backgroundColor : '#F7AB0D',
           // backgroundColor: 'yellow',
+          borderWidth: 1,
+          barThickness: 15,
          
         },
       ],
-      borderWidth: 1
+      borderWidth: 1,
     }
   };
   
@@ -31,7 +35,8 @@ export const data = (data)=>{
         font: {
           size: 14, // Font size in pixels
           weight: 'bold', // Font weight (e.g., 'normal', 'bold', 'bolder', or numeric values)
-          family: 'mono', // Font family (e.g., 'Arial', 'Times New Roman', etc.)
+          family: 'inter', // Font family (e.g., 'Arial', 'Times New Roman', etc.)
+          
         },
         color:'black',
         padding: { // Space above the title
@@ -44,7 +49,7 @@ export const data = (data)=>{
       beginAtZero: true,
       grid: {
         color: 'gray', // Grid line color
-        lineWidth: 1,   // Make the grid lines bold
+        lineWidth: 0,   // Make the grid lines bold
       },
       ticks: {
         color: 'black', // X-axis label color
@@ -52,10 +57,10 @@ export const data = (data)=>{
     },
     y: {
       beginAtZero: true,
-      suggestedMax: 10, // Suggested max value for y-axis
+      suggestedMax: 8, // Suggested max value for y-axis
       grid: {
         color: 'gray', // Grid line color
-        lineWidth: 1,   // Make the grid lines bold
+        lineWidth: 0,   // Make the grid lines bold
       },
       ticks: {
         color: 'black', // Y-axis label color

@@ -23,6 +23,8 @@ import PrimaryInfo from "./Components/MaterialComponent/PrimaryInfo/PrimaryInfo"
 import MaterialDetails from "./Components/MaterialComponent/CreateMaterial/MaterialDetails";
 import ShowMaterial from "./Components/ShowMaterialDetails/ShowMaterial/ShowMaterial";
 import StatusStipper from "./Components/Stipper/StatusStipper";
+import VerticalNav from "./Components/Dashboard/NavBar/VerticalNav";
+import LeftSideNav from "./Components/Dashboard/SideNav/LeftSideNav";
 
 function App() {
   return (
@@ -50,7 +52,7 @@ function App() {
               <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
 
            </Route> 
-           <Route path="/demo" element={<StatusStipper />} />
+           <Route path="/demo" element={<LeftSideNav />} />
          </Routes>
        </BrowserRouter>
        <div>
