@@ -32,15 +32,14 @@ function PaymentStackedBar() {
     }, 0))
 
   },[totalAmount,balanceAmount])
-  const totalPayment = totalAmountPayment + totalBalancePayment;
     const data = {
         labels: ['Payments'],
         datasets: [
           {
             label: 'Total',
             data: [totalAmountPayment],
-            backgroundColor: '#4caf50',
-            borderColor: '#388e3c',
+            backgroundColor: '#F7AB0D',
+            borderColor: '#F7AB0D',
             borderWidth: 1,
             borderRadius: {
               topLeft: 20, // Rounded top corners for cylinder effect
@@ -48,13 +47,13 @@ function PaymentStackedBar() {
               bottomLeft: 20,
               bottomRight: 20,
             },
-            barPercentage: 0.5,
+            barPercentage: 0.2,
           },
           {
-            label: 'Remaining',
+            label: 'Balanced',
             data: [totalBalancePayment],
-            backgroundColor: '#f44336',
-            borderColor: '#d32f2f',
+            backgroundColor: '#FB923C',
+            borderColor: '#FB923C',
             borderWidth: 1,
             borderRadius: {
                 topLeft: 20, // Rounded top corners for cylinder effect
@@ -62,7 +61,7 @@ function PaymentStackedBar() {
               bottomLeft: 0, // Rounded bottom corners for cylinder effect
               bottomRight: 0,
             },
-            barPercentage: 0.5,
+            barPercentage: 0.2,
           },
         ],
       };
@@ -110,7 +109,7 @@ function PaymentStackedBar() {
 
 export default function PaymentChart() {
   return(
-    <div className='md:mt-14 p-2 mt-10 bg-white  shadow-md rounded-md md:w-[450px]'>
+    <div className='md:mt-14 p-2 mt-10 bg-white   shadow-md rounded-md md:w-[450px]'>
          <PaymentStackedBar />
     </div>
   );

@@ -22,7 +22,7 @@ const PrimaryStipper = ({setShowPage}) => {
           
           <li key={element} onClick={()=>{setShowPage(index)}}  className={`flex items-center cursor-pointer hover:cursor-pointer 
           ${
-            (trackSolarData?.PrimaryInfromation?.[keyArray[index]] === true) ? " text-green-500"  : (trackSolarData?.PrimaryInfromation?.[keyArray[index]] === false) ? "text-blue-500" : " text-red-500"
+            (trackSolarData?.PrimaryInfromation?.[keyArray[index]] === true) ? " text-green-500"  : (trackSolarData?.PrimaryInfromation?.[keyArray[index]] === false) ? "text-blue-500" : " text-black"
            }`}>
     <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border  rounded-full shrink-0 ">
             {index+1}

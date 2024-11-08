@@ -122,7 +122,7 @@ ctx.fillText(line2, centerX, centerY + lineHeight);
    return (
     <div className="md:w-[500px] md:h-[290px] bg-white w-full h-[300px] 
     md:ml-[350px]  md:-mt-2  shadow-md rounded-md flex items-center justify-center p-3">
-        <Doughnut data={data} options={options} plugins={[doughnutLabel]} />
+        <Doughnut  data={data} options={options} plugins={[doughnutLabel]} />
     </div>
    )
 }
