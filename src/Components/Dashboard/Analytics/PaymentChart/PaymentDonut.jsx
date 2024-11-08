@@ -48,10 +48,10 @@ function PaymentStackedBar() {
               bottomLeft: 20,
               bottomRight: 20,
             },
-            barPercentage: 0.2,
+            barPercentage: 0.5,
           },
           {
-            label: 'Balance',
+            label: 'Remaining',
             data: [totalBalancePayment],
             backgroundColor: '#f44336',
             borderColor: '#d32f2f',
@@ -62,7 +62,7 @@ function PaymentStackedBar() {
               bottomLeft: 0, // Rounded bottom corners for cylinder effect
               bottomRight: 0,
             },
-            barPercentage: 0.2,
+            barPercentage: 0.5,
           },
         ],
       };
@@ -102,7 +102,7 @@ function PaymentStackedBar() {
       };
       
   return (
-    <div className='h-full'> {/* Set height here */}
+    <div className='md:h-full h-[300px]'> {/* Set height here */}
       <Bar style={{width:'100px',}} data={data} options={options} />
     </div>
   );
