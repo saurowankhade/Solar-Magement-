@@ -15,12 +15,12 @@ const HomeDashboard = () => {
    
   return (
     <div className="flex flex-col gap-10 bg-gray-100">
-      <div>
+      <div className="mt-2 md:mt-0">
       <LeftSideNav />
       </div>
-      <div className="flex flex-col md:flex-row md:gap-4">
+      <div className="flex flex-col  md:flex-row md:gap-4">
       <ChartsBar />   
-     <PaymentChart />
+      <PaymentChart />
       </div>   
       <div className="flex flex-col md:flex-row gap-2">
         <PieChart />

@@ -5,7 +5,7 @@ import AllTrackContext from "../../../../Context/AllTrackData/AllTrackContext";
 ChartJS.register(
     ArcElement,Tooltip,Legend
 )
-const PieChart = () => {
+const PieChart = ({className}) => {
     const {allTrack} = useContext(AllTrackContext)
     const [enquiryData,setEnquiryData] = useState([]);
     const [siteWorkData,setSiteWorkData] = useState([]);
@@ -120,8 +120,8 @@ ctx.fillText(line2, centerX, centerY + lineHeight);
       }
       
    return (
-    <div className="md:w-[500px] md:h-[290px] bg-white w-full h-[300px] 
-    md:ml-[350px]  md:-mt-2  shadow-md rounded-md flex items-center justify-center p-3">
+    <div className={`  md:w-[500px] md:h-[290px] bg-white w-full h-[300px] 
+    md:ml-[350px] -mt-4 md:-mt-2  shadow-md rounded-md flex items-center justify-center p-3 ${className}`}>
         <Doughnut  data={data} options={options} plugins={[doughnutLabel]} />
     </div>
    )

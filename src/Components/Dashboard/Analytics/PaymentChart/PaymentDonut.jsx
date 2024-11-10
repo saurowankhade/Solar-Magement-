@@ -94,7 +94,19 @@ function PaymentStackedBar() {
           },
           y: {
             stacked: false,
-            display: true,
+            display: true,ticks: {
+              // This callback formats the values
+              callback: function(value) {
+                if (value >= 1_000_000_000) {
+                  return (value / 1_000_000_000).toFixed(1) + 'B'; // Billions
+                } else if (value >= 1_000_000) {
+                  return (value / 1_000_000).toFixed(1) + 'M'; // Millions
+                } else if (value >= 1_000) {
+                  return (value / 1_000).toFixed(1) + 'K'; // Thousands
+                }
+                return value;
+              },
+            },
             
           },
         },
@@ -107,9 +119,9 @@ function PaymentStackedBar() {
   );
 }
 
-export default function PaymentChart() {
+export default function PaymentChart({className}) {
   return(
-    <div className='md:mt-14 p-2 mt-10 bg-white   shadow-md rounded-md md:w-[450px]'>
+    <div className={`  md:mt-14 p-2 mt-4 bg-white   shadow-md rounded-md md:w-[450px] ${className}`}>
          <PaymentStackedBar />
     </div>
   );

@@ -43,7 +43,7 @@ const TableBody = ({getData,collectionId,index}) => {
     }
 
   return (
-    <tbody className="w-full border-b">
+    <tbody className="w-full border-b scroll">
       
     <tr onClick={goToSpeficData} className="bg-gray-50 mt-2 cursor-pointer">
     <td className="p-2 sm:px-6 sm:py-4 border">
@@ -73,12 +73,12 @@ const TableBody = ({getData,collectionId,index}) => {
       <td className="p-2 sm:px-6 sm:py-4 h-full flex items-center justify-center gap-3">
       {
         isLoading ? <Loading type='spinningBubbles' color='#1e3a8a' height={'90%'} width={'90%'} /> :   <div className="flex gap-2">
-        <button onClick={handleLink} className={`border bg-[#F7AB0D]  p-2 rounded-lg ${user?.verified ? "bg-[#F7AB0D] text-white font-bold" : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
+        <button onClick={handleLink} className={`border bg-[#000000]  p-2 rounded-lg ${user?.verified ? "bg-[#F7AB0D] text-white " : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
           Update
         </button>
        {
         user?.jobProfile === "Admin" && user?.verified ?  
-        <button onClick={deleteHandle} className="border bg-[#F7AB0D] text-white p-2 rounded-lg">
+        <button onClick={deleteHandle} className="border bg-[#000000] text-white p-2 rounded-lg">
         Delete
         </button> : <></>
        }
