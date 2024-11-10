@@ -7,7 +7,7 @@ const Users = () => {
     const navigate = useNavigate();
    
   return (
-<div className=" scrollbar-custom md:w-[700px] overflow-x-auto overflow-y-auto h-[300px] rounded-md shadow-md border bg-white md:-mt-2 md:mr-5 mb-20 mt-4  md:mb-0 ">
+<div className=" scrollbar-custom md:w-[700px] overflow-x-auto overflow-y-auto  rounded-md shadow-md border bg-white md:-mt-2 md:mr-5 mb-20 mt-4  md:mb-0 ">
 <h1 className="font-bold font-sans px-4 py-4 text-base sm:text-lg">Users</h1>
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 border">
         <thead className="text-xs text-gray-700 uppercase  border sticky top-0 bg-white ">

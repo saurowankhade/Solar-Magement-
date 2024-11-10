@@ -11,7 +11,7 @@ const PrimaryInformation = () => {
   const [showPage,setShowPage] = useState(0);
   return (
     <div className='w-full '>
-      <div className=' flex flex-col justify-center items-center'>
+      <div className=' flex flex-col justify-center items-center '>
       <PrimaryStipper setShowPage={setShowPage} />
       {
         showPage===0 ? <MainInformation /> : 

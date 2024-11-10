@@ -231,7 +231,7 @@ const ShowAcivity = () => {
 
         <div className="flex justify-end mr-10 w-full items-center">
           <div className=" cursor-pointer rounded-md bg-black px-2 py-2 flex gap-2 items-center justify-center font-bold text-white text-base" disabled={enable} onClick={exportToExcel}>
-            <svg fill="none" viewBox="0 0 15 15" height="1em" width="1em" >
+            <svg fill="none" viewBox="0 0 15 15" height="1em" width="1em"  >
               <path
                 fill="currentColor"
                 fillRule="evenodd"
