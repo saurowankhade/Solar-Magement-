@@ -87,6 +87,7 @@ function PaymentStackedBar() {
             },
           },
         },
+        
         scales: {
           x: {
             stacked: false,

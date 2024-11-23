@@ -1,24 +1,31 @@
 import { useNavigate } from "react-router-dom"
 import UserContext from "../../../Context/UserContext/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import PopUp from "../../PopUp/PopUp";
 
 const LeftSideNav = () => {
+    const [count,setCount] = useState(0);
     const navigate = useNavigate();
     const {user} = useContext(UserContext);
+    const handleNavigate = (path) => (e) => {
+        if(!user?.verified){
+            e.stopPropagation();
+        } else{
+            navigate(path);
+        }
+      };
     return (
-        <div onClick={(e)=>{
-            if(!user?.name){
+        <div onClick={()=>{
+            if(!user?.verified){
                 toast.dismiss()
-                toast.info("Loading data please wait...",{position:'top-center'})
+                toast.info("You are not verified yet!",{position:'top-center'})
               }
         }} className="flex flex-col space-y-6 md:p-4 bg-gray-200 rounded-md md:w-[300px] w-full md:m-2 max-h-full overflow-hidden fixed md:top-[70px] bottom-0 justify-around">
             {/* Project Entry Section */}
             <div className="md:flex md:flex-col bg-white h-fit rounded-lg  md:p-4 md:space-y-4 shadow-md justify-between grid grid-cols-5 w-full p-1">
                 {/* Project Entry */}
-                <div onClick={() => {
-                    navigate('/dashboard/new-acivity')
-                }} className="flex md:border-b flex-col items-center md:flex-row md:items-center md:py-2  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleNavigate('/dashboard/new-acivity')} className="flex md:border-b flex-col items-center md:flex-row md:items-center md:py-2  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <rect width="25" height="25" fill="url(#pattern0_635_62)" />
@@ -38,9 +45,7 @@ const LeftSideNav = () => {
 
                 {/* Project overview */}
 
-                <div onClick={() => {
-                    navigate('/dashboard/show-existing-acivity')
-                }} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleNavigate('/dashboard/show-existing-acivity')} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <rect width="30" height="30" fill="url(#pattern0_457_87)" />
@@ -141,7 +146,9 @@ const LeftSideNav = () => {
                 </div>
                 {/* FAQ */}
 
-                <div className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={()=>{
+                    setCount(1)
+                }} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
                         viewBox="0 0 1024 1024"
@@ -200,6 +207,10 @@ const LeftSideNav = () => {
                 </div>
 
             </div>
+
+           {
+            count === 1 ?  <PopUp /> : <></>
+           }
         </div>
     )
 }

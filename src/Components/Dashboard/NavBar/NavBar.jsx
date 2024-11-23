@@ -42,7 +42,7 @@ const NavBar = () => {
 
   return (
 <nav className={`fixed w-full top-0 transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
  {
   location.pathname === '/dashboard' ?  <a className="flex items-center space-x-3 rtl:space-x-reverse">
   <img src={urjaSolarLogo} className="h-8" alt="UrjaSolar Icon" />
@@ -75,7 +75,9 @@ const NavBar = () => {
           type="button"
           className="flex"
         >
-          <svg width="30" height="30" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg 
+      height="1.5em"
+      width="1.5em" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.33334 39.5834V35.4167H12.5V20.8334C12.5 17.9514 13.3681 15.3993 15.1042 13.1771C16.8403 10.9202 19.0972 9.44446 21.875 8.75002V7.29169C21.875 6.42363 22.1702 5.69446 22.7604 5.10418C23.3854 4.47919 24.132 4.16669 25 4.16669C25.8681 4.16669 26.5972 4.47919 27.1875 5.10418C27.8125 5.69446 28.125 6.42363 28.125 7.29169V8.75002C30.9028 9.44446 33.1597 10.9202 34.8958 13.1771C36.632 15.3993 37.5 17.9514 37.5 20.8334V35.4167H41.6667V39.5834H8.33334ZM25 45.8334C23.8542 45.8334 22.8646 45.434 22.0313 44.6354C21.2327 43.8021 20.8333 42.8125 20.8333 41.6667H29.1667C29.1667 42.8125 28.75 43.8021 27.9167 44.6354C27.1181 45.434 26.1458 45.8334 25 45.8334ZM16.6667 35.4167H33.3333V20.8334C33.3333 18.5417 32.5174 16.5799 30.8854 14.9479C29.2535 13.316 27.2917 12.5 25 12.5C22.7083 12.5 20.7465 13.316 19.1146 14.9479C17.4827 16.5799 16.6667 18.5417 16.6667 20.8334V35.4167Z" fill="#1D1B20"/>
 </svg>
         </button>

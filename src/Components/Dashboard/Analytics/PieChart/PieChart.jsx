@@ -2,6 +2,7 @@ import  { useContext, useEffect, useState } from "react";
 import {Chart as ChartJS, ArcElement,Tooltip,Legend} from 'chart.js'
 import { Doughnut } from "react-chartjs-2";
 import AllTrackContext from "../../../../Context/AllTrackData/AllTrackContext";
+import { useNavigate } from "react-router-dom";
 ChartJS.register(
     ArcElement,Tooltip,Legend
 )
@@ -13,6 +14,8 @@ const PieChart = ({className}) => {
     const [meterInstallationData,setMeterInstallationData] = useState([]);
     const [NSCApprovedData,setNSCApprovedData] = useState([]);
     const [subsidyData,setSubsidyData] = useState([]);
+
+    const navigateTO = useNavigate();
   
     useEffect(()=>{
       if(allTrack.length > 0){
@@ -56,6 +59,7 @@ const PieChart = ({className}) => {
             },
           },
         plugins: {
+          
             title: {
                 display: true,
                 text: `Total Project `,
@@ -80,6 +84,12 @@ const PieChart = ({className}) => {
               font: {
                 size: 12, // Set the font size here
               },
+            },
+            onClick: (e, legendItem, legend) => {
+              // Customize what happens on click
+              console.log('Clicked legend item', (legendItem.text).toLowerCase());
+              navigateTO(`/dashboard/show-existing-acivity?sortby=${legend.title}&isdone=${true}`)
+              // By default, do nothing
             },
           },
           tooltip: {
