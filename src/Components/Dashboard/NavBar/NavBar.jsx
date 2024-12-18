@@ -42,12 +42,37 @@ const NavBar = () => {
 
   return (
 <nav className={`fixed w-full top-0 transition-shadow duration-150n-300  border-gray-200   ${hasShadow ? ' shadow-md' : ' border '} ${user?.name ? " bg-white" : " animate-pulse bg-gray-300"}`}>
-  <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
+  <div className=" flex  flex-wrap items-center justify-between mx-auto p-4">
  {
-  location.pathname === '/dashboard' ?  <a className="flex items-center space-x-3 rtl:space-x-reverse">
-  <img src={urjaSolarLogo} className="h-8" alt="UrjaSolar Icon" />
+  location.pathname === '/dashboard' ?  <a className="flex  items-center space-x-3 rtl:space-x-reverse">
+  {/* <img src={urjaSolarLogo} className="h-8 border" alt="UrjaSolar Icon" /> */}
+ <span>
+ <svg  height="32" viewBox="0 0 147 154" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="12.5635" width="146.286" height="141.436" rx="21" fill="#F7AB0D"/>
+<g filter="url(#filter0_d_27_6)">
+<path d="M19.5625 45.4688V41.25H66.4375V45.4688H53.9375V99.375C53.9375 105.312 54.4062 110.417 55.3438 114.688C57.8438 126.146 64.3542 131.875 74.875 131.875C91.5417 131.771 99.9271 120.938 100.031 99.375V45.4688H87.5312V41.25H118.312V45.4688H105.812V98.4375C105.812 105.833 104.979 112.135 103.312 117.344C98.9375 130.156 88.3646 136.562 71.5938 136.562C45.4479 136.458 32.2708 124.479 32.0625 100.625V45.4688H19.5625Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_d_27_6" x="15.5625" y="41.25" width="106.75" height="103.312" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_27_6"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_27_6" result="shape"/>
+</filter>
+</defs>
+</svg>
+ </span>
+
   <span className="self-center text-2xl font-semibold whitespace-nowrap sm:block hidden">UrjaSolar</span>
-</a> :  <a onClick={goBack} className="cursor-pointer">
+
+</a>
+
+
+:  <a onClick={goBack} className="cursor-pointer">
   <svg
       viewBox="0 0 24 24"
       fill="#000"
