@@ -305,7 +305,7 @@ const ShowAcivity = () => {
         {/* Iner */}
         <div className="flex">
 
-          <div className="flex  gap-4 w-[900px] justify-center items-center  p-1">
+          <div className="flex  gap-2 w-[800px] justify-center items-center  p-1">
             <p>Sort by : {
               selectedOptgroupLabel ? selectedOptgroupLabel+" "+`${selectedValue === true ? 'Done' : 'Pending'}` : ''
               }</p>
@@ -360,7 +360,7 @@ const ShowAcivity = () => {
           </div>
 
           <div className="flex justify-end w-full items-center">
-            <div className=" cursor-pointer rounded-md bg-black px-2 py-2 flex gap-2 items-center justify-center font-bold text-white text-base" disabled={enable} onClick={exportToExcel}>
+            <div className="cursor-pointer rounded-md bg-black px-2 py-2 flex gap-2 items-center justify-center font-bold text-white text-base" disabled={enable} onClick={exportToExcel}>
               <svg fill="none" viewBox="0 0 15 15" height="1em" width="1em"  >
                 <path
                   fill="currentColor"
