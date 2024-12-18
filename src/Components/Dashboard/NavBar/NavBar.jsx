@@ -1,13 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../../../Context/UserContext/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
-
-import urjaSolarLogo from '../../../../urja-solar.png'
-import allUserIcon from '../../../assets/all-user.png'
-import userIcon from '../../../assets/user-profile.png'
 import { toast } from "react-toastify";
 import authentication from "../../../Firebase/authentication";
-import firestore from "../../../Firebase/Firestore";
 import { setItem } from "../../../utils/LocalStorage/localAuth";
 
 const NavBar = () => {
