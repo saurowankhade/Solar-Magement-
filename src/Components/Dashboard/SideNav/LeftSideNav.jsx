@@ -3,9 +3,11 @@ import UserContext from "../../../Context/UserContext/UserContext";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import PopUp from "../../PopUp/PopUp";
+import Swal from "sweetalert2";
+import authentication from "../../../Firebase/authentication";
+import { setItem } from "../../../utils/LocalStorage/localAuth";
 
 const LeftSideNav = () => {
-    const [count,setCount] = useState(0);
     const navigate = useNavigate();
     const {user} = useContext(UserContext);
     const handleNavigate = (path) => (e) => {
@@ -15,6 +17,26 @@ const LeftSideNav = () => {
             navigate(path);
         }
       };
+
+      const handleSignOut = ()=>{
+        Swal.fire({
+            title: "Do you want to sign out?",
+            showDenyButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                authentication.signout().then((status)=>{
+                    if(status.status === 200){
+                      setItem("isLogin",{isLogin:false,userID:""})
+                      toast.success("Sign out",{position:'top-center'})
+                      navigate("/user-signin")
+                    }
+                  })
+            } 
+          });
+      }
     return (
         <div onClick={()=>{
             if(!user?.verified){
@@ -147,7 +169,6 @@ const LeftSideNav = () => {
                 {/* FAQ */}
 
                 <div onClick={()=>{
-                    setCount(1)
                 }} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
@@ -190,7 +211,7 @@ const LeftSideNav = () => {
 
                 {/* Sign out */}
 
-                <div className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleSignOut} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
                         viewBox="0 0 1024 1024"
@@ -208,9 +229,6 @@ const LeftSideNav = () => {
 
             </div>
 
-           {
-            count === 1 ?  <PopUp /> : <></>
-           }
         </div>
     )
 }

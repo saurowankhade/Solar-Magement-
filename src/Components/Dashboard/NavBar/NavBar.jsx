@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import authentication from "../../../Firebase/authentication";
 import { setItem } from "../../../utils/LocalStorage/localAuth";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
     const [show,setShow] = useState(false);
@@ -33,6 +34,25 @@ const NavBar = () => {
     navigate(-1); // Navigate to the previous route
   };
 
+  const handleSignOut = ()=>{
+    Swal.fire({
+        title: "Do you want to sign out?",
+        showDenyButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            authentication.signout().then((status)=>{
+                if(status.status === 200){
+                  setItem("isLogin",{isLogin:false,userID:""})
+                  toast.success("Sign out",{position:'top-center'})
+                  navigate("/user-signin")
+                }
+              })
+        } 
+      });
+  }
 
 
   return (
@@ -175,15 +195,7 @@ const NavBar = () => {
               </a>
             </li>
             <li>
-              <a onClick={()=>{
-                authentication.signout().then((status)=>{
-                  if(status.status === 200){
-                    setItem("isLogin",{isLogin:false,userID:""})
-                    toast.success("Sign out",{position:'top-center'})
-                    navigateTo("/user-signin")
-                  }
-                })
-              }}  className=" flex gap-2 items-center cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <a onClick={handleSignOut}  className=" flex gap-2 items-center cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <svg
       viewBox="0 0 1024 1024"
       fill="currentColor"

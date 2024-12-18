@@ -19,11 +19,8 @@ import ShowSpecific from "./Components/ExistingActivity/ShowSpecificAcivity/Show
 import PrivateRoute from "./Routing/PrivateRoute";
 import HomeDashboard from "./Components/Dashboard/Home";
 import Library from "./Components/Library/Library";
-import PrimaryInfo from "./Components/MaterialComponent/PrimaryInfo/PrimaryInfo";
 import MaterialDetails from "./Components/MaterialComponent/CreateMaterial/MaterialDetails";
 import ShowMaterial from "./Components/ShowMaterialDetails/ShowMaterial/ShowMaterial";
-import StatusStipper from "./Components/Stipper/StatusStipper";
-import VerticalNav from "./Components/Dashboard/NavBar/VerticalNav";
 import LeftSideNav from "./Components/Dashboard/SideNav/LeftSideNav";
 
 function App() {
