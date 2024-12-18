@@ -41,7 +41,7 @@ const PieChart = ({className}) => {
     },[allTrack])
 
     const data = {
-        labels: [`Enquiry Number `,'Site work','Inspection','Mater Installation','NSC Approved','Subsidy'],
+        labels: [`Enquiry Number`,'Site work','Inspection','Mater Installation','NSC Approved','Subsidy'],
         font:'12',
         datasets:[{
             label : '',
@@ -78,6 +78,7 @@ const PieChart = ({className}) => {
             position: 'right',
             align: 'center',
             fontSize:8,
+            cursor: 'pointer',
             labels: {
               boxWidth: 12,   // Adjusts the legend box size
               padding: 10,    // Adds spacing between legend items
@@ -87,8 +88,7 @@ const PieChart = ({className}) => {
             },
             onClick: (e, legendItem, legend) => {
               // Customize what happens on click
-              console.log('Clicked legend item', (legendItem.text).toLowerCase());
-              navigateTO(`/dashboard/show-existing-acivity?sortby=${legend.title}&isdone=${true}`)
+              navigateTO(`/dashboard/show-existing-acivity?sortby=${legendItem.text}&isdone=${true}`)
               // By default, do nothing
             },
           },
@@ -130,7 +130,7 @@ ctx.fillText(line2, centerX, centerY + lineHeight);
       }
       
    return (
-    <div className={`  md:w-[500px] md:h-[290px] bg-white w-full h-[300px] 
+    <div className={` cursor-pointer  md:w-[500px] md:h-[290px] bg-white w-full h-[300px] 
     md:ml-[350px] -mt-4 md:-mt-2  shadow-md rounded-md flex items-center justify-center p-3 ${className}`}>
         <Doughnut  data={data} options={options} plugins={[doughnutLabel]} />
     </div>

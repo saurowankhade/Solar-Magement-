@@ -9,9 +9,8 @@ import AllTrackContext from "../../../Context/AllTrackData/AllTrackContext";
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx'; // Import xlsx
 import { useFirestoreDocuments } from "../../../useFirestoreDocuments/useFirestoreDocuments";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
-import exportExcel from '../../../assets/export-excel.svg'
 
 
 const ShowAcivity = () => {
@@ -31,8 +30,11 @@ const ShowAcivity = () => {
   const [enable, setEnable] = useState(false);
 
 
-  const navigateFilter = useLocation();
-  const { name, index } = navigateFilter.state || {}
+  const [searchParams,setSearchParam] = useSearchParams();
+
+  // Retrieve values from query parameters
+  const sortBy = searchParams.get('sortby');
+  const isDone = searchParams.get('isdone') === 'true';
 
   // useEffect(()=>{
   //   if(user?.companyID){
@@ -172,49 +174,51 @@ const ShowAcivity = () => {
   };
 
   useEffect(() => {
-    if (name === "Enquiry No" && index === 0) {
+    console.log("Name : ",sortBy);
+    
+    if (sortBy === "Enquiry No" && isDone) {
       setTrackDataDoublicate(
         trackData.filter(item =>
           item?.data?.ConsumerName
         )
       )
     }
-    if (name === "Site Work Done" && index === 1) {
+    if (sortBy === "Site work" && isDone) {
       setTrackDataDoublicate(
         trackData.filter(item =>
           item?.data?.SiteWorkInfromation?.isDone === true
         )
       )
     }
-    if (name === "Inspection No" && index === 2) {
+    if (sortBy === "Inspection" && isDone) {
       setTrackDataDoublicate(
         trackData.filter(item =>
           item?.data?.InspectionInfromation?.isDone === true
         )
       )
     }
-    if (name === "Meter Installation" && index === 3) {
+    if (sortBy === "Meter Installation" && isDone) {
       setTrackDataDoublicate(
         trackData.filter(item =>
           item?.data?.MeterInfromation?.isDone === true
         )
       )
     }
-    if (name === "NSC Approved" && index === 4) {
+    if (sortBy === "NSC Approved" && isDone) {
       setTrackDataDoublicate(
         trackData.filter(item =>
           item?.data?.NetMeteringInfromation?.isDone === true
         )
       )
     }
-    if (name === "Subsidy" && index === 5) {
+    if (sortBy === "Subsidy" && isDone) {
       setTrackDataDoublicate(
         trackData.filter(item =>
           item?.data?.SubsidyInfromation?.isDone === true
         )
       )
     }
-  }, [name, index, trackData])
+  }, [sortBy,isDone, trackData])
 
   return (
     <div className="w-full mt-20">
