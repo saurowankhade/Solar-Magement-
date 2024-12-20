@@ -87,7 +87,7 @@ const LeftSideNav = () => {
 
                 {/* Material entry */}
 
-                <div className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal cursor-pointer group">
+                <div onClick={handleNavigate('/dashboard/material-entry')} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal cursor-pointer group">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" >
                         <rect width="30" height="30" fill="url(#pattern0_453_59)" />
@@ -107,7 +107,7 @@ const LeftSideNav = () => {
 
                 {/* Material overview */}
 
-                <div className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleNavigate('/dashboard/material-overview')} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <rect width="30" height="30" fill="url(#pattern0_453_61)" />
@@ -126,7 +126,7 @@ const LeftSideNav = () => {
                 </div>
 
                 {/* Libary */}
-                <div className="flex  flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleNavigate('/dashboard/library')} className="flex  flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <rect width="30" height="30" fill="url(#pattern0_453_63)" />

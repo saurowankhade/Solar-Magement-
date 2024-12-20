@@ -1,11 +1,11 @@
 import {  useContext, useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify";
 import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext";
-import { v4 as docID } from 'uuid';
 import ReactLoading from 'react-loading';
 import UserContext from "../../../Context/UserContext/UserContext";
 import firestore from "../../../Firebase/Firestore";
 import DropDown from "./DropDown";
+import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUserContext";
 
 const PrimaryInfo = () => {
 
@@ -49,10 +49,19 @@ const PrimaryInfo = () => {
     },[user])
 
     useEffect(()=>{
-        setTeamNameData(allLibrary?.["Team Name"])
+        firestore.getAllDocuments("Users")
+    .then((status)=>{        
+     if(status?.status === 200){
+      const filterData = (status.data).filter((userData) => userData?.companyID === user?.companyID);
+      const teamName = filterData.map((team)=> team?.name);
+      setTeamNameData(teamName);
+    //   console.log("Tema name origina ",teamName);
+            
+     } 
+    });
         setDriverNameData(allLibrary?.["Driver Name"])
         setVehicleNameData(allLibrary?.["Vehicle Name"])
-    },[allLibrary])
+    },[allLibrary, user?.companyID])
 
     useEffect(()=>{
         if(trackSolarData){
@@ -115,7 +124,7 @@ const PrimaryInfo = () => {
             <h2 className="text-center font-bold">Main Info</h2>
             <div className=" flex flex-col ">
                <div className="relative ">
-               
+    
                 <DropDown placeholder={"Consumer Name"} list={consumerNameData} ref={consumerNameRef} />
 
                 <DropDown placeholder={"Team Name"} list={teamNameData} ref={teamNameRef} />

@@ -4,7 +4,7 @@ import MaterialList from '../PrimaryInfo/MaterialList'
 
 const MaterialDetails = () => {
   return (
-    <div>
+    <div className='my-40'>
       <PrimaryInfo />
       <MaterialList />
     </div>
