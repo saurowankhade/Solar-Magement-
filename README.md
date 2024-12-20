@@ -4,6 +4,7 @@ UrjaSolar is the platform where solar contractor can able to track there consume
 
 Live : _[UrjaSolar](https://urja-solar.vercel.app)_
 
-![Recording2024-08-30182221-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/5fc52399-acc2-4f42-80b4-75d4da5a412f)
+![image](https://github.com/user-attachments/assets/e16f0a23-1d39-45be-8402-c5a0591387ef)
+
 
 
