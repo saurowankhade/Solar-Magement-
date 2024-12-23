@@ -12,7 +12,6 @@ import Meter from "./MeterInstalltion/Meter";
 import NetMettering from "./NetMetering/NetMettering";
 import Subsidy from "./Subsidy/Subsidy";
 import TableUi from "../../ShimmerUI/TableUi";
-import TrackStipper from "../../Stipper/TrackStipper";
 import Payment from "./Payment/Payment";
 import StatusStipper from "../../Stipper/StatusStipper";
 

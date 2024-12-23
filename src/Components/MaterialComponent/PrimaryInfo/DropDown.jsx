@@ -19,7 +19,7 @@ const Dropdown = forwardRef(({ placeholder, className, list }, ref) => {
   };
 
   return (
-    <div className={`custom-dropdown ${className}`}>
+    <div className={`w-full custom-dropdown ${className}`}>
       <input
         className="w-full my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none text-base"
         placeholder={placeholder}

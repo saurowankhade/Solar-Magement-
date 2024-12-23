@@ -80,10 +80,10 @@ const PieChart = ({className}) => {
             fontSize:8,
             cursor: 'pointer',
             labels: {
-              boxWidth: 12,   // Adjusts the legend box size
-              padding: 10,    // Adds spacing between legend items
+              boxWidth: 18,   // Adjusts the legend box size
+              padding: 18,    // Adds spacing between legend items
               font: {
-                size: 12, // Set the font size here
+                size: 14, // Set the font size here
               },
             },
             onClick: (e, legendItem, legend) => {

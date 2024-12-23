@@ -119,7 +119,7 @@ const PrimaryInfo = () => {
           }
     }
   return (
-    <div className="primaryInformation  container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+    <div className="primaryInformation  container mx-auto w-[350px]  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
         <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
             <h2 className="text-center font-bold">Main Info</h2>
             <div className=" flex flex-col ">
@@ -149,7 +149,7 @@ const PrimaryInfo = () => {
             <div className="flex w-full justify-center mt-8">
             {
                 isLoading ? <ReactLoading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
-                <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
+                <button className="bg-[#F7AB0D] text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
                 onClick={handleSubmit}>Save</button>
             }
             </div>

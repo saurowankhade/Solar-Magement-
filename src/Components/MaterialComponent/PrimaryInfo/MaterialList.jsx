@@ -7,7 +7,7 @@ import firestore from "../../../Firebase/Firestore"
 import { toast } from "react-toastify"
 import Table from "../MaterialInfo/Table"
 
-const MaterialList = () => {
+const MaterialList = ({type}) => {
     
     const materialRef = useRef(null)
     const unitRef = useRef(null)
@@ -37,9 +37,9 @@ const MaterialList = () => {
     },[user])
 
     useEffect(()=>{
-        setMaterialData(allLibrary?.["Material Name"])
+        setMaterialData(allLibrary?.[`${type} Material`])
         setUnitData(allLibrary?.["Units"])
-    },[allLibrary])
+    },[allLibrary, type])
 
     useEffect(()=>{
         if(trackSolarData){
@@ -92,13 +92,13 @@ const MaterialList = () => {
           }
     }
   return (
-    <div className="primaryInformation  container mx-auto  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
+    <div className="primaryInformation  container mx-auto w-[350px]  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
     <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
-        <h2 className="text-center font-bold">Material Info</h2>
+        <h2 className="text-center font-bold">{type} Material Info</h2>
         <div className=" flex flex-col ">
            <div className="relative ">
            
-            <DropDown placeholder={"Material"} list={materialData} ref={materialRef} />
+            <DropDown placeholder={`${type} Material`} list={materialData} ref={materialRef} />
 
             <DropDown placeholder={"Unit"} list={unitData} ref={unitRef} />
 
@@ -111,7 +111,7 @@ const MaterialList = () => {
            </div>
 
           <div className="flex w-full items-center mr-1 justify-end">
-          <button className="bg-blue-900 w-fit text-white rounded-full cursor-pointer px-4 py-1 my-2 items-end text-base  shadow-xl" 
+          <button className="bg-[#F7AB0D] w-fit text-white rounded-full cursor-pointer px-4 py-1 my-2 items-end text-base  shadow-xl" 
             onClick={addToList}>Add</button>
           </div>
            
@@ -119,10 +119,6 @@ const MaterialList = () => {
         </div>
 
         <div>
-            {
-                console.log("Material : ",materialDetails)
-                
-            }
             <Table materialDetails={materialDetails || []} setMaterialDetails={setMaterialDetails} />
         </div>
 
@@ -130,8 +126,8 @@ const MaterialList = () => {
         <div className="flex w-full justify-center mt-8">
         {
             isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
-            <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
-            onClick={handleSubmit}>Add</button>
+            <button className="bg-[#F7AB0D] text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
+            onClick={handleSubmit}>Save</button>
         }
         </div>
 
