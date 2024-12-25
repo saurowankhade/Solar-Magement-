@@ -15,10 +15,10 @@ const PrimaryInformation = () => {
       <PrimaryStipper setShowPage={setShowPage} />
       {
         showPage===0 ? <MainInformation /> : 
-        showPage===1 ?<IsLoadChangeInformation /> :
-        showPage===2 ?<IsNameChangeInformation /> :
-        showPage===3 ?<BankDetails /> :
-        showPage===4 ?<IsBankLoanInformation /> : <></>
+        showPage===1 ? <IsLoadChangeInformation /> :
+        showPage===2 ? <IsNameChangeInformation /> :
+        showPage===3 ? <BankDetails /> :
+        showPage===4 ? <IsBankLoanInformation /> : <></>
       }
       </div>
     </div>

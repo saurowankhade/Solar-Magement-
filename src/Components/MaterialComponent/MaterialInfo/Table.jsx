@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+
 const Table = ({materialDetails,setMaterialDetails, isShow}) => {
+
+    useEffect(()=>{
+        console.log("In Table : ",materialDetails);
+        
+    },[materialDetails])
     const removeElement = (index)=>{
         setMaterialDetails((prevData) => 
             prevData.filter((_, i) => i !== index)

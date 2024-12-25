@@ -22,6 +22,7 @@ import Library from "./Components/Library/Library";
 import MaterialDetails from "./Components/MaterialComponent/CreateMaterial/MaterialDetails";
 import ShowMaterial from "./Components/ShowMaterialDetails/ShowMaterial/ShowMaterial";
 import LeftSideNav from "./Components/Dashboard/SideNav/LeftSideNav";
+import CommonContext from "./Routing/CommonContext";
 
 function App() {
   return (
@@ -42,9 +43,11 @@ function App() {
                 
                 <Route path="library" element={<PrivateRoute><TrackSolarContextProvider><Library/></TrackSolarContextProvider></PrivateRoute>}/>
               
-                <Route path="material-entry" element={<PrivateRoute><TrackSolarContextProvider><MaterialDetails/></TrackSolarContextProvider></PrivateRoute>}/>
-                <Route path="material-overview" element={<PrivateRoute><TrackSolarContextProvider><ShowMaterial/></TrackSolarContextProvider></PrivateRoute>} ></Route>
-                <Route path="material-overview/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
+                <Route path="material-entry" element={<CommonContext >
+                  <MaterialDetails/>
+                </CommonContext>}/>
+                <Route path="material-overview" element={<CommonContext ><ShowMaterial/> </CommonContext>} ></Route>
+                <Route path="material-overview/:Id" element={<CommonContext ><ShowSpecific/> </CommonContext>} ></Route>
 
               <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
 

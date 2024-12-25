@@ -49,17 +49,8 @@ const PrimaryInfo = () => {
     },[user])
 
     useEffect(()=>{
-        firestore.getAllDocuments("Users")
-    .then((status)=>{        
-     if(status?.status === 200){
-      const filterData = (status.data).filter((userData) => userData?.companyID === user?.companyID);
-      const teamName = filterData.map((team)=> team?.name);
-      setTeamNameData(teamName);
-    //   console.log("Tema name origina ",teamName);
-            
-     } 
-    });
         setDriverNameData(allLibrary?.["Driver Name"])
+        setDriverNameData(allLibrary?.["Team Name"])
         setVehicleNameData(allLibrary?.["Vehicle Name"])
     },[allLibrary, user?.companyID])
 
@@ -97,8 +88,12 @@ const PrimaryInfo = () => {
                     VehicleName : vehicleName,
                     Note : note,
                     ConsumerAddress : consumerDetails[index]?.ConsumerAddress, 
+                   Basic:{
                     CreatedAt:new Date(),
-                    CreatedBy : user
+                    CreatedBy : user,
+                    isBasicDone:true,
+                   },
+                    
                 }
                 firestore.addData(user?.companyID+"MaterialList",updatedTrackSolarData,updatedTrackSolarData?.Id)
                 .then((cre)=>{
@@ -146,9 +141,9 @@ const PrimaryInfo = () => {
             </div>
 
 
-            <div className="flex w-full justify-center mt-8">
+            <div className="flex w-full justify-center mt-8 mb-4">
             {
-                isLoading ? <ReactLoading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+                isLoading ? <ReactLoading type='spinningBubbles' color='#F7AB0D' height={'8%'} width={'8%'} /> :  
                 <button className="bg-[#F7AB0D] text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
                 onClick={handleSubmit}>Save</button>
             }

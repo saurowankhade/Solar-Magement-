@@ -1,13 +1,13 @@
 import Loading from "react-loading"
 import DropDown from "./DropDown"
 import { useContext, useEffect, useRef, useState } from "react"
-import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext"
 import UserContext from "../../../Context/UserContext/UserContext"
 import firestore from "../../../Firebase/Firestore"
 import { toast } from "react-toastify"
 import Table from "../MaterialInfo/Table"
+import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext"
 
-const MaterialList = ({type}) => {
+const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
     
     const materialRef = useRef(null)
     const unitRef = useRef(null)
@@ -17,14 +17,14 @@ const MaterialList = ({type}) => {
     const [materialData,setMaterialData] = useState([])
     const [unitData,setUnitData] = useState([])
 
-    const [materialDetails,setMaterialDetails] = useState([])
+    // const [materialDetails,setMaterialDetails] = useState([])
 
     const [isLoading,setIsLoading] = useState(false);
         
     //Context 
-    const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext);
 
+    const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext)
 
     useEffect(()=>{
         if(user?.companyID){
@@ -41,11 +41,6 @@ const MaterialList = ({type}) => {
         setUnitData(allLibrary?.["Units"])
     },[allLibrary, type])
 
-    useEffect(()=>{
-        if(trackSolarData){
-           setMaterialDetails(trackSolarData?.AddMaterialList)
-        }
-    },[trackSolarData])
 
     const addToList = ()=>{
         const materialName = materialRef.current.value
@@ -59,7 +54,8 @@ const MaterialList = ({type}) => {
                 Unit:unit,
                 Quantity:Number(quantity)
             }
-            setMaterialDetails([...materialDetails || [],updateMaterialList])
+            // setMaterialDetails([...materialDetails || [],updateMaterialList])
+            setMaterialContextData([...materialContextData || [],updateMaterialList])
             materialRef.current.value = ""
             unitRef.current.value = ""
             quantityRef.current.value = ""
@@ -67,14 +63,31 @@ const MaterialList = ({type}) => {
     }
 
     const handleSubmit = ()=>{
-          if(materialDetails.length <=0){
+          if(materialContextData.length <=0){
             toast.error("Select Material")
           } else{
             setIsLoading(true)
                 const updatedTrackSolarData = {
                     ...trackSolarData,
-                    AddMaterialList:materialDetails,
-                    Verify:false
+                    AddMaterial :{
+                        ...trackSolarData?.AddMaterial,
+                        [type+"Material"]:{
+                            createdAt:new Date(),
+                            createdBy: user,
+                            ["is"+type+"MaterialDone"]:true,
+                            MaterialList:materialContextData,
+                        }
+                    },
+                    UsedMaterial :{
+                        ...trackSolarData?.UsedMaterial,
+                        [type+"Material"]:{
+                            createdAt:new Date(),
+                            createdBy: user,
+                            ["is"+type+"MaterialDone"]:true,
+                            MaterialList:materialContextData,
+                        }
+                    }
+
                 }
                 firestore.addData(user?.companyID+"MaterialList",updatedTrackSolarData,trackSolarData?.Id)
                 .then((cre)=>{
@@ -94,7 +107,7 @@ const MaterialList = ({type}) => {
   return (
     <div className="primaryInformation  container mx-auto w-[350px]  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
     <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
-        <h2 className="text-center font-bold">{type} Material Info</h2>
+        <h2 className="text-center font-bold">{type} Material</h2>
         <div className=" flex flex-col ">
            <div className="relative ">
            
@@ -119,7 +132,9 @@ const MaterialList = ({type}) => {
         </div>
 
         <div>
-            <Table materialDetails={materialDetails || []} setMaterialDetails={setMaterialDetails} />
+            <Table materialDetails={materialContextData || [] }          
+             setMaterialDetails={setMaterialContextData} />
+
         </div>
 
 

@@ -29,8 +29,8 @@ const Dropdown = forwardRef(({ placeholder, className, list }, ref) => {
         onChange={handleInputChange}
         onBlur={() => setTimeout(() => setShowOptions(false), 100)}
       />
-      {showOptions && (
-        <ul className="border px-2 w-fit  overflow-x-hidden  shadow-sm absolute z-50 bg-white overflow-y-auto rounded-md ">
+      {(showOptions && filteredOptions && filteredOptions.length > 0) && (
+        <ul className={`border px-2 w-full ${filteredOptions.length > 5 ? 'h-32' : ''}  overflow-x-hidden  shadow-sm absolute z-50 bg-white overflow-y-auto rounded-md `}>
           {filteredOptions.map((option, index) => (
             <li key={index+option} className="px-3 cursor-pointer border-b py-1 break-words " onMouseDown={() => handleOptionClick(option)}>
               {option}
