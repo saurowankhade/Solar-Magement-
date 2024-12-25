@@ -17,7 +17,7 @@ const MaterialDetails = () => {
     <div className='w-full '>
       <div className=' flex flex-col justify-center items-center '>
 
-        <MaterialStipper setShowPage={setShowPage} />
+        <MaterialStipper showPage={showPage} setShowPage={setShowPage} />
         <div className="mt-10">
           {showPage === 0 ? (
             <PrimaryInfo />

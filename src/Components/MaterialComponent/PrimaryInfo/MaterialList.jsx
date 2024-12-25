@@ -13,11 +13,9 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
     const unitRef = useRef(null)
     const quantityRef = useRef(null)
 
-    const [allLibrary,setAllLibrary] = useState([]);
     const [materialData,setMaterialData] = useState([])
     const [unitData,setUnitData] = useState([])
 
-    // const [materialDetails,setMaterialDetails] = useState([])
 
     const [isLoading,setIsLoading] = useState(false);
         
@@ -26,21 +24,16 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
 
     const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext)
 
+    // get Library data 
     useEffect(()=>{
         if(user?.companyID){
             firestore.getOneData("Library",user?.companyID)
             .then((cre)=>{
-                setAllLibrary(cre)
+                setMaterialData(cre?.[`${type} Material`]) // set material data
+                setUnitData(cre?.["Units"]) // set units data
             })
-
         }
-    },[user])
-
-    useEffect(()=>{
-        setMaterialData(allLibrary?.[`${type} Material`])
-        setUnitData(allLibrary?.["Units"])
-    },[allLibrary, type])
-
+    },[type, user])
 
     const addToList = ()=>{
         const materialName = materialRef.current.value
@@ -54,7 +47,6 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
                 Unit:unit,
                 Quantity:Number(quantity)
             }
-            // setMaterialDetails([...materialDetails || [],updateMaterialList])
             setMaterialContextData([...materialContextData || [],updateMaterialList])
             materialRef.current.value = ""
             unitRef.current.value = ""
@@ -140,7 +132,7 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
 
         <div className="flex w-full justify-center mt-8">
         {
-            isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+            isLoading ? <Loading type='spinningBubbles' color='#F7AB0D' height={'8%'} width={'8%'} /> :  
             <button className="bg-[#F7AB0D] text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
             onClick={handleSubmit}>Save</button>
         }

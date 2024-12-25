@@ -50,7 +50,7 @@ const PrimaryInfo = () => {
 
     useEffect(()=>{
         setDriverNameData(allLibrary?.["Driver Name"])
-        setDriverNameData(allLibrary?.["Team Name"])
+        setTeamNameData(allLibrary?.["Team Name"])
         setVehicleNameData(allLibrary?.["Vehicle Name"])
     },[allLibrary, user?.companyID])
 
