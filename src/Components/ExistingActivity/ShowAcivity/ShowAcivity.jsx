@@ -14,6 +14,8 @@ import { useLocation, useSearchParams } from "react-router-dom";
 
 
 const ShowAcivity = () => {
+  const headerData = ["Sr.No","Date","Consumer Name","Consumer Mobile No","Bill Unit","Consumer Number","PV Number","MNRE Number","Option"]
+
   const [trackData, setTrackData] = useState([]);
   const [trackDataDoublicate, setTrackDataDoublicate] = useState([]);
 
@@ -385,7 +387,7 @@ const ShowAcivity = () => {
         {
           isLoading ?
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 border ">
-              <TableHeader />
+              <TableHeader headerData={headerData} />
               <TableBodyShimmerUI />
             </table>
             :
@@ -393,11 +395,8 @@ const ShowAcivity = () => {
 
             <table ref={tableRef} className="w-full text-sm text-left rtl:text-right text-gray-500 border h-[100px]  overflow-y-scroll ">
 
-              <TableHeader />
-              {
-                console.log("Data : ", trackDataDoublicate)
+              <TableHeader headerData={headerData} />
 
-              }
               {
                 trackDataDoublicate.length > 0 ?
 

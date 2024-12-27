@@ -8,7 +8,22 @@ import Loading from "react-loading";
 import Swal from "sweetalert2";
 
 const TableBody = ({getData,collectionId,index}) => {
-    const {Id,ConsumerName,ConsumerNumber,BillUnit,ConsumerMobileNumber,CreatedAt,MNREApplicationNumber , PVApplicationNumber} = getData || {};
+    const checkCollection = collectionId.includes("TrackSolarData");
+    console.log("Data",getData);
+    
+    let data = [];
+    if(checkCollection){
+      const {ConsumerName,ConsumerNumber,BillUnit,ConsumerMobileNumber,MNREApplicationNumber , PVApplicationNumber} = getData || {};
+      data = [ConsumerName,ConsumerMobileNumber,BillUnit,ConsumerNumber,PVApplicationNumber,MNREApplicationNumber];
+
+    } else{
+      // ["Sr.No","Date","Consumer Name","Consumer Address","Team Name","Pending Material","Note","Options"]
+
+      const {ConsumerName,ConsumerAddress,TeamName,Note} = getData || {};
+
+      data = [ConsumerName,ConsumerAddress,TeamName,Note];
+
+    }
 
     const {setTrackSolarData} = useContext(TrackSolarContext);
     const {user} = useContext(UserContext)
@@ -25,8 +40,8 @@ const TableBody = ({getData,collectionId,index}) => {
     const handleLink = useCallback((event)=>{
         event.stopPropagation();
         setTrackSolarData(getData);
-        navigateToAddTrack("/dashboard/new-acivity");
-    },[getData,setTrackSolarData,navigateToAddTrack])
+        navigateToAddTrack(`/dashboard/${checkCollection ? "new-acivity":"material-entry"}`);
+    },[getData,checkCollection,setTrackSolarData,navigateToAddTrack])
 
     const deleteHandle = (event)=>{
         event.stopPropagation();
@@ -43,8 +58,8 @@ const TableBody = ({getData,collectionId,index}) => {
           confirmButtonText: "Yes, delete it!"
         }).then((result) => {
           if (result.isConfirmed) {
-            firestore.deleteDocument(collectionId,Id).then(()=>{
-                firestore.getAllDocuments(user?.companyID+"TrackSolarData")
+            firestore.deleteDocument(collectionId,data?.Id).then(()=>{
+                firestore.getAllDocuments(user?.companyID+`${checkCollection ? "TrackSolarData":"MaterialList"}`)
                 .then((data)=>{
                   setAllTrack(data)
                   setIsLoading(false)
@@ -61,7 +76,8 @@ const TableBody = ({getData,collectionId,index}) => {
        
 
     const goToSpeficData = ()=>{
-       navigate(`/dashboard/show-existing-acivity/${Id}`)
+      const navigateName = checkCollection ? "show-existing-acivity" : "material-overview"
+       navigate(`/dashboard/${navigateName}/${data?.Id}`)
     }
 
   return (
@@ -72,9 +88,22 @@ const TableBody = ({getData,collectionId,index}) => {
         {index}
       </td>
       <td className="p-2 sm:px-6 sm:py-4 border">
-        {firestore.formatTimestamp(CreatedAt)  }
+        {
+          console.log("Collect check ",checkCollection)
+          
+        }
+        { checkCollection ? firestore.formatTimestamp(getData?.CreatedAt) : firestore.formatTimestamp(getData?.Basic?.CreatedAt)  }
       </td>
-      <td className="p-2 sm:px-6 sm:py-4 border">
+
+      {
+        data.map((elements,index)=>(
+          <td key={elements+index} className="p-2 sm:px-6 sm:py-4 border">
+          {elements}
+        </td>
+        ))
+      }
+      
+      {/* <td className="p-2 sm:px-6 sm:py-4 border">
         {ConsumerName}
       </td>
       <td className="p-2 sm:px-6 sm:py-4 border">
@@ -91,13 +120,20 @@ const TableBody = ({getData,collectionId,index}) => {
       </td>
       <td className="p-2 sm:px-6 sm:py-4 border">
         {MNREApplicationNumber}
-      </td>
+      </td> */}
+
+
       <td className="p-2 sm:px-6 sm:py-4 h-full flex items-center justify-center gap-3">
       {
         isLoading ? <Loading type='spinningBubbles' color='#1e3a8a' height={'90%'} width={'90%'} /> :   <div className="flex gap-2">
         <button onClick={handleLink} className={`border bg-[#000000]  p-2 rounded-lg ${user?.verified ? "bg-black text-white " : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
           Update
         </button>
+        {
+          !checkCollection && <button onClick={handleLink} className={`border bg-[#000000]  p-2 rounded-lg ${user?.verified ? "bg-black text-white " : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
+          Retrun
+        </button>
+        }
        {
         user?.jobProfile === "Admin" && user?.verified ?  
         <button onClick={deleteHandle} className="border bg-[#000000] text-white p-2 rounded-lg">

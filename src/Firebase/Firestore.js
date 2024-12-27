@@ -82,8 +82,10 @@ class Firestore {
       
           // Create a query with orderBy for sorting by date
                    
-          const q = collectionName === "Users" ? collectionRef :  query(collectionRef,
-            orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
+          const q = collectionName === "Users" ? collectionRef : 
+          collectionName.includes("MaterialList") ? query(collectionRef,
+            orderBy(new FieldPath('Basic', 'CreatedAt'), 'desc')) : 
+            query(collectionRef,orderBy(new FieldPath('data', 'CreatedAt'), 'desc'),
           );
            // Use FieldPath for nested fields
       
