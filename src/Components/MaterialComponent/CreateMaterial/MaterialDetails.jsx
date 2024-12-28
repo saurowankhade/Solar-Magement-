@@ -2,10 +2,11 @@
 import PrimaryInfo from '../PrimaryInfo/PrimaryInfo'
 import MaterialList from '../PrimaryInfo/MaterialList'
 import MaterialStipper from '../../Stipper/MaterialStipper';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import StructureContext from '../../../Context/StructureMaterial/StructureContext';
 import ElectricContext from '../../../Context/ElectricMaterial/ElectricContext';
 import ConcreteContext from '../../../Context/ConcreteMaterial/ConcreteContext';
+import TrackSolarContext from '../../../Context/TrackSolarContext/TrackSolarContext';
 
 const MaterialDetails = () => {
 
@@ -13,6 +14,13 @@ const MaterialDetails = () => {
   const {structureData,setStructureData} = useContext(StructureContext);
   const {electricData,setElectricData} = useContext(ElectricContext);
   const {concreteData,setconcreteData} = useContext(ConcreteContext);
+   //Context 
+   const {trackSolarData} = useContext(TrackSolarContext);
+   useEffect(()=>{
+    setStructureData(trackSolarData?.AddMaterial?.StructureMaterial?.MaterialList)
+    setElectricData(trackSolarData?.AddMaterial?.["Electric FittingMaterial"]?.MaterialList)
+    setconcreteData(trackSolarData?.AddMaterial?.ConcreteMaterial?.MaterialList)
+   },[setElectricData, setStructureData, setconcreteData, trackSolarData])
   return (
     <div className='w-full '>
       <div className=' flex flex-col justify-center items-center '>

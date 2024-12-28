@@ -23,6 +23,7 @@ import MaterialDetails from "./Components/MaterialComponent/CreateMaterial/Mater
 import ShowMaterial from "./Components/ShowMaterialDetails/ShowMaterial/ShowMaterial";
 import LeftSideNav from "./Components/Dashboard/SideNav/LeftSideNav";
 import CommonContext from "./Routing/CommonContext";
+import ShowOneList from "./Components/ShowMaterialDetails/ShowOne/ShowOneList";
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
                   <MaterialDetails/>
                 </CommonContext>}/>
                 <Route path="material-overview" element={<CommonContext ><ShowMaterial/> </CommonContext>} ></Route>
-                <Route path="material-overview/:Id" element={<CommonContext ><ShowSpecific/> </CommonContext>} ></Route>
+                <Route path="material-overview/:Id" element={<CommonContext ><ShowOneList /> </CommonContext>} ></Route>
 
               <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
 

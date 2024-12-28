@@ -77,7 +77,7 @@ const TableBody = ({getData,collectionId,index}) => {
 
     const goToSpeficData = ()=>{
       const navigateName = checkCollection ? "show-existing-acivity" : "material-overview"
-       navigate(`/dashboard/${navigateName}/${data?.Id}`)
+       navigate(`/dashboard/${navigateName}/${getData?.Id}`)
     }
 
   return (
