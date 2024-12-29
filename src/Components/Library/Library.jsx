@@ -39,7 +39,8 @@ const Library = () => {
         setIsLoading(true)
         if (action.toString() === actionArray[0] && (inputText.current.value).length >= 0) {
 
-            firestore.updateData("Library", { [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
+            if(alreadyData){
+                firestore.updateData("Library", { [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
                 .then((cre) => {
                     if (cre.status === 200) {
                         setIsLoading(false)
@@ -49,8 +50,30 @@ const Library = () => {
                     } else {
                         setIsLoading(false)
                         toast.error(`${selectInput} is failed to add`)
+                        console.log(cre?.message);
+                        
+                        
                     }
-                })
+                });
+            } else{
+                firestore.addData("Library", { [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
+                .then((cre) => {
+                    if (cre.status === 200) {
+                        setIsLoading(false)
+                        toast.success(`${selectInput} is added`)
+                        setAlreadyData([...alreadyData, inputText.current.value])
+                        inputText.current.value = ""
+                    } else {
+                        setIsLoading(false)
+                        toast.error(`${selectInput} is failed to add`)
+                        console.log(cre?.message);
+                        
+                        
+                    }
+                });
+            }
+
+
         } else if (action === actionArray[0]) {
             toast.info("Enter text")
         }
