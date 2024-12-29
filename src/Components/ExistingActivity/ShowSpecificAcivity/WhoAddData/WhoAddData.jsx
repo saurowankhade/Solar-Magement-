@@ -12,17 +12,17 @@ const WhoAddData = (props) => {
       <h3 className="text-center text-xl underline">Who added this</h3>
           <div className="mt-2">
             <span className="text-base font-bold">Date : </span>
-           <span className="text-blue-800">{firestore.formatTimestamp(date) }</span>
+           <span className="text-black">{firestore.formatTimestamp(date) }</span>
           </div>
            <div className="mt-2">
             <span className="text-base font-bold">Created By : </span> 
              {/* eslint-disable-next-line react/prop-types */}
-            <span className="text-blue-800">{user?.name} </span>
+            <span className="text-black">{user?.name} </span>
            </div>
            <div className="mt-2">
             <span className="text-base font-bold">Job Profile : </span> 
              {/* eslint-disable-next-line react/prop-types */}
-            <span className="text-blue-800">{user?.jobProfile} </span>
+            <span className="text-black">{user?.jobProfile} </span>
            </div>
       </div>
     </div>

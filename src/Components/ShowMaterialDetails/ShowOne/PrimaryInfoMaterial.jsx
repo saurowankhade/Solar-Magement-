@@ -7,7 +7,7 @@ const PrimaryInfoMaterial = ({allData}) => {
     const valueData = [TeamName, ConsumerName, ConsumerAddress, DriverName, VehicleName, Note];
     return (
         <div className="flex justify-center `">
-            <div className={`p-2  shadow-md border  w-[500px] `}>
+            <div className={`p-2  shadow-md border mt-2 w-[700px] `}>
                 <h3 className="text-center text-xl underline">Main Data</h3>
 
                 {

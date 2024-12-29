@@ -7,7 +7,7 @@ const Table = ({materialDetails,setMaterialDetails, isShow,whichMaterial}) => {
     }
 
   return (
-    <div className={`relative overflow-x-auto shadow-sm border ${isShow && 'md:w-[500px]'}`}>
+    <div className={`relative overflow-x-auto shadow-md border ${isShow && 'md:w-[700px]'}`}>
     {isShow && <h1 className="mt-2 mb-2 text-center">{whichMaterial}</h1>}
     <table className="w-full overflow-x-auto text-sm text-left rtl:text-right text-gray-500 border">
         <thead className="text-xs text-gray-700 uppercase  border ">
