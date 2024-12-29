@@ -23,7 +23,11 @@ const LeftSideNav = () => {
             title: "Do you want to sign out?",
             showDenyButton: true,
             confirmButtonText: "Yes",
-            denyButtonText: `No`
+            denyButtonText: `No`,
+            customClass: {
+                confirmButton: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded',
+                denyButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+              }
           }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {

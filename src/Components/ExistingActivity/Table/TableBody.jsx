@@ -53,9 +53,9 @@ const TableBody = ({getData,collectionId,index}) => {
           text: "You won't be able to recover it!",
           icon: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!"
+          confirmButtonColor: "#48BB78",
+          cancelButtonColor: "#F56565",
+          confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.isConfirmed) {
             firestore.deleteDocument(collectionId,data?.Id).then(()=>{
