@@ -53,7 +53,6 @@ function App() {
               <Route path="regitser-users" element={<PrivateRoute><RegisterUsers/></PrivateRoute>}/>
 
            </Route> 
-           <Route path="/demo" element={<LeftSideNav />} />
          </Routes>
        </BrowserRouter>
        <div>

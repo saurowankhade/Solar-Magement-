@@ -77,6 +77,7 @@ const TableBody = ({getData,collectionId,index}) => {
 
     const goToSpeficData = ()=>{
       const navigateName = checkCollection ? "show-existing-acivity" : "material-overview"
+      // setTrackSolarData(getData)
        navigate(`/dashboard/${navigateName}/${getData?.Id}`)
     }
 

@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-
-const Table = ({materialDetails,setMaterialDetails, isShow}) => {
+const Table = ({materialDetails,setMaterialDetails, isShow,whichMaterial}) => {
 
     const removeElement = (index)=>{
         setMaterialDetails((prevData) => 
@@ -9,7 +7,8 @@ const Table = ({materialDetails,setMaterialDetails, isShow}) => {
     }
 
   return (
-    <div className="relative overflow-x-auto shadow-sm border">
+    <div className={`relative overflow-x-auto shadow-sm border ${isShow && 'md:w-[500px]'}`}>
+    {isShow && <h1 className="mt-2 mb-2 text-center">{whichMaterial}</h1>}
     <table className="w-full overflow-x-auto text-sm text-left rtl:text-right text-gray-500 border">
         <thead className="text-xs text-gray-700 uppercase  border ">
             <tr>
@@ -27,6 +26,9 @@ const Table = ({materialDetails,setMaterialDetails, isShow}) => {
                 </th>
             </tr>
         </thead>
+        {
+            (materialDetails.length === 0 && isShow) && <p className="text-base text-center  p-2">Oops! data not avaiable!</p> 
+        }
         {
             materialDetails.map((material,index)=>(
                 <tbody key={`${material+index}`} className="">
