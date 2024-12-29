@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext";
 import UserContext from "../../Context/UserContext/UserContext";
 import { toast } from "react-toastify";
 import firestore from "../../Firebase/Firestore";
