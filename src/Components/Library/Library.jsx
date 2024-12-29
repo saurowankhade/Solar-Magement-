@@ -12,7 +12,7 @@ const Library = () => {
     const actionArray = ["Add", "Delete"]
 
     const [selectInput, setSelectInput] = useState("Team Name");
-    const selectInputArray = ["Team Name","Driver Name", "Vehicle Name", "Structure Material", "Electric fitting Material", "Concrete Material", "Units"]
+    const selectInputArray = ["Team Name","Driver Name", "Vehicle Name", "Structure Material", "Electric Fitting Material", "Concrete Material", "Units"]
 
     const [alreadyData, setAlreadyData] = useState([]);
 
@@ -20,6 +20,7 @@ const Library = () => {
     const elementToDel = useRef();
     const [isLoading, setIsLoading] = useState(false);
 
+    const [allData,setAllData] = useState([]);
 
     const { user } = useContext(UserContext);
 
@@ -28,6 +29,7 @@ const Library = () => {
             firestore.getOneData("Library", user?.companyID)
                 .then((cre) => {
                     const inputData = cre?.[selectInput]
+                    setAllData(cre);
                     setAlreadyData(inputData || []);
                 })
         }
@@ -38,9 +40,12 @@ const Library = () => {
     const handleSubmit = () => {
         setIsLoading(true)
         if (action.toString() === actionArray[0] && (inputText.current.value).length >= 0) {
-
-            if(alreadyData){
-                firestore.updateData("Library", { [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
+            console.log(allData," is lenght");
+            
+            if(Object.keys(allData).length > 0){
+                console.log(alreadyData);
+                
+                firestore.updateData("Library", { ...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
                 .then((cre) => {
                     if (cre.status === 200) {
                         setIsLoading(false)
@@ -56,7 +61,7 @@ const Library = () => {
                     }
                 });
             } else{
-                firestore.addData("Library", { [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
+                firestore.addData("Library", {...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
                 .then((cre) => {
                     if (cre.status === 200) {
                         setIsLoading(false)
