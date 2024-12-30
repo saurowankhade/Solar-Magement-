@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import dashboardImg from '../../assets/dashboard.png';
+import Testimonial from './Testimonial/Testimonial';
+import Feature from './Features/Feature';
 const Home = ()=>{
     const navigateTo = useNavigate();
     const handleClick = (e)=>{
@@ -15,6 +17,67 @@ const Home = ()=>{
         }
         
     }
+
+    const testimonials = [
+        {
+          text: "UrjaSolar has transformed the way we manage our projects. Highly recommend!",
+          name: "Mayuresh Gadge"
+        },
+        {
+          text: "The material tracking feature is a lifesaver. Great tool!",
+          name: "Shabda Gadge"
+        },
+        {
+          text: "Monitoring progress and managing consumer data has never been easier.",
+          name: "Shreenath Solar"
+        },
+        // Add more testimonials as needed
+      ];
+      const features = [
+        {
+          icon: "fas fa-user",
+          title: "Consumer Tracking",
+          description: "Manage consumer details with ease, from site work to subsidies.",
+          iconColor: "text-blue-600",
+          bgColor: "bg-blue-100"
+        },
+        {
+          icon: "fas fa-box",
+          title: "Material Management",
+          description: "Track materials added, returned, and used during projects.",
+          iconColor: "text-green-600",
+          bgColor: "bg-green-100"
+        },
+        {
+          icon: "fas fa-users",
+          title: "Users Management",
+          description: "Manage and verify users for access to project data and features.",
+          iconColor: "text-purple-600",
+          bgColor: "bg-purple-100"
+        },
+        {
+          icon: "fas fa-file-excel",
+          title: "Export to Excel",
+          description: "Easily export your data to Excel for better analysis and reporting.",
+          iconColor: "text-orange-600",
+          bgColor: "bg-orange-100"
+        },
+        {
+          icon: "fas fa-bell",
+          title: "Pending Task Reminder",
+          description: "Get notified about pending tasks and deadlines for smooth project management.",
+          iconColor: "text-red-600",
+          bgColor: "bg-red-100"
+        },
+        {
+          icon: "fas fa-sort",
+          title: "Easy Sort & Analyze",
+          description: "Sort and analyze data easily to make informed decisions and streamline processes.",
+          iconColor: "text-teal-600",
+          bgColor: "bg-teal-100"
+        },
+      ];
+
     return (
     <div className="min-h-screen">
   {/* Header */}
@@ -80,119 +143,54 @@ const Home = ()=>{
   </section>
 
   {/* Features Section */}
-  <section id="features" className="py-16 bg-white flex flex-col items-center">
-  <div className="text-center">
-    <h2 className="text-3xl font-bold text-gray-800">Features</h2>
-    <p className="mt-4 text-gray-600">
-      Everything you need to manage your solar projects efficiently.
-    </p>
-  </div>
-  <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12 justify-items-center">
-    {/* Consumer Tracking */}
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-      <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
-        <i className="fas fa-user"></i>
+  <section id="features" className="py-16 bg-gray-50 flex flex-col items-center">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold text-gray-800">Features</h2>
+        <p className="mt-4 text-gray-600">
+          Everything you need to manage your solar projects efficiently.
+        </p>
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-800">Consumer Tracking</h3>
-      <p className="mt-2 text-gray-600">
-        Manage consumer details with ease, from site work to subsidies.
-      </p>
-    </div>
-    
-    {/* Material Management */}
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-      <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center text-green-600">
-        <i className="fas fa-box"></i>
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12 justify-items-center">
+        {features.map((feature, index) => (
+          <Feature
+            key={index}
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+            iconColor={feature.iconColor}
+            bgColor={feature.bgColor}
+          />
+        ))}
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-800">Material Management</h3>
-      <p className="mt-2 text-gray-600">
-        Track materials added, returned, and used during projects.
-      </p>
-    </div>
-    
-    {/* Users Management */}
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-      <div className="w-16 h-16 mx-auto bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
-        <i className="fas fa-users"></i>
-      </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-800">Users Management</h3>
-      <p className="mt-2 text-gray-600">
-        Manage and verify users for access to project data and features.
-      </p>
-    </div>
-  </div>
-  
-  <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12 justify-items-center">
-    {/* Export to Excel */}
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-      <div className="w-16 h-16 mx-auto bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
-        <i className="fas fa-file-excel"></i>
-      </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-800">Export to Excel</h3>
-      <p className="mt-2 text-gray-600">
-        Easily export your data to Excel for better analysis and reporting.
-      </p>
-    </div>
-    
-    {/* Pending Task Reminder */}
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-      <div className="w-16 h-16 mx-auto bg-red-100 rounded-full flex items-center justify-center text-red-600">
-        <i className="fas fa-bell"></i>
-      </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-800">Pending Task Reminder</h3>
-      <p className="mt-2 text-gray-600">
-        Get notified about pending tasks and deadlines for smooth project management.
-      </p>
-    </div>
-    
-    {/* Easy Sort and Analyze */}
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-      <div className="w-16 h-16 mx-auto bg-teal-100 rounded-full flex items-center justify-center text-teal-600">
-        <i className="fas fa-sort"></i>
-      </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-800">Easy Sort & Analyze</h3>
-      <p className="mt-2 text-gray-600">
-        Sort and analyze data easily to make informed decisions and streamline processes.
-      </p>
-    </div>
-  </div>
-</section>
+    </section>
 
 
 
 
   {/* Testimonials */}
-  <section id="testimonials" className="py-16 bg-gray-50">
-    <div className="text-center">
-      <h2 className="text-3xl font-bold text-gray-800">What Our Users Say</h2>
-      <p className="mt-4 text-gray-600">Hear from contractors using UrjaSolar.</p>
-    </div>
-    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12">
-      <div className="p-6 bg-white rounded-lg shadow-md">
-        <p className="text-gray-600">
-          &quot;UrjaSolar has transformed the way we manage our projects. Highly
-          recommend!&quot;
-        </p>
-        <p className="mt-4 font-bold text-gray-800">- John D.</p>
+  <section id="testimonials" className="py-16 sm:px-8 lg:px-32  overflow-hidden">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold text-gray-800">What Our Users Say</h2>
+        <p className="mt-4 text-gray-600">Hear from contractors using UrjaSolar.</p>
       </div>
-      <div className="p-6 bg-white rounded-lg shadow-md">
-        <p className="text-gray-600">
-        &quot;The material tracking feature is a lifesaver. Great tool !&quot;
-        </p>
-        <p className="mt-4 font-bold text-gray-800">- Sarah M.</p>
+      <div className="mt-12 relative overflow-hidden">
+        {/* Slider container */}
+        <div className="flex animate-slide">
+          {testimonials.map((testimonial, index) => (
+            <Testimonial key={index} testimonial={testimonial} />
+          ))}
+          {/* Duplicate testimonials for infinite scrolling */}
+          {testimonials.map((testimonial, index) => (
+            <Testimonial key={index + testimonials.length} testimonial={testimonial} />
+          ))}
+        </div>
       </div>
-      <div className="p-6 bg-white rounded-lg shadow-md">
-        <p className="text-gray-600">
-          &quot;Monitoring progress and managing consumer data has never been
-          easier.&quot;
-        </p>
-        <p className="mt-4 font-bold text-gray-800">- Raj K.</p>
-      </div>
-    </div>
-  </section>
+    </section>
+
+
 
   {/* FAQ Section */}
-  <section id="faq" className="py-16 bg-white">
+  <section id="faq" className="py-16 bg-gray-50">
     <div className="text-center">
       <h2 className="text-3xl font-bold text-gray-800">Frequently Asked Questions</h2>
       <p className="mt-4 text-gray-600">Everything you need to know.</p>
@@ -214,7 +212,7 @@ const Home = ()=>{
   </section>
 
   {/* Pricing Section */}
-  <section id="pricing" className="py-16 bg-gray-50">
+  <section id="pricing" className="py-16 ">
     <div className="text-center">
       <h2 className="text-3xl font-bold text-gray-800">Pricing Plans</h2>
       <p className="mt-4 text-gray-600">Choose the plan that fits your needs.</p>

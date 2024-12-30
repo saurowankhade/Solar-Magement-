@@ -14,6 +14,16 @@ export default {
         mono: ['Menlo', 'monospace'],
         inter: ['Inter', 'sans-serif'],
       },
+      
+      animation: {
+        slide: 'slide 20s linear infinite',
+      },
+      keyframes: {
+        slide: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-33.33%)' }, // Adjusted to avoid gap
+        },
+      },
   }
 },
 plugins: [
