@@ -16,7 +16,7 @@ const PricingCard = ({ title, price, features, buttonText }) => {
                     <li key={index}>✔ {feature}</li>
                 ))}
             </ul>
-            <button onClick={handleClick} className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+            <button onClick={handleClick} className="mt-6 px-4 py-2 bg-[black] text-white rounded-md hover:bg-[#000000de]">
                 {buttonText}
             </button>
         </div>
