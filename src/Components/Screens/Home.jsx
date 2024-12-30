@@ -99,16 +99,16 @@ const Home = () => {
         {
             question: 'What is the response time for customer support?',
             answer: 'Our customer support team typically responds within 24 hours during business days. For urgent issues, please mark them as high priority.'
-          },
-          {
+        },
+        {
             question: 'What if I face any technical issues?',
             answer: 'If you encounter any technical issues, you can contact our technical support team by emailing support@urjasolar.com, or you can call or WhatsApp us at +91 9322108251.'
-          }
+        }
     ];
 
     const pricingData = [
         {
-            
+
             title: "7-Day Free Tier",
             price: "Free for the first 7 days",
             features: ["Basic Features", "Up to 5 Projects"],
@@ -117,17 +117,17 @@ const Home = () => {
         {
             title: "Monthly Plan",
             price: "₹999/month",
-            features: ["Unlimited Projects", "Android App","Advanced Features", "Priority Support"],
+            features: ["Unlimited Projects", "Android App", "Advanced Features", "Priority Support"],
             buttonText: "Get Started",
         },
         {
             title: "Yearly Plan",
             price: "₹9999/year",
-            features: ["Unlimited Projects", "Android App","Advanced Features", "Priority Support", "2 Months Free"],
+            features: ["Unlimited Projects", "Android App", "Advanced Features", "Priority Support", "2 Months Free"],
             buttonText: "Get Started",
         },
     ];
-    
+
 
 
     return (
@@ -242,22 +242,22 @@ const Home = () => {
 
             {/* Pricing Section */}
             <section id="pricing" className="py-16 flex flex-col items-center">
-    <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-800">Pricing Plans</h2>
-        <p className="mt-4 text-gray-600">Choose the plan that fits your needs.</p>
-    </div>
-    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12">
-        {pricingData.map((plan, index) => (
-            <PricingCard 
-                key={index}
-                title={plan.title}
-                price={plan.price}
-                features={plan.features}
-                buttonText={plan.buttonText}
-            />
-        ))}
-    </div>
-</section>
+                <div className="text-center">
+                    <h2 className="text-3xl font-bold text-gray-800">Pricing Plans</h2>
+                    <p className="mt-4 text-gray-600">Choose the plan that fits your needs.</p>
+                </div>
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-12">
+                    {pricingData.map((plan, index) => (
+                        <PricingCard
+                            key={index}
+                            title={plan.title}
+                            price={plan.price}
+                            features={plan.features}
+                            buttonText={plan.buttonText}
+                        />
+                    ))}
+                </div>
+            </section>
 
 
 
@@ -269,7 +269,31 @@ const Home = () => {
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                         {/* Logo and Description */}
                         <div className="mb-6 md:mb-0">
-                            <h3 className="text-2xl font-bold text-white">UrjaSolar</h3>
+                            {/* <h3 className="text-2xl font-bold text-white">UrjaSolar</h3> */}
+                            <div className='flex gap-2'>
+                            <span>
+                        <svg height="32" viewBox="0 0 147 154" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect y="12.5635" width="146.286" height="141.436" rx="21" fill="#F7AB0D" />
+                            <g filter="url(#filter0_d_27_6)">
+                                <path d="M19.5625 45.4688V41.25H66.4375V45.4688H53.9375V99.375C53.9375 105.312 54.4062 110.417 55.3438 114.688C57.8438 126.146 64.3542 131.875 74.875 131.875C91.5417 131.771 99.9271 120.938 100.031 99.375V45.4688H87.5312V41.25H118.312V45.4688H105.812V98.4375C105.812 105.833 104.979 112.135 103.312 117.344C98.9375 130.156 88.3646 136.562 71.5938 136.562C45.4479 136.458 32.2708 124.479 32.0625 100.625V45.4688H19.5625Z" fill="white" />
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_27_6" x="15.5625" y="41.25" width="106.75" height="103.312" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="4" />
+                                    <feGaussianBlur stdDeviation="2" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_27_6" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_27_6" result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+                    </span>
+
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap ">UrjaSolar</span>
+                            </div>
                             <p className="mt-2 text-gray-400">
                                 Empowering solar contractors to manage projects efficiently.
                             </p>
