@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 const NavBar = () => {
     const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
-    const navigateTo = useNavigate();
     const [hasShadow, setHasShadow] = useState(false);
     const location = useLocation()
 
