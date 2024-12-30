@@ -14,9 +14,9 @@ export default {
         mono: ['Menlo', 'monospace'],
         inter: ['Inter', 'sans-serif'],
       },
-      
+
       animation: {
-        slide: 'slide 20s linear infinite',
+        slide: 'slide 15s linear infinite',
       },
       keyframes: {
         slide: {

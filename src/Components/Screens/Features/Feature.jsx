@@ -1,7 +1,7 @@
 // components/Feature.js
 const Feature = ({ icon, title, description, iconColor, bgColor }) => {
   return (
-    <div className="max-w-xs w-full bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
+    <div className="max-w-xs w-full cursor-pointer bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
       <div className={`w-16 h-16 mx-auto ${bgColor} rounded-full flex items-center justify-center ${iconColor}`}>
         <i className={icon}></i>
       </div>
