@@ -84,6 +84,10 @@ const Home = () => {
             answer: 'UrjaSolar is a platform for solar contractors to manage projects, materials, and progress effectively.'
         },
         {
+            question: 'Why do solar contractors need a new tool?',
+            answer: "Currently, there are no tools designed specifically for solar contractors to track customer details. If done manually, there's a risk of errors. Contractors often set alarms to remind them of pending tasks, but with UrjaSolar, they receive automatic notifications for any tasks that are pending. Searching and sorting through information is also a challenge, but UrjaSolar makes this process much easier. Additionally, when contractors need to assign multiple employees to a task, it can be difficult, but UrjaSolar solves that problem efficiently."
+        },
+        {
             question: 'How do I register as a user?',
             answer: 'To register as a user, click on the "Sign Up" button on the homepage, fill in your details, and submit the form to create your account.'
         },
