@@ -264,7 +264,7 @@ const Home = () => {
 
 
             {/* Footer */}
-            <footer className="bg-gray-800 text-white">
+            <footer className="bg-black text-white">
                 <div className="container mx-auto px-6 py-10">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                         {/* Logo and Description */}
