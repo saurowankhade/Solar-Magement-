@@ -343,7 +343,7 @@ const Home = () => {
                     {/* Divider */}
                     <div className="mt-8 border-t border-gray-600 pt-6 text-center">
                         <p className="text-gray-400 text-sm">
-                            &copy; 2024 UrjaSolar. All rights reserved.
+                            &copy; {new Date().getFullYear().toString()} UrjaSolar. All rights reserved.
                         </p>
                     </div>
                 </div>
