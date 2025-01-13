@@ -3,12 +3,28 @@ import firestore from "../../Firebase/Firestore";
 
 
 function RegisterUserShow({getData}) {
-    const {name,email,mobileNo,jobProfile,userImg,verified,userID} = getData;
+    const {name,email,mobileNo,jobProfile,userImg,verified,userID,companyID,isCmp} = getData;
    const handleRightButton = ()=>{
-    const added = firestore.updateDocument("Users",userID,{verified:true});
-    added.then(()=>{
-        toast.success("Added!")
-        window.location.reload();
+    firestore.addData("Users",{
+        name:name,
+        mobileNo:mobileNo,
+        email:email,
+        jobProfile:jobProfile,
+        companyID:companyID,
+        userID:userID,
+        userImg:userImg,
+        mobileNoVerify:false,
+        isCmp:isCmp,
+        verified:true
+    },userID)
+    .then((status)=>{
+        if(status.status === 200){
+            toast.success("Added!")
+            window.location.reload();
+        } else{
+            toast.error("Failed")
+        }
+        
     }).catch((error)=>{
         toast.error(error.message)
     })
