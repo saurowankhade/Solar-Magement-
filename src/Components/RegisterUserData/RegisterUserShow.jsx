@@ -1,10 +1,13 @@
 import { toast } from "react-toastify";
 import firestore from "../../Firebase/Firestore";
-
+import { useState } from "react";
+import Loading from "react-loading";
 
 function RegisterUserShow({getData}) {
     const {name,email,mobileNo,jobProfile,userImg,verified,userID,companyID,isCmp} = getData;
+    const [isLoading,setIsLoading] = useState(false);
    const handleRightButton = ()=>{
+    setIsLoading(true)
     firestore.addData("Users",{
         name:name,
         mobileNo:mobileNo,
@@ -21,9 +24,11 @@ function RegisterUserShow({getData}) {
         if(status.status === 200){
             toast.success("Added!")
             window.location.reload();
+            
         } else{
             toast.error("Failed")
         }
+        setIsLoading(false)
         
     }).catch((error)=>{
         toast.error(error.message)
@@ -46,6 +51,8 @@ function RegisterUserShow({getData}) {
             verified ? 
             <p className="text-2xl cursor-pointer" title="Verified">✅</p> 
             : 
+            isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'4%'} width={'4%'} /> :  
+                          
             <span className="flex gap-2">
             <p className="text-2xl cursor-pointer" onClick={handleWrongButton}>❌</p>
             <p className="text-2xl cursor-pointer" onClick={handleRightButton}>✅</p>
