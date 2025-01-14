@@ -14,7 +14,7 @@ const Dashboard =  ()=>{
   const {setAllTrack} = useContext(AllTrackContext);
 
 
-  const { data, error } = useFirestoreDocuments("SolarData");
+  const { data } = useFirestoreDocuments("SolarData");
   useEffect(()=>{
     setAllTrack(data ?? [])
   },[data,setAllTrack])
@@ -27,7 +27,7 @@ const Dashboard =  ()=>{
       setAllUser(filterData)      
      } 
     });
-  },[setAllUser, user])
+  },[setAllUser, user]);
 
   return(
         

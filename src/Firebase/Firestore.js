@@ -20,7 +20,7 @@ class Firestore {
       
       // Update the document with the new data fields
       await updateDoc(docRef, data);
-      
+            
       return { status: 200, message: 'Data updated successfully!' };
     } catch (error) {
       return { status: 500, message: error.message, Id: documentID };

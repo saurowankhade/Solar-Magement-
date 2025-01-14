@@ -13,7 +13,6 @@ const UserContextProvider = ({children})=>{
           setUser(userCri)
         })
       },[setUser])
-
     return (
         <UserContext.Provider value={{user,setUser}}>
 

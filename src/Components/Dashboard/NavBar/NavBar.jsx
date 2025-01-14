@@ -10,7 +10,9 @@ const NavBar = () => {
     const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
     const [hasShadow, setHasShadow] = useState(false);
-    const location = useLocation()
+    const [companyID,setCompanyID] = useState('');
+    const location = useLocation();
+    
 
     useEffect(() => {
       const handleScroll = () => {
@@ -55,6 +57,14 @@ const NavBar = () => {
         } 
       });
   }
+
+  useEffect(()=>{
+    if(Array.isArray(user?.companyID)){
+       setCompanyID(user?.companyID[1])
+    } else{
+      setCompanyID(user?.companyID)
+    }
+  },[user])
 
 
   return (
@@ -103,10 +113,10 @@ const NavBar = () => {
   <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button onClick={()=>{
         toast.dismiss()
-          navigator.clipboard.writeText(user?.companyID).then(()=>{
+          navigator.clipboard.writeText(companyID).then(()=>{
           toast.success("Copy to clipboard",{position:'bottom-center'})
         })
-      }} className="flex text-sm md:me-0 items-center gap-3 text-center  font-bold border p-2 rounded-full bg-gradient-to-r from-[#F7AB0D] to-[#F0D807] text-white">{user?.companyID}</button>
+      }} className="flex text-sm md:me-0 items-center gap-3 text-center  font-bold border p-2 rounded-full bg-gradient-to-r from-[#F7AB0D] to-[#F0D807] text-white">{companyID}</button>
       {
          user?.jobProfile === "Admin" && user?.verified ? 
          <div className="mr-4 sm:mr-10 ">

@@ -193,7 +193,9 @@ const LeftSideNav = () => {
                 </div>
                 {/* Profile */}
 
-                <div className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={() => {
+                    navigate('/dashboard/profile');
+                }} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg fill="none" viewBox="0 0 24 24" height="20" width="20" >
                         <path
