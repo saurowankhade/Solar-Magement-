@@ -66,7 +66,7 @@ const Profile = () => {
       <div className="w-full justify-center my-2">    
                 <div className=" border rounded-full flex items-center py-2 gap-1 px-2 justify-between  ">
                 <div className="text-base px-1">Company ID :</div> 
-                    <select className="outline-none cursor-pointer text-base w-[100px] sm:w-fit" name="documents" id="documents"  onChange={(e)=>{handleActiveId(e)}}  >
+                    <select className="outline-none cursor-pointer text-base w-[100px] sm:w-fit" name="documents" id="documents" value={user?.activeID}  onChange={(e)=>{handleActiveId(e)}}  >
                         {
                             user?.companyID.map((document)=>(
                                 <option className="cursor-pointer" key={document} value={document}>
@@ -88,16 +88,17 @@ const Profile = () => {
 
   {
     user?.isCmp &&(
-        <div className="text-center flex flex-col mt-6">
+        <div className="text-center  mt-6 flex flex-col gap-3 ">
         <input className=" my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-lg" placeholder="Compnay ID" type="text"  value={compnayIdState} onChange={(e)=>{
             setCompnayIdState(e.target.value)
         }}  />
   
+          <div className="flex flex-col items-center">
           {
-            isLoading ? <ReactLoading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :  
+            isLoading ? <ReactLoading type='spinningBubbles' color='#000' height={'10%'} width={'10%'} /> :  
                             
             <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-black text-white px-4 py-2 rounded-md hover:bg-[#000000d9]"
             onClick={()=>{
                 if(compnayIdState.length < 14){
                     toast.error("Enter proper ID")
@@ -109,6 +110,7 @@ const Profile = () => {
             Add Compnay ID
           </button>
           }
+          </div>
         </div>
     )
   }
