@@ -1,5 +1,5 @@
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../Context/UserContext/UserContext";
 import NavBar from "./NavBar/NavBar";
 import firestore from "../../Firebase/Firestore";
@@ -13,6 +13,8 @@ const Dashboard =  ()=>{
   const {setAllUser} = useContext(ShowAllUserContext);
   const {setAllTrack} = useContext(AllTrackContext);
 
+  const [show,setShow] = useState(false);
+
 
   const { data } = useFirestoreDocuments("SolarData");
   useEffect(()=>{
@@ -23,7 +25,7 @@ const Dashboard =  ()=>{
     firestore.getAllDocuments("Users")
     .then((status)=>{        
      if(status?.status === 200){
-      const filterData = (status.data).filter((userData) => userData?.companyID === user?.companyID);
+      const filterData = (status.data).filter((userData) => userData?.activeID === user?.activeID);
       setAllUser(filterData)      
      } 
     });
@@ -37,9 +39,12 @@ const Dashboard =  ()=>{
             e.stopPropagation();
             toast.dismiss()
             toast.info("Loading data please wait...",{position:'top-center'})
+          } 
+          if(show){
+            setShow(false);
           }
         }} className=" w-full h-full ">
-          <NavBar /> 
+          <NavBar  show={show} setShow={setShow} /> 
           <Outlet />
         </div>
     )

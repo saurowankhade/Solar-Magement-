@@ -6,13 +6,11 @@ import authentication from "../../../Firebase/authentication";
 import { setItem } from "../../../utils/LocalStorage/localAuth";
 import Swal from "sweetalert2";
 
-const NavBar = () => {
-    const [show,setShow] = useState(false);
+const NavBar = ({show,setShow}) => {
+    // const [show,setShow] = useState(false);
     const {user} = useContext(UserContext);
     const [hasShadow, setHasShadow] = useState(false);
-    const [companyID,setCompanyID] = useState('');
     const location = useLocation();
-    
 
     useEffect(() => {
       const handleScroll = () => {
@@ -34,6 +32,10 @@ const NavBar = () => {
    const goBack = () => {
     navigate(-1); // Navigate to the previous route
   };
+
+  const handleNavigate = (navi)=>{
+    navigate(navi)
+  }
 
   const handleSignOut = ()=>{
     Swal.fire({
@@ -57,14 +59,6 @@ const NavBar = () => {
         } 
       });
   }
-
-  useEffect(()=>{
-    if(Array.isArray(user?.companyID)){
-       setCompanyID(user?.companyID[1])
-    } else{
-      setCompanyID(user?.companyID)
-    }
-  },[user])
 
 
   return (
@@ -113,10 +107,10 @@ const NavBar = () => {
   <div className="flex items-center gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button onClick={()=>{
         toast.dismiss()
-          navigator.clipboard.writeText(companyID).then(()=>{
+          navigator.clipboard.writeText(user?.activeID).then(()=>{
           toast.success("Copy to clipboard",{position:'bottom-center'})
         })
-      }} className="flex text-sm md:me-0 items-center gap-3 text-center  font-bold border p-2 rounded-full bg-gradient-to-r from-[#F7AB0D] to-[#F0D807] text-white">{companyID}</button>
+      }} className="flex text-sm md:me-0 items-center gap-3 text-center  font-bold border p-2 rounded-full bg-gradient-to-r from-[#F7AB0D] to-[#F0D807] text-white">{user?.activeID}</button>
       {
          user?.jobProfile === "Admin" && user?.verified ? 
          <div className="mr-4 sm:mr-10 ">
@@ -174,7 +168,7 @@ const NavBar = () => {
           </div>
           <ul className="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a href="#" className="flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
+              <a onClick={()=>{handleNavigate('/dashboard/profile')}} className="flex cursor-pointer gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
               <svg fill="none" viewBox="0 0 24 24" height="1em" width="1em" >
       <path
         fill="currentColor"

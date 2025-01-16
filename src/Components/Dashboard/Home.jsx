@@ -7,7 +7,7 @@ import PieChart from "./Analytics/PieChart/PieChart"
 import PaymentChart from "./Analytics/PaymentChart/PaymentDonut"
 
 const HomeDashboard = () => {
-    const {user} = useContext(UserContext)
+    // const {user} = useContext(UserContext)
   return (
     <div className="flex flex-col gap-10 bg-gray-100">
       <div className="mt-2 md:mt-0">

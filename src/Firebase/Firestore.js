@@ -38,6 +38,37 @@ class Firestore {
         }
       }
 
+      async subscribeToUserData(userID, setUser) {
+        try {
+          // Reference the Firestore document
+          const docRef = doc(db, "Users", userID);
+      
+          // Attach real-time listener
+          const unsubscribe = onSnapshot(
+            docRef,
+            (docSnap) => {
+              if (docSnap.exists()) {
+                setUser(docSnap.data()); // Update UI or state with the document's data
+              } else {
+                console.warn("Document does not exist!");
+                setUser(""); // Clear the state if document doesn't exist
+              }
+            },
+            (error) => {
+              console.error("Error getting real-time document updates: ", error);
+              setItem("isLogin", { isLogin: false, userID: "" }); // Handle error (e.g., log out the user)
+            }
+          );
+      
+          // Return the unsubscribe function to allow cleanup
+          return unsubscribe;
+        } catch (error) {
+          console.error("Error setting up real-time listener: ", error);
+          setItem("isLogin", { isLogin: false, userID: "" });
+        }
+      }
+      
+
 
       
       async getOneData (collectionName,docsId)  {

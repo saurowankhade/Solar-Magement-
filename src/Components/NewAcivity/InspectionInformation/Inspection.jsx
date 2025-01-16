@@ -49,7 +49,7 @@ const handleSubmit = useCallback((e) => {
   // Update the context state
   setTrackSolarData(updatedTrackSolarData);
 
-  const companyID = user?.companyID;
+  const companyID = user?.activeID;
   firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
   .then((getStatus)=>{
       if(getStatus.status === 200){
@@ -61,7 +61,7 @@ const handleSubmit = useCallback((e) => {
       }
   });
 
-}, [trackSolarData, inspectionByAEQCOnSite, inspectionFileSign, inspectionReportSendAEQC, MNREInspectionApproved, setTrackSolarData, user?.companyID]);
+}, [trackSolarData, inspectionByAEQCOnSite, inspectionFileSign, inspectionReportSendAEQC, MNREInspectionApproved, user, setTrackSolarData]);
 
 
 

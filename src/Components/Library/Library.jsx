@@ -24,8 +24,8 @@ const Library = () => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
-        if (user?.companyID) {
-            firestore.getOneData("Library", user?.companyID)
+        if (user?.activeID) {
+            firestore.getOneData("Library", user?.activeID)
                 .then((cre) => {
                     const inputData = cre?.[selectInput]
                     setAllData(cre);
@@ -33,7 +33,7 @@ const Library = () => {
                 })
         }
 
-    }, [selectInput, user?.companyID])
+    }, [selectInput, user])
 
 
     const handleSubmit = () => {
@@ -44,7 +44,7 @@ const Library = () => {
             if(Object.keys(allData).length > 0){
                 console.log(alreadyData);
                 
-                firestore.updateData("Library", { ...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
+                firestore.updateData("Library", { ...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.activeID)
                 .then((cre) => {
                     if (cre.status === 200) {
                         setIsLoading(false)
@@ -60,7 +60,7 @@ const Library = () => {
                     }
                 });
             } else{
-                firestore.addData("Library", {...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.companyID)
+                firestore.addData("Library", {...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.activeID)
                 .then((cre) => {
                     if (cre.status === 200) {
                         setIsLoading(false)
@@ -93,7 +93,7 @@ const Library = () => {
         if (alreadyData.includes(selectedItem)) {
             // Remove the item and update the state
             const updatedData = alreadyData.filter((item) => item !== selectedItem);
-            firestore.updateData("Library", { [selectInput]: [...updatedData] }, user?.companyID)
+            firestore.updateData("Library", { [selectInput]: [...updatedData] }, user?.activeID)
                 .then((cre) => {
                     if (cre.status === 200) {
                         setAlreadyData(updatedData);

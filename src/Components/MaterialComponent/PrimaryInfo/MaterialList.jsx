@@ -26,8 +26,8 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
 
     // get Library data 
     useEffect(()=>{
-        if(user?.companyID){
-            firestore.getOneData("Library",user?.companyID)
+        if(user?.activeID){
+            firestore.getOneData("Library",user?.activeID)
             .then((cre)=>{
                 setMaterialData(cre?.[`${type} Material`]) // set material data
                 setUnitData(cre?.["Units"]) // set units data
@@ -81,7 +81,7 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
                     }
 
                 }
-                firestore.addData(user?.companyID+"MaterialList",updatedTrackSolarData,trackSolarData?.Id)
+                firestore.addData(user?.activeID+"MaterialList",updatedTrackSolarData,trackSolarData?.Id)
                 .then((cre)=>{
                     console.log(cre);
                     if(cre.status === 200){

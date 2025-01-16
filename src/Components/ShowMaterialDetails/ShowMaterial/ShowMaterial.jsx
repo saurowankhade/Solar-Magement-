@@ -44,8 +44,8 @@ const ShowMaterial = () => {
  
   // const { data } = useFirestoreDocuments("MaterialList");
   useEffect(() => {
-    if (user?.companyID ) {
-      firestore.getAllDocuments(user?.companyID+"MaterialList")
+    if (user?.activeID ) {
+      firestore.getAllDocuments(user?.activeID+"MaterialList")
       .then((status)=>{
         console.log("Status : ",status);
         
@@ -215,7 +215,7 @@ const ShowMaterial = () => {
               trackDataDoublicate.length > 0 ?
 
                 trackDataDoublicate.map((map, index) => (
-                  <TableBody key={map?.id} getData={map} index={index + 1} collectionId={user?.companyID + "MaterialList"} />
+                  <TableBody key={map?.id} getData={map} index={index + 1} collectionId={user?.activeID + "MaterialList"} />
                 ))
                 :
                 <tbody className="w-full border-b">

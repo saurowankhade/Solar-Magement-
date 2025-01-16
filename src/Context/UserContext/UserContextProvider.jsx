@@ -8,11 +8,13 @@ const UserContextProvider = ({children})=>{
 
     useEffect(()=>{
       const userId = authentication.userID();      
-        const userData = firestore.getUserData(userId);
-        userData.then((userCri)=>{
-          setUser(userCri)
-        })
+         firestore.subscribeToUserData(userId,setUser);
+        // userData.then((userCri)=>{
+        //   setUser(userCri)
+        // })
       },[setUser])
+
+
     return (
         <UserContext.Provider value={{user,setUser}}>
 

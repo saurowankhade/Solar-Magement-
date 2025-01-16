@@ -62,7 +62,7 @@ const ShowAcivity = () => {
   // },[user])
   const { data } = useFirestoreDocuments("SolarData");
   useEffect(() => {
-    if (user?.companyID && data) {
+    if (user?.activeID && data) {
       setTrackData(data)
       setTrackDataDoublicate(data)
     }
@@ -401,7 +401,7 @@ const ShowAcivity = () => {
                 trackDataDoublicate.length > 0 ?
 
                   trackDataDoublicate.map((map, index) => (
-                    <TableBody key={map?.id} getData={map?.data} index={index + 1} collectionId={user?.companyID + "TrackSolarData"} />
+                    <TableBody key={map?.id} getData={map?.data} index={index + 1} collectionId={user?.activeID + "TrackSolarData"} />
                   ))
                   :
                   <tbody className="w-full border-b">

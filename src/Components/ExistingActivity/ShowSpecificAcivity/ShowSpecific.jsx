@@ -23,8 +23,8 @@ const ShowSpecific = () => {
   const [showPage,setShowPage] = useState(0);
   
   useEffect(()=>{
-    if(user?.companyID){
-    const companyID = user?.companyID;
+    if(user?.activeID){
+    const companyID = user?.activeID;
     firestore.getOneData(companyID + "TrackSolarData",Id)
       .then((data)=>{
           setTrackSolarData(data?.data);

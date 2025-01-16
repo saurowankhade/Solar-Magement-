@@ -19,8 +19,8 @@ const ShowOneList = () => {
   const [materialType, setMaterialType] = useState("AddMaterial");
 
   useEffect(() => {
-    if (user?.companyID) {
-      const companyID = user?.companyID;
+    if (user?.activeID) {
+      const companyID = user?.activeID;
       firestore.getOneData(companyID + "MaterialList", Id)
         .then((data) => {
           setTrackSolarData(data);

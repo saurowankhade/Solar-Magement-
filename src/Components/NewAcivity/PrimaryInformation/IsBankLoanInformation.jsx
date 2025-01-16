@@ -65,7 +65,7 @@ const handleSubmit = useCallback((e) => {
 
 
 
-  const companyID = user?.companyID;
+  const companyID = user?.activeID;
   firestore.addData(companyID + "TrackSolarData", {"data":updatedTrackSolarData}, trackSolarData?.Id)
   .then((getStatus)=>{
       if(getStatus.status === 200){

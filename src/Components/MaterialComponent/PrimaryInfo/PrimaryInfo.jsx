@@ -30,8 +30,8 @@ const PrimaryInfo = () => {
 
 
     useEffect(()=>{
-        if(user?.companyID){
-            firestore.getConsumerDetails(user?.companyID+"TrackSolarData")
+        if(user?.activeID){
+            firestore.getConsumerDetails(user?.activeID+"TrackSolarData")
             .then((cre)=>{
                 if(cre.status === 200){
                     setConsumerDetails(cre?.data)
@@ -40,7 +40,7 @@ const PrimaryInfo = () => {
                     toast.error("Failed to load : ",cre?.message)
                 }
             })
-            firestore.getOneData("Library",user?.companyID)
+            firestore.getOneData("Library",user?.activeID)
             .then((cre)=>{
                 setAllLibrary(cre)
             })
@@ -52,7 +52,7 @@ const PrimaryInfo = () => {
         setDriverNameData(allLibrary?.["Driver Name"])
         setTeamNameData(allLibrary?.["Team Name"])
         setVehicleNameData(allLibrary?.["Vehicle Name"])
-    },[allLibrary, user?.companyID])
+    },[allLibrary, user?.activeID])
 
     useEffect(()=>{
         if(trackSolarData){
@@ -95,7 +95,7 @@ const PrimaryInfo = () => {
                    },
                     
                 }
-                firestore.addData(user?.companyID+"MaterialList",updatedTrackSolarData,updatedTrackSolarData?.Id)
+                firestore.addData(user?.activeID+"MaterialList",updatedTrackSolarData,updatedTrackSolarData?.Id)
                 .then((cre)=>{
                     console.log(cre);
                     

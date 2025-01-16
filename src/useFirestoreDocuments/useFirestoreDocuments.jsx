@@ -11,9 +11,9 @@ export function useFirestoreDocuments(collectionName) {
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        if (user?.companyID) {
+        if (user?.activeID) {
             const collectionNameToUse = collectionName === 'SolarData'
-                ? `${user.companyID}TrackSolarData`
+                ? `${user.activeID}TrackSolarData`
                 : collectionName;
                 
             setCollectionRef(collectionNameToUse);

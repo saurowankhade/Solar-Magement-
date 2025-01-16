@@ -19,12 +19,28 @@ class Authentication  {
                 email:email,
                 jobProfile:jobProfile,
                 verified:verified,
-                companyID:companyID,
+                companyID:[companyID],
+                activeID:companyID,
                 userID:user.uid,
                 userImg:"",
                 mobileNoVerify:false,
                 isCmp:isCmp
                });
+
+               if(isCmp){
+                const planEnd = new Date();
+                planEnd.setDate(planEnd.getDate() + 20);
+                setDoc(doc(db,"CompanyRegister",companyID),{
+                  name:name,
+                  mobileNo:mobileNo,
+                  email:email,
+                  companyID:companyID,
+                  isPaid:false,
+                  RegisterAt: new Date(),
+                  PlanStart: new Date(),
+                  PlanEnd : planEnd
+                 });
+               }
 
                return {status:200,message:"Done",userId:user?.uid};
 
