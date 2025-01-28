@@ -69,7 +69,7 @@ function App() {
        draggablePercent={20}
        />
        </div>
-       </div>
+   </div>
    
   )
 }

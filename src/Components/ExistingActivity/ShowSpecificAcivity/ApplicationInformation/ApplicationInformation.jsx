@@ -4,7 +4,7 @@ import WhoAddData from "../WhoAddData/WhoAddData";
 
 const ApplicationInformation = () => {
     const {trackSolarData} = useContext(TrackSolarContext);
-    const{ConsumerNumber,MNREApplicationNumber,PVApplicationNumber,PVTechnicalFeasibility,MNRETechnicalFeasibility,ApplicationInfromation,BillUnit} = trackSolarData;
+    const{ConsumerNumber,MNREApplicationNumber,PVApplicationNumber,ApplicationInfromation,BillUnit} = trackSolarData;
   return (
     <div>
 
@@ -34,7 +34,7 @@ const ApplicationInformation = () => {
             <span className="text-base font-bold">PV Application Number : </span> 
             <span className={`${PVApplicationNumber ? "text-blue-800" : "text-red-800"}`}>{PVApplicationNumber || "Not yet"}</span>
            </div>
-
+{/* 
            <div className="mt-2">
             <span className="text-base font-bold">PV Technical Feasibility : </span> 
             <span className={`${PVTechnicalFeasibility ? "text-blue-800" : "text-red-800"}`}>{PVTechnicalFeasibility ? "Done" : "Pending"}</span>
@@ -43,7 +43,7 @@ const ApplicationInformation = () => {
            <div className="mt-2">
             <span className="text-base font-bold">MNRE Technical Feasibility : </span> 
             <span className={`${MNRETechnicalFeasibility ? "text-blue-800" : "text-red-800"}`}>{MNRETechnicalFeasibility ? "Done" : "Pending"}</span>
-           </div>
+           </div> */}
            
       </div>
     </div>

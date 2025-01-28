@@ -31,7 +31,7 @@ export const data = (data)=>{
       },
       title: {
         display: true,
-        text: `Monthly Enquiries for the year ${new Date().getFullYear()}`,
+        text: `Monthly Registration for the year ${new Date().getFullYear()}`,
         font: {
           size: 14, // Font size in pixels
           weight: 'bold', // Font weight (e.g., 'normal', 'bold', 'bolder', or numeric values)

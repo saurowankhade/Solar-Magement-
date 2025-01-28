@@ -11,8 +11,8 @@ const ApplicationInformation = () => {
   const [billUnit,setBillUnit] = useState("");
   const [MNREAppliactionNumber,setMNREApplicationNumber] = useState("");
   const [PVAppliactionNumber,setPVApplicationNumber] = useState("");
-  const [PVTechnicalFeasibility,setPVTechnicalFeasibility] = useState(false);
-  const [MNRETechnicalFeasibility,setMNRETechnicalFeasibility] = useState(false);
+  // const [PVTechnicalFeasibility,setPVTechnicalFeasibility] = useState(false);
+  // const [MNRETechnicalFeasibility,setMNRETechnicalFeasibility] = useState(false);
   const {user} = useContext(UserContext);
   const {trackSolarData,setTrackSolarData} = useContext(TrackSolarContext);
   const [isLoading,setIsLoading] = useState(false)
@@ -24,8 +24,8 @@ const ApplicationInformation = () => {
         setBillUnit(trackSolarData?.BillUnit || "");
         setMNREApplicationNumber(trackSolarData?.MNREApplicationNumber || "");
         setPVApplicationNumber(trackSolarData?.PVApplicationNumber || "");
-        setPVTechnicalFeasibility(trackSolarData?.PVTechnicalFeasibility || false);
-        setMNRETechnicalFeasibility(trackSolarData?.MNRETechnicalFeasibility || false);
+        // setPVTechnicalFeasibility(trackSolarData?.PVTechnicalFeasibility || false);
+        // setMNRETechnicalFeasibility(trackSolarData?.MNRETechnicalFeasibility || false);
     }
 },[trackSolarData]);
 
@@ -40,12 +40,12 @@ const handleSubmit = useCallback((e) => {
       BillUnit:billUnit,
       MNREApplicationNumber:MNREAppliactionNumber ,
       PVApplicationNumber:PVAppliactionNumber,
-      PVTechnicalFeasibility:PVTechnicalFeasibility,
-      MNRETechnicalFeasibility:MNRETechnicalFeasibility,
+      // PVTechnicalFeasibility:PVTechnicalFeasibility,
+      // MNRETechnicalFeasibility:MNRETechnicalFeasibility,
       ApplicationInfromation : {
         createdBy:trackSolarData?.ApplicationInfromation?.createdBy || user,
         createdAt:trackSolarData?.ApplicationInfromation?.createdAt || new Date(),
-        isDone:((consumerNo && billUnit && MNREAppliactionNumber && PVAppliactionNumber)&&(PVTechnicalFeasibility|| MNRETechnicalFeasibility) ? true : false)
+        isDone:((consumerNo && billUnit && MNREAppliactionNumber && PVAppliactionNumber) ? true : false)
     }
   };
 
@@ -63,7 +63,7 @@ const handleSubmit = useCallback((e) => {
       }
   });
 
-}, [trackSolarData,billUnit, user,consumerNo, MNREAppliactionNumber, PVAppliactionNumber, PVTechnicalFeasibility, MNRETechnicalFeasibility, setTrackSolarData]);
+}, [trackSolarData,billUnit, user,consumerNo, MNREAppliactionNumber, PVAppliactionNumber, setTrackSolarData]);
 
 
   
@@ -82,17 +82,18 @@ const handleSubmit = useCallback((e) => {
         </div>
 
 
-        <div className="flex flex-wrap gap-2 my-2">
+        {/* <div className="flex flex-wrap gap-2 my-2">
                <div className=" w-full p-2 rounded-full border flex items-center hover:border hover:border-gray-500">
                 <input className="cursor-pointer" type="checkbox" name="PVTechnicalFeasibility" id="PVTechnicalFeasibility" checked={PVTechnicalFeasibility} onChange={(e)=>{setPVTechnicalFeasibility(e.target.checked)}}  />
                 <label className=" px-2 py01 text-base cursor-pointer text-black" htmlFor="PVTechnicalFeasibility">PV Technical Feasibility</label>
                 </div> 
 
                 <div className=" w-full p-2 my-2 rounded-full border  flex flex-row items-center hover:border hover:border-gray-500">
+                
                 <input className="cursor-pointer " type="checkbox" name="MNRETechnicalFeasibility" id="MNRETechnicalFeasibility"  checked={MNRETechnicalFeasibility} onChange={(e)=>{setMNRETechnicalFeasibility(e.target.checked)}}   />
                 <label className=" px-2 py01 text-base cursor-pointer text-black" htmlFor="MNRETechnicalFeasibility">MNRE Technical Feasibility</label>
                 </div> 
-               </div>
+               </div> */}
 
 
 
