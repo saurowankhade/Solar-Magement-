@@ -12,6 +12,7 @@ function RegisterUsers() {
     const {user} = useContext(UserContext);
     // const {allUser,setAllUser} = useContext(ShowAllUserContext);
     const {allUser,setAllUser} = useContext(ShowAllUserContext);
+    
     useEffect(()=>{
       firestore.getAllDocuments("Users")
       .then((status)=>{        
@@ -28,7 +29,7 @@ function RegisterUsers() {
     },[allUser])
 
   return (
-    <div className="">
+    <div className="mt-5">
         <h3 className="p-2 text-2xl text-center">Users Data </h3>
         {/* {
           console.log();

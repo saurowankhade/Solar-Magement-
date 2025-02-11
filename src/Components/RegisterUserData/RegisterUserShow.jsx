@@ -1,70 +1,176 @@
 import { toast } from "react-toastify";
 import firestore from "../../Firebase/Firestore";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Loading from "react-loading";
+import Swal from "sweetalert2";
+import UserContext from "../../Context/UserContext/UserContext";
 
-function RegisterUserShow({getData}) {
-    const {name,email,mobileNo,jobProfile,userImg,verified,userID,companyID,isCmp,activeID} = getData;
-    const [isLoading,setIsLoading] = useState(false);
-   const handleRightButton = ()=>{
-    setIsLoading(true)
-    firestore.addData("Users",{
-        name:name,
-        activeID:activeID,
-        mobileNo:mobileNo,
-        email:email,
-        jobProfile:jobProfile,
-        companyID:companyID,
-        userID:userID,
-        userImg:userImg,
-        mobileNoVerify:false,
-        isCmp:isCmp,
-        verified:true
-    },userID)
-    .then((status)=>{
-        if(status.status === 200){
-            toast.success("Added!")
-            window.location.reload();
-            
-        } else{
-            toast.error("Failed")
-        }
-        setIsLoading(false)
+function RegisterUserShow({ getData   }) {
+    const { name, email, mobileNo, jobProfile, userImg, verified, userID, companyID, isCmp, activeID } = getData;
+    const [isLoading, setIsLoading] = useState(false);
+    const [showMore, setShowMore] = useState(false);
+    const {user} = useContext(UserContext);
+    const handleRightButton = () => {
+
+        if(verified){
+            toast.info("Already Verified!")
+        } else if(user?.jobProfile === 'Admin' && user?.verified){
+            Swal.fire({
+                title: "Are you sure to verify ?",
+                showDenyButton: true,
+                confirmButtonText: "Yes",
+                denyButtonText: `No`, customClass: {
+                  confirmButton: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded',
+                  denyButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+                }
+              }).then((result)=>{
+                if(result.isConfirmed){
+                    firestore.updateData("Users", {
+                        verified: true}
+                        , userID)
+                        .then((status) => {
+                            if (status.status === 200) {
+                                toast.success("Added!")
+                                window.location.reload();
+                            } else {
+                                toast.error("Failed")
+                            }
+                            setIsLoading(false)
         
-    }).catch((error)=>{
-        toast.error(error.message)
-    })
-    }
-    const handleWrongButton = ()=>{
-        const added = firestore.updateDocument("Users",userID,{verified:false});
-    added.then(()=>{
-        toast.success("Added!")
-        window.location.reload();
-    }).catch((error)=>{
-        toast.error(error.message)
-    })
-    }
-  return (
-    <div className="border w-full shadow-md p-3 flex flex-col gap-3 mt-3">
-        <div className="flex justify-between">
-        <p>Name : {name} </p>
-        {
-            verified ? 
-            <p className="text-2xl cursor-pointer" title="Verified">✅</p> 
-            : 
-            isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'4%'} width={'4%'} /> :  
-                          
-            <span className="flex gap-2">
-            <p className="text-2xl cursor-pointer" onClick={handleWrongButton}>❌</p>
-            <p className="text-2xl cursor-pointer" onClick={handleRightButton}>✅</p>
-           </span>
+                        }).catch((error) => {
+                            toast.error(error.message)
+                        })
+                }
+              })
+
+        } else{
+            toast.error("Sorry you can`t verify!")
         }
+       
+        
+    }
+
+    const handleDelete = () => {
+        if(user?.jobProfile === 'Admin' && !isCmp ){
+            Swal.fire({
+                title: "Are you sure to delete ?",
+                showDenyButton: true,
+                confirmButtonText: "Yes",
+                denyButtonText: `No`, customClass: {
+                  confirmButton: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded',
+                  denyButton: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+                }
+              }).then((result)=>{
+                if(result.isConfirmed){
+                    firestore.updateData("Users", {
+                        activeID:'',
+                        companyID:[],
+                        verified: false}
+                        , userID)
+                        .then((status) => {
+                            if (status.status === 200) {
+                                toast.success("Removed!")
+                                window.location.reload();
+                            } else {
+                                toast.error("Failed")
+                            }
+                            setIsLoading(false)
+        
+                        }).catch((error) => {
+                            toast.error(error.message)
+                        })
+                }
+              })
+
+        } else{
+            toast.error("Sorry you can`t delete!");
+        }
+    }
+    return (
+        <div className="border mt-3 w-full shadow-md p-3 flex flex-col gap-3 ">
+            <div className="flex justify-between">
+                <p>Name : {name} </p>
+                   
+                        <div className="flex ">
+                           {
+                            verified ?  <svg width="24" height="24" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clipPath="url(#clip0_708_14)">
+                                <path d="M56.4801 17.3696C56.1043 14.5177 54.5986 11.4652 52.0659 8.93317C49.5347 6.40184 46.4829 4.89623 43.6316 4.52048C42.3415 4.35005 40.6188 3.63755 39.5863 2.84501C37.3033 1.09439 34.0805 0 30.4999 0C26.9194 0 23.6965 1.09439 21.4136 2.84501C20.3811 3.63687 18.6583 4.35005 17.3683 4.52048C14.5169 4.89623 11.4652 6.40195 8.93386 8.93317C6.40116 11.4652 4.89543 14.5176 4.51979 17.3696C4.35005 18.6597 3.63687 20.3818 2.84501 21.4136C1.09382 23.6958 0 26.9194 0 30.4999C0 34.0805 1.09382 37.304 2.84501 39.5863C3.63755 40.6188 4.35005 42.3402 4.51979 43.63C4.89554 46.4821 6.40116 49.5347 8.93386 52.0665C11.4652 54.5979 14.5169 56.1037 17.3683 56.4793C18.6583 56.6496 20.3811 57.3628 21.4136 58.1547C23.6958 59.9053 26.9187 60.9998 30.4999 60.9998C34.0812 60.9998 37.3033 59.9053 39.5863 58.1547C40.6188 57.3628 42.3415 56.6496 43.6316 56.4793C46.4828 56.1035 49.5347 54.5978 52.0659 52.0665C54.5986 49.5346 56.1043 46.4821 56.4801 43.63C56.6497 42.3401 57.363 40.6181 58.1548 39.5863C59.9061 37.304 60.9999 34.0811 60.9999 30.4999C60.9999 26.9194 59.9061 23.6958 58.1548 21.4136C57.3623 20.3818 56.6497 18.6597 56.4801 17.3696ZM49.9396 20.5133L28.0223 42.4306L24.5155 45.9375C23.5469 46.9062 21.9772 46.9062 21.0087 45.9375L17.5019 42.4306L11.0595 35.9891C10.091 35.0204 10.091 33.4508 11.0595 32.4821L14.5663 28.9755C15.5349 28.0069 17.1046 28.0069 18.0732 28.9755L22.7614 33.6636L42.9254 13.4997C43.894 12.5312 45.4636 12.5312 46.4323 13.4997L49.939 17.0065C50.9081 17.975 50.9081 19.5455 49.9396 20.5133Z" fill="#F7AB0D" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_708_14">
+                                    <rect width="61" height="61" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg> : 
+                        
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.2217 6.83397C22.0739 5.71189 21.4815 4.5109 20.485 3.5147C19.4891 2.51876 18.2884 1.92639 17.1666 1.77855C16.659 1.7115 15.9812 1.43117 15.575 1.11935C14.6768 0.430581 13.4088 0 12 0C10.5912 0 9.32325 0.430581 8.42505 1.11935C8.0188 1.4309 7.34099 1.7115 6.83343 1.77855C5.71157 1.92639 4.5109 2.51881 3.51497 3.5147C2.51849 4.5109 1.92607 5.71184 1.77828 6.83397C1.7115 7.34153 1.4309 8.01907 1.11935 8.42505C0.430358 9.32294 0 10.5912 0 12C0 13.4088 0.430358 14.677 1.11935 15.575C1.43117 15.9812 1.7115 16.6585 1.77828 17.1659C1.92612 18.2881 2.51849 19.4891 3.51497 20.4852C4.5109 21.4812 5.71157 22.0736 6.83343 22.2214C7.34099 22.2884 8.0188 22.569 8.42505 22.8806C9.32294 23.5693 10.591 24 12 24C13.409 24 14.6768 23.5693 15.575 22.8806C15.9812 22.569 16.659 22.2884 17.1666 22.2214C18.2883 22.0736 19.4891 21.4811 20.485 20.4852C21.4815 19.4891 22.0739 18.2881 22.2217 17.1659C22.2885 16.6584 22.5691 15.9809 22.8806 15.575C23.5696 14.677 24 13.409 24 12C24 10.5912 23.5696 9.32294 22.8806 8.42505C22.5688 8.01907 22.2885 7.34153 22.2217 6.83397ZM19.6484 8.07082L11.0252 16.694L9.64545 18.0738C9.26438 18.4549 8.64678 18.4549 8.26572 18.0738L6.88599 16.694L4.3513 14.1597C3.97024 13.7786 3.97024 13.161 4.3513 12.7799L5.73103 11.4002C6.1121 11.0191 6.7297 11.0191 7.11076 11.4002L8.95534 13.2447L16.8887 5.31137C17.2698 4.9303 17.8874 4.9303 18.2685 5.31137L19.6482 6.6911C20.0294 7.07216 20.0295 7.69003 19.6484 8.07082Z" fill="#FF0000"/>
+<path d="M19.381 5.1416C19.1399 4.8844 18.8499 4.67964 18.5287 4.53974C18.2074 4.39984 17.8616 4.3277 17.5121 4.3277C17.1626 4.3277 16.8168 4.39984 16.4955 4.53974C16.1743 4.67964 15.8843 4.8844 15.6432 5.1416L11.7719 9.07744L8.03417 5.27732C7.53681 4.78178 6.86718 4.50581 6.17081 4.50938C5.47444 4.51296 4.80759 4.79579 4.31517 5.29642C3.82276 5.79704 3.54457 6.47502 3.54105 7.183C3.53753 7.89099 3.80897 8.57178 4.29639 9.07744L8.03417 12.8776L4.29639 16.6777C3.80897 17.1833 3.53753 17.8641 3.54105 18.5721C3.54457 19.2801 3.82276 19.9581 4.31517 20.4587C4.80759 20.9593 5.47444 21.2422 6.17081 21.2457C6.86718 21.2493 7.53681 20.9733 8.03417 20.4778L11.7719 16.6777L15.5097 20.4778C16.0071 20.9733 16.6767 21.2493 17.3731 21.2457C18.0695 21.2422 18.7363 20.9593 19.2287 20.4587C19.7211 19.9581 19.9993 19.2801 20.0028 18.5721C20.0064 17.8641 19.7349 17.1833 19.2475 16.6777L15.5097 12.8776L19.2475 9.07744C19.7481 8.55625 20.0392 7.86382 20.0639 7.1358C20.0886 6.40778 19.8451 5.69661 19.381 5.1416Z" fill="#FF0000"/>
+<path d="M22.4523 8.02352C22.3472 7.68699 22.1754 7.3764 21.9471 7.11057C21.7188 6.84474 21.4389 6.6292 21.1243 6.47702C20.8097 6.32484 20.4669 6.23918 20.1168 6.22523C19.7667 6.21129 19.4165 6.26935 19.0875 6.39589L13.8886 8.25321L12.1786 3.20467C11.9467 2.542 11.4641 2.00198 10.8356 1.70196C10.2072 1.40194 9.48371 1.36616 8.82244 1.60241C8.16116 1.83866 7.6155 2.32784 7.30404 2.96364C6.99258 3.59945 6.94048 4.3305 7.15907 4.99795L8.86908 10.0465L3.84951 11.8398C3.19054 12.0827 2.64974 12.5774 2.34461 13.2162C2.03948 13.8551 1.99468 14.5866 2.21996 15.2517C2.44524 15.9168 2.92238 16.4617 3.54771 16.7682C4.17303 17.0747 4.89601 17.1178 5.55953 16.8883L10.5791 15.095L12.2891 20.1436C12.5211 20.8062 13.0037 21.3463 13.6321 21.6463C14.2606 21.9463 14.984 21.9821 15.6453 21.7458C16.3066 21.5096 16.8522 21.0204 17.1637 20.3846C17.4752 19.7488 17.5273 19.0177 17.3087 18.3503L15.5987 13.3017L20.6182 11.5085C21.2958 11.2573 21.8594 10.7607 22.1987 10.1161C22.5379 9.47148 22.6284 8.72523 22.4523 8.02352Z" fill="#FF0000"/>
+<path d="M18.9543 5.70034C18.7419 5.47902 18.4864 5.30284 18.2034 5.18245C17.9204 5.06207 17.6157 5 17.3079 5C17 5 16.6953 5.06207 16.4123 5.18245C16.1293 5.30284 15.8739 5.47902 15.6615 5.70034L12.2511 9.08699L8.95825 5.81712C8.5201 5.39072 7.93019 5.15326 7.31672 5.15633C6.70325 5.15941 6.11579 5.40278 5.682 5.83355C5.2482 6.26432 5.00313 6.84769 5.00003 7.45689C4.99693 8.06609 5.23606 8.65188 5.66545 9.08699L8.95825 12.3569L5.66545 15.6267C5.23606 16.0618 4.99693 16.6476 5.00003 17.2568C5.00313 17.866 5.2482 18.4494 5.682 18.8802C6.11579 19.3109 6.70325 19.5543 7.31672 19.5574C7.93019 19.5605 8.5201 19.323 8.95825 18.8966L12.2511 15.6267L15.5439 18.8966C15.982 19.323 16.5719 19.5605 17.1854 19.5574C17.7989 19.5543 18.3863 19.3109 18.8201 18.8802C19.2539 18.4494 19.499 17.866 19.5021 17.2568C19.5052 16.6476 19.2661 16.0618 18.8367 15.6267L15.5439 12.3569L18.8367 9.08699C19.2777 8.63852 19.5341 8.04271 19.5559 7.41628C19.5777 6.78984 19.3631 6.1779 18.9543 5.70034Z" fill="white"/>
+</svg>
+
+
+                           }
+
+                            {/* More Options */}
+                            <svg className="cursor-pointer" onClick={() => { setShowMore(!showMore) }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 20C11.45 20 10.9792 19.8042 10.5875 19.4125C10.1958 19.0208 10 18.55 10 18C10 17.45 10.1958 16.9792 10.5875 16.5875C10.9792 16.1958 11.45 16 12 16C12.55 16 13.0208 16.1958 13.4125 16.5875C13.8042 16.9792 14 17.45 14 18C14 18.55 13.8042 19.0208 13.4125 19.4125C13.0208 19.8042 12.55 20 12 20ZM12 14C11.45 14 10.9792 13.8042 10.5875 13.4125C10.1958 13.0208 10 12.55 10 12C10 11.45 10.1958 10.9792 10.5875 10.5875C10.9792 10.1958 11.45 10 12 10C12.55 10 13.0208 10.1958 13.4125 10.5875C13.8042 10.9792 14 11.45 14 12C14 12.55 13.8042 13.0208 13.4125 13.4125C13.0208 13.8042 12.55 14 12 14ZM12 8C11.45 8 10.9792 7.80417 10.5875 7.4125C10.1958 7.02083 10 6.55 10 6C10 5.45 10.1958 4.97917 10.5875 4.5875C10.9792 4.19583 11.45 4 12 4C12.55 4 13.0208 4.19583 13.4125 4.5875C13.8042 4.97917 14 5.45 14 6C14 6.55 13.8042 7.02083 13.4125 7.4125C13.0208 7.80417 12.55 8 12 8Z" fill="#1D1B20" />
+                            </svg>
+
+                            {
+                                showMore &&
+
+                                <div
+                                    className={`absolute right-4 my-8  z-50   text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow  sm:right-1 md:right-4  lg:right-4 `}
+                                    id="user-dropdown"
+                                >
+                                    <ul className="py-2" aria-labelledby="user-menu-button">
+                                        <li>
+                                            <a onClick={() => {
+                                                handleRightButton()
+                                            }} className="flex cursor-pointer gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clipPath="url(#clip0_709_20)">
+                                                        <path d="M12 0C5.38308 0 0 5.38333 0 12C0 18.6167 5.38308 24 12 24C18.6169 24 24 18.6167 24 12C24 5.38333 18.6169 0 12 0ZM12 21.5573C6.73002 21.5573 2.44275 17.27 2.44275 12C2.44275 6.73002 6.73002 2.44275 12 2.44275C17.27 2.44275 21.5573 6.73002 21.5573 12C21.5573 17.27 17.27 21.5573 12 21.5573Z" fill="black" />
+                                                        <path d="M18.8816 8.06766L17.3486 6.53435C17.2406 6.42638 17.0488 6.42638 16.9411 6.53435L9.69055 13.7849L7.05922 11.1538C6.95149 11.0459 6.75998 11.0459 6.65177 11.1538L5.1187 12.6869C5.06447 12.7411 5.03418 12.8142 5.03418 12.8906C5.03418 12.9671 5.06447 13.0404 5.1187 13.0943L9.48682 17.4622C9.543 17.5182 9.61653 17.5467 9.69055 17.5467C9.76407 17.5467 9.83809 17.5187 9.89427 17.4622L18.8816 8.47487C18.9359 8.42088 18.9664 8.3476 18.9664 8.27114C18.9664 8.19468 18.9359 8.12164 18.8816 8.06766Z" fill="black" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_709_20">
+                                                            <rect width="24" height="24" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+
+                                                <span>Verify</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a onClick={() => {
+                                                handleDelete();
+                                            }} className="flex cursor-pointer gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6H4V4H9V3H15V4H20V6H19V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM17 6H7V19H17V6ZM9 17H11V8H9V17ZM13 17H15V8H13V17Z" fill="#1D1B20" />
+                                                </svg>
+
+                                                <span>Delete</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            }
+
+                        </div>
+            </div>
+            <p>Email : {email}</p>
+            <p>Mobile No : {mobileNo}</p>
+            <p>Job Profile : {jobProfile}</p>
         </div>
-        <p>Email : {email}</p>
-        <p>Mobile No : {mobileNo}</p>
-        <p>Job Profile : {jobProfile}</p>
-    </div>
-  )
+    )
 }
 
 export default RegisterUserShow
