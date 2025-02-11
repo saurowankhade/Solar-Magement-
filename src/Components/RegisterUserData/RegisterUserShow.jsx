@@ -4,12 +4,13 @@ import { useState } from "react";
 import Loading from "react-loading";
 
 function RegisterUserShow({getData}) {
-    const {name,email,mobileNo,jobProfile,userImg,verified,userID,companyID,isCmp} = getData;
+    const {name,email,mobileNo,jobProfile,userImg,verified,userID,companyID,isCmp,activeID} = getData;
     const [isLoading,setIsLoading] = useState(false);
    const handleRightButton = ()=>{
     setIsLoading(true)
     firestore.addData("Users",{
         name:name,
+        activeID:activeID,
         mobileNo:mobileNo,
         email:email,
         jobProfile:jobProfile,
