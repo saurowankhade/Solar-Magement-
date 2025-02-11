@@ -16,7 +16,7 @@ function RegisterUsers() {
       firestore.getAllDocuments("Users")
       .then((status)=>{        
        if(status?.status === 200){
-        const filterData = (status.data).filter((userData) => userData?.companyID === user?.companyID);
+        const filterData = (status.data).filter((userData) => userData?.activeID === user?.activeID);
         setAllUser(filterData) 
 
        } 

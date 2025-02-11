@@ -2,7 +2,7 @@ import { useContext,} from "react";
 import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext";
 
 const PrimaryStipper = ({setShowPage}) => {
-    const processArray = ["Consumer","Load Change","Name Change","Bank Details","Bank Loan"]
+    const processArray = ["Consumer","Name Change","Bank Details","Bank Loan"]
 
 
     const keyArray = ["isMainDone","isLoadChangeDone","isNameChangeDone","isBankDetailsDone","isBankLoanDone"]
