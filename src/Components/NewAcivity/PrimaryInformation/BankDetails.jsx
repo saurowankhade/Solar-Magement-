@@ -65,7 +65,6 @@ const BankDetails = () => {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
                     isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone || false,
-                    isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
                     isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
                     isBankDetailsDone:(bankName && bankHolderName && consumerAccountNumber && IFSCCode && checkORPassbookPhoto ? true : false),
                     isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
