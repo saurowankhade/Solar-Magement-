@@ -32,7 +32,7 @@ const SignUpForm =(props)=>{
   useEffect(()=>{
     firestore.getCompanyIds()
     .then((data)=>{
-      setCompanyIds(data.map((onlyIds)=> onlyIds?.id))
+      setCompanyIds(data.map((onlyIds)=> onlyIds?.companyID))
     });
     
   },[])

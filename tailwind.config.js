@@ -17,11 +17,17 @@ export default {
 
       animation: {
         slide: 'slide 15s linear infinite',
+        fadeInOut: "fadeInOut 1s 1",
+
       },
       keyframes: {
         slide: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-33.33%)' }, // Adjusted to avoid gap
+        },
+        fadeInOut: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
   }

@@ -7,12 +7,13 @@ import { getItem } from "../utils/LocalStorage/localAuth";
 
 const KEY_VAULE = "isLogin";
 class Authentication  {
-
+//register
     async RegisterEmailAndPassword(email,password,name,mobileNo,jobProfile,verified,companyID,isCmp){ 
       try{
         const userCredential = await createUserWithEmailAndPassword(auth,email,password);
             const user = userCredential.user;
             if(user){
+              // user data
                setDoc(doc(db,"Users",user.uid),{
                 name:name,
                 mobileNo:mobileNo,
@@ -27,6 +28,7 @@ class Authentication  {
                 isCmp:isCmp
                });
 
+               // company Register 
                if(isCmp){
                 const planEnd = new Date();
                 planEnd.setDate(planEnd.getDate() + 20);
@@ -38,7 +40,9 @@ class Authentication  {
                   isPaid:false,
                   RegisterAt: new Date(),
                   PlanStart: new Date(),
-                  PlanEnd : planEnd
+                  PlanEnd : planEnd,
+                  parentCompanyID:companyID,
+                  createBy:user.uid
                  });
                }
 
@@ -49,12 +53,10 @@ class Authentication  {
         return {status:500,message:error};
       }
     }
-
+// login 
     async LoginEmailAndPassword(email,password){
         try{
-              const data = await signInWithEmailAndPassword(auth,email,password)
-              // console.log(data);
-              
+              const data = await signInWithEmailAndPassword(auth,email,password)              
               return {status:200,message:"Done",userId:data?.user?.uid};
         } catch(error){
             return {status:500,message:error};
