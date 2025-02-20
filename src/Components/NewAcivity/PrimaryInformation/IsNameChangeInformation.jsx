@@ -54,7 +54,7 @@ const IsNameChangeInformation = ()=>{
     const handleSubmit = (e)=>{
         e.preventDefault();
         toast.dismiss()
-        if(!(trackSolarData?.ConsumerName && ( trackSolarData?.LoadChange===true || trackSolarData?.LoadChange === false) )){
+        if(!(trackSolarData?.ConsumerName)){
             toast.error("Fill all the information",{position:"top-center"});
             return;
         }
@@ -77,13 +77,13 @@ const IsNameChangeInformation = ()=>{
                 createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
               
                 isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone,
-                
-                isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
+
                 isNameChangeDone:isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
                 :   true,
                 isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
                 isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
-                isDone: (trackSolarData?.PrimaryInfromation?.isMainDone) && (trackSolarData?.PrimaryInfromation?.isLoadChangeDone && 
+
+                isDone: (trackSolarData?.PrimaryInfromation?.isMainDone) && (
                 isNameChange ? (isEBill && isStampPaper && isUForm && isPaymentRecipt && isPassPhoto && documents ? true: false)
                 :   true)
                  && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false

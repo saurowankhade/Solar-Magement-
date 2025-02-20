@@ -5,7 +5,7 @@ const PrimaryStipper = ({setShowPage}) => {
     const processArray = ["Consumer","Name Change","Bank Details","Bank Loan"]
 
 
-    const keyArray = ["isMainDone","isLoadChangeDone","isNameChangeDone","isBankDetailsDone","isBankLoanDone"]
+    const keyArray = ["isMainDone","isNameChangeDone","isBankDetailsDone","isBankLoanDone"]
 
     const {trackSolarData} = useContext(TrackSolarContext);
 

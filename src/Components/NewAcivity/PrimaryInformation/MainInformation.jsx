@@ -65,12 +65,13 @@ const MainInformation = () => {
                     createdBy:trackSolarData?.PrimaryInfromation?.createdBy || user,
                     createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
                     isMainDone:(consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState && stampPaper ? true : false),
-                    isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
+                    
+
                     isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
                     isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
                     isBankLoanDone:trackSolarData?.PrimaryInfromation?.isBankLoanDone || false,
                     isDone:  (consumerNameState && consumerAddress && visitState && consumerMobileNumberState && requiredSystemKWState && stampPaper ? true : false)
-                    && trackSolarData?.PrimaryInfromation?.isLoadChangeDone && trackSolarData?.PrimaryInfromation?.isNameChangeDone && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false,
+                     && trackSolarData?.PrimaryInfromation?.isNameChangeDone && trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false,
                 }
             }
             

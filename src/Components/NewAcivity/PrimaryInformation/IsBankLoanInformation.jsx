@@ -34,7 +34,7 @@ useEffect(()=>{
 const handleSubmit = useCallback((e) => {
   e.preventDefault();
   toast.dismiss()
-   if(!(trackSolarData?.ConsumerName && ( trackSolarData?.LoadChange===true || trackSolarData?.LoadChange === false) && (trackSolarData?.NameChange === true || trackSolarData?.NameChange === false))){
+   if(!(trackSolarData?.ConsumerName && (trackSolarData?.NameChange === true || trackSolarData?.NameChange === false))){
     toast.error("Fill all the information",{position:"top-center"});
    } else if(isBankLoan && bankLoanDocuments.length===0){
     toast.error("Select Documents!",{position:'top-right'});
@@ -52,12 +52,10 @@ const handleSubmit = useCallback((e) => {
       createdAt:trackSolarData?.PrimaryInfromation?.createdAt || new Date(),
       isMainDone:trackSolarData?.PrimaryInfromation?.isMainDone,
       
-      isLoadChangeDone:trackSolarData?.PrimaryInfromation?.isLoadChangeDone || false,
       isNameChangeDone:trackSolarData?.PrimaryInfromation?.isNameChangeDone || false,
       isBankDetailsDone:trackSolarData?.PrimaryInfromation?.isBankDetailsDone || false,
       isBankLoanDone:true,
       isDone: trackSolarData?.PrimaryInfromation?.isMainDone &&
-       trackSolarData?.PrimaryInfromation?.isLoadChangeDone && 
        trackSolarData?.PrimaryInfromation?.isNameChangeDone && 
        trackSolarData?.PrimaryInfromation?.isBankDetailsDone ? true : false
   }
