@@ -36,16 +36,18 @@ const MaterialDetails = () => {
               setMaterialContextData={setStructureData}
             />
           ) : showPage === 2 ? (
-            <MaterialList
-              type="Electric Fitting"
-              materialContextData={electricData}
-              setMaterialContextData={setElectricData}
-            />
-          ) : showPage === 3 ? (
+            
             <MaterialList
               type="Concrete"
               materialContextData={concreteData}
               setMaterialContextData={setconcreteData}
+            />
+          ) : showPage === 3 ? (
+
+            <MaterialList
+              type="Electric Fitting"
+              materialContextData={electricData}
+              setMaterialContextData={setElectricData}
             />
           ) : (
             <></>

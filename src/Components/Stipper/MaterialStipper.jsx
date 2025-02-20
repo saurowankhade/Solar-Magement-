@@ -2,9 +2,9 @@ import { useContext, } from "react";
 import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext";
 
 const MaterialStipper = ({ showPage,setShowPage }) => {
-  const processArray = ["Basic ", "Structure ", "Electric Fitting ", "Concrete "]
+  const processArray = ["Basic ", "Structure ","Concrete ", "Electric Fitting ", ]
 
-  const keyArray = ["isBasicDone", "isStructureMaterialDone", "isElectric FittingMaterialDone", "isConcreteMaterialDone"]
+  const keyArray = ["isBasicDone", "isStructureMaterialDone","isConcreteMaterialDone", "isElectric FittingMaterialDone", ]
 
   const { trackSolarData } = useContext(TrackSolarContext);
   
