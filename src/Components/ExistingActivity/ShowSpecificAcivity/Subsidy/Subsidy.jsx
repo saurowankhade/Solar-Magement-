@@ -14,7 +14,7 @@ const Subsidy = () => {
       
              <div className="flex justify-center">
             <div className="p-2  shadow-md border  w-[700px] ">
-            <h3 className="text-center text-xl underline">Site Work Data</h3>
+            <h3 className="text-center text-xl underline">Subsidy</h3>
                 
                  <div className="mt-2">
                   <span className="text-base font-bold">MNRE Subsidy Request : </span> 

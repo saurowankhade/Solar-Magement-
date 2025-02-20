@@ -55,10 +55,11 @@ const ShowSpecific = () => {
       showPage === 1 ? <ApplicationInformation/> :
       showPage === 2 ? <SiteWork/> :
       showPage === 3 ? <Inspection/> :
-      showPage === 4 ? <Meter/> :
-      showPage === 5 ? <NetMettering/> :
-      showPage === 6 ? <Subsidy/> : 
-      showPage === 7 ? <Payment/> : <></>
+      showPage === 4 ? <Inspection/> :
+      showPage === 5 ? <Meter/> :
+      showPage === 6 ? <NetMettering/> :
+      showPage === 7 ? <Subsidy/> : 
+      showPage === 8 ? <Payment/> : <></>
     }
     </div>
     </>

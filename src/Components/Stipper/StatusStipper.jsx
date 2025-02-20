@@ -4,7 +4,7 @@ import TrackSolarContext from "../../Context/TrackSolarContext/TrackSolarContext
 import UserContext from "../../Context/UserContext/UserContext";
 
 const StatusStipper = ({setShowPage,showPage}) => {
-    const [processArray,setProcessArray] = useState(["Primary","Application","Site Work","Installation Data","Inspection","Meter Install","NSC","Subsidy"]);
+    const [processArray,setProcessArray] = useState(["Registration","Application","Site Work","Installation Data","Inspection","Meter Install","NSC","Subsidy"]);
 
     const [keyArray,setkeyArray] = useState(["PrimaryInfromation","ApplicationInfromation","SiteWorkInfromation","InspectionInfromation","MeterInfromation","NetMeteringInfromation","SubsidyInfromation"])
 
