@@ -104,6 +104,29 @@ class Firestore {
           return [];
         }
       }
+
+      async getCompanyIds(){
+        try {
+          // Reference to the collection
+          const collectionRef = collection(db, "CompanyRegister");
+
+      // Get the documents based on the query
+          const snapshot = await getDocs(collectionRef);
+          
+          if (snapshot.empty) {
+            console.log('No matching documents.');
+            return [];
+          }
+      
+          // Map document data
+          const documents = snapshot.docs.map(doc => ({ id: doc.id }));
+          
+          return documents;
+        } catch (error) {
+          console.error('Error fetching documents:', error);
+          return [];
+        }
+      }
      
 
       async getAllDocuments(collectionName) {

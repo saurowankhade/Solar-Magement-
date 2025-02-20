@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import authentication from '../../Firebase/authentication';
 
@@ -6,6 +6,7 @@ import ReactLoading from 'react-loading';
 import { toast } from 'react-toastify';
 import { setItem } from '../../utils/LocalStorage/localAuth';
 import { useNavigate } from 'react-router-dom';
+import firestore from '../../Firebase/Firestore';
 
 // eslint-disable-next-line react/display-name
 const SignUpForm =(props)=>{
@@ -26,9 +27,21 @@ const SignUpForm =(props)=>{
 
   const navigateToDashboard = useNavigate();
 
+  const [companyIds,setCompanyIds] = useState([]);
+
+  useEffect(()=>{
+    firestore.getCompanyIds()
+    .then((data)=>{
+      setCompanyIds(data.map((onlyIds)=> onlyIds?.id))
+    });
+    
+  },[])
+  
+
 
   const handleButtonClick = (event)=>{
     event.preventDefault();
+    setError('')
     const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
     let ranStr = "";
     for(let i=0;i<=4;i++){
@@ -43,8 +56,11 @@ const SignUpForm =(props)=>{
     const verified = isCmpReg ? true : false;
     const companyID = isCmpReg ? mobileNo+ranStr : companyIDRef.current.value;
 
-    if(password.length <=7) setError("Password must be greater than 7!")
-    else if(password !== rePassword) setError("Password not match!") 
+    if(!companyIds.includes(companyID) && !isCmpReg){
+      setError("Check Company Id")
+    }
+    else if(password.length <=7) setError("Password must be greater than 7!")
+    else if(password !== rePassword) setError("Password not match!")
     else {
     setIsLoading(true)
     authentication.RegisterEmailAndPassword(email,password,name,mobileNo,jobProfile,verified,companyID,isCmpReg)

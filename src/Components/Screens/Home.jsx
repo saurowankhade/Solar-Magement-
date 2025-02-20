@@ -172,9 +172,9 @@ const Home = () => {
                     <button onClick={(e) => { handleClick(e) }} className="px-4 py-2 text-sm font-medium text-black border border-black rounded-md hover:bg-[#00000002]">
                         Sign In
                     </button>
-                    <button onClick={(e) => { handleClick(e) }} className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-black">
+                    {/* <button onClick={(e) => { handleClick(e) }} className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-black">
                         Sign Up
-                    </button>
+                    </button> */}
                 </div>
             </header>
 
