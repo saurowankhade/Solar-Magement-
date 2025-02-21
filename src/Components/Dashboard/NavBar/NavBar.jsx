@@ -199,7 +199,7 @@ const NavBar = ({show,setShow}) => {
               </a>
             </li>
             <li>
-              <Link to={'/'} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
+              <Link to={'/dashboard/branches'} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
               <svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 2V14M5 14C3.34315 14 2 15.3431 2 17C2 18.6569 3.34315 20 5 20C6.65685 20 8 18.6569 8 17M5 14C6.65685 14 8 15.3431 8 17M17 8C18.6569 8 20 6.65685 20 5C20 3.34315 18.6569 2 17 2C15.3431 2 14 3.34315 14 5C14 6.65685 15.3431 8 17 8ZM17 8C17 10.3869 16.0518 12.6761 14.364 14.364C12.6761 16.0518 10.3869 17 8 17" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>

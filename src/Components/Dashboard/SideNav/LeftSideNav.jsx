@@ -75,7 +75,7 @@ const LeftSideNav = () => {
 
                 {/* Project overview */}
 
-                <div onClick={handleNavigate('/dashboard/show-existing-acivity')} className="flex md:border-b flex-col items-center md:flex-row md:items-center md:py-2  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleNavigate('/dashboard/show-existing-acivity')} className="flex flex-col items-center md:flex-row md:items-center md:py-2  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
   width={18}
@@ -204,7 +204,7 @@ const LeftSideNav = () => {
 
 
                     <div className="md:flex md:flex-col md:px-4 md:items-start md:space-y-1 flex py-1">
-                        <span className="text-[8px] font-semibold md:text-base text-center md:font-normal md:group-hover:translate-x-2 transform transition-transform duration-300 ease-in-out">Libary</span>
+                        <span className="text-[8px] font-semibold md:text-base text-center md:font-normal md:group-hover:translate-x-2 transform transition-transform duration-300 ease-in-out">Library</span>
                     </div>
                 </div>
 
@@ -250,6 +250,7 @@ const LeftSideNav = () => {
                 {
                     user?.isCmp && (
                         <div onClick={()=>{
+                            navigate('/dashboard/branches')
                         }} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                             {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">

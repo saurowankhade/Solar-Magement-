@@ -10,6 +10,8 @@ class Firestore {
       await setDoc(doc(db, collection, documentID), data);
       return { status: 200, message: 'Data saved!' };
     } catch (error) {
+      console.log(error);
+      
       return { status: 500, message: error,Id:documentID };
     }
   }
@@ -220,8 +222,6 @@ class Firestore {
         }
       }
 
-
-
       async fetchDocuments(collectionName) {
         const collectionRef = collection(db, collectionName);
     
@@ -254,6 +254,32 @@ class Firestore {
             // Optionally, return the unsubscribe function if needed
             return unsubscribe;
         });
+    }
+
+
+    async getAllBranchCompany(userId){
+      try {
+        // Reference to the collection
+        const collectionRef = collection(db, "CompanyRegister");
+
+    const q = query(collectionRef, where("createBy", "==", userId));
+
+    // Get the documents based on the query
+        const snapshot = await getDocs(q);
+        
+        if (snapshot.empty) {
+          console.log('No matching documents.');
+          return [];
+        }
+    
+        // Map document data
+        const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        return documents;
+      } catch (error) {
+        console.error('Error fetching documents:', error);
+        return [];
+      }
     }
 
 

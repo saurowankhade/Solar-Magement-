@@ -33,7 +33,7 @@ const CopyIcon = () => (
   </svg>
 );
 
-const CelebrationUI = ({ id = "ABC-123-XYZ", duration = 6000 , setShowCelebration }) => {
+const CelebrationUI = ({ id = "ABC-123-XYZ", duration = 6000 , showCelebration,setShowCelebration }) => {
   const [confetti, setConfetti] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
   const [copied, setCopied] = useState(false);

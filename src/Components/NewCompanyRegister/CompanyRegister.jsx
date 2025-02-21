@@ -5,11 +5,9 @@ import Loading from 'react-loading';
 import UserContext from '../../Context/UserContext/UserContext';
 import CelebrationUI from './CelebrationUI';
 
-const CompanyRegister = ({showCompany, setShowCompany }) => {
+const CompanyRegister = ({showCompany, setShowCompany ,showCelebration , setShowCelebration,companyId,setCompanyId }) => {
 
     const [isLoading, setIsLoading] = useState(false);
-    const [showCelebration, setShowCelebration] = useState(false);
-    const [companyId, setCompanyId] = useState('');
      
 
     const nameRef = useRef(null);
@@ -24,12 +22,14 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
         firestore.getCompanyIds()
             .then((data) => {
                 setMobileNos(data.map((onlyIds) => onlyIds?.mobileNo))
-            });
+            });  
 
     }, [])
 
     const handleButtonClick = (event) => {
         event.preventDefault();
+        setShowCelebration(true);
+        
         const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         let ranStr = "";
         for (let i = 0; i <= 4; i++) {
@@ -39,12 +39,16 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
         const email = emailRef.current.value;
         const mobileNo = mobileNoRef.current.value;
 
+        setCompanyId(mobileNo+ranStr);
+
         const companyID = mobileNo + ranStr;
         const planEnd = new Date();
         planEnd.setDate(planEnd.getDate() + 20);
-        setCompanyId(companyID);
-
+        console.log('back');
+        // setCompanyId(companyID);
         if (!mobileNos.includes(mobileNo)) {
+            console.log('here');
+            
             setIsLoading(true)
             firestore.addData("CompanyRegister", {
                 name: name,
@@ -55,7 +59,7 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
                 RegisterAt: new Date(),
                 PlanStart: new Date(),
                 PlanEnd: planEnd,
-                parentCompanyID:user?.companyID.filter(name => name.toLowerCase().includes(user?.mobileNo.toLowerCase())),
+                parentCompanyID:user?.companyID.find(name => name.toLowerCase().includes(user?.mobileNo.toLowerCase())) || user?.mobileNo ,
                 createBy:user?.userID
             }, companyID).then((status) => {
                 setIsLoading(false)
@@ -78,8 +82,9 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
         },user?.userID)
         .then((status)=>{
             if(status.status === 200){
-                toast.success("Child Company Register!")
                 setShowCelebration(true);
+                setShowCompany(false)
+                toast.success("Child Company Register!")
             } else{
                 toast.error(status.message)
             }
@@ -90,9 +95,8 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
         })
     }
 
-    return showCelebration ? <CelebrationUI id={companyId} setShowCompany={setShowCelebration} /> : 
-    (
-        <section className={`bg-[#00000016] backdrop-blur-lg h-full w-full absolute ${showCompany ? ' block animate-fadeInOut' : 'hidden'}`}>
+    return(
+        <section className={` overflow-hidden ${showCompany ? ' block animate-fadeInOut' : 'hidden'}`}>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
 
                 <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
@@ -105,7 +109,7 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
                         </svg>
                     </div>
 
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-4">
+                    <div  className="p-6 space-y-4 md:space-y-6 sm:p-4">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                             Child Company Deatils
                         </h1>
@@ -128,7 +132,7 @@ const CompanyRegister = ({showCompany, setShowCompany }) => {
 
                                 {
                                     isLoading ? <Loading type='spinningBubbles' color='black' height={'10%'} width={'10%'} /> :
-                                        <button className='w-full text-[#fafafa] bg-black  focus:outline-none font-medium rounded-lg text-sm px-5 py-2 hover:cursor-pointe' type="submit">Add Child Company</button>
+                                        <button className='w-full text-[#fafafa] bg-black  focus:outline-none font-medium rounded-lg text-sm px-5 py-2 hover:cursor-pointe' type="submit">Add Branch</button>
                                 }
                             </div>
 

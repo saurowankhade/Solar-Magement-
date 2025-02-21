@@ -25,6 +25,7 @@ import LeftSideNav from "./Components/Dashboard/SideNav/LeftSideNav";
 import CommonContext from "./Routing/CommonContext";
 import ShowOneList from "./Components/ShowMaterialDetails/ShowOne/ShowOneList";
 import Profile from "./Components/Profile/Profile";
+import BranchCompany from "./Components/NewCompanyRegister/BranchCompany";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
                 <Route path="show-existing-acivity/:Id" element={<PrivateRoute><TrackSolarContextProvider><ShowSpecific/></TrackSolarContextProvider></PrivateRoute>} ></Route>
                 
                 <Route path="library" element={<PrivateRoute><TrackSolarContextProvider><Library/></TrackSolarContextProvider></PrivateRoute>}/>
+
+                <Route path="branches" element={<PrivateRoute><TrackSolarContextProvider><BranchCompany/></TrackSolarContextProvider></PrivateRoute>}/>
                 
                 <Route path="profile" element={<PrivateRoute><TrackSolarContextProvider><Profile/></TrackSolarContextProvider></PrivateRoute>}/>
               
