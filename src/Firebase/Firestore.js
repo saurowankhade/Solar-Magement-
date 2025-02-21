@@ -180,7 +180,7 @@ class Firestore {
             ConsumerName:doc.data().data.ConsumerName,
             ConsumerAddress:doc.data().data.ConsumerAddress
            }));
-          console.log(documents);
+          // console.log(documents);
       
           return { status: 200, message: "Data", data: documents };
         } catch (error) {
@@ -211,7 +211,7 @@ class Firestore {
             TeamName : doc.data().TeamName,
             Verify : doc.data().Verify
            }));
-          console.log(documents);
+          // console.log(documents);
       
           return { status: 200, message: "Data", data: documents };
         } catch (error) {

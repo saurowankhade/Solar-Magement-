@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../../../Context/UserContext/UserContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import authentication from "../../../Firebase/authentication";
 import { setItem } from "../../../utils/LocalStorage/localAuth";
@@ -199,18 +199,12 @@ const NavBar = ({show,setShow}) => {
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
-              <svg
-      viewBox="0 0 1024 1024"
-      fill="currentColor"
-      height="1em"
-      width="1em"
-    >
-      <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" />
-      <path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z" />
-    </svg>
-                FAQ
-              </a>
+              <Link to={'/'} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">
+              <svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 2V14M5 14C3.34315 14 2 15.3431 2 17C2 18.6569 3.34315 20 5 20C6.65685 20 8 18.6569 8 17M5 14C6.65685 14 8 15.3431 8 17M17 8C18.6569 8 20 6.65685 20 5C20 3.34315 18.6569 2 17 2C15.3431 2 14 3.34315 14 5C14 6.65685 15.3431 8 17 8ZM17 8C17 10.3869 16.0518 12.6761 14.364 14.364C12.6761 16.0518 10.3869 17 8 17" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
+    Branch 
+              </Link>
             </li>
             <li>
               <a onClick={handleSignOut}  className=" flex gap-2 items-center cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

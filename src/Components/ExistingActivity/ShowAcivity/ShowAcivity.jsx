@@ -186,7 +186,7 @@ const ShowAcivity = () => {
   };
 
   useEffect(() => {
-    console.log("Name : ", searchParams.size);
+    
     if(searchParams.size === 0){
       setTrackDataDoublicate(
         trackData.filter(item =>

@@ -54,8 +54,8 @@ const LeftSideNav = () => {
                 <div onClick={handleNavigate('/dashboard/new-acivity')} className="flex md:border-b flex-col items-center md:flex-row md:items-center md:py-2  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
-  width={19}
-  height={27}
+   width={18}
+   height={18}
   viewBox="0 0 19 27"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const LeftSideNav = () => {
 
                 {/* Project overview */}
 
-                <div onClick={handleNavigate('/dashboard/show-existing-acivity')} className="flex flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
+                <div onClick={handleNavigate('/dashboard/show-existing-acivity')} className="flex md:border-b flex-col items-center md:flex-row md:items-center md:py-2  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
   width={18}

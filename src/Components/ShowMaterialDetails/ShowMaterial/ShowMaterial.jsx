@@ -47,7 +47,6 @@ const ShowMaterial = () => {
     if (user?.activeID ) {
       firestore.getAllDocuments(user?.activeID+"MaterialList")
       .then((status)=>{
-        console.log("Status : ",status);
         
         setTrackData(status?.data)
         setTrackDataDoublicate(status?.data)
@@ -57,7 +56,6 @@ const ShowMaterial = () => {
 
   useEffect(() => {
     trackData[0] && setIsLoading(false);
-    console.log("Material Data here : ",trackData);
     
   }, [trackData])
 
@@ -76,7 +74,6 @@ const ShowMaterial = () => {
   }, [searchQuery, setSearchQuery, trackData])
 
   useEffect(() => {
-    console.log("Name : ", searchParams.size);
     if(searchParams.size === 0){
       setTrackDataDoublicate(
         trackData.filter(item =>

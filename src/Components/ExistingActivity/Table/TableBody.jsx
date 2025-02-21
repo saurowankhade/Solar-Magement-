@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const TableBody = ({getData,collectionId,index}) => {
     const checkCollection = collectionId.includes("TrackSolarData");
-    console.log("Data",getData);
+   
     
     let data = [];
     if(checkCollection){
@@ -89,10 +89,7 @@ const TableBody = ({getData,collectionId,index}) => {
         {index}
       </td>
       <td className="p-2 sm:px-6 sm:py-4 border">
-        {
-          console.log("Collect check ",checkCollection)
-          
-        }
+       
         { checkCollection ? firestore.formatTimestamp(getData?.CreatedAt) : firestore.formatTimestamp(getData?.Basic?.CreatedAt)  }
       </td>
 

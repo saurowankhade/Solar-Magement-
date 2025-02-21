@@ -37,12 +37,10 @@ const Library = () => {
 
 
     const handleSubmit = () => {
-        setIsLoading(true)
-        if (action.toString() === actionArray[0] && (inputText.current.value).length >= 0) {
-            console.log(allData," is lenght");
-            
+       
+        if (action.toString() === actionArray[0] && (inputText.current.value).length > 0) {
+            setIsLoading(true)
             if(Object.keys(allData).length > 0){
-                console.log(alreadyData);
                 
                 firestore.updateData("Library", { ...allData, [selectInput]: [...alreadyData || [], inputText.current.value] }, user?.activeID)
                 .then((cre) => {
@@ -54,7 +52,7 @@ const Library = () => {
                     } else {
                         setIsLoading(false)
                         toast.error(`${selectInput} is failed to add`)
-                        console.log(cre?.message);
+                        
                         
                         
                     }
@@ -70,7 +68,7 @@ const Library = () => {
                     } else {
                         setIsLoading(false)
                         toast.error(`${selectInput} is failed to add`)
-                        console.log(cre?.message);
+                    
                         
                         
                     }
@@ -90,7 +88,7 @@ const Library = () => {
     }
     const removeItem = (selectedItem) => {
         // Check if the item exists in the state array
-        if (alreadyData.includes(selectedItem)) {
+        if (alreadyData.includes(selectedItem) && selectInput.length > 0) {
             // Remove the item and update the state
             const updatedData = alreadyData.filter((item) => item !== selectedItem);
             firestore.updateData("Library", { [selectInput]: [...updatedData] }, user?.activeID)
@@ -102,13 +100,13 @@ const Library = () => {
                         elementToDel.current.value = ""
                     } else {
                         setIsLoading(false)
-                        console.log(cre.message);
+                       
                         toast.error(`${selectInput} is failed to delete`)
                     }
                 })
 
         } else {
-            toast.error(`"${selectedItem}" does not exist.`)
+            toast.error(`Select Proper Name!`)
         }
     };
 
