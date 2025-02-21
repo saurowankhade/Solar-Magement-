@@ -47,7 +47,7 @@ const LeftSideNav = () => {
                 toast.dismiss()
                 toast.info("You are not verified yet!",{position:'top-center'})
               }
-        }} className="flex flex-col space-y-6 md:p-4 bg-gray-200 rounded-md md:w-[300px] w-full md:m-2 max-h-full overflow-hidden fixed md:top-[70px] bottom-0 justify-around">
+        }} className="flex flex-col space-y-6 md:p-4 bg-gray-200 rounded-md md:w-[300px] w-full md:m-2 max-h-full overflow-hidden fixed md:top-[70px] bottom-0 justify-around z-999 ">
             {/* Project Entry Section */}
             <div className="md:flex md:flex-col bg-white h-fit rounded-lg  md:p-4 md:space-y-4 shadow-md justify-between grid grid-cols-5 w-full p-1">
                 {/* Project Entry */}
