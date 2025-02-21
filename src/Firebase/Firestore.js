@@ -25,6 +25,8 @@ class Firestore {
             
       return { status: 200, message: 'Data updated successfully!' };
     } catch (error) {
+      console.log(error);
+      
       return { status: 500, message: error.message, Id: documentID };
     }
   }

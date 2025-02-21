@@ -3,17 +3,23 @@ import UserContext from '../../Context/UserContext/UserContext'
 import CompanyRegister from './CompanyRegister';
 import firestore from '../../Firebase/Firestore';
 import CelebrationUI from './CelebrationUI';
+import TableUi from '../ShimmerUI/TableUi';
+import BranchDetails from './BranchDetails';
 
 const BranchCompany = () => {
     const { user } = useContext(UserContext);
+    const [isLoading,setIsLoading] = useState(false);
     const [showCompany , setShowCompany] = useState(false);
     const [showCelebration , setShowCelebration] = useState(false);
     const [companyId , setCompanyId] = useState('');
     const [companyData , setCompanyData] = useState([]);
+    const [showMore , setShowMore] = useState(false);
 
     useEffect(()=>{
+        setIsLoading(true)
         firestore.getAllBranchCompany(user?.userID)
         .then((data)=>{
+            setIsLoading(false)
             setCompanyData(data);
         })
     },[user]);
@@ -55,8 +61,18 @@ const BranchCompany = () => {
                         Add Branch
                     </button>
                 </div>
-               
+            
+            {
+                isLoading && (
+                    <TableUi/>
+                )
+            }
 
+            {
+                companyData.map((data)=>(
+                    <BranchDetails key={data?.companyID} getData={data} showMore={showMore} setShowMore={setShowMore} />
+                ))
+            }
 
                
 

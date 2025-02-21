@@ -31,10 +31,6 @@ function RegisterUsers() {
   return (
     <div className="mt-5">
         <h3 className="p-2 text-2xl text-center">Users Data </h3>
-        {/* {
-          console.log();
-          
-        } */}
       {
             usersData.length === 0 ? <TableUi/> : 
       <> 

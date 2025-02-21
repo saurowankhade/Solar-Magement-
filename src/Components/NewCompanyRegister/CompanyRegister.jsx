@@ -115,7 +115,7 @@ const CompanyRegister = ({showCompany, setShowCompany ,showCelebration , setShow
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleButtonClick}>
                             <div>
-                                <input type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Name" required ref={nameRef} />
+                                <input type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Company Name" required ref={nameRef} />
 
                             </div>
 
