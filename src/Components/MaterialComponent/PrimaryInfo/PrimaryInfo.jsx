@@ -119,10 +119,10 @@ const PrimaryInfo = ({isReturn = false}) => {
             setIsLoading(true)
             const updateData = {
                 ...trackSolarData,
-                note:note
+                Note:note
             }
             firestore.updateData(user?.activeID+"MaterialList",{
-                note:note
+                Note:note
             },trackSolarData?.Id)
             .then((cre)=>{                    
                 if(cre.status === 200){
