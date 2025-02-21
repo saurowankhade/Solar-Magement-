@@ -4,8 +4,8 @@
     ],
     "redirects": [
     {
-      "source": "https://app.urjasolar.vercel.app",
-      "destination": "https://urjasolar.vercel.app",
+      "source": "https://app.urja-solar.vercel.app/",
+      "destination": "https://urja-solar.vercel.app/",
       "permanent": true
     }
   ]
