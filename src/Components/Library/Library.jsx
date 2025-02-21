@@ -168,14 +168,17 @@ const Library = () => {
 
 
                 <div className=" flex flex-col ">
+
+                
+
                     {
-                        action === "Add" ? <input className=" py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none   text-base" placeholder={`Enter ${selectInput}`} type="text" ref={inputText} /> :
+                        action === "Add" ? 
+                        <Dropdown placeholder={`Enter ${selectInput}`} list={alreadyData} ref={inputText} /> :
                             action === "Delete" ?
-                                <>
+                                
                                     <Dropdown placeholder={selectInput} list={alreadyData} ref={elementToDel} />
 
-
-                                </> : <></>
+                                 : <></>
                     }
 
                 </div>
@@ -183,8 +186,8 @@ const Library = () => {
 
                 <div className="flex w-full justify-center mt-8">
                     {
-                        isLoading ? <Loading type='spinningBubbles' color='#3b82f6' height={'10%'} width={'10%'} /> :
-                            <button className="bg-blue-500 text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl"
+                        isLoading ? <Loading type='bubbles' color='#000' height={'10%'} width={'10%'} /> :
+                            <button className="bg-black text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl"
                                 onClick={handleSubmit}>{action}</button>
                     }
                 </div>
