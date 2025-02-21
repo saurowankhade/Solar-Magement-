@@ -89,7 +89,7 @@ const CelebrationUI = ({ id = "ABC-123-XYZ", duration = 6000 , showCelebration,s
         {/* Message card */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="bg-white rounded-lg shadow-xl p-8 text-center ">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Child Company ID!</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Company ID!</h2>
             
             {/* ID Display with Copy Button */}
             <div className="flex items-center justify-center gap-2 mb-6">
