@@ -55,8 +55,8 @@ const ShowOneList = () => {
                 setMaterialType(e.target.value);
               }} className="border text-base rounded-md p-1 gap-3" >
                 <option value="AddMaterial">AddMaterial</option>
-                <option value="RetrunMaterial">RetrunMaterial</option>
-                <option value="UsedMaterial">UsedMaterial</option>
+                <option value="ReturnMaterial">ReturnMaterial</option>
+                <option value="UsedMaterial">UsedMaterial</option> ReturnMaterial
               </select>
             </div>
 

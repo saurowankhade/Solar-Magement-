@@ -7,7 +7,7 @@ import firestore from "../../../Firebase/Firestore";
 import DropDown from "./DropDown";
 import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUserContext";
 
-const PrimaryInfo = () => {
+const PrimaryInfo = ({isReturn = false}) => {
 
     const consumerNameRef = useRef(null)
     const teamNameRef = useRef(null)
@@ -76,9 +76,7 @@ const PrimaryInfo = () => {
             if(consumerNameData.includes(consumerName)){
                 setIsLoading(true)
                 const index = consumerNameData.indexOf(consumerName)
-                console.log("Inedx",index);
-                console.log("ID : ",consumerDetails[index]?.id);
-                
+               
                 const updatedTrackSolarData = {
                     ...trackSolarData,
                     Id:consumerDetails[index]?.id,
@@ -96,9 +94,7 @@ const PrimaryInfo = () => {
                     
                 }
                 firestore.addData(user?.activeID+"MaterialList",updatedTrackSolarData,updatedTrackSolarData?.Id)
-                .then((cre)=>{
-                    console.log(cre);
-                    
+                .then((cre)=>{                    
                     if(cre.status === 200){
                         setIsLoading(false)
                         toast.success("Data Saved")
@@ -113,6 +109,34 @@ const PrimaryInfo = () => {
             }
           }
     }
+
+    const handleSubmitUpdate = ()=>{
+        const note = noteRef.current.value;
+
+        if(note.length <= 0){
+            toast.error("Fill all info")
+          } else{
+            setIsLoading(true)
+            const updateData = {
+                ...trackSolarData,
+                note:note
+            }
+            firestore.updateData(user?.activeID+"MaterialList",{
+                note:note
+            },trackSolarData?.Id)
+            .then((cre)=>{                    
+                if(cre.status === 200){
+                    setIsLoading(false)
+                    toast.success("Data Saved")
+                    setTrackSolarData(updateData)
+                } else{
+                    setIsLoading(false)
+                    toast.error("Falied to save",cre.message)
+                }
+            })
+          }
+    }
+
   return (
     <div className="primaryInformation  container mx-auto w-[350px]  my-3 px-5 sm:px-10 md:px-16 lg:px-32 md:w-[900px]">
         <div id="mainInformation" className="shadow-md p-2 border rounded-lg">
@@ -120,13 +144,13 @@ const PrimaryInfo = () => {
             <div className=" flex flex-col ">
                <div className="relative ">
     
-                <DropDown placeholder={"Consumer Name"} list={consumerNameData} ref={consumerNameRef} />
+                <DropDown isReturn={isReturn}  placeholder={"Consumer Name"} list={consumerNameData} ref={consumerNameRef} />
 
-                <DropDown placeholder={"Team Name"} list={teamNameData} ref={teamNameRef} />
+                <DropDown isReturn={isReturn}  placeholder={"Team Name"} list={teamNameData} ref={teamNameRef} />
 
-                <DropDown placeholder={"Driver Name"} list={driverNameData} ref={driverNameRef} />
+                <DropDown  isReturn={isReturn} placeholder={"Driver Name"} list={driverNameData} ref={driverNameRef} />
 
-                <DropDown placeholder={"Vehicle Name"} list={vehicleNameData} ref={vehicleNameRef} />
+                <DropDown isReturn={isReturn}  placeholder={"Vehicle Name"} list={vehicleNameData} ref={vehicleNameRef} />
 
                 <input
         className="w-full my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none text-base"
@@ -145,7 +169,7 @@ const PrimaryInfo = () => {
             {
                 isLoading ? <ReactLoading type='spinningBubbles' color='#F7AB0D' height={'8%'} width={'8%'} /> :  
                 <button className="bg-[#F7AB0D] text-white rounded-full cursor-pointer px-4 py-1 text-lg shadow-xl" 
-                onClick={handleSubmit}>Save</button>
+                onClick={isReturn ? handleSubmitUpdate : handleSubmit} >Save</button>
             }
             </div>
 

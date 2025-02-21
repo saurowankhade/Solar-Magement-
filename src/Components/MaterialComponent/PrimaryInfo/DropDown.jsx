@@ -1,6 +1,6 @@
 import { useState, forwardRef, useEffect } from 'react';
 
-const Dropdown = forwardRef(({ placeholder, className, list }, ref) => {
+const Dropdown = forwardRef(({ isReturn = false ,placeholder, className, list }, ref) => {
     const constList = list;
   const [filteredOptions, setFilteredOptions] = useState(list || []);  // State for filtered options
   const [showOptions, setShowOptions] = useState(false);  // State for displaying options
@@ -24,7 +24,8 @@ const Dropdown = forwardRef(({ placeholder, className, list }, ref) => {
         className="w-full my-2 py-2 px-3 placeholder:text-gray-600 rounded-full border outline-none text-base"
         placeholder={placeholder}
         type="text"
-        ref={ref}  
+        ref={ref}
+        disabled={isReturn}
         onClick={()=>{setShowOptions(!showOptions)}}
         onChange={handleInputChange}
         onBlur={() => setTimeout(() => setShowOptions(false), 100)}

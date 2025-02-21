@@ -128,7 +128,11 @@ const TableBody = ({getData,collectionId,index}) => {
           Update
         </button>
         {
-          !checkCollection && <button onClick={handleLink} className={`border bg-[#000000]  p-2 rounded-lg ${user?.verified ? "bg-black text-white " : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
+          !checkCollection && <button onClick={(e)=>{
+            e.stopPropagation()
+            setTrackSolarData(getData);
+            navigateToAddTrack('/dashboard/material-return-entry')
+          }} className={`border bg-[#000000]  p-2 rounded-lg ${user?.verified ? "bg-black text-white " : "bg-blue-100 text-black"} `} disabled={!user?.verified} >
           Retrun
         </button>
         }

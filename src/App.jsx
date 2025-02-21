@@ -26,6 +26,7 @@ import CommonContext from "./Routing/CommonContext";
 import ShowOneList from "./Components/ShowMaterialDetails/ShowOne/ShowOneList";
 import Profile from "./Components/Profile/Profile";
 import BranchCompany from "./Components/NewCompanyRegister/BranchCompany";
+import ReturnMaterial from "./Components/MaterialComponent/ReturnMaterial/ReturnMaterial";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
               
                 <Route path="material-entry" element={<CommonContext >
                   <MaterialDetails/>
+                </CommonContext>}/>
+                <Route path="material-return-entry" element={<CommonContext >
+                  <ReturnMaterial />
                 </CommonContext>}/>
                 <Route path="material-overview" element={<CommonContext ><ShowMaterial/> </CommonContext>} ></Route>
                 <Route path="material-overview/:Id" element={<CommonContext ><ShowOneList /> </CommonContext>} ></Route>
