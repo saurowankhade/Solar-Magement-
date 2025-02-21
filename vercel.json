@@ -1,12 +1,5 @@
 {
     "rewrites": [
       { "source": "/(.*)", "destination": "/" }
-    ],
-    "redirects": [
-    {
-      "source": "https://app.urja-solar.vercel.app/",
-      "destination": "https://urja-solar.vercel.app/",
-      "permanent": true
-    }
-  ]
+    ]
   }
