@@ -163,10 +163,7 @@ const LeftSideNav = () => {
 
                 {/* Libary */}
                 <div onClick={
-                  // handleNavigate('/dashboard/library')
-                  ()=>{
-                    navigate('/track')
-                  }
+                  handleNavigate('/dashboard/library')
                   } className="flex  flex-col items-center md:flex-row md:items-center md:py-1  justify-center md:justify-normal group cursor-pointer">
                     {/* <FaPlusSquare size={24} className="text-yellow-500" /> */}
                     <svg
