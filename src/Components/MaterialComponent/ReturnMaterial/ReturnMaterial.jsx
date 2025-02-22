@@ -32,6 +32,12 @@ const ReturnMaterial = () => {
             form here {document.referrer}
             <br /> <br />
             <span>form here {navigator.userAgent}</span>
+            <br /> <br />
+            <span>form here {/FBAN|FBAV|Instagram|Twitter|WhatsApp|WebView/i.test(navigator.userAgent)}</span>
+        
+            <br /> <br />
+            <span>form here {window.opener}</span>
+
         </div>
         {showPage === 0 ? (
           <PrimaryInfo isReturn={true} />
