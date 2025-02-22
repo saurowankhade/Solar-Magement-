@@ -27,6 +27,7 @@ import ShowOneList from "./Components/ShowMaterialDetails/ShowOne/ShowOneList";
 import Profile from "./Components/Profile/Profile";
 import BranchCompany from "./Components/NewCompanyRegister/BranchCompany";
 import ReturnMaterial from "./Components/MaterialComponent/ReturnMaterial/ReturnMaterial";
+import TrafficSourceTracker from "./Components/TrafficSourceTracker";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
            <Route path="/company-signup" element={<CmpRegister />} /> 
            <Route path="/user-signup" element={<UserRegister />} />
            <Route path="/user-signin" element={<UserLogin />} />
+           <Route path="/track" element={<TrafficSourceTracker />} />
                 
            <Route path="/dashboard" element={<PrivateRoute><Dashboard /> </PrivateRoute>} >
                 <Route index element={<HomeDashboard/>}></Route>

@@ -28,17 +28,6 @@ const ReturnMaterial = () => {
 
       <MaterialStipper showPage={showPage} setShowPage={setShowPage} />
       <div className="mt-10">
-        <div className='flex-col gap-2'>
-            form here {document.referrer}
-            <br /> <br />
-            <span>form here {navigator.userAgent}</span>
-            <br /> <br />
-            <span>form here {/FBAN|FBAV|Instagram|Twitter|WhatsApp|WebView/i.test(navigator.userAgent)}</span>
-        
-            <br /> <br />
-            <span>form here {window.opener}</span>
-
-        </div>
         {showPage === 0 ? (
           <PrimaryInfo isReturn={true} />
           
