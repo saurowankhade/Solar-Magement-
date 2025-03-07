@@ -10,7 +10,7 @@ import ShowAllUserContext from "../../../Context/ShowAllUsersContext/ShowAllUser
 const PrimaryInfo = ({isReturn = false}) => {
 
     const consumerNameRef = useRef(null)
-    const teamNameRef = useRef(null)
+    // const teamNameRef = useRef(null)
     const driverNameRef = useRef(null)
     const vehicleNameRef = useRef(null)
     const noteRef = useRef(null)
@@ -18,7 +18,7 @@ const PrimaryInfo = ({isReturn = false}) => {
     const [consumerDetails,setConsumerDetails] = useState([])
     const [consumerNameData,setConsumerNameData] = useState([])
     const [allLibrary,setAllLibrary] = useState([]);
-    const [teamNameData,setTeamNameData] = useState([])
+    // const [teamNameData,setTeamNameData] = useState([])
     const [driverNameData,setDriverNameData] = useState([])
     const [vehicleNameData,setVehicleNameData] = useState([])
 
@@ -50,14 +50,14 @@ const PrimaryInfo = ({isReturn = false}) => {
 
     useEffect(()=>{
         setDriverNameData(allLibrary?.["Driver Name"])
-        setTeamNameData(allLibrary?.["Team Name"])
+        // setTeamNameData(allLibrary?.["Team Name"])
         setVehicleNameData(allLibrary?.["Vehicle Name"])
     },[allLibrary, user?.activeID])
 
     useEffect(()=>{
         if(trackSolarData){
             consumerNameRef.current.value = trackSolarData?.ConsumerName;
-            teamNameRef.current.value = trackSolarData?.TeamName
+            // teamNameRef.current.value = trackSolarData?.TeamName
             driverNameRef.current.value = trackSolarData?.DriverName
             vehicleNameRef.current.value = trackSolarData?.VehicleName
             noteRef.current.value = trackSolarData?.Note
@@ -66,12 +66,12 @@ const PrimaryInfo = ({isReturn = false}) => {
 
     const handleSubmit = ()=>{
           const consumerName = consumerNameRef.current.value;
-          const teamName = teamNameRef.current.value;
+        //   const teamName = teamNameRef.current.value;
           const driverName = driverNameRef.current.value;
           const vehicleName = vehicleNameRef.current.value;
           const note = noteRef.current.value;
-          if(consumerName.length <= 0 || teamName.length <= 0 || driverName.length <= 0 || vehicleName.length <= 0){
-            toast.error("Fill all info")
+          if(consumerName.length <= 0 ){
+            toast.error("Consumer Name Missing !")
           } else{
             if(consumerNameData.includes(consumerName)){
                 setIsLoading(true)
@@ -81,7 +81,7 @@ const PrimaryInfo = ({isReturn = false}) => {
                     ...trackSolarData,
                     Id:consumerDetails[index]?.id,
                     ConsumerName : consumerName,
-                    TeamName : teamName,
+                    // TeamName : teamName,
                     DriverName : driverName,
                     VehicleName : vehicleName,
                     Note : note,
@@ -146,7 +146,7 @@ const PrimaryInfo = ({isReturn = false}) => {
     
                 <DropDown isReturn={isReturn}  placeholder={"Consumer Name"} list={consumerNameData} ref={consumerNameRef} />
 
-                <DropDown isReturn={isReturn}  placeholder={"Team Name"} list={teamNameData} ref={teamNameRef} />
+                {/* <DropDown isReturn={isReturn}  placeholder={"Team Name"} list={teamNameData} ref={teamNameRef} /> */}
 
                 <DropDown  isReturn={isReturn} placeholder={"Driver Name"} list={driverNameData} ref={driverNameRef} />
 

@@ -7,14 +7,18 @@ import { toast } from "react-toastify"
 import Table from "../MaterialInfo/Table"
 import TrackSolarContext from "../../../Context/TrackSolarContext/TrackSolarContext"
 
-const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
+const MaterialList = ({isReturn = false,type,materialContextData,setMaterialContextData}) => {
     
     const materialRef = useRef(null)
     const unitRef = useRef(null)
     const quantityRef = useRef(null)
+    
+    const teamNameRef = useRef(null)
 
     const [materialData,setMaterialData] = useState([])
     const [unitData,setUnitData] = useState([])
+    
+    const [teamNameData,setTeamNameData] = useState([])
 
 
     const [isLoading,setIsLoading] = useState(false);
@@ -29,17 +33,26 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
         if(user?.activeID){
             firestore.getOneData("Library",user?.activeID)
             .then((cre)=>{
+                setTeamNameData(cre?.["Team Name"])
                 setMaterialData(cre?.[`${type} Material`]) // set material data
                 setUnitData(cre?.["Units"]) // set units data
             })
         }
     },[type, user])
 
+    useEffect(()=>{
+        if(trackSolarData){
+            teamNameRef.current.value = trackSolarData?.AddMaterial?.[type+"Material"]?.TeamName || '';
+        }
+    },[trackSolarData, type])
+
+
+
     const addToList = ()=>{
         const materialName = materialRef.current.value
         const unit = unitRef.current.value;
         const quantity = quantityRef.current.value;
-        if(materialName.length <= 0 || unit.length <=0 || quantity.length <=0){
+        if(  materialName.length <= 0 || unit.length <=0 || quantity.length <=0){
             toast.error("Fill all info")
         } else{
             const updateMaterialList = {
@@ -55,7 +68,11 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
     }
 
     const handleSubmit = ()=>{
-          if(materialContextData.length <=0){
+        const teamName = teamNameRef.current.value;
+        if(teamName.length <=0 ){
+            toast.error('Team Name missing!')
+        }  
+        else if(materialContextData.length <=0){
             toast.error("Select Material")
           } else{
             setIsLoading(true)
@@ -66,6 +83,7 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
                         [type+"Material"]:{
                             createdAt:new Date(),
                             createdBy: user,
+                            TeamName : teamName,
                             ["is"+type+"MaterialDone"]:true,
                             MaterialList:materialContextData,
                         }
@@ -75,6 +93,7 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
                         [type+"Material"]:{
                             createdAt:new Date(),
                             createdBy: user,
+                            TeamName : teamName,
                             ["is"+type+"MaterialDone"]:true,
                             MaterialList:materialContextData,
                         }
@@ -102,6 +121,9 @@ const MaterialList = ({type,materialContextData,setMaterialContextData}) => {
         <h2 className="text-center font-bold">{type} Material</h2>
         <div className=" flex flex-col ">
            <div className="relative ">
+
+
+             <DropDown isReturn={isReturn}  placeholder={"Team Name"} list={teamNameData} ref={teamNameRef} />
            
             <DropDown placeholder={`${type} Material`} list={materialData} ref={materialRef} />
 

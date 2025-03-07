@@ -40,10 +40,6 @@ const ShowOneList = () => {
         !trackSolarData?.ConsumerName ? <TableUi /> :
           <>
 
-
-
-
-
             <div className="sticky">
               <MaterialStipper showPage={showPage} setShowPage={setShowPage} />
             </div>
@@ -67,19 +63,18 @@ const ShowOneList = () => {
                   <PrimaryInfoMaterial allData={trackSolarData} />
                 </div> :
                   showPage === 1 ?<div className="flex flex-col gap-2">
-                  <WhoAddData user={trackSolarData?.[materialType]?.StructureMaterial?.createdBy} date={trackSolarData?.[materialType]?.StructureMaterial?.createdAt}/> 
+                  <WhoAddData isTeam={true}  teamName={trackSolarData?.[materialType]?.StructureMaterial?.TeamName} user={trackSolarData?.[materialType]?.StructureMaterial?.createdBy} date={trackSolarData?.[materialType]?.StructureMaterial?.createdAt}/> 
                   <Table materialDetails={trackSolarData?.[materialType]?.StructureMaterial?.MaterialList || []} whichMaterial={"Structure Material"} isShow={true} />  </div> 
-                  :
-                    showPage === 2 ? 
+                  :showPage === 2 ? 
+                  <div className="flex flex-col gap-2">
+              <WhoAddData isTeam={true}  teamName={trackSolarData?.[materialType]?.ConcreteMaterial?.TeamName} user={trackSolarData?.[materialType]?.ConcreteMaterial?.createdBy} date={trackSolarData?.[materialType]?.ConcreteMaterial?.createdAt}/>
+                  <Table materialDetails={trackSolarData?.[materialType]?.ConcreteMaterial?.MaterialList || []} whichMaterial={"Concrete Material"} isShow={true} /> 
+                  </div> : 
+                    showPage === 3 ? 
                     <div className="flex flex-col gap-2">
-                  <WhoAddData user={trackSolarData?.[materialType]?.["Electric FittingMaterial"]?.createdBy} date={trackSolarData?.[materialType]?.["Electric FittingMaterial"]?.createdAt}/>
+                  <WhoAddData isTeam={true}  teamName={trackSolarData?.[materialType]?.["Electric FittingMaterial"]?.TeamName} user={trackSolarData?.[materialType]?.["Electric FittingMaterial"]?.createdBy} date={trackSolarData?.[materialType]?.["Electric FittingMaterial"]?.createdAt}/>
                     <Table materialDetails={trackSolarData?.[materialType]?.["Electric FittingMaterial"]?.MaterialList || []} whichMaterial={"Electric Fitting Material"} isShow={true} /> 
-                    </div> :
-                      showPage === 3 ? 
-                      <div className="flex flex-col gap-2">
-                  <WhoAddData user={trackSolarData?.[materialType]?.ConcreteMaterial?.createdBy} date={trackSolarData?.[materialType]?.ConcreteMaterial?.createdAt}/>
-                      <Table materialDetails={trackSolarData?.[materialType]?.ConcreteMaterial?.MaterialList || []} whichMaterial={"Concrete Material"} isShow={true} /> 
-                      </div> : <></>
+                    </div>  : <></>
               }
             </div>
           </>

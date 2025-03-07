@@ -2,9 +2,9 @@
 
 const PrimaryInfoMaterial = ({allData}) => {
     // const { trackSolarData } = useContext(TrackSolarContext);
-    const { ConsumerName, ConsumerAddress, DriverName, Note, TeamName, VehicleName } = allData || {};
-    const labelData = ["Team Name", "Consumer Name", "Consumer Address", "Driver Name", "Vehicle Name", "Note"];
-    const valueData = [TeamName, ConsumerName, ConsumerAddress, DriverName, VehicleName, Note];
+    const { ConsumerName, ConsumerAddress, DriverName, Note, VehicleName } = allData || {};
+    const labelData = [ "Consumer Name", "Consumer Address", "Driver Name", "Vehicle Name", "Note"];
+    const valueData = [ ConsumerName, ConsumerAddress, DriverName, VehicleName, Note];
     return (
         <div className="flex justify-center `">
             <div className={`p-2  shadow-md border mt-2 w-[700px] `}>
